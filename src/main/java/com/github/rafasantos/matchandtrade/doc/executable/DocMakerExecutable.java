@@ -18,9 +18,9 @@ import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationMake
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestMaker;
 import com.matchandtrade.WebserviceApplication;
 
-public class DocMaker {
+public class DocMakerExecutable {
 	
-	private static final Logger logger = LoggerFactory.getLogger(DocMaker.class);
+	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
 
 	public static void main(String[] arguments) {
 		try {
@@ -28,7 +28,7 @@ public class DocMaker {
 			String destinationFolder = ArgumentBuilder.obtainDestinationFolder(arguments);
 			String[] webArgumentsArray = ArgumentBuilder.buildWebServerArguments(arguments);
 			startMatchAndTradeWebServer(webArgumentsArray);
-			DocMaker mainInstance = new DocMaker();
+			DocMakerExecutable mainInstance = new DocMakerExecutable();
 			mainInstance.execute(destinationFolder);
 			logger.info("Document generation complete.");
 			System.exit(0);
