@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.generator.rest;
+package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,11 +20,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
-import com.github.rafasantos.matchandtrade.doc.generator.OutputGenerator;
+import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.config.AuthenticationProperties;
 
 
-public class RestAuthenticate implements OutputGenerator {
+public class RestAuthenticateMaker implements OutputMaker {
 	
 	private static final String AUTHENTICATE_POSITIVE_REQUEST = "AUTHENTICATE_POSITIVE_REQUEST";
 	private static final String AUTHENTICATE_POSITIVE_RESPONSE = "AUTHENTICATE_POSITIVE_RESPONSE";

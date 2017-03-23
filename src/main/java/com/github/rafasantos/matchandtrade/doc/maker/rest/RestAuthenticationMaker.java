@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.generator.rest;
+package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
-import com.github.rafasantos.matchandtrade.doc.generator.OutputGenerator;
+import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 
 
-public class RestAuthentication implements OutputGenerator {
+public class RestAuthenticationMaker implements OutputMaker {
 	
 	public void positive() throws ClientProtocolException, IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();

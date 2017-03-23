@@ -1,6 +1,6 @@
-package com.github.rafasantos.matchandtrade.doc.generator;
+package com.github.rafasantos.matchandtrade.doc.maker;
 
-public interface OutputGenerator {
+public interface OutputMaker {
 	
 	public void execute();
 	public String getDocOutput();
