@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArgumentBuilder {
-
+	
 	public static String[] buildWebServerArguments(String[] arguments) {
 		List<String> webArgumentsList = new ArrayList<>();
 		for (int i=0; i < arguments.length; i++) {
@@ -19,13 +19,13 @@ public class ArgumentBuilder {
 	}
 	
 	public static String obtainDestinationFolder(String[] arguments) {
-		String destinationFolder = null;
+		String result = null;
 		for (int i=0; i < arguments.length; i++) {
 			if (arguments[i].equals("--destination-folder")) {
-				destinationFolder = arguments[i+1];
+				result = arguments[i+1];
 			}
 		}
-		return destinationFolder;
+		return result;
 	}
 	
 }

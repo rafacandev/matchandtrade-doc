@@ -11,8 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.developmentguide.DevelopmentGuide;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestMaker;
 import com.matchandtrade.WebserviceApplication;
 
 public class DocMaker {
@@ -38,17 +41,14 @@ public class DocMaker {
 	}
 	
 	public void execute(String destinationFolder) throws IOException {
-		// Generate README.md
-		String readmeLocation = DocMaker.class.getClassLoader().getResource("doc/README.md").getPath();
-		File readmeFile = new File(readmeLocation);
-		File readmeDestination = new File(destinationFolder + File.separator + "README.md");
-		FileUtils.copyFile(readmeFile, readmeDestination);
-		
 		// TODO Scan all files instead of instantiate one by one manually
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
+		docMakers.add(new ReadmeMaker());
+		docMakers.add(new DevelopmentGuide());
+		docMakers.add(new RestMaker());
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationMaker());
-		
+
 		for(OutputMaker t : docMakers) {
 			t.execute();
 			String tOutput = t.getDocOutput();
