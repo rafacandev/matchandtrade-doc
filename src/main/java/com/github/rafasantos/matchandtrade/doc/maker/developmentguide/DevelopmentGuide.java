@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
+import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
 public class DevelopmentGuide implements OutputMaker {
 	
@@ -19,25 +20,19 @@ public class DevelopmentGuide implements OutputMaker {
 		return fileAsString;
 	}
 
-	@Override
-	public void execute() {
-		// Nothing to do execute for now
-	}
-
-	
 	private String buildDocOutput() throws IOException {
-		String fileString = buildDocOutputString();
+		String template = buildDocOutputString();
 		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-		String authenticateRequestPositive = authenticate.buildAuthenticateRequestOutputPositive();
-		String authenticateResponsePositive = authenticate.buildAuthenticateResponseOutputPositive();
-		fileString = fileString.replace("${" + RestAuthenticateMaker.AUTHENTICATE_POSITIVE_REQUEST_PLACEHOLDER + "}", authenticateRequestPositive);
-		fileString = fileString.replace("${" + RestAuthenticateMaker.AUTHENTICATE_POSITIVE_RESPONSE_PLACEHOLDER + "}", authenticateResponsePositive);
-		return fileString;
+		String authenticateRequest = authenticate.buildAuthenticateRequestOutputPositive();
+		String authenticateResponse = authenticate.buildAuthenticateResponseOutputPositive();
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_REQUEST_PLACEHOLDER, authenticateRequest);
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_RESPONSE_PLACEHOLDER, authenticateResponse);
+		return template;
 	}
 	
 	
 	@Override
-	public String getDocOutput() {
+	public String obtainDocOutput() {
 		String result = null;
 		try {
 			result = buildDocOutput();
@@ -47,7 +42,7 @@ public class DevelopmentGuide implements OutputMaker {
 	}
 
 	@Override
-	public String getDocOutputLocation() {
+	public String obtainDocOutputLocation() {
 		return "development-guide/development-guide.md";
 	}
 }

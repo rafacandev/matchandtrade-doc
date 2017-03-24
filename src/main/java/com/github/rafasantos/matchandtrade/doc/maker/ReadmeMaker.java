@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 
 public class ReadmeMaker implements OutputMaker {
 
@@ -17,24 +18,20 @@ public class ReadmeMaker implements OutputMaker {
 		String fileAsString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 		return fileAsString;
 	}
-
-	@Override
-	public void execute() {
-		// Nothing to do execute for now
-	}
 	
 	@Override
-	public String getDocOutput() {
+	public String obtainDocOutput() {
 		String result = null;
 		try {
 			result = buildDocOutputString();
-		} catch (IOException e) {
+		} catch (Exception e) {
+			throw new DocMakerException(this, e);
 		}
 		return result;
 	}
 
 	@Override
-	public String getDocOutputLocation() {
+	public String obtainDocOutputLocation() {
 		return "README.md";
 	}
 }

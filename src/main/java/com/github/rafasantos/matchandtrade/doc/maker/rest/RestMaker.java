@@ -19,12 +19,7 @@ public class RestMaker implements OutputMaker {
 	}
 
 	@Override
-	public void execute() {
-		// Nothing to do execute for now
-	}
-	
-	@Override
-	public String getDocOutput() {
+	public String obtainDocOutput() {
 		String result = null;
 		try {
 			result = buildDocOutputString();
@@ -34,7 +29,7 @@ public class RestMaker implements OutputMaker {
 	}
 
 	@Override
-	public String getDocOutputLocation() {
+	public String obtainDocOutputLocation() {
 		return "rest/rest.md";
 	}
 }

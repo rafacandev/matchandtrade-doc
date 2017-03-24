@@ -33,7 +33,7 @@ public class DocMakerExecutable {
 			logger.info("Document generation complete.");
 			System.exit(0);
 		} catch (Exception e) {
-			logger.error("Exection interrupted. Exception message: {}", e.getMessage(), e);
+			logger.error("Error when generating the documentation.", e);
 			System.exit(-1);
 		} finally {
 			System.exit(0);
@@ -50,9 +50,8 @@ public class DocMakerExecutable {
 		docMakers.add(new RestAuthenticationMaker());
 
 		for(OutputMaker t : docMakers) {
-			t.execute();
-			String tOutput = t.getDocOutput();
-			String tOutputLocation = t.getDocOutputLocation();
+			String tOutput = t.obtainDocOutput();
+			String tOutputLocation = t.obtainDocOutputLocation();
 			File tOutputFile = new File(destinationFolder + File.separator + tOutputLocation);
 			FileUtils.write(tOutputFile, tOutput, StandardCharsets.UTF_8);
 		}
