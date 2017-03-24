@@ -1,8 +1,5 @@
 package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -21,79 +18,91 @@ import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
+import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.config.AuthenticationProperties;
 
 
 public class RestAuthenticateMaker implements OutputMaker {
 	
-	private static final String AUTHENTICATE_POSITIVE_REQUEST = "AUTHENTICATE_POSITIVE_REQUEST";
-	private static final String AUTHENTICATE_POSITIVE_RESPONSE = "AUTHENTICATE_POSITIVE_RESPONSE";
-//	private static final String AUTHENTICATE_NEGATIVE_REQUEST = "AUTHENTICATE_NEGATIVE_REQUEST";
-//	private static final String AUTHENTICATE_NEGATIVE_RESPONSE = "AUTHENTICATE_NEGATIVE_RESPONSE";
-	
-	private StringBuilder positiveRequestOuput = new StringBuilder();;
-	private StringBuilder positiveResponseOuput = new StringBuilder();
-//	private StringBuilder negativeRequestOuput = new StringBuilder();
-//	private StringBuilder negativeResponseOuput = new StringBuilder();
+	public static final String AUTHENTICATE_POSITIVE_REQUEST_PLACEHOLDER = "AUTHENTICATE_POSITIVE_REQUEST";
+	public static final String AUTHENTICATE_POSITIVE_RESPONSE_PLACEHOLDER = "AUTHENTICATE_POSITIVE_RESPONSE";
 
+	private CloseableHttpClient httpClient;
+	private HttpGet httpRequest;
+	private CloseableHttpResponse httpResponse;
 	
-	public void execute() {
+	public RestAuthenticateMaker() {
+		httpClient = HttpClients.createDefault();
+		httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/authenticate");
 		try {
-			positive();
-		} catch (ClientProtocolException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+			httpResponse = httpClient.execute(httpRequest);
+		} catch (Exception e) {
+			throw new DocMakerException(this, e);
 		}
 	}
 	
-	public void positive() throws ClientProtocolException, IOException {
-		CloseableHttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/authenticate");
-		CloseableHttpResponse httpResponse = httpClient.execute(httpRequest);
-		
+	public String buildAuthenticateRequestOutputPositive() {
 		StringBuilder headers = new StringBuilder();
 		for (Header h : httpResponse.getAllHeaders()) {
 			headers.append(h.getName() + ": ");
 			headers.append(h.getValue());
 		}
-		
-		assertEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
-		assertTrue(headers.toString().contains("Authorization"));
-		
-		positiveRequestOuput.append(httpRequest.getMethod() + " " + httpRequest.getURI());
-		
-		
-		positiveResponseOuput.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
-		positiveResponseOuput.append(httpResponse.getStatusLine().getStatusCode() + " ");
-		positiveResponseOuput.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
+		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		AssertUtil.isTrue(headers.toString().contains("Authorization"));
+		StringBuilder result = new StringBuilder();;
+		result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+		return result.toString();
+	}
+	
+	public String buildAuthenticateResponseOutputPositive() {
+		StringBuilder result = new StringBuilder();
+		result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
+		result.append(httpResponse.getStatusLine().getStatusCode() + " ");
+		result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
 		Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
-		positiveResponseOuput.append("\nHeaders: ");
+		result.append("\nHeaders: ");
 		for (int i = 0; i < authoHeaders.length; i++) {
-			positiveResponseOuput.append("\n\t" + authoHeaders[i].getName() + ": ");
-			positiveResponseOuput.append(authoHeaders[i].getValue());
+			result.append("\n\t" + authoHeaders[i].getName() + ": ");
+			result.append(authoHeaders[i].getValue());
 		}
-		positiveResponseOuput.append("\n\n");
-		String responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
-		positiveResponseOuput.append(responseBody);
+		result.append("\n\n");
+		String responseBody;
+		try {
+			responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+		} catch (Exception e) {
+			throw new DocMakerException(this, e);
+		}
+		result.append(responseBody);
+		return result.toString();
 	}
 
+	private String buildDocOutput() throws IOException {
+		String authenticationsPath = this.getClass().getClassLoader().getResource("doc/rest/resources/authenticate.md").getFile();
+		File authenticationsFile = new File(authenticationsPath);
+		String authenticationsString = FileUtils.readFileToString(authenticationsFile, StandardCharsets.UTF_8);
+		String positiveRequestOuput = buildAuthenticateRequestOutputPositive();
+		authenticationsString = authenticationsString.replace("${" + AUTHENTICATE_POSITIVE_REQUEST_PLACEHOLDER + "}", positiveRequestOuput);
+		String positiveResponseOuput = buildAuthenticateResponseOutputPositive();
+		authenticationsString = authenticationsString.replace("${" + AUTHENTICATE_POSITIVE_RESPONSE_PLACEHOLDER + "}", positiveResponseOuput);
+		return authenticationsString;
+	}
+
+	public void execute() {
+		try {
+			buildAuthenticateRequestOutputPositive();
+		} catch (Exception e) {
+			throw new DocMakerException(this, e);
+		}
+	}
+	
 	@Override
 	public String getDocOutput() {
 		try {
 			return buildDocOutput();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new DocMakerException(this, e);
 		}
-	}
-	
-	private String buildDocOutput() throws IOException {
-		String authenticationsPath = this.getClass().getClassLoader().getResource("doc/rest/resources/authenticate.md").getFile();
-		File authenticationsFile = new File(authenticationsPath);
-		String authenticationsString = FileUtils.readFileToString(authenticationsFile, StandardCharsets.UTF_8);
-		authenticationsString = authenticationsString.replace("${" + AUTHENTICATE_POSITIVE_REQUEST + "}", positiveRequestOuput);
-		authenticationsString = authenticationsString.replace("${" + AUTHENTICATE_POSITIVE_RESPONSE + "}", positiveResponseOuput);
-		return authenticationsString;
 	}
 
 	@Override

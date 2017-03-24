@@ -1,24 +1,37 @@
-## Quick Start
+## Development Guide
+This guide provides detailed information for those who want to develop and/or customize the application.
+
 #### Requirements
-* Java JDK
+* Java JDK version 8 or higher
 * Maven
 
-Download the source code:
+Clone the source code:
 
-`git clone https://github.com/rafasantos/matchandtrade.git`
+```
+git clone https://github.com/rafasantos/matchandtrade.git
+```
 
 Build the source code. The files will be generated on the `/target` folder:
 
-`mvn package`
+```
+mvn package
+```
 
 
-Run the website:
+Start the RESTful web server:
+```
+java -jar /target/webservice-0.0.1-SNAPSHOT.jar
+```
 
-`java -jar /target/webservice-0.0.1-SNAPSHOT.jar`
 
-Access the website:
+Authenticate:
 
-`http://localhost:8080/swagger-ui.html`
+```
+${AUTHENTICATE_POSITIVE_REQUEST}
+```
+```
+${AUTHENTICATE_POSITIVE_RESPONSE}
+```
 
 ## Unit Test and Integration Test
 Unit tests and integration tests are executed via `mvn` and configured with the maven plugins `maven-surefire-plugin` and `maven-failsafe-plugin` respectively.
