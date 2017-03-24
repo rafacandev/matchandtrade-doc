@@ -8,6 +8,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
+import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
 public class DevelopmentGuide implements OutputMaker {
@@ -23,13 +24,11 @@ public class DevelopmentGuide implements OutputMaker {
 	private String buildDocOutput() throws IOException {
 		String template = buildDocOutputString();
 		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-		String authenticateRequest = authenticate.buildAuthenticateRequestOutputPositive();
-		String authenticateResponse = authenticate.buildAuthenticateResponseOutputPositive();
-		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_REQUEST_PLACEHOLDER, authenticateRequest);
-		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_RESPONSE_PLACEHOLDER, authenticateResponse);
+		RequestResponseHolder rrHolder = authenticate.testPositive();
+		String authenticateSnippet = authenticate.buildAuthenticatePositiveSnippet(rrHolder.getHttpRequest(), rrHolder.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_PLACEHOLDER, authenticateSnippet);
 		return template;
 	}
-	
 	
 	@Override
 	public String obtainDocOutput() {

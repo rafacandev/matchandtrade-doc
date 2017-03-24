@@ -18,12 +18,26 @@ import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationMake
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestMaker;
 import com.matchandtrade.WebserviceApplication;
 
+
+/**
+ * If no arguments are provided, then it will attribute the following values:
+ * <code>
+ * -cf src/config/matchandtrade.properties --destination-folder target/doc-maker
+ * </code>
+ */
 public class DocMakerExecutable {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
 
 	public static void main(String[] arguments) {
 		try {
+			if (arguments.length == 0) {
+				arguments = new String[4];
+				arguments[0] = "-cf";
+				arguments[1] = "src/config/matchandtrade.properties";
+				arguments[2] = "--destination-folder";
+				arguments[3] = "target/doc-maker";
+			}
 			logger.info("Starting Match and Trade web server.");
 			String destinationFolder = ArgumentBuilder.obtainDestinationFolder(arguments);
 			String[] webArgumentsArray = ArgumentBuilder.buildWebServerArguments(arguments);

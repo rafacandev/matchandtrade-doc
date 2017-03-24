@@ -10,27 +10,21 @@ Clone the source code:
 ```
 git clone https://github.com/rafasantos/matchandtrade.git
 ```
-
 Build the source code. The files will be generated on the `/target` folder:
 
 ```
 mvn package
 ```
 
-
 Start the RESTful web server:
 ```
 java -jar /target/webservice-0.0.1-SNAPSHOT.jar
 ```
 
-
 Authenticate:
 
 ```
-${AUTHENTICATE_POSITIVE_REQUEST}
-```
-```
-${AUTHENTICATE_POSITIVE_RESPONSE}
+${AUTHENTICATE_POSITIVE_PLACEHOLDER}
 ```
 
 ## Unit Test and Integration Test
