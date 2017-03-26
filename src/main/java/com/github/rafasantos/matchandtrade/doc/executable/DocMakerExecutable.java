@@ -64,11 +64,19 @@ public class DocMakerExecutable {
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationsMaker());
 
+		HtmlParser htmlParser = new HtmlParser();
 		for(OutputMaker t : docMakers) {
 			String docContent = t.obtainDocContent();
 			String docLocation = t.getDocLocation();
 			File docFile = new File(destinationFolder + File.separator + docLocation);
 			FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
+			// Also generate HTML files derived from MarkDown files for easier visualization
+			File htmlFile = HtmlParser.optainHtmlFile(docFile);
+			String docContentAsHtml = htmlParser.parseMarkDownToHTML(docContent);
+			String styleHead = HtmlParser.getGitHubStyleHead();
+			String styleTail = HtmlParser.getGitHubStyleTail();
+			String htmlContetn = styleHead + docContentAsHtml + styleTail;
+			FileUtils.write(htmlFile, htmlContetn, StandardCharsets.UTF_8);
 		}
 	}
 
