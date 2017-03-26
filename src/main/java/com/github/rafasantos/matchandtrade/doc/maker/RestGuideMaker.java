@@ -1,7 +1,5 @@
 package com.github.rafasantos.matchandtrade.doc.maker;
 
-import org.apache.http.client.methods.HttpGet;
-
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
@@ -21,11 +19,9 @@ public class RestGuideMaker implements OutputMaker {
 
 		// Assemble authentications snippet		
 		RestAuthenticationsMaker authentications = new RestAuthenticationsMaker();
-		RequestResponseHolder rrHolderAuthentications = authentications.testPositive();
-		HttpGet authenticationsRequest = rrHolderAuthentications.getHttpRequest();
 		// Reuse the same Authorization header for better documentation clarity
-		authenticationsRequest.setHeaders(rrHolderAuth.getHttpResponse().getHeaders("Authorization"));
-		String authenticationsSnippet = authentications.buildPositiveSnippet(authenticationsRequest, rrHolderAuthentications.getHttpResponse());
+		RequestResponseHolder rrHolderAuthentications = authentications.testPositive(rrHolderAuth.getHttpResponse().getHeaders("Authorization")[0]);
+		String authenticationsSnippet = authentications.buildPositiveSnippet(rrHolderAuthentications.getHttpRequest(), rrHolderAuthentications.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
 
 		return template;

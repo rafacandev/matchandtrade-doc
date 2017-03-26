@@ -23,7 +23,10 @@ public class RestAuthenticateMaker implements OutputMaker {
 	public static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
 
 	public RequestResponseHolder testPositive() {
-		HttpClient httpClient = HttpClients.createDefault();
+		return testPositive(HttpClients.createDefault());
+	}
+	
+	public RequestResponseHolder testPositive(HttpClient httpClient) {
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/authenticate");
 		HttpResponse httpResponse;
 		try {

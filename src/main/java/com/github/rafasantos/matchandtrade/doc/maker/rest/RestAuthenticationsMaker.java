@@ -2,6 +2,7 @@ package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import java.io.IOException;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -21,16 +22,19 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	
 	public RequestResponseHolder testPositive() {
+		return testPositive(RestUtil.getAuthenticationHeader());
+	}
+	
+	public RequestResponseHolder testPositive(Header authorizationHeader) {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/authentications/");
-		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
+		httpRequest.addHeader(authorizationHeader);
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.execute(httpRequest);
 		} catch (IOException e) {
 			throw new DocMakerException(this, e);
 		}
-		
 		// Assert if status is 200
 		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
 		
