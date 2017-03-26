@@ -40,31 +40,35 @@ public class TemplateUtil {
 			// Start snippet
 			result.append("```\n");
 			result.append("-----  Request  -----\n");
+			// Request headers
+			Header[] headers = httpRequest.getAllHeaders();
+			if (headers.length > 0) {
+				result.append("Headers:\t");
+				for (int i = 0; i < headers.length; i++) {
+					result.append("{" + headers[i].getName() + ": ");
+					result.append(headers[i].getValue() + "}");
+				}
+				result.append("\n\n");
+			}
 			// Request URL
 			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
-			result.append("\n");
-			// Request headers
-			StringBuilder headers = new StringBuilder();
-			for (Header h : httpRequest.getAllHeaders()) {
-				headers.append(h.getName() + ": ");
-				headers.append(h.getValue());
-			}
-			if (headers.length() > 0) {
-				result.append("\nHeaders: " + headers);
-			}
-			
-			result.append("\n");
+			result.append("\n\n");
 			result.append("-----  Response  -----\n");
 			// Response details
+			result.append("Status:\t\t");
 			result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
 			result.append(httpResponse.getStatusLine().getStatusCode() + " ");
 			result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
+			result.append("\n");
 			// Response headers
 			Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
-			result.append("\nHeaders: ");
-			for (int i = 0; i < authoHeaders.length; i++) {
-				result.append("\n\t" + authoHeaders[i].getName() + ": ");
-				result.append(authoHeaders[i].getValue());
+			if (authoHeaders.length > 0) {
+				result.append("Headers:\t");
+				for (int i = 0; i < authoHeaders.length; i++) {
+					result.append("{" + authoHeaders[i].getName() + ": ");
+					result.append(authoHeaders[i].getValue() + "}");
+				}
+				result.append("\n");
 			}
 			// Response body
 			String responseBody;
@@ -73,7 +77,7 @@ public class TemplateUtil {
 			} catch (Exception e) {
 				throw new DocMakerException(e);
 			}
-			result.append("\n\n");
+			result.append("\n");
 			result.append(responseBody);
 			result.append("\n");
 			result.append("```");
