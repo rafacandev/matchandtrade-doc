@@ -1,14 +1,14 @@
-package com.github.rafasantos.matchandtrade.doc.maker.rest;
+package com.github.rafasantos.matchandtrade.doc.maker;
 
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
-public class RestMaker implements OutputMaker {
+public class RestGuideMaker implements OutputMaker {
 	
 	@Override
 	public String obtainDocContent() {
-		String template = TemplateUtil.buildTemplate("doc/rest/rest.md");
+		String template = TemplateUtil.buildTemplate(getDocLocation());
 		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
 		RequestResponseHolder rrHolder = authenticate.testPositive();
 		String authenticateSnippet = authenticate.buildAuthenticatePositiveSnippet(rrHolder.getHttpRequest());
@@ -17,7 +17,7 @@ public class RestMaker implements OutputMaker {
 	}
 	
 	@Override
-	public String obtainDocLocation() {
-		return "rest/rest.md";
+	public String getDocLocation() {
+		return "doc/rest-guide.md";
 	}
 }

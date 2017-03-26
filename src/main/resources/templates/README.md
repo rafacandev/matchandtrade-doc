@@ -11,12 +11,12 @@ Match and Trade is a web application where many people trade several items at on
 
 RESTful Documentation
 ---------------------
-Checkout our [RESTful Documentation](rest/rest.md). This application offers a power RESTful API which can be integrated with other applications.
+Checkout our [RESTful Documentation](doc/rest-guide.md). This application offers a power RESTful API which can be integrated with other applications.
 
 Development Guide
 -----------------
-Checkout our [Development Guide](development-guide/development-guide.md) if you want to contribute or customize the application.
+Checkout our [Development Guide](doc/development-guide.md) if you want to contribute or customize the application.
 
 Deployment Guide
 ----------------
-Follow the [Deployment Guide](deployment-guide/deployment-guide.md) if you want to host your own instance of the application.
+Follow the [Deployment Guide](doc/deployment-guide.md) if you want to host your own instance of the application.

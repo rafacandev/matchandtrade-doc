@@ -50,7 +50,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	}
 
 	private String buildDocContent(HttpGet httpRequest) throws IOException {
-		String template = TemplateUtil.buildTemplate("doc/rest/resources/authenticate.md");
+		String template = TemplateUtil.buildTemplate(getDocLocation());
 		String snippet = buildAuthenticatePositiveSnippet(httpRequest);
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_POSITIVE_SNIPPET, snippet);
 		return template;
@@ -67,7 +67,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocLocation() {
-		return "rest/resources/authenticate.md";
+	public String getDocLocation() {
+		return "doc/rest/authenticate.md";
 	}
 }

@@ -13,7 +13,7 @@ import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 
 
-public class RestAuthenticationMaker implements OutputMaker {
+public class RestAuthenticationsMaker implements OutputMaker {
 	
 	public void positive() throws ClientProtocolException, IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -38,8 +38,8 @@ public class RestAuthenticationMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocLocation() {
-		return "rest/resources/authentications.md";
+	public String getDocLocation() {
+		return "doc/rest/authentications.md";
 	}
 
 }

@@ -10,12 +10,12 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.rafasantos.matchandtrade.doc.maker.DevelopmentGuide;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.developmentguide.DevelopmentGuide;
+import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
 import com.matchandtrade.WebserviceApplication;
 
 
@@ -60,13 +60,13 @@ public class DocMakerExecutable {
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
 		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
-		docMakers.add(new RestMaker());
+		docMakers.add(new RestGuideMaker());
 		docMakers.add(new RestAuthenticateMaker());
-		docMakers.add(new RestAuthenticationMaker());
+		docMakers.add(new RestAuthenticationsMaker());
 
 		for(OutputMaker t : docMakers) {
 			String docContent = t.obtainDocContent();
-			String docLocation = t.obtainDocLocation();
+			String docLocation = t.getDocLocation();
 			File docFile = new File(destinationFolder + File.separator + docLocation);
 			FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
 		}
