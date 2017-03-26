@@ -30,6 +30,7 @@ public class DocMakerExecutable {
 	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
 
 	public static void main(String[] arguments) {
+		// TODO Better arguments handling
 		try {
 			if (arguments.length == 0) {
 				arguments = new String[4];
@@ -64,10 +65,10 @@ public class DocMakerExecutable {
 		docMakers.add(new RestAuthenticationMaker());
 
 		for(OutputMaker t : docMakers) {
-			String tOutput = t.obtainDocOutput();
-			String tOutputLocation = t.obtainDocOutputLocation();
-			File tOutputFile = new File(destinationFolder + File.separator + tOutputLocation);
-			FileUtils.write(tOutputFile, tOutput, StandardCharsets.UTF_8);
+			String docContent = t.obtainDocContent();
+			String docLocation = t.obtainDocLocation();
+			File docFile = new File(destinationFolder + File.separator + docLocation);
+			FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
 		}
 	}
 

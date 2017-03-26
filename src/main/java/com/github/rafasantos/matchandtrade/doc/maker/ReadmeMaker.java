@@ -20,7 +20,7 @@ public class ReadmeMaker implements OutputMaker {
 	}
 	
 	@Override
-	public String obtainDocOutput() {
+	public String obtainDocContent() {
 		String result = null;
 		try {
 			result = buildDocOutputString();
@@ -31,7 +31,7 @@ public class ReadmeMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocOutputLocation() {
+	public String obtainDocLocation() {
 		return "README.md";
 	}
 }

@@ -32,13 +32,13 @@ public class RestAuthenticationMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocOutput() {
+	public String obtainDocContent() {
 		// TODO Auto-generated method stub
 		return "bla-bla";
 	}
 
 	@Override
-	public String obtainDocOutputLocation() {
+	public String obtainDocLocation() {
 		return "rest/resources/authentications.md";
 	}
 

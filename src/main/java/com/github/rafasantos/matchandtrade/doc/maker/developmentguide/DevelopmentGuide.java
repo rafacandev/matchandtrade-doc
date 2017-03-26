@@ -31,7 +31,7 @@ public class DevelopmentGuide implements OutputMaker {
 	}
 	
 	@Override
-	public String obtainDocOutput() {
+	public String obtainDocContent() {
 		String result = null;
 		try {
 			result = buildDocOutput();
@@ -41,7 +41,7 @@ public class DevelopmentGuide implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocOutputLocation() {
+	public String obtainDocLocation() {
 		return "development-guide/development-guide.md";
 	}
 }

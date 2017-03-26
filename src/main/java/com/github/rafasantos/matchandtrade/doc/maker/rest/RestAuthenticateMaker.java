@@ -84,7 +84,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocOutput() {
+	public String obtainDocContent() {
 		try {
 			RequestResponseHolder requestResponseBag = testPositive();
 			return buildDocOutput(requestResponseBag.getHttpRequest(), requestResponseBag.getHttpResponse());
@@ -94,7 +94,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocOutputLocation() {
+	public String obtainDocLocation() {
 		return "rest/resources/authenticate.md";
 	}
 }
