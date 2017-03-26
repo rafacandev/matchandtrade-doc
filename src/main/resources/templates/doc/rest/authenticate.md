@@ -1,7 +1,7 @@
 Authenticate
 ============
-Information about the current authenticated session. In many cases, this resource is the used to get the `userId` associated with the current session.
+This endpoint (endpoints do not necessarily operate on resources. See ["Web Services - Terminology](https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms)) is going to redirect the client to an oAuth server and later redirected back to the consumer with an header called `Authorization`.
 
-This authentication request is going to redirect the client to a oAuth server and later redirected back with an header called `Authorization` which needs to be passed to secured REST resources.
+The `Authorization` header needs to be included to any secured REST resources.
 
-${AUTHENTICATE_POSITIVE_SNIPPET}
+${AUTHENTICATE_SNIPPET}

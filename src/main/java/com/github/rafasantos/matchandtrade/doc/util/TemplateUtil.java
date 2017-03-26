@@ -8,10 +8,8 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.config.AuthenticationProperties;
@@ -36,12 +34,9 @@ public class TemplateUtil {
 		return result;
 	}
 	
-	public static String buildRequestSnippet(HttpRequestBase httpRequest) {
-		CloseableHttpClient httpClient = HttpClients.createDefault();
+	public static String buildRequestSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
 		StringBuilder result = new StringBuilder();;
 		try {
-			CloseableHttpResponse httpResponse = httpClient.execute(httpRequest);
-
 			// Start snippet
 			result.append("```\n");
 			result.append("-----  Request  -----\n");
