@@ -1,10 +1,6 @@
 package com.github.rafasantos.matchandtrade.doc.maker.developmentguide;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
-import org.apache.commons.io.FileUtils;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
@@ -13,28 +9,21 @@ import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
 public class DevelopmentGuide implements OutputMaker {
 	
-	String filePath = this.getClass().getClassLoader().getResource("doc/development-guide/development-guide.md").getFile();
-	
-	private String buildDocOutputString() throws IOException {
-		File file = new File(filePath);
-		String fileAsString = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-		return fileAsString;
-	}
 
-	private String buildDocOutput() throws IOException {
-		String template = buildDocOutputString();
+	private String buildDocContent() throws IOException {
+		String template = TemplateUtil.buildTemplate("doc/development-guide/development-guide.md");
 		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
 		RequestResponseHolder rrHolder = authenticate.testPositive();
-		String authenticateSnippet = authenticate.buildAuthenticatePositiveSnippet(rrHolder.getHttpRequest(), rrHolder.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_PLACEHOLDER, authenticateSnippet);
+		String authenticateSnippet = authenticate.buildAuthenticatePositiveSnippet(rrHolder.getHttpRequest());
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_POSITIVE_SNIPPET, authenticateSnippet);
 		return template;
 	}
-	
+
 	@Override
 	public String obtainDocContent() {
 		String result = null;
 		try {
-			result = buildDocOutput();
+			result = buildDocContent();
 		} catch (IOException e) {
 		}
 		return result;

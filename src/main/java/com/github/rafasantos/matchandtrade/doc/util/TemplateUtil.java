@@ -1,15 +1,13 @@
 package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -36,39 +34,56 @@ public class TemplateUtil {
 		return result;
 	}
 	
-	public static String buildRequestResponseOutput(HttpRequestBase httpRequest) {
+	public static String buildRequestSnippet(HttpRequestBase httpRequest) {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
+		StringBuilder result = new StringBuilder();;
 		try {
 			CloseableHttpResponse httpResponse = httpClient.execute(httpRequest);
-			
-			
+
+			// Start snippet
+			result.append("```\n");
+			result.append("-----  Request  -----\n");
+			// Request URL
+			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+			result.append("\n");
+			// Request headers
 			StringBuilder headers = new StringBuilder();
-			for (Header h : httpResponse.getAllHeaders()) {
+			for (Header h : httpRequest.getAllHeaders()) {
 				headers.append(h.getName() + ": ");
 				headers.append(h.getValue());
 			}
-			StringBuilder result = new StringBuilder();;
-			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+			if (headers.length() > 0) {
+				result.append("\nHeaders: " + headers);
+			}
 			
-			
+			result.append("\n");
+			result.append("-----  Response  -----\n");
+			// Response details
 			result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
 			result.append(httpResponse.getStatusLine().getStatusCode() + " ");
 			result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
+			// Response headers
 			Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
 			result.append("\nHeaders: ");
 			for (int i = 0; i < authoHeaders.length; i++) {
 				result.append("\n\t" + authoHeaders[i].getName() + ": ");
 				result.append(authoHeaders[i].getValue());
 			}
+			// Response body
+			String responseBody;
+			try {
+				responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+			} catch (Exception e) {
+				throw new DocMakerException(e);
+			}
 			result.append("\n\n");
-			
-			
+			result.append(responseBody);
+			result.append("\n");
+			result.append("```");
 		} catch (Exception e) {
 			throw new DocMakerException(e);
 		}
-		
-		return null;
-		
+		return result.toString();
 	}
 
 }

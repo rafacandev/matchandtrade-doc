@@ -23,9 +23,7 @@ java -jar /target/webservice-0.0.1-SNAPSHOT.jar
 
 Authenticate:
 
-```
-${AUTHENTICATE_POSITIVE_PLACEHOLDER}
-```
+${AUTHENTICATE_POSITIVE_SNIPPET}
 
 ## Unit Test and Integration Test
 Unit tests and integration tests are executed via `mvn` and configured with the maven plugins `maven-surefire-plugin` and `maven-failsafe-plugin` respectively.
