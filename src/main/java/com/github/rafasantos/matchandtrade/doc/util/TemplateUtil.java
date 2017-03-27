@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
@@ -40,22 +41,31 @@ public class TemplateUtil {
 			// Start snippet
 			result.append("```\n");
 			result.append("-----  Request  -----\n");
+			// Request URL
+			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+			result.append("\n");
 			// Request headers
 			Header[] headers = httpRequest.getAllHeaders();
 			if (headers.length > 0) {
-				result.append("Headers:\t");
+				result.append("Headers:  ");
 				for (int i = 0; i < headers.length; i++) {
 					result.append("{" + headers[i].getName() + ": ");
 					result.append(headers[i].getValue() + "}");
 				}
-				result.append("\n\n");
 			}
-			// Request URL
-			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
-			result.append("\n\n");
+			result.append("\n");
+			// Request body
+			if (httpRequest instanceof HttpPost) {
+				result.append("\n");
+				HttpPost httpPost = (HttpPost) httpRequest;
+				String requestBody = IOUtils.toString(httpPost.getEntity().getContent(), StandardCharsets.UTF_8);
+				result.append(requestBody);
+				result.append("\n");
+			}
+			result.append("\n");			
 			result.append("-----  Response  -----\n");
 			// Response details
-			result.append("Status:\t\t");
+			result.append("Status:  ");
 			result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
 			result.append(httpResponse.getStatusLine().getStatusCode() + " ");
 			result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
