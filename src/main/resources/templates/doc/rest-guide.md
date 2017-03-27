@@ -9,6 +9,7 @@ Here is the list of resources available thought the RESTful API.
 * [/authenticate][1]
 * [/authentications][2]
 * [/trades][3]
+* [/users][4]
 
 General Guidelines
 ------------------
@@ -35,6 +36,7 @@ ${AUTHENTICATIONS_SNIPPET}
 [1]: rest/authenticate.md
 [2]: rest/authentications.md
 [3]: rest/trades.md
+[4]: rest/users.md
 [6]: https://rafaelsantosbra.wordpress.com/2016/10/18/many-to-many-relationships-for-rest-api-with-a-relationship-attribute/ "REST API Many to Many relationship"
 [7]: http://venkat.io/posts/expanding-your-rest-api/ "REST API Expand Resources"
 [8]: https://spring.io/understanding/HATEOAS "Spring HATEOAS"
