@@ -34,7 +34,7 @@ public class TemplateUtil {
 		return result;
 	}
 	
-	public static String buildRequestSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
+	public static String buildSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
 		StringBuilder result = new StringBuilder();;
 		try {
 			// Start snippet

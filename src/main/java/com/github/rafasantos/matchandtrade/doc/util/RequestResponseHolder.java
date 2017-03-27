@@ -1,22 +1,22 @@
 package com.github.rafasantos.matchandtrade.doc.util;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 
 public class RequestResponseHolder {
-	private HttpGet httpRequest;
+	private HttpRequestBase httpRequest;
 	private HttpResponse httpResponse;
 
-	public RequestResponseHolder(HttpGet httpRequest, HttpResponse httpResponse) {
+	public RequestResponseHolder(HttpRequestBase httpRequest, HttpResponse httpResponse) {
 		this.httpRequest = httpRequest;
 		this.httpResponse = httpResponse;
 	}
 
-	public HttpGet getHttpRequest() {
+	public HttpRequestBase getHttpRequest() {
 		return httpRequest;
 	}
 
-	public void setHttpRequest(HttpGet httpRequest) {
+	public void setHttpRequest(HttpRequestBase httpRequest) {
 		this.httpRequest = httpRequest;
 	}
 

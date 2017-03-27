@@ -16,6 +16,7 @@ import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
 import com.matchandtrade.WebserviceApplication;
 
 
@@ -63,6 +64,7 @@ public class DocMakerExecutable {
 		docMakers.add(new RestGuideMaker());
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationsMaker());
+		docMakers.add(new RestTradesMaker());
 
 		HtmlParser htmlParser = new HtmlParser();
 		for(OutputMaker t : docMakers) {

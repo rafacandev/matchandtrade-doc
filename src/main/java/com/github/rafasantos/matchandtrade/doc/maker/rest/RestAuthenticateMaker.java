@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
@@ -49,11 +50,11 @@ public class RestAuthenticateMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 
-	public String buildPositiveSnippet(HttpGet httpRequest, HttpResponse httpResponse) {
-		return TemplateUtil.buildRequestSnippet(httpRequest, httpResponse);
+	public String buildPositiveSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
+		return TemplateUtil.buildSnippet(httpRequest, httpResponse);
 	}
 
-	private String buildDocContent(HttpGet httpRequest, HttpResponse httpResponse) throws IOException {
+	private String buildDocContent(HttpRequestBase httpRequest, HttpResponse httpResponse) throws IOException {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		String snippet = buildPositiveSnippet(httpRequest, httpResponse);
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, snippet);
