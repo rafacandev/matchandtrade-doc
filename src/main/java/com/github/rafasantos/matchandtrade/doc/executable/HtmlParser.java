@@ -11,6 +11,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -41,7 +42,8 @@ public class HtmlParser {
                 AbbreviationExtension.create(),
                 DefinitionExtension.create(),
                 FootnoteExtension.create(),
-                TypographicExtension.create()
+                TypographicExtension.create(),
+                TablesExtension.create()
         ));
 		mdParser = Parser.builder(mdOptions).build();
 		htmlRenderer = HtmlRenderer.builder(mdOptions).build();
