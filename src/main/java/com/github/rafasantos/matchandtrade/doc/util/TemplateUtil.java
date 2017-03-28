@@ -81,9 +81,10 @@ public class TemplateUtil {
 				result.append("\n");
 			}
 			// Response body
-			String responseBody;
+			String responseBody = "";
 			try {
-				responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+				String responseBodyTemp = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+				responseBody = JsonUtil.prettyJson(responseBodyTemp);
 			} catch (Exception e) {
 				throw new DocMakerException(e);
 			}
@@ -96,5 +97,4 @@ public class TemplateUtil {
 		}
 		return result.toString();
 	}
-
 }
