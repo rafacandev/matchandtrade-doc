@@ -6,18 +6,21 @@ Resources
 ---------
 Here is the list of resources available thought the RESTful API.
 
-* [/authenticate][1]
-* [/authentications][2]
-* [/trades][3]
-* [/users][4]
+* [authenticate][1]
+* [authentications][2]
+* [trades][3]
+* [users][4]
 
 General Guidelines
 ------------------
-Generally speaking, resources and payloads have consistent formats. Furthermore, [expanding resources][7] is discouraged and multiple asynchronous calls are favored in order to load sub-resources.
+Generally speaking, resources and payloads have consistent formats. Furthermore, [expanding resources][7] is discouraged and multiple asynchronous calls are favored when it comes to sub-resources.
+
 ### HATEOAS
 The importance of HATEOAS cannot be emphasized enough. This app uses the [Spring HATEOAS][8] approach to handle hypermedia.
+
 ### Many To Many Relationships
 Relationships are treated as resources similarly to what is described on this [post][6].
+
 ### Pagination
 REST clients should rely on the pagination information which is included in responses with multiple results. Our pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
 
