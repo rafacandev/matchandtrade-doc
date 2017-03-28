@@ -52,20 +52,21 @@ public class TemplateUtil {
 					result.append("{" + headers[i].getName() + ": ");
 					result.append(headers[i].getValue() + "}");
 				}
+				result.append("\n");
 			}
-			result.append("\n");
 			// Request body
 			if (httpRequest instanceof HttpPost) {
 				result.append("\n");
 				HttpPost httpPost = (HttpPost) httpRequest;
 				String requestBody = IOUtils.toString(httpPost.getEntity().getContent(), StandardCharsets.UTF_8);
+				requestBody = JsonUtil.prettyJson(requestBody);
 				result.append(requestBody);
 				result.append("\n");
 			}
 			result.append("\n");			
 			result.append("-----  Response  -----\n");
 			// Response details
-			result.append("Status:  ");
+			result.append("Status:   ");
 			result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
 			result.append(httpResponse.getStatusLine().getStatusCode() + " ");
 			result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
@@ -73,24 +74,26 @@ public class TemplateUtil {
 			// Response headers
 			Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
 			if (authoHeaders.length > 0) {
-				result.append("Headers:\t");
+				result.append("Headers:  ");
 				for (int i = 0; i < authoHeaders.length; i++) {
 					result.append("{" + authoHeaders[i].getName() + ": ");
 					result.append(authoHeaders[i].getValue() + "}");
 				}
 				result.append("\n");
 			}
+			result.append("\n");
 			// Response body
-			String responseBody = "";
-			try {
-				String responseBodyTemp = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
-				responseBody = JsonUtil.prettyJson(responseBodyTemp);
-			} catch (Exception e) {
-				throw new DocMakerException(e);
+			if (httpResponse.getEntity() != null) {
+				String responseBody = "";
+				try {
+					responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+					responseBody = JsonUtil.prettyJson(responseBody);
+				} catch (Exception e) {
+					throw new DocMakerException(e);
+				}
+				result.append(responseBody);
+				result.append("\n");
 			}
-			result.append("\n");
-			result.append(responseBody);
-			result.append("\n");
 			result.append("```");
 		} catch (Exception e) {
 			throw new DocMakerException(e);
