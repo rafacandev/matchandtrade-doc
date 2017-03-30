@@ -17,9 +17,11 @@ import org.apache.http.impl.client.HttpClients;
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
+import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.rest.v1.json.TradeJson;
 
 
 public class RestTradesMaker implements OutputMaker {
@@ -33,12 +35,10 @@ public class RestTradesMaker implements OutputMaker {
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
 		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		
-		// TODO use TradeJson instead of string literal
-		StringBuilder requestString = new StringBuilder();
-		requestString.append("{");
-		requestString.append("\"name\": \"Testing Trade Name\"");
-		requestString.append("}");
-		StringEntity requestBody = new StringEntity(requestString.toString(), StandardCharsets.UTF_8);
+		TradeJson tradeJson = new TradeJson();
+		tradeJson.setName("Testing Trade Name");
+		
+		StringEntity requestBody = new StringEntity(JsonUtil.toJson(tradeJson), StandardCharsets.UTF_8);
 		httpRequest.setEntity(requestBody);
 
 		HttpResponse httpResponse;

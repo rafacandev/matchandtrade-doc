@@ -2,6 +2,7 @@ package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -17,11 +18,18 @@ public class JsonUtil {
 
 	private static ObjectMapper objectMapper;
 
-	private static void init() {
-		objectMapper = new ObjectMapper();
-		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-		objectMapper.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);		
+	/**
+	 * Instantiate objectMapper with default configuration if it is null, then, return objectMapper. 
+	 * @return objectMapper with default config
+	 */
+	private static ObjectMapper getObjectMapper() {
+		if (objectMapper == null) {
+			objectMapper = new ObjectMapper();
+			objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+			objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+			objectMapper.configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);		
+		}
+		return objectMapper;
 	}
 	
 	/**
@@ -31,17 +39,26 @@ public class JsonUtil {
 	 * @return pretty json
 	 */
 	public static String prettyJson(String json) {
-		if (objectMapper == null) {
-			init();
-		}
 		String result = null;
 		try {
-			Object jsonObject = objectMapper.readValue(json, Object.class);
-			result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+			Object jsonObject = getObjectMapper().readValue(json, Object.class);
+			result = getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
 		} catch (IOException e) {
 			throw new DocMakerException("Not able to parse string to JSON: " + json, e);
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Parse an object to a JSON string.
+	 * @param o
+	 * @return JSON string
+	 */
+	public static String toJson(Object o) {
+		try {
+			return getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(o);
+		} catch (JsonProcessingException e) {
+			throw new DocMakerException("Not able to parse object to string", e);
+		}
+	}
 }
