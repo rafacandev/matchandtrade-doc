@@ -3,6 +3,8 @@ package com.github.rafasantos.matchandtrade.doc.maker.rest;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import javax.ws.rs.core.MediaType;
+
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -29,7 +31,7 @@ public class RestTradesMaker implements OutputMaker {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + "/rest/v1/trades/");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
-		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		
 		// TODO use TradeJson instead of string literal
 		StringBuilder requestString = new StringBuilder();
@@ -55,7 +57,7 @@ public class RestTradesMaker implements OutputMaker {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/trades/1");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
-		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.execute(httpRequest);

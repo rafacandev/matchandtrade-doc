@@ -3,6 +3,8 @@ package com.github.rafasantos.matchandtrade.doc.maker.rest;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.ws.rs.core.MediaType;
+
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -31,7 +33,7 @@ public class RestUsersMaker implements OutputMaker {
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/users/1");
 		Header authorizationHeader = RestUtil.getAuthenticationHeader();
 		httpRequest.addHeader(authorizationHeader);
-		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.execute(httpRequest);
@@ -49,7 +51,7 @@ public class RestUsersMaker implements OutputMaker {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPut httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + "/rest/v1/users/1");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
-		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		
 		String requestBody = 
 			"{"
