@@ -66,8 +66,6 @@ public class RestAuthenticateMaker implements OutputMaker {
 			throw new DocMakerException(this, e);
 		}
 		
-		System.out.println(httpResponse.getStatusLine());
-		
 		// Assert if status is 200
 		AssertUtil.areEqual(HttpStatus.SC_RESET_CONTENT, httpResponse.getStatusLine().getStatusCode());
 		

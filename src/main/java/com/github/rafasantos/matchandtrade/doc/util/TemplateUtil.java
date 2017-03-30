@@ -67,9 +67,7 @@ public class TemplateUtil {
 			result.append("-----  Response  -----\n");
 			// Response details
 			result.append("Status:   ");
-			result.append(httpResponse.getStatusLine().getProtocolVersion() + " ");
-			result.append(httpResponse.getStatusLine().getStatusCode() + " ");
-			result.append(Response.Status.fromStatusCode(httpResponse.getStatusLine().getStatusCode()).getReasonPhrase());
+			result.append(httpResponse.getStatusLine());
 			result.append("\n");
 			// Response headers
 			Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
