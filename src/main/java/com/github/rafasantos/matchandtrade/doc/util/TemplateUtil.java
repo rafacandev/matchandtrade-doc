@@ -3,8 +3,6 @@ package com.github.rafasantos.matchandtrade.doc.util;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-import javax.ws.rs.core.Response;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;

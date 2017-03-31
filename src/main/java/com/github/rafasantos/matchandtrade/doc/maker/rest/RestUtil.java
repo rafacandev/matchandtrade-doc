@@ -18,7 +18,7 @@ public class RestUtil {
 	public static Header getAuthenticationHeader() {
 		if (authenticationHeader == null) {
 			RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-			RequestResponseHolder requestResponseHolder = authenticate.testPositive();
+			RequestResponseHolder requestResponseHolder = authenticate.buildAuthenticateRequestResponse();
 			authenticationHeader = getAuthenticationHeaderFromResponse(requestResponseHolder.getHttpResponse());
 		}
 		return authenticationHeader;

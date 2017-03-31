@@ -1,5 +1,7 @@
 package com.github.rafasantos.matchandtrade.doc.maker;
 
+import org.apache.http.Header;
+
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
@@ -13,15 +15,18 @@ public class RestGuideMaker implements OutputMaker {
 		
 		// Assemble authentication snippet
 		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-		RequestResponseHolder rrHolderAuth = authenticate.testPositive();
-		String authenticateSnippet = authenticate.buildPositiveSnippet(rrHolderAuth.getHttpRequest(), rrHolderAuth.getHttpResponse());
+		RequestResponseHolder requestResponseAuth = authenticate.buildAuthenticateRequestResponse();
+		String authenticateSnippet = TemplateUtil.buildSnippet(requestResponseAuth.getHttpRequest(), requestResponseAuth.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_SNIPPET, authenticateSnippet);
 
+		// Use the same authorization header for documentation clarity and consistency
+		Header authorizationHeader = requestResponseAuth.getHttpResponse().getHeaders("Authorization")[0];
+		
 		// Assemble authentications snippet		
 		RestAuthenticationsMaker authentications = new RestAuthenticationsMaker();
 		// Reuse the same Authorization header for better documentation clarity
-		RequestResponseHolder rrHolderAuthentications = authentications.testPositive(rrHolderAuth.getHttpResponse().getHeaders("Authorization")[0]);
-		String authenticationsSnippet = authentications.buildPositiveSnippet(rrHolderAuthentications.getHttpRequest(), rrHolderAuthentications.getHttpResponse());
+		RequestResponseHolder requestResponseAuthentications = authentications.buildGetAuthenticationsRequestResponse(authorizationHeader);
+		String authenticationsSnippet = TemplateUtil.buildSnippet(requestResponseAuthentications.getHttpRequest(), requestResponseAuthentications.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
 
 		return template;

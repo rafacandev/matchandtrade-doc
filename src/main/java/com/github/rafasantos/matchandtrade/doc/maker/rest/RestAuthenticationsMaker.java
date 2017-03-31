@@ -7,7 +7,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
@@ -22,11 +21,7 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	
-	public RequestResponseHolder testPositive() {
-		return testPositive(RestUtil.getAuthenticationHeader());
-	}
-	
-	public RequestResponseHolder testPositive(Header authorizationHeader) {
+	public RequestResponseHolder buildGetAuthenticationsRequestResponse(Header authorizationHeader) {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/authentications/");
 		httpRequest.addHeader(authorizationHeader);
@@ -42,25 +37,13 @@ public class RestAuthenticationsMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 
-	public String buildPositiveSnippet(HttpRequestBase authenticationsRequest, HttpResponse httpResponse) {
-		return TemplateUtil.buildSnippet(authenticationsRequest, httpResponse);
-	}
-	
-	private String buildDocContent(HttpRequestBase httpRequest, HttpResponse httpResponse) throws IOException {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
-		String snippet = TemplateUtil.buildSnippet(httpRequest, httpResponse);
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET, snippet);
-		return template;
-	}
-
 	@Override
 	public String obtainDocContent() {
-		try {
-			RequestResponseHolder requestResponseHodler = testPositive();
-			return buildDocContent(requestResponseHodler.getHttpRequest(), requestResponseHodler.getHttpResponse());
-		} catch (IOException e) {
-			throw new DocMakerException(this, e);
-		}
+		RequestResponseHolder requestResponse = buildGetAuthenticationsRequestResponse(RestUtil.getAuthenticationHeader());
+		String template = TemplateUtil.buildTemplate(getDocLocation());
+		String snippet = TemplateUtil.buildSnippet(requestResponse.getHttpRequest(), requestResponse.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET, snippet);
+		return template;
 	}
 
 	@Override

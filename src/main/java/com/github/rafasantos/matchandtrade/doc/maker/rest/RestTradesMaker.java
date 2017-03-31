@@ -29,7 +29,7 @@ public class RestTradesMaker implements OutputMaker {
 	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
 	
-	public RequestResponseHolder buildPostRequestResponse() {
+	private RequestResponseHolder buildPostRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + "/rest/v1/trades/");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
@@ -53,7 +53,7 @@ public class RestTradesMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 	
-	public RequestResponseHolder buildGetRequestResponse() {
+	private RequestResponseHolder buildGetRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/trades/1");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
