@@ -7,7 +7,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
@@ -53,10 +55,10 @@ public class TemplateUtil {
 				result.append("\n");
 			}
 			// Request body
-			if (httpRequest instanceof HttpPost) {
+			if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
 				result.append("\n");
-				HttpPost httpPost = (HttpPost) httpRequest;
-				String requestBody = IOUtils.toString(httpPost.getEntity().getContent(), StandardCharsets.UTF_8);
+				HttpEntityEnclosingRequestBase requestBase = (HttpEntityEnclosingRequestBase) httpRequest;
+				String requestBody = IOUtils.toString(requestBase.getEntity().getContent(), StandardCharsets.UTF_8);
 				requestBody = JsonUtil.prettyJson(requestBody);
 				result.append(requestBody);
 				result.append("\n");
