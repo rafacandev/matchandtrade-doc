@@ -18,9 +18,11 @@ import org.apache.http.impl.client.HttpClients;
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
+import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.rest.v1.json.UserJson;
 
 
 public class RestUsersMaker implements OutputMaker {
@@ -53,12 +55,12 @@ public class RestUsersMaker implements OutputMaker {
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
 		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		
-		String requestBody = 
-			"{"
-			  + "\"email\" : \"testing.email@test.com\","
-			  + "\"name\" : \"User name after PUT\","
-			  + "\"userId\" : 1"
-			+"}";	
+		UserJson requestJson = new UserJson();
+		requestJson.setEmail("testing.email@test.com");
+		requestJson.setName("User name for PUT method");
+		requestJson.setUserId(1);
+		
+		String requestBody = JsonUtil.toJson(requestJson);
 		
 		try {
 			httpRequest.setEntity(new StringEntity(requestBody));
