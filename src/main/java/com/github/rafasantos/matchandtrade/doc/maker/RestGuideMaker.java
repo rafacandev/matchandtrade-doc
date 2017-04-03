@@ -10,7 +10,7 @@ import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 public class RestGuideMaker implements OutputMaker {
 	
 	@Override
-	public String obtainDocContent() {
+	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
 		// Assemble authentication snippet

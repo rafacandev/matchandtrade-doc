@@ -12,7 +12,7 @@ public class ReadmeMaker implements OutputMaker {
 	}
 	
 	@Override
-	public String obtainDocContent() {
+	public String buildDocContent() {
 		String result = null;
 		try {
 			result = buildDocOutputString();

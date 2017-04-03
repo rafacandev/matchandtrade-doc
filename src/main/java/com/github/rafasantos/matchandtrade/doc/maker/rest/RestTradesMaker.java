@@ -71,7 +71,7 @@ public class RestTradesMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocContent() {
+	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
 		RequestResponseHolder post = buildPostRequestResponse();

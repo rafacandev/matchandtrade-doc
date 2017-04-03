@@ -38,7 +38,7 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	}
 
 	@Override
-	public String obtainDocContent() {
+	public String buildDocContent() {
 		RequestResponseHolder requestResponse = buildGetAuthenticationsRequestResponse(RestUtil.getAuthenticationHeader());
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		String snippet = TemplateUtil.buildSnippet(requestResponse.getHttpRequest(), requestResponse.getHttpResponse());

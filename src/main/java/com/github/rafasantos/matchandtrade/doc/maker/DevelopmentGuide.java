@@ -6,7 +6,7 @@ import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 public class DevelopmentGuide implements OutputMaker {
 
 	@Override
-	public String obtainDocContent() {
+	public String buildDocContent() {
 		return TemplateUtil.buildTemplate(getDocLocation());
 	}
 

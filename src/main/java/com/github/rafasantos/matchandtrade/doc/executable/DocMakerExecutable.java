@@ -70,7 +70,8 @@ public class DocMakerExecutable {
 
 		HtmlParser htmlParser = new HtmlParser();
 		for(OutputMaker t : docMakers) {
-			String docContent = t.obtainDocContent();
+			// Generate Markdown documents
+			String docContent = t.buildDocContent();
 			String docLocation = t.getDocLocation();
 			File docFile = new File(destinationFolder + File.separator + docLocation);
 			FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
