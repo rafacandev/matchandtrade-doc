@@ -14,8 +14,8 @@ When a new Trade is create, the `userId` associated to the `Authorization` heade
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-name | read-write, unique, 200 max length | The name for this trade
-tradeId | Read-only | Id associated with this resource
+name | read-write, unique, 150 max length | The name for this trade
+tradeId | read-only | Id associated with this resource
 
 #### Examples
 ${TRADES_POST_SNIPPET}

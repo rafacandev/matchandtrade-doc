@@ -13,9 +13,9 @@ Resource to manage the users in the system. Typically, users are created in the 
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-email | Read-only | The user's email address, this value is assigned by the Authentication Authority during the sign-up process
-name | Read-write, 200max | The user's name this value is firstly assigned by the Authentication Authority during the sign-up process
-userId | Read-only | Id associated with this resource
+email | read-only | The user's email address, this value is assigned by the Authentication Authority during the sign-up process
+name | read-write, 150 max length | The user's name this value is firstly assigned by the Authentication Authority during the sign-up process
+userId | read-only | Id associated with this resource
 
 #### Examples
 ${USERS_GET_SNIPPET}

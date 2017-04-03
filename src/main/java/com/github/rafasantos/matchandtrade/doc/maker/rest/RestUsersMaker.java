@@ -58,7 +58,6 @@ public class RestUsersMaker implements OutputMaker {
 		UserJson requestJson = new UserJson();
 		requestJson.setEmail("testing.email@test.com");
 		requestJson.setName("User name for PUT method");
-		requestJson.setUserId(1);
 		
 		String requestBody = JsonUtil.toJson(requestJson);
 		
