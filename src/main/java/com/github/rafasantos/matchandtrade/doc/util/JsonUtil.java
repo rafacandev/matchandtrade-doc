@@ -33,7 +33,8 @@ public class JsonUtil {
 	}
 	
 	/**
-	 * Prettyfi a JSON string
+	 * Attempt to prettyfi a JSON string. If error (e.g: the string is not a valid json, 
+	 * it returns the original string.
 	 * 
 	 * @param json
 	 * @return pretty json
@@ -43,10 +44,10 @@ public class JsonUtil {
 		try {
 			Object jsonObject = getObjectMapper().readValue(json, Object.class);
 			result = getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
+			return result;
 		} catch (IOException e) {
-			throw new DocMakerException("Not able to parse string to JSON: " + json, e);
+			return json;
 		}
-		return result;
 	}
 	
 	/**

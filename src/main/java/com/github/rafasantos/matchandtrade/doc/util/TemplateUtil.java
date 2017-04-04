@@ -79,7 +79,6 @@ public class TemplateUtil {
 				}
 				result.append("\n");
 			}
-			result.append("\n");
 			// Response body
 			if (httpResponse.getEntity() != null) {
 				String responseBody = "";
@@ -89,10 +88,12 @@ public class TemplateUtil {
 				} catch (Exception e) {
 					throw new DocMakerException(e);
 				}
-				result.append(responseBody);
-				result.append("\n");
+				if (responseBody != null && responseBody.length() > 0) {
+					result.append("\n");
+					result.append(responseBody);
+				}
 			}
-			result.append("```");
+			result.append("\n```");
 		} catch (Exception e) {
 			throw new DocMakerException(e);
 		}

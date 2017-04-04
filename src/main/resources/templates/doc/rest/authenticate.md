@@ -1,6 +1,6 @@
 Authenticate
 ============
-This endpoint (endpoints do not necessarily operate any resource. See [Web Services - Terminology](https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms). Instead it is going to redirect the client to an oAuth server and later return back to the client with an header called `Authorization`.
+This endpoint (endpoints do not necessarily operate any resource. See [Web Services - Terminology](https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms). Instead it is going to redirect the client to an oAuth server and later return back to the client with a header called `Authorization`.
 
 The `Authorization` header acts as a session token and needs to be included to any secured REST resource.
 
