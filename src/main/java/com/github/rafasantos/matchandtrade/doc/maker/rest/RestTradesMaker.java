@@ -28,15 +28,13 @@ public class RestTradesMaker implements OutputMaker {
 	
 	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
+	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
 	
-	private RequestResponseHolder buildPostRequestResponse() {
+	private RequestResponseHolder buildPostRequestResponse(TradeJson tradeJson) {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + "/rest/v1/trades/");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
 		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
-		
-		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName("Testing Trade Name");
 		
 		StringEntity requestBody = new StringEntity(JsonUtil.toJson(tradeJson), StandardCharsets.UTF_8);
 		httpRequest.setEntity(requestBody);
@@ -53,7 +51,7 @@ public class RestTradesMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 	
-	private RequestResponseHolder buildGetRequestResponse() {
+	private RequestResponseHolder buildGetByIdRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/trades/1");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
@@ -70,17 +68,48 @@ public class RestTradesMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 
+	private RequestResponseHolder buildGetAllRequestResponse() {
+		// Create more Trades
+		TradeJson tradeJson = new TradeJson();
+		tradeJson.setName("Second testing trade");
+		buildPostRequestResponse(tradeJson);
+		tradeJson = new TradeJson();
+		tradeJson.setName("Third testing trade");
+		buildPostRequestResponse(tradeJson);
+		
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/trades/");
+		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
+		HttpResponse httpResponse;
+		try {
+			httpResponse = httpClient.execute(httpRequest);
+		} catch (IOException e) {
+			throw new DocMakerException(this, e);
+		}
+		// Assert if status is 200
+		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		
+		return new RequestResponseHolder(httpRequest, httpResponse);
+	}
+	
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		RequestResponseHolder post = buildPostRequestResponse();
+		TradeJson postTradeJson = new TradeJson();
+		postTradeJson.setName("First testing trade");
+		RequestResponseHolder post = buildPostRequestResponse(postTradeJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
 		
-		RequestResponseHolder get = buildGetRequestResponse();
+		RequestResponseHolder get = buildGetByIdRequestResponse();
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
+		
+		RequestResponseHolder getAll = buildGetAllRequestResponse();
+		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getAllSnippet);
 		
 		return template;
 	}

@@ -5,8 +5,9 @@ Trades are the central components of Match and Trade. The user who creates a tra
 When a new Trade is create, the `userId` associated to the `Authorization` header will be assigned as the trade _organizer_. 
 
 #### Operations
-* `GET rest/v1/trades/{tradeId}`
 * `POST rest/v1/trades/{tradeId}`
+* `GET rest/v1/trades/{tradeId}`
+* `GET rest/v1/trades/`
 
 #### Authorization
 * Only authenticated clients.
@@ -14,10 +15,12 @@ When a new Trade is create, the `userId` associated to the `Authorization` heade
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-name | read-write, unique, 150 max length | The name for this trade
+name | read-write, unique, 150 max length | The name of this trade
 tradeId | read-only | Id associated with this resource
 
 #### Examples
 ${TRADES_POST_SNIPPET}
 
 ${TRADES_GET_SNIPPET}
+
+${TRADES_GET_ALL_SNIPPET}
