@@ -5,12 +5,10 @@ import java.io.UnsupportedEncodingException;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -29,25 +27,6 @@ public class RestUsersMaker implements OutputMaker {
 	
 	private static final String USERS_GET_SNIPPET = "USERS_GET_SNIPPET";
 	private static final String USERS_PUT_SNIPPET = "USERS_PUT_SNIPPET";
-	
-	private RequestResponseHolder buildGetRequestResponse() {
-		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/users/1");
-		Header authorizationHeader = RestUtil.getAuthenticationHeader();
-		httpRequest.addHeader(authorizationHeader);
-		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
-		HttpResponse httpResponse;
-		try {
-			httpResponse = httpClient.execute(httpRequest);
-		} catch (IOException e) {
-			throw new DocMakerException(this, e);
-		}
-		// Assert if status is 200
-		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
-		RequestResponseHolder result = new RequestResponseHolder(httpRequest, httpResponse);
-		result.setAuthorizationHeader(authorizationHeader);
-		return result;
-	}
 	
 	private RequestResponseHolder buildPutRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
@@ -83,7 +62,7 @@ public class RestUsersMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		RequestResponseHolder get = buildGetRequestResponse();
+		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/users/1");
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
 

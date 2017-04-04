@@ -51,34 +51,6 @@ public class DocMakerExecutable {
 			System.exit(0);
 		}
 	}
-	
-//	public void execute(String destinationFolder) throws IOException {
-//		// TODO Scan all files instead of instantiate one by one manually
-//		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
-//		docMakers.add(new ReadmeMaker());
-//		docMakers.add(new DevelopmentGuide());
-//		docMakers.add(new RestGuideMaker());
-//		docMakers.add(new RestAuthenticateMaker());
-//		docMakers.add(new RestAuthenticationsMaker());
-//		docMakers.add(new RestTradesMaker());
-//		docMakers.add(new RestUsersMaker());
-//
-//		HtmlParser htmlParser = new HtmlParser();
-//		for(OutputMaker t : docMakers) {
-//			// Generate Markdown documents
-//			String docContent = t.buildDocContent();
-//			String docLocation = t.getDocLocation();
-//			File docFile = new File(destinationFolder + File.separator + docLocation);
-//			FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
-//			// Also generate HTML files derived from MarkDown files for easier visualization
-//			File htmlFile = HtmlParser.optainHtmlFile(docFile);
-//			String docContentAsHtml = htmlParser.parseMarkDownToHTML(docContent);
-//			String styleHead = HtmlParser.getGitHubStyleHead();
-//			String styleTail = HtmlParser.getGitHubStyleTail();
-//			String htmlContetn = styleHead + docContentAsHtml + styleTail;
-//			FileUtils.write(htmlFile, htmlContetn, StandardCharsets.UTF_8);
-//		}
-//	}
 
 	private static void startMatchAndTradeWebServer(String[] arguments) throws IOException {
 		PropertiesProvider.buildAppProperties(arguments);

@@ -3,8 +3,8 @@ Users
 Resource to manage the users in the system. Typically, users are created in the application on the first time they authenticate in the system. See [Authenticate][1] for more details.
 
 #### Operations
-* `GET rest/v1/users/{userId}`
 * `PUT rest/v1/users/{userId}`
+* `GET rest/v1/users/{userId}`
 
 #### Authorization
 * Only authenticated clients.
@@ -18,9 +18,9 @@ name | read-write, 150 max length | The user's name this value is firstly assign
 userId | read-only | Id associated with this resource
 
 #### Examples
-${USERS_GET_SNIPPET}
-
 ${USERS_PUT_SNIPPET}
+
+${USERS_GET_SNIPPET}
 
 [1]: authenticate.md
 [2]: authentications.md
