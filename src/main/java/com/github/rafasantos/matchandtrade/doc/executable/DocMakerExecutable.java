@@ -1,23 +1,10 @@
 package com.github.rafasantos.matchandtrade.doc.executable;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.rafasantos.matchandtrade.doc.maker.DevelopmentGuide;
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUsersMaker;
 import com.matchandtrade.WebserviceApplication;
 
 

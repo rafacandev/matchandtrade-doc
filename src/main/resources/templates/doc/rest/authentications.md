@@ -12,8 +12,7 @@ Information about the current authenticated session. Typically this resource is 
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-authenticationId | Read-only | Id associated with this authentication, this value is assigned during the [authenticate][1] process
-userId | Read-only | The [user][2] associated with this authentication, this value is assigned during the sign-up process
+userId | read-only | The [user][2] associated with this authentication, this value is assigned during the sign-up process
 
 #### Example
 

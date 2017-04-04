@@ -13,7 +13,9 @@ Here is the list of resources available thought the RESTful API.
 
 General Guidelines
 ------------------
-Generally speaking, resources and payloads have consistent formats. Furthermore, [expanding resources][7] is discouraged and multiple asynchronous calls are favored when it comes to sub-resources.
+Generally speaking, resources and payloads have consistent formats.
+
+Expanding resources ([See Atlassian Example][7]) is discouraged at the moment and multiple asynchronous calls are favored.
 
 ### HATEOAS
 The importance of HATEOAS cannot be emphasized enough. This app uses the [Spring HATEOAS][8] approach to handle hypermedia.
@@ -41,7 +43,7 @@ ${AUTHENTICATIONS_SNIPPET}
 [3]: rest/trades.md
 [4]: rest/users.md
 [6]: https://rafaelsantosbra.wordpress.com/2016/10/18/many-to-many-relationships-for-rest-api-with-a-relationship-attribute/ "REST API Many to Many relationship"
-[7]: http://venkat.io/posts/expanding-your-rest-api/ "REST API Expand Resources"
+[7]: https://developer.atlassian.com/confdev/confluence-server-rest-api/expansions-in-the-rest-api "Atlassian Developers - Expansions in the REST API"
 [8]: https://spring.io/understanding/HATEOAS "Spring HATEOAS"
 [9]: https://developer.github.com/guides/traversing-with-pagination/ "GitHub Pagination"
 [10]: https://www.w3.org/wiki/LinkHeader "LinkHeader Specification"
