@@ -1,6 +1,6 @@
 Authentications
 ===============
-Information about the current authenticated session. Typically this resource is used to get the `userId` associated with the current session.
+This _endpoint_ returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
 
 
 #### Methods
@@ -19,5 +19,4 @@ userId | read-only | The [user][2] associated with this authentication, this val
 ${AUTHENTICATIONS_SNIPPET}
 
 
-[1]: authenticate.md
 [2]: users.md

@@ -13,12 +13,20 @@ Here is the list of resources available thought the RESTful API.
 
 General Guidelines
 ------------------
-Generally speaking, resources and payloads have consistent formats.
+Generally speaking, _resources_ have consistent behavior which _endpoints_ may vary in format and behavior.
 
-Expanding resources ([See Atlassian Example][7]) is discouraged at the moment and multiple asynchronous calls are favored.
+### Endpoints vs Resources
+_Resource_ URLs are a specialized _endpoints_ which provides standard operations over a resource. In this application, all _resources_ support HATEOAS, pagination and follow standard query parameters.
+
+On the other hand, _endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]).
+
+See [Web Services - Terminology][5] for more details.
 
 ### HATEOAS
-The importance of HATEOAS cannot be emphasized enough. This app uses the [Spring HATEOAS][8] approach to handle hypermedia.
+The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
+
+### Expanding
+Expanding resources (see [Atlassian API][7] for an example) is discouraged at the moment and multiple asynchronous calls are favored.
 
 ### Many To Many Relationships
 Relationships are treated as resources similarly to what is described on this [post][6].
@@ -42,6 +50,7 @@ ${AUTHENTICATIONS_SNIPPET}
 [2]: rest/authentications.md
 [3]: rest/trades.md
 [4]: rest/users.md
+[5]: https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms
 [6]: https://rafaelsantosbra.wordpress.com/2016/10/18/many-to-many-relationships-for-rest-api-with-a-relationship-attribute/ "REST API Many to Many relationship"
 [7]: https://developer.atlassian.com/confdev/confluence-server-rest-api/expansions-in-the-rest-api "Atlassian Developers - Expansions in the REST API"
 [8]: https://spring.io/understanding/HATEOAS "Spring HATEOAS"

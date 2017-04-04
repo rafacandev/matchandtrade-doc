@@ -1,6 +1,6 @@
 Users
 ======
-Resource to manage the users in the system. Typically, users are created in the application on the first time they authenticate in the system. The oAuth process will create the user, see [Authenticate][1] endpoint for more details.
+Resource to manage the users in the system. Typically, users are created in the application on the first time they authenticate in the system. See [Authenticate][1] for more details.
 
 #### Operations
 * `GET rest/v1/users/{userId}`
