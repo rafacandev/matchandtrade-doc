@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -34,7 +35,16 @@ public class TemplateUtil {
 		}
 		return result;
 	}
-	
+
+	private static Header[] buildResponseHeaders(HttpResponse httpResponse) {
+		Header[] authorizationHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
+		Header[] paginationTotalCount = httpResponse.getHeaders("X-Pagination-Total-Count");
+		Header[] responseHeaders = (Header[]) ArrayUtils.addAll(authorizationHeaders, paginationTotalCount);
+		Header[] linkHeaders = httpResponse.getHeaders("Link");
+		responseHeaders = (Header[]) ArrayUtils.addAll(responseHeaders, linkHeaders);
+		return responseHeaders;
+	}
+
 	public static String buildSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
 		StringBuilder result = new StringBuilder();;
 		try {
@@ -70,12 +80,12 @@ public class TemplateUtil {
 			result.append(httpResponse.getStatusLine());
 			result.append("\n");
 			// Response headers
-			Header[] authoHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
-			if (authoHeaders.length > 0) {
+			Header[] responseHeaders = buildResponseHeaders(httpResponse);
+			if (responseHeaders.length > 0) {
 				result.append("Headers:  ");
-				for (int i = 0; i < authoHeaders.length; i++) {
-					result.append("{" + authoHeaders[i].getName() + ": ");
-					result.append(authoHeaders[i].getValue() + "}");
+				for (int i = 0; i < responseHeaders.length; i++) {
+					result.append("{" + responseHeaders[i].getName() + ": ");
+					result.append(responseHeaders[i].getValue() + "}");
 				}
 				result.append("\n");
 			}
@@ -99,4 +109,5 @@ public class TemplateUtil {
 		}
 		return result.toString();
 	}
+
 }
