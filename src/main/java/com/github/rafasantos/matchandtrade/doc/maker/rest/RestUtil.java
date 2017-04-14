@@ -23,6 +23,10 @@ public class RestUtil {
 		}
 		return authenticationHeader;
 	}
+	
+	public static void setAuthenticationHeader(Header header) {
+		authenticationHeader = header;
+	}
 
 	private static Header getAuthenticationHeaderFromResponse(HttpResponse httpResponse) {
 		Header result = null;

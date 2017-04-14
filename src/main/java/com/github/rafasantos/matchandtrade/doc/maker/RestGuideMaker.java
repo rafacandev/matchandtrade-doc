@@ -4,8 +4,11 @@ import org.apache.http.Header;
 
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.rest.v1.json.TradeJson;
 
 public class RestGuideMaker implements OutputMaker {
 	
@@ -21,14 +24,23 @@ public class RestGuideMaker implements OutputMaker {
 
 		// Use the same authorization header for documentation clarity and consistency
 		Header authorizationHeader = requestResponseAuth.getHttpResponse().getHeaders("Authorization")[0];
+		// Reuse the same Authorization header for better documentation clarity
+		RestUtil.setAuthenticationHeader(authorizationHeader);
 		
 		// Assemble authentications snippet		
 		RestAuthenticationsMaker authentications = new RestAuthenticationsMaker();
-		// Reuse the same Authorization header for better documentation clarity
-		RequestResponseHolder requestResponseAuthentications = authentications.buildGetAuthenticationsRequestResponse(authorizationHeader);
+		RequestResponseHolder requestResponseAuthentications = authentications.buildGetAuthenticationsRequestResponse();
 		String authenticationsSnippet = TemplateUtil.buildSnippet(requestResponseAuthentications.getHttpRequest(), requestResponseAuthentications.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
 
+		// Assemble Trade snippet		
+		RestTradesMaker trades = new RestTradesMaker();
+		TradeJson tradeJson = new TradeJson();
+		tradeJson.setName("Trading programing books.");
+		RequestResponseHolder requestResponseTrades = trades.buildPostRequestResponse(tradeJson);
+		String tradesSnippet = TemplateUtil.buildSnippet(requestResponseTrades.getHttpRequest(), requestResponseTrades.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, RestTradesMaker.TRADES_POST_SNIPPET, tradesSnippet);
+		
 		return template;
 	}
 	

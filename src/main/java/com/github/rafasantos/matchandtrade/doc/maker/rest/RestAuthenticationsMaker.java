@@ -2,7 +2,6 @@ package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import java.io.IOException;
 
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -21,10 +20,10 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	
-	public RequestResponseHolder buildGetAuthenticationsRequestResponse(Header authorizationHeader) {
+	public RequestResponseHolder buildGetAuthenticationsRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/authentications/");
-		httpRequest.addHeader(authorizationHeader);
+		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.execute(httpRequest);
@@ -39,7 +38,7 @@ public class RestAuthenticationsMaker implements OutputMaker {
 
 	@Override
 	public String buildDocContent() {
-		RequestResponseHolder requestResponse = buildGetAuthenticationsRequestResponse(RestUtil.getAuthenticationHeader());
+		RequestResponseHolder requestResponse = buildGetAuthenticationsRequestResponse();
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		String snippet = TemplateUtil.buildSnippet(requestResponse.getHttpRequest(), requestResponse.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET, snippet);

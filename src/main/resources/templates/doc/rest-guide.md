@@ -44,6 +44,8 @@ ${AUTHENTICATE_SNIPPET}
 Verify the authentication details. Note that you need to pass the `Authorization` header obtained on the previous response. 
 ${AUTHENTICATIONS_SNIPPET}
 
+Create a `Trade`
+${TRADES_POST_SNIPPET}
 
 
 [1]: rest/authenticate.md

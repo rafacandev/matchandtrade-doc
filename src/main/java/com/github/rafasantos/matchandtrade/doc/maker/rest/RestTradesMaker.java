@@ -25,11 +25,11 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 
 public class RestTradesMaker implements OutputMaker {
 	
-	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
+	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
 	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
 	
-	private RequestResponseHolder buildPostRequestResponse(TradeJson tradeJson) {
+	public RequestResponseHolder buildPostRequestResponse(TradeJson tradeJson) {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpPost httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + "/rest/v1/trades/");
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
