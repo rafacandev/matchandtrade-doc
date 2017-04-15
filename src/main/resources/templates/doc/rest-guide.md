@@ -18,9 +18,36 @@ Generally speaking, _resources_ have consistent behavior which _endpoints_ may v
 ### Endpoints vs Resources
 _Resource_ URLs are a specialized _endpoints_ which provides standard operations over a resource. In this application, all _resources_ support HATEOAS, pagination and follow standard query parameters.
 
-On the other hand, _endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]).
+On the other hand, _endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]). See [Web Services - Terminology][5] for more details.
 
-See [Web Services - Terminology][5] for more details.
+### PUT vs PATCH
+`PUT` requests are favored over `PATH` requests. While `PATH` may offer smaller payloads, it also introduces development complexity for little benefit.
+
+Additionally, when doing a `PUT` or `PATCH` it is recommended to do not include the `id` for the given resource in the payload. For example, when doing a `PUT /trades/{tradeId}` do not include `tradeId` in the payload, it will be simply ignored.
+
+```
+-----  Request  -----
+PUT http://localhost:8081/rest/v1/trades/1
+Headers:  {Authorization: 7075-1255-9178}{Content-Type: application/json}
+
+{
+  // Do not enter tradeId in this payload, it will be ignored.
+  "name" : "Name to update"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Name to update",
+  "tradeId" : 1,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}
+```
+
 
 ### HATEOAS
 The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
