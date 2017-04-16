@@ -25,7 +25,8 @@ import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 
 public class RestTradeMembershipsMaker implements OutputMaker {
 	
-	public static final String TRADES_POST_SNIPPET = "TRADES_MEMBERSHIP_POST_SNIPPET";
+	public static final String TRADES_MEMBERSHIP_POST_SNIPPET = "TRADES_MEMBERSHIP_POST_SNIPPET";
+	public static final String TRADES_MEMBERSHIP_GET_SNIPPET = "TRADES_MEMBERSHIP_GET_SNIPPET";
 	
 	public RequestResponseHolder buildPostRequestResponse(TradeMembershipJson json) {
 		HttpClient httpClient = HttpClients.createDefault();
@@ -52,12 +53,19 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
+		
 		TradeMembershipJson postJson = new TradeMembershipJson();
 		postJson.setUserId(1);
 		postJson.setTradeId(1);
 		RequestResponseHolder post = buildPostRequestResponse(postJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
+		
+		
+		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships/1");
+		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
+		
 		return template;
 	}
 

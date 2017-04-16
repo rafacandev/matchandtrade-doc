@@ -22,3 +22,5 @@ tradeId | read-write | Must belong to an existing `Trade`
 
 #### Examples
 ${TRADES_MEMBERSHIP_POST_SNIPPET}
+
+${TRADES_MEMBERSHIP_GET_SNIPPET}
