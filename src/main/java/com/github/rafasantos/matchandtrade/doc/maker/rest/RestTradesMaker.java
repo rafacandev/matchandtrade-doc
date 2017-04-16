@@ -27,6 +27,7 @@ public class RestTradesMaker implements OutputMaker {
 	
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
+	private static final String TRADES_SEARCH_SNIPPET = "TRADES_SEARCH_SNIPPET";
 	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
 	
 	public RequestResponseHolder buildPostRequestResponse(TradeJson tradeJson) {
@@ -64,6 +65,10 @@ public class RestTradesMaker implements OutputMaker {
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
 
+		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades?name=First%20testing%20trade");
+		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet);
+		
 		// Make as second TradeJson so the getAll can display two results
 		TradeJson secondTradeJson = new TradeJson();
 		secondTradeJson.setName("Second testing trade");

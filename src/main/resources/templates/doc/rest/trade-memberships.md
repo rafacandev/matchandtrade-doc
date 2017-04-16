@@ -1,6 +1,6 @@
 Trade Memberships
 =================
-Members of a `Trade`. Members are existing `User`s who participate in a `Trade`.  
+Members of a `trade`. Members are existing `user`s who participate in a `trade`.  
 
 #### Operations
 * `POST rest/v1/trade-memberships/`
@@ -25,11 +25,11 @@ _pageNumber | See pagination details
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
 tradeMembershipId | read-only | Id associated with this resource
-userId | read-write | Must belong to an existing `User`
-tradeId | read-write | Must belong to an existing `Trade`
+userId | read-write | Must belong to an existing `user`
+tradeId | read-write | Must belong to an existing `trade`
 
 #### Rules
-* Cannot delete the owner of a `Trade`
+* Cannot delete the owner of a `trade`
 
 #### Examples
 ${TRADES_MEMBERSHIP_POST_SNIPPET}

@@ -7,7 +7,15 @@ When a new Trade is create, the `userId` associated to the `Authorization` heade
 #### Operations
 * `POST rest/v1/trades/{tradeId}`
 * `GET rest/v1/trades/{tradeId}`
+* `GET rest/v1/trades?{queryParameters}`
 * `GET rest/v1/trades/`
+
+##### Query Parameters
+| Field Name | Description |
+| ---------- | ----------- |
+name | Resources matching `Trade.name`SNIPPET
+_pageSize | See pagination details
+_pageNumber | See pagination details
 
 #### Authorization
 * Only authenticated clients.
@@ -22,5 +30,7 @@ tradeId | read-only | Id associated with this resource
 ${TRADES_POST_SNIPPET}
 
 ${TRADES_GET_SNIPPET}
+
+${TRADES_SEARCH_SNIPPET}
 
 ${TRADES_GET_ALL_SNIPPET}
