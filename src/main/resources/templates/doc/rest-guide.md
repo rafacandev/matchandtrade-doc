@@ -9,6 +9,7 @@ Here is the list of resources available thought the RESTful API.
 * [authenticate][1]
 * [authentications][2]
 * [trades][3]
+* [trade-memberships][12]
 * [users][4]
 
 General Guidelines
@@ -86,3 +87,4 @@ ${TRADES_POST_SNIPPET}
 [9]: https://developer.github.com/guides/traversing-with-pagination/ "GitHub Pagination"
 [10]: https://www.w3.org/wiki/LinkHeader "LinkHeader Specification"
 [11]: http://www.rfc-editor.org/rfc/rfc5988.txt "rfc5988"
+[12]: rest/trade-memberships.md
