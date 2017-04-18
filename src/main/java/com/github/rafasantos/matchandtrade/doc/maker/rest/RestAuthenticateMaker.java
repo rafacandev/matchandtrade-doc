@@ -40,7 +40,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 		}
 			
 		// Assert if status is 200
-		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		AssertUtil.isEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
 		
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
@@ -73,7 +73,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 		}
 		
 		// Assert if status is 200
-		AssertUtil.areEqual(HttpStatus.SC_RESET_CONTENT, httpResponse.getStatusLine().getStatusCode());
+		AssertUtil.isEquals(HttpStatus.SC_RESET_CONTENT, httpResponse.getStatusLine().getStatusCode());
 		
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();

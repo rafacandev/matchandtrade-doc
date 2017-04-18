@@ -11,14 +11,7 @@ The `Authorization` header acts as a session token and needs to be included to a
 #### Authorization
 * Public
 
-#### Resource
-| Field Name | Rules | Description |
-| ---------- | ----- | ----------- |
-userId | read-only | The [user][1] associated with this authentication, this value is assigned during the sign-up process
-
 #### Examples
 ${AUTHENTICATE_SNIPPET}
 
 ${SIGN_OFF_SNIPPET}
-
-[1]: users.md

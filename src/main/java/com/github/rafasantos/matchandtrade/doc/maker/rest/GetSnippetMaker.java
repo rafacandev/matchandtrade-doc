@@ -30,7 +30,7 @@ public class GetSnippetMaker {
 			throw new DocMakerException(e);
 		}
 		// Assert if status is 200
-		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		AssertUtil.isEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
 		
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}

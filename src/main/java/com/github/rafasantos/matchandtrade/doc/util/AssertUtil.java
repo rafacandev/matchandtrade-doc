@@ -4,7 +4,7 @@ import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 
 public class AssertUtil {
 
-	public static void areEqual(Object expected, Object actual) {
+	public static void isEquals(Object expected, Object actual) {
 		if (!objectsAreNull(expected, actual) && expected != null) {
 			if (!expected.equals(actual)) {
 				throw new DocMakerException("Expected [" + expected + "] but found [" + actual + "].");

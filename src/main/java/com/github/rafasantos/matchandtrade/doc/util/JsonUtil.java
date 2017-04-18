@@ -2,7 +2,9 @@ package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -60,6 +62,19 @@ public class JsonUtil {
 			return getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(o);
 		} catch (JsonProcessingException e) {
 			throw new DocMakerException("Not able to parse object to string", e);
+		}
+	}
+	
+	/**
+	 * Parse an JSON Object from a string.
+	 * @param o
+	 * @return JSON string
+	 */
+	public static <T> T fromString(String string, Class<T> type ) {
+		try {
+			return getObjectMapper().readValue(string, type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
 		}
 	}
 }

@@ -30,12 +30,12 @@ public class RestUsersMaker implements OutputMaker {
 	
 	private RequestResponseHolder buildPutRequestResponse() {
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpPut httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + "/rest/v1/users/1");
+		HttpPut httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + "/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
 		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
 		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
 		
 		UserJson requestJson = new UserJson();
-		requestJson.setEmail("testing.email@test.com");
+		requestJson.setEmail(RestUtil.getAuthenticatedUser().getEmail());
 		requestJson.setName("User name for PUT method");
 		
 		String requestBody = JsonUtil.toJson(requestJson);
@@ -52,7 +52,7 @@ public class RestUsersMaker implements OutputMaker {
 		} catch (IOException e) {
 			throw new DocMakerException(this, e);
 		}
-		AssertUtil.areEqual(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		AssertUtil.isEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
 		
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
@@ -62,7 +62,7 @@ public class RestUsersMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/users/1");
+		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
 
