@@ -1,6 +1,6 @@
 Authentications
 ===============
-This _endpoint_ returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
+This _resource_ returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
 
 
 #### Methods

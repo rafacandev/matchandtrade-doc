@@ -10,6 +10,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 
@@ -26,6 +27,7 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 public class RestTradesMaker implements OutputMaker {
 	
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
+	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
 	private static final String TRADES_SEARCH_SNIPPET = "TRADES_SEARCH_SNIPPET";
 	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
@@ -51,27 +53,54 @@ public class RestTradesMaker implements OutputMaker {
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 	
+	public RequestResponseHolder buildPutRequestResponse(TradeJson tradeJson) {
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpPut httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + "/rest/v1/trades/1");
+		httpRequest.addHeader(RestUtil.getAuthenticationHeader());
+		httpRequest.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
+		
+		StringEntity requestBody = new StringEntity(JsonUtil.toJson(tradeJson), StandardCharsets.UTF_8);
+		httpRequest.setEntity(requestBody);
+
+		HttpResponse httpResponse;
+		try {
+			httpResponse = httpClient.execute(httpRequest);
+		} catch (IOException e) {
+			throw new DocMakerException(this, e);
+		}
+		// Assert if status is 200
+		AssertUtil.isEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
+		
+		return new RequestResponseHolder(httpRequest, httpResponse);
+	}
+	
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
 		TradeJson firstTradeJson = new TradeJson();
-		firstTradeJson.setName("First testing trade");
+		firstTradeJson.setName("Name for POST");
 		RequestResponseHolder post = buildPostRequestResponse(firstTradeJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
+		
+		firstTradeJson.setName("Name for PUT");
+		RequestResponseHolder put = buildPutRequestResponse(firstTradeJson);
+		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet);
+		
 		
 		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades/1");
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
 
-		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades?name=First%20testing%20trade");
+		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades?name=Name%20for%20PUT&_pageNumber=1&_pageSize=2");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet);
 		
 		// Make as second TradeJson so the getAll can display two results
 		TradeJson secondTradeJson = new TradeJson();
-		secondTradeJson.setName("Second testing trade");
+		secondTradeJson.setName("Another testing trade");
 		buildPostRequestResponse(secondTradeJson);
 		RequestResponseHolder getAll = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades/");
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());

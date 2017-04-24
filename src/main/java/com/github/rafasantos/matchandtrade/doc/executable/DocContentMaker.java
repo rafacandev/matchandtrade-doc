@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.rafasantos.matchandtrade.doc.maker.DevelopmentGuide;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
@@ -19,6 +21,8 @@ import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUsersMaker;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {
+	
+	private final Logger logger = LoggerFactory.getLogger(DocContentMaker.class);
 	
 	private String destinationFolder;
 	private StringBuilder report = new StringBuilder();
@@ -48,6 +52,7 @@ public class DocContentMaker {
 			report.append("\n==== DocContentMaker Report ============\n");
 			
 			for(OutputMaker t : docMakers) {
+				logger.info("Making content for {} with template doc located at {}.", t.getClass().getName(), t.getDocLocation());
 				report.append(t.getClass().getSimpleName()+": ");
 				// Generate Markdown documents
 				String docContent = t.buildDocContent();
