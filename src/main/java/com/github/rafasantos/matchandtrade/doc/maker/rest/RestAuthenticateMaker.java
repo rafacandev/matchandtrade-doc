@@ -1,21 +1,18 @@
 package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
 
-import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
-import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 
 public class RestAuthenticateMaker implements OutputMaker {
 
@@ -29,60 +26,38 @@ public class RestAuthenticateMaker implements OutputMaker {
 	 * @return RequestResponseHolder for authenticate
 	 */
 	public RequestResponseHolder buildAuthenticateRequestResponse() {
-		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/authenticate");
-		HttpResponse httpResponse;
-		try {
-			// Execute the request
-			httpResponse = httpClient.execute(httpRequest);
-		} catch (Exception e) {
-			throw new DocMakerException(this, e);
-		}
-			
-		// Assert if status is 200
-		AssertUtil.isEquals(HttpStatus.SC_OK, httpResponse.getStatusLine().getStatusCode());
-		
+		RequestResponseHolder result = GetSnippetMaker.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
+
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
-		for (Header h : httpResponse.getAllHeaders()) {
+		for (Header h : result.getHttpResponse().getAllHeaders()) {
 			headers.add(h.getName());
 		}
 		AssertUtil.isTrue(headers.toString().contains("Authorization"));
 		
-		return new RequestResponseHolder(httpRequest, httpResponse);
+		return result;
 	}
 
 	private String buildSingOffSnippet(HttpResponse authenticatedResponse) {
-		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + "/authenticate/sign-out");
-		
 		// Add the previous Authorization header to the request
+		List<Header> authenticatedHeaders = new ArrayList<>();
 		Header[] authenticatedResponseHeaders = authenticatedResponse.getAllHeaders();
 		for (int i=0; i < authenticatedResponseHeaders.length; i++) {
 			if (authenticatedResponseHeaders[i].getName().equals("Authorization")) {
-				httpRequest.addHeader(authenticatedResponseHeaders[i]);
+				authenticatedHeaders.add(authenticatedResponseHeaders[i]);
 			}
 		}
 
-		HttpResponse httpResponse;
-		try {
-			// Execute the request
-			httpResponse = httpClient.execute(httpRequest);
-		} catch (Exception e) {
-			throw new DocMakerException(this, e);
-		}
-		
-		// Assert if status is 200
-		AssertUtil.isEquals(HttpStatus.SC_RESET_CONTENT, httpResponse.getStatusLine().getStatusCode());
+		RequestResponseHolder result = GetSnippetMaker.buildGetRequestResponse("/authenticate/sign-out", authenticatedHeaders, HttpStatus.SC_RESET_CONTENT);
 		
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
-		for (Header h : httpResponse.getAllHeaders()) {
+		for (Header h : result.getHttpResponse().getAllHeaders()) {
 			headers.add(h.getName());
 		}
 		AssertUtil.isTrue(!headers.toString().contains("Authorization"));
 		
-		return TemplateUtil.buildSnippet(httpRequest, httpResponse); 
+		return TemplateUtil.buildSnippet(result.getHttpRequest(), result.getHttpResponse()); 
 	}
 
 
