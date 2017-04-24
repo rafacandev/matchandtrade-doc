@@ -16,8 +16,8 @@ Members of a [trade][2]. Members are existing [user][1]s who participate in a [t
 | ---------- | ----------- |
 userId | Resources matching `TradeMembership.userId`
 tradeId | Resources matching `TradeMembership.tradeId`
-_pageSize | See pagination details
-_pageNumber | See pagination details
+_pageSize | See [pagination][3]
+_pageNumber | See [pagination][3]
 
 
 #### Authorization
@@ -44,3 +44,4 @@ ${TRADES_MEMBERSHIP_GET_ALL_SNIPPET}
 
 [1]: users.md
 [2]: trades.md
+[3]: ../rest-guide.md

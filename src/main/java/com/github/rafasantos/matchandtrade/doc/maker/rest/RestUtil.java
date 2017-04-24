@@ -1,5 +1,6 @@
 package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -11,8 +12,9 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClients;
-import org.springframework.core.type.StandardAnnotationMetadata;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
@@ -52,10 +54,8 @@ public class RestUtil {
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.execute(httpRequest);
-			String responseBody = IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+			String responseBody = buildResponseBodyString(httpResponse);
 			AuthenticationJson authenticationJson = JsonUtil.fromString(responseBody, AuthenticationJson.class);
-
-			
 			HttpGet httpRequestUser = new HttpGet(PropertiesProvider.getServerUrl() + "/rest/v1/users/" + authenticationJson.getUserId());
 			httpRequestUser.addHeader(RestUtil.getAuthenticationHeader());
 			httpRequestUser.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
@@ -78,5 +78,20 @@ public class RestUtil {
 			}
 		}
 		return result;
+	}
+	
+	public static String buildResponseBodyString(HttpResponse httpResponse) {
+		try {
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			httpResponse.getEntity().writeTo(outputStream);
+			
+			// Creating a new entity so it can be read again
+			ByteArrayEntity entity = new ByteArrayEntity(outputStream.toByteArray(), ContentType.get(httpResponse.getEntity()));
+			httpResponse.setEntity(entity);
+			
+			return IOUtils.toString(outputStream.toByteArray(), StandardCharsets.UTF_8.toString());
+		} catch (UnsupportedOperationException | IOException e) {
+			throw new DocMakerException("Error building response body as string", e);
+		}
 	}
 }

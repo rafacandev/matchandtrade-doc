@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -58,11 +57,9 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
-		// Need to authenticate as a new user because because the current user is already the owner of the previous trade
-		RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-		RequestResponseHolder requestResponseAuth = authenticate.buildAuthenticateRequestResponse();
-		Header authorizationHeader = requestResponseAuth.getHttpResponse().getHeaders("Authorization")[0];
-		RestUtil.setAuthenticationHeader(authorizationHeader);
+		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
+		RestUtil.setAuthenticationHeader(null);
+		
 		// Become member of one of the previous trades
 		TradeMembershipJson postJson = new TradeMembershipJson();
 		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
@@ -71,7 +68,8 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
 		
-		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships/3");
+		TradeMembershipJson postResponseJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeMembershipJson.class);
+		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
 
@@ -79,7 +77,10 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
 
-		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships?userId="+RestUtil.getAuthenticatedUser().getUserId()+"&tradeId=1&_pageNumber=1&_pageSize=10");
+		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse(
+			"/rest/v1/trade-memberships?userId="
+			+ RestUtil.getAuthenticatedUser().getUserId()
+			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=10");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
 		
