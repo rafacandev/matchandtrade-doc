@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
+import com.github.rafasantos.matchandtrade.doc.util.GetSnippetMaker;
 import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;

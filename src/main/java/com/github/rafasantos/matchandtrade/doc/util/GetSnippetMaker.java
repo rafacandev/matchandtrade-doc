@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.maker.rest;
+package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +16,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
-import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
-import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 
 public class GetSnippetMaker {
