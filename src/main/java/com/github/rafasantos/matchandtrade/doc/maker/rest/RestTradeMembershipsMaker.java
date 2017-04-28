@@ -21,6 +21,7 @@ import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 
 
@@ -57,13 +58,19 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
+		// Create a new trade
+		TradeJson trade = new TradeJson();
+		trade.setName("Used DVDs");
+		RequestResponseHolder tradeRRH = RestTradesMaker.buildPostRequestResponse(trade);
+		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
+
 		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
 		RestUtil.setAuthenticationHeader(null);
 		
-		// Become member of one of the previous trades
+		// Become member of one of the created trade
 		TradeMembershipJson postJson = new TradeMembershipJson();
 		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
-		postJson.setTradeId(1);
+		postJson.setTradeId(trade.getTradeId());
 		RequestResponseHolder post = buildPostRequestResponse(postJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);

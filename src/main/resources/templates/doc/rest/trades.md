@@ -40,5 +40,7 @@ ${TRADES_SEARCH_SNIPPET}
 
 ${TRADES_GET_ALL_SNIPPET}
 
+${TRADES_DEL_ALL_SNIPPET}
+
 [1]: users.md
 [2]: ../rest-guide.md

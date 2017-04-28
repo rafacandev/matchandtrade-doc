@@ -65,6 +65,10 @@ mvn test -Dlogging.level.root=debug
 java -jar /target/webservice-0.0.1-SNAPSHOT.jar -Dlogging.level.root=debug
 ```
 
+Spring MVC for Rest
+===================
+Checkout the [Response for GET/POST/PUT/DELETE in REST web service][8] tutorial to get started with Spring MVC geared towards RESTful applications.
+
 
 Unit Test and Integration Test
 ==============================
@@ -95,4 +99,4 @@ To generate the maven site you need to issue the command `mvn site`. Open the fi
 [5]: https://projects.spring.io/spring-boot "Spring Boot"
 [6]: https://en.wikipedia.org/wiki/Representational_state_transfer "RESTful Web Services on Wikipedia"
 [7]: https://angular.io/
-
+[8]: http://shengwangi.blogspot.ca/2016/02/response-for-get-post-put-delete-in-rest.html
