@@ -30,7 +30,7 @@ public class RestTradesMaker implements OutputMaker {
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
-	private static final String TRADES_DEL_SNIPPET = "TRADES_DEL_SNIPPET";
+	private static final String TRADES_DELETE_SNIPPET = "TRADES_DELETE_SNIPPET";
 	private static final String TRADES_SEARCH_SNIPPET = "TRADES_SEARCH_SNIPPET";
 	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
 	
@@ -104,6 +104,10 @@ public class RestTradesMaker implements OutputMaker {
 		RequestResponseHolder getAll = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trades/");
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getAllSnippet);
+		
+		RequestResponseHolder del = GetSnippetMaker.buildDeleteRequestResponse("/rest/v1/trades/" + postResponse.getTradeId());
+		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, delSnippet);
 		
 		return template;
 	}

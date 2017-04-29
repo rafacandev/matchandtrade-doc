@@ -47,8 +47,6 @@ public class DocMakerExecutable {
 			logger.error("Error when making the documentation. Exception message: {}", e.getMessage(), e);
 			logger.info(docContentMaker.getReport());
 			System.exit(-1);
-		} finally {
-			System.exit(0);
 		}
 	}
 
