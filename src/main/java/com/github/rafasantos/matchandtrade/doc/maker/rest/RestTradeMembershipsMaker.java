@@ -31,6 +31,7 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	public static final String TRADES_MEMBERSHIP_GET_SNIPPET = "TRADES_MEMBERSHIP_GET_SNIPPET";
 	public static final String TRADES_MEMBERSHIP_GET_ALL_SNIPPET = "TRADES_MEMBERSHIP_GET_ALL_SNIPPET";
 	public static final String TRADES_MEMBERSHIP_SEARCH_SNIPPET = "TRADES_MEMBERSHIP_SEARCH_SNIPPET";
+	public static final String TRADES_MEMBERSHIP_DELETE_SNIPPET = "TRADES_MEMBERSHIP_DELETE_SNIPPET";
 	
 	public RequestResponseHolder buildPostRequestResponse(TradeMembershipJson json) {
 		HttpClient httpClient = HttpClients.createDefault();
@@ -90,6 +91,10 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=10");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
+
+		RequestResponseHolder del = GetSnippetMaker.buildDeleteRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
+		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
 		
 		return template;
 	}

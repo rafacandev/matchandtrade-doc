@@ -1,7 +1,5 @@
 Trade Memberships
 =================
-TODO DELETE rest/v1/trade-memberships/{tradeMembershipId}
-
 Members of a [trade][2]. Members are existing [user][1]s who participate in a [trade][2].  
 
 #### Operations
@@ -41,6 +39,8 @@ ${TRADES_MEMBERSHIP_GET_SNIPPET}
 ${TRADES_MEMBERSHIP_SEARCH_SNIPPET}
 
 ${TRADES_MEMBERSHIP_GET_ALL_SNIPPET}
+
+${TRADES_MEMBERSHIP_DELETE_SNIPPET}
 
 [1]: users.md
 [2]: trades.md
