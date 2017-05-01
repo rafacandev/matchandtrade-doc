@@ -11,7 +11,7 @@ import org.apache.http.HttpStatus;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
-import com.github.rafasantos.matchandtrade.doc.util.GetSnippetMaker;
+import com.github.rafasantos.matchandtrade.doc.util.SnippetUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
@@ -27,7 +27,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	 * @return RequestResponseHolder for authenticate
 	 */
 	public RequestResponseHolder buildAuthenticateRequestResponse() {
-		RequestResponseHolder result = GetSnippetMaker.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
+		RequestResponseHolder result = SnippetUtil.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
 
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
@@ -49,7 +49,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 			}
 		}
 
-		RequestResponseHolder result = GetSnippetMaker.buildGetRequestResponse("/authenticate/sign-out", authenticatedHeaders, HttpStatus.SC_RESET_CONTENT);
+		RequestResponseHolder result = SnippetUtil.buildGetRequestResponse("/authenticate/sign-out", authenticatedHeaders, HttpStatus.SC_RESET_CONTENT);
 		
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();

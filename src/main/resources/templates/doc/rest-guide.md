@@ -54,7 +54,7 @@ Status:   HTTP/1.1 200
 The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
 
 ### Expanding
-Expanding resources (see [Atlassian API][7] for an example) is discouraged at the moment and multiple asynchronous calls are favored.
+Expanding resources (see [Atlassian API][7] for an example) is discouraged while multiple asynchronous calls are favored.
 
 ### Many To Many Relationships
 Relationships are treated as resources similarly to what is described on this [post][6].
@@ -72,7 +72,7 @@ ${AUTHENTICATE_SNIPPET}
 Verify the authentication details. Note that you need to pass the `Authorization` header obtained on the previous response. 
 ${AUTHENTICATIONS_SNIPPET}
 
-Create a `Trade`
+Create a [Trade][3]
 ${TRADES_POST_SNIPPET}
 
 

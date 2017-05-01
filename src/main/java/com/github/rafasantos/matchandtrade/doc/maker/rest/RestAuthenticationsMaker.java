@@ -1,7 +1,7 @@
 package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
-import com.github.rafasantos.matchandtrade.doc.util.GetSnippetMaker;
+import com.github.rafasantos.matchandtrade.doc.util.SnippetUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 
@@ -11,7 +11,7 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	
 	public RequestResponseHolder buildGetAuthenticationsRequestResponse() {
-		return GetSnippetMaker.buildGetRequestResponse("/rest/v1/authentications/");
+		return SnippetUtil.buildGetRequestResponse("/rest/v1/authentications/");
 	}
 
 	@Override

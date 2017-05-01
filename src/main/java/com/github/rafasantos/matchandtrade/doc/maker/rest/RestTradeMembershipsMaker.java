@@ -16,9 +16,10 @@ import org.apache.http.impl.client.HttpClients;
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.util.AssertUtil;
-import com.github.rafasantos.matchandtrade.doc.util.GetSnippetMaker;
+import com.github.rafasantos.matchandtrade.doc.util.SnippetUtil;
 import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
+import com.github.rafasantos.matchandtrade.doc.util.RestUtil;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.v1.json.TradeJson;
@@ -77,22 +78,22 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
 		
 		TradeMembershipJson postResponseJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeMembershipJson.class);
-		RequestResponseHolder get = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
+		RequestResponseHolder get = SnippetUtil.buildGetRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
 
-		RequestResponseHolder getAll = GetSnippetMaker.buildGetRequestResponse("/rest/v1/trade-memberships/");
+		RequestResponseHolder getAll = SnippetUtil.buildGetRequestResponse("/rest/v1/trade-memberships/");
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
 
-		RequestResponseHolder search = GetSnippetMaker.buildGetRequestResponse(
+		RequestResponseHolder search = SnippetUtil.buildGetRequestResponse(
 			"/rest/v1/trade-memberships?userId="
 			+ RestUtil.getAuthenticatedUser().getUserId()
 			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=10");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
 
-		RequestResponseHolder del = GetSnippetMaker.buildDeleteRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
+		RequestResponseHolder del = SnippetUtil.buildDeleteRequestResponse("/rest/v1/trade-memberships/" + postResponseJson.getTradeMembershipId());
 		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
 		

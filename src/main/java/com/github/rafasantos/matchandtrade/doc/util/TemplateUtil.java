@@ -13,7 +13,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUtil;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.config.AuthenticationProperties;
 

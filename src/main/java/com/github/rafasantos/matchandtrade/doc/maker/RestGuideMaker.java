@@ -5,8 +5,8 @@ import org.apache.http.Header;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUtil;
 import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
+import com.github.rafasantos.matchandtrade.doc.util.RestUtil;
 import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 
@@ -34,10 +34,9 @@ public class RestGuideMaker implements OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
 
 		// Assemble Trade snippet		
-		RestTradesMaker trades = new RestTradesMaker();
 		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName("Trading programing books.");
-		RequestResponseHolder requestResponseTrades = trades.buildPostRequestResponse(tradeJson);
+		tradeJson.setName("Trading video-games in New York.");
+		RequestResponseHolder requestResponseTrades = RestTradesMaker.buildPostRequestResponse(tradeJson);
 		String tradesSnippet = TemplateUtil.buildSnippet(requestResponseTrades.getHttpRequest(), requestResponseTrades.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestTradesMaker.TRADES_POST_SNIPPET, tradesSnippet);
 		

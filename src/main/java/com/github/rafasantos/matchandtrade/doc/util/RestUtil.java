@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.maker.rest;
+package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,8 +17,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClients;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
-import com.github.rafasantos.matchandtrade.doc.util.JsonUtil;
-import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.v1.json.AuthenticationJson;
 import com.matchandtrade.rest.v1.json.UserJson;
