@@ -17,16 +17,18 @@ public class RestUsersMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		RequestResponseHolder get = SnippetUtil.buildGetRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
-		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
-
+		// PUT /users/{userId}
 		UserJson requestJson = new UserJson();
 		requestJson.setEmail(RestUtil.getAuthenticatedUser().getEmail());
-		requestJson.setName("User name for PUT method");
+		requestJson.setName("Scott Summers");
 		RequestResponseHolder put = SnippetUtil.buildPutRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId(), requestJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_SNIPPET, putSnippet);
+
+		// GET users/{userId}
+		RequestResponseHolder get = SnippetUtil.buildGetRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
+		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
 		
 		return template;
 	}
