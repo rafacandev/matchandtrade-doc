@@ -2,6 +2,8 @@ package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.IOException;
 
+import org.apache.http.HttpResponse;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,4 +77,20 @@ public class JsonUtil {
 			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
 		}
 	}
+
+
+	/**
+	 * Parse an JSON Object from a string.
+	 * @param o
+	 * @return JSON string
+	 */
+	public static <T> T fromHttpResponse(HttpResponse httpResponse, Class<T> type ) {
+		try {
+			String response = RestUtil.buildResponseBodyString(httpResponse);
+			return fromString(response, type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from HttpResponse to Json object." + e);
+		}
+	}
+
 }

@@ -75,6 +75,15 @@ ${AUTHENTICATIONS_SNIPPET}
 Create a [Trade][3]
 ${TRADES_POST_SNIPPET}
 
+Authenticate as a second [user][4] which is going to become a [trade][3] _member_;
+${AUTHENTICATE_SNIPPET_SECOND}
+
+Verify the authentication details for the second user. The `userId` is going to be used on [TradeMemberships][4].
+${AUTHENTICATIONS_SNIPPET_SECOND}
+
+The second user becomes member of the [trade][3].
+${TRADES_MEMBERSHIP_POST_SNIPPET}
+
 
 [1]: rest/authenticate.md
 [2]: rest/authentications.md
