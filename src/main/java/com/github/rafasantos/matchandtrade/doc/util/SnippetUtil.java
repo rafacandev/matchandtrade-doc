@@ -1,6 +1,7 @@
 package com.github.rafasantos.matchandtrade.doc.util;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +13,35 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.rest.Json;
+import com.matchandtrade.rest.JsonLinkSupport;
 
 public class SnippetUtil {
 
-	public static RequestResponseHolder buildDeleteRequestResponse(String url) {
+	public enum MethodType { POST, PUT}
+	
+	// Utility classes should not have public constructors
+	private SnippetUtil() {}
+	
+	private static List<Header> buildDefaultHeaders() {
 		List<Header> defaultHeaders = new ArrayList<>();
 		defaultHeaders.add(RestUtil.getAuthenticationHeader());
 		defaultHeaders.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON));
+		return defaultHeaders;
+	}
+	
+	public static RequestResponseHolder buildDeleteRequestResponse(String url) {
+		List<Header> defaultHeaders = buildDefaultHeaders();
 		return buildDeleteRequestResponse(url, defaultHeaders, HttpStatus.SC_NO_CONTENT);
 	}
 
@@ -47,12 +64,10 @@ public class SnippetUtil {
 	}
 
 	public static RequestResponseHolder buildGetRequestResponse(String url) {
-		List<Header> defaultHeaders = new ArrayList<>();
-		defaultHeaders.add(RestUtil.getAuthenticationHeader());
-		defaultHeaders.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON));
+		List<Header> defaultHeaders = buildDefaultHeaders();
 		return buildGetRequestResponse(url, defaultHeaders, HttpStatus.SC_OK);
 	}
-	
+
 	public static RequestResponseHolder buildGetRequestResponse(String url, List<Header> headers, int httpStatus) {
 		HttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + url);
@@ -70,4 +85,48 @@ public class SnippetUtil {
 		
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
+
+	public static RequestResponseHolder buildPostRequestResponse(String url, Json body) {
+		List<Header> defaultHeaders = buildDefaultHeaders();
+		return buildPutOrPostRequestResponse(url, body, defaultHeaders, HttpStatus.SC_OK, MethodType.POST);
+	}
+	
+	public static RequestResponseHolder buildPutOrPostRequestResponse(String url, Json body, List<Header> headers, int httpStatus, MethodType methodType) {
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpEntityEnclosingRequestBase httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + url);
+		if (methodType == MethodType.POST) {
+			httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + url);
+		} else {
+			httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + url);
+		}
+		for (Header h : headers) {
+			httpRequest.addHeader(h);
+		}
+		
+		// Remove links (HATEOAS) from the body
+		if (body instanceof JsonLinkSupport) {
+			JsonLinkSupport jls = (JsonLinkSupport) body;
+			jls.removeLinks();
+		}
+		
+		StringEntity requestBody = new StringEntity(JsonUtil.toJson(body), StandardCharsets.UTF_8);
+		httpRequest.setEntity(requestBody);
+		
+		HttpResponse httpResponse;
+		try {
+			httpResponse = httpClient.execute(httpRequest);
+		} catch (IOException e) {
+			throw new DocMakerException(e);
+		}
+		// Assert status
+		AssertUtil.isEquals(httpStatus, httpResponse.getStatusLine().getStatusCode());
+		
+		return new RequestResponseHolder(httpRequest, httpResponse);
+	}
+
+	public static RequestResponseHolder buildPutRequestResponse(String url, Json body) {
+		List<Header> defaultHeaders = buildDefaultHeaders();
+		return buildPutOrPostRequestResponse(url, body, defaultHeaders, HttpStatus.SC_OK, MethodType.PUT);
+	}
+	
 }

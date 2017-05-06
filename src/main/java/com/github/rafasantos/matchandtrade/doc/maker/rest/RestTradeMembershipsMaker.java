@@ -63,7 +63,7 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		// Create a new trade
 		TradeJson trade = new TradeJson();
 		trade.setName("Used DVDs");
-		RequestResponseHolder tradeRRH = RestTradesMaker.buildPostRequestResponse(trade);
+		RequestResponseHolder tradeRRH = SnippetUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
 		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
 
 		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
