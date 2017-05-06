@@ -1,9 +1,8 @@
 Authentications
 ===============
-This _resource_ returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
+_Resource_ for authentications. It returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
 
-
-#### Methods
+#### Operations
 * `GET rest/v1/authentications`
 
 #### Authorization
@@ -15,8 +14,6 @@ This _resource_ returns information about the current authenticated session, typ
 userId | read-only | The [user][2] associated with this authentication, this value is assigned during the sign-up process
 
 #### Example
-
 ${AUTHENTICATIONS_SNIPPET}
-
 
 [2]: users.md

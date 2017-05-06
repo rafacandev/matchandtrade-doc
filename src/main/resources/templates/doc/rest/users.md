@@ -1,6 +1,6 @@
 Users
 ======
-Resource to manage the users in the system. Typically, users are created in the application on the first time they authenticate in the system. See [Authenticate][1] for more details.
+_Resource_ for users. Typically, users are created in the application on the first time they authenticate in the system. See [Authenticate][1] for more details.
 
 #### Operations
 * `PUT rest/v1/users/{userId}`

@@ -9,15 +9,6 @@ Members of a [trade][2]. Members are existing [user][1]s who participate in a [t
 * `GET rest/v1/trade-memberships/`
 * `DELETE rest/v1/trade-memberships/{tradeMembershipId}`
 
-##### Query Parameters
-| Field Name | Description |
-| ---------- | ----------- |
-userId | Resources matching `TradeMembership.userId`
-tradeId | Resources matching `TradeMembership.tradeId`
-_pageSize | See [pagination][3]
-_pageNumber | See [pagination][3]
-
-
 #### Authorization
 * Only authenticated clients.
 
@@ -27,6 +18,14 @@ _pageNumber | See [pagination][3]
 tradeMembershipId | read-only | Id associated with this resource
 userId | read-write | Must belong to an existing `user`
 tradeId | read-write | Must belong to an existing `trade`
+
+##### Query Parameters
+| Field Name | Description |
+| ---------- | ----------- |
+userId | Resources matching `TradeMembership.userId`
+tradeId | Resources matching `TradeMembership.tradeId`
+_pageSize | See [pagination][3]
+_pageNumber | See [pagination][3]
 
 #### Rules
 * Cannot delete the owner of a [trade][2]
