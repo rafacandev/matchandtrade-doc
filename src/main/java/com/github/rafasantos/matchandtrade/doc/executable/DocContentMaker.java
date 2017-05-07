@@ -15,6 +15,7 @@ import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.github.rafasantos.matchandtrade.doc.maker.rest.RestItemMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUsersMaker;
@@ -46,6 +47,7 @@ public class DocContentMaker {
 		docMakers.add(new RestUsersMaker());
 		docMakers.add(new RestTradeMembershipsMaker());
 		docMakers.add(new RestGuideMaker());
+		docMakers.add(new RestItemMaker());
 
 		HtmlParser htmlParser = new HtmlParser();
 		try {

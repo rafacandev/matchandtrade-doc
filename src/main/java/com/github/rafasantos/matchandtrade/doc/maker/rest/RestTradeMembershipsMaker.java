@@ -23,20 +23,8 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
-		// Create a new trade
-		TradeJson trade = new TradeJson();
-		trade.setName("Used DVDs");
-		RequestResponseHolder tradeRRH = SnippetUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
-		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
-
-		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
-		RestUtil.setAuthenticationHeader(null);
-		
-		// Become member of one of the created trade
-		TradeMembershipJson postJson = new TradeMembershipJson();
-		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
-		postJson.setTradeId(trade.getTradeId());
-		RequestResponseHolder post = SnippetUtil.buildPostRequestResponse(BASE_URL, postJson);
+		RequestResponseHolder post = buildPostJson("Board games in New York");
+		TradeMembershipJson postJson = JsonUtil.fromHttpResponse(post.getHttpResponse(), TradeMembershipJson.class);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
 		
@@ -61,6 +49,21 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
 		
 		return template;
+	}
+	
+	public static RequestResponseHolder buildPostJson(String tradeName) {
+		// Create a new trade
+		TradeJson trade = new TradeJson();
+		trade.setName(tradeName);
+		RequestResponseHolder tradeRRH = SnippetUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
+		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
+		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
+		RestUtil.setAuthenticationHeader(null);
+		// Become member of one of the created trade
+		TradeMembershipJson postJson = new TradeMembershipJson();
+		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
+		postJson.setTradeId(trade.getTradeId());
+		return SnippetUtil.buildPostRequestResponse(BASE_URL, postJson);
 	}
 
 	@Override

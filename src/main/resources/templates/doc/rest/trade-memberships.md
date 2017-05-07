@@ -1,6 +1,6 @@
 Trade Memberships
 =================
-Members of a [trade][2]. Members are existing [user][1]s who participate in a [trade][2].  
+_Resource_ for Trade Memberships. [Users][1] who wants to participate in a [trade][2] need create a trade membership.  
 
 #### Operations
 * `POST rest/v1/trade-memberships/`

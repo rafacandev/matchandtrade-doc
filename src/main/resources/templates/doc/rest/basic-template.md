@@ -1,6 +1,6 @@
 NAME-OF-ENDPOINT
 ===============
-Description of the endpoint.
+_Resource_ for ZZZ. Description of this endpoint.
 
 #### Operations
 * `POST rest/v1/end-point/`

@@ -10,6 +10,7 @@ Here is the list of resources available thought the RESTful API.
 * [authentications][2]
 * [trades][3]
 * [trade-memberships][12]
+* [trade-memberships/{tradeMembershipId}/items][13]
 * [users][4]
 
 General Guidelines
@@ -97,3 +98,4 @@ ${TRADES_MEMBERSHIP_POST_SNIPPET}
 [10]: https://www.w3.org/wiki/LinkHeader "LinkHeader Specification"
 [11]: http://www.rfc-editor.org/rfc/rfc5988.txt "rfc5988"
 [12]: rest/trade-memberships.md
+[13]: rest/items.md
