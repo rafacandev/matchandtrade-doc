@@ -20,8 +20,8 @@ public class TemplateUtil {
 
 	public static final String TEMPLATE_ROOT_LOCATION = "templates/";
 	
-	public static String replacePlaceholder(String template, String placeholder, String stamp) {
-		return template.replace("${" + placeholder + "}", stamp);
+	public static String replacePlaceholder(String template, String placeholder, String replacement) {
+		return template.replace("${" + placeholder + "}", replacement);
 	}
 
 	public static String buildTemplate(String resourceLocation) {
