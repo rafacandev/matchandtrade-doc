@@ -14,6 +14,7 @@ public class RestItemMaker implements OutputMaker {
 	public static final String BASE_URL = "/items";
 	public static final String ITEMS_POST_SNIPPET = "ITEMS_POST_SNIPPET";
 	public static final String ITEMS_GET_SNIPPET = "ITEMS_GET_SNIPPET";
+	public static final String ITEMS_SEARCH_SNIPPET = "ITEMS_SEARCH_SNIPPET";
 	public static final String ITEMS_GET_ALL_SNIPPET = "ITEMS_GET_ALL_SNIPPET";
 	
 	@Override
@@ -41,6 +42,11 @@ public class RestItemMaker implements OutputMaker {
 		RequestResponseHolder getAll = SnippetUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL);
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_GET_ALL_SNIPPET, getAllSnippet);
+
+		// GET rest/v1/trade-memberships/{tradeMembershipId}/items?name=
+		RequestResponseHolder search = SnippetUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL + "?name=Pandemic%20Legacy:%20Season%201");
+		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, ITEMS_SEARCH_SNIPPET, searchSnippet);
 		
 		return template;
 	}

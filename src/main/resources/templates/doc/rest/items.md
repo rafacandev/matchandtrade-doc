@@ -29,6 +29,8 @@ ${ITEMS_POST_SNIPPET}
 
 ${ITEMS_GET_SNIPPET}
 
+${ITEMS_SEARCH_SNIPPET}
+
 ${ITEMS_GET_ALL_SNIPPET}
 
 [1]: trade-memberships.md

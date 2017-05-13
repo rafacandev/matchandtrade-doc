@@ -17,9 +17,12 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
@@ -28,7 +31,10 @@ import com.matchandtrade.rest.JsonLinkSupport;
 
 public class SnippetUtil {
 
-	public enum MethodType { POST, PUT}
+	public enum MethodType {POST, PUT}
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SnippetUtil.class);
+	
 	
 	// Utility classes should not have public constructors
 	private SnippetUtil() {}
@@ -57,9 +63,7 @@ public class SnippetUtil {
 		} catch (IOException e) {
 			throw new DocMakerException(e);
 		}
-		// Assert if status is 204
-		AssertUtil.isEquals(httpStatus, httpResponse.getStatusLine().getStatusCode());
-		
+		assertStatusCode(httpStatus, httpRequest, httpResponse);		
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
 
@@ -80,15 +84,21 @@ public class SnippetUtil {
 		} catch (IOException e) {
 			throw new DocMakerException(e);
 		}
-		// Assert if status is 200
-		AssertUtil.isEquals(httpStatus, httpResponse.getStatusLine().getStatusCode());
-		
+		assertStatusCode(httpStatus, httpRequest, httpResponse);
 		return new RequestResponseHolder(httpRequest, httpResponse);
+	}
+
+	private static void assertStatusCode(int httpStatus, HttpRequestBase httpRequest, HttpResponse httpResponse) {
+		String snippet = TemplateUtil.buildSnippet(httpRequest, httpResponse);
+		LOGGER.debug(snippet);
+		if (httpResponse.getStatusLine().getStatusCode() != httpStatus) {
+			throw new DocMakerException("Expected [" + httpStatus + "] but found [" + httpResponse.getStatusLine().getStatusCode() + "].");
+		}
 	}
 
 	public static RequestResponseHolder buildPostRequestResponse(String url, Json body) {
 		List<Header> defaultHeaders = buildDefaultHeaders();
-		return buildPutOrPostRequestResponse(url, body, defaultHeaders, HttpStatus.SC_OK, MethodType.POST);
+		return buildPutOrPostRequestResponse(url, body, defaultHeaders, HttpStatus.SC_CREATED, MethodType.POST);
 	}
 	
 	public static RequestResponseHolder buildPutOrPostRequestResponse(String url, Json body, List<Header> headers, int httpStatus, MethodType methodType) {
@@ -118,8 +128,8 @@ public class SnippetUtil {
 		} catch (IOException e) {
 			throw new DocMakerException(e);
 		}
-		// Assert status
-		AssertUtil.isEquals(httpStatus, httpResponse.getStatusLine().getStatusCode());
+
+		assertStatusCode(httpStatus, httpRequest, httpResponse);
 		
 		return new RequestResponseHolder(httpRequest, httpResponse);
 	}
