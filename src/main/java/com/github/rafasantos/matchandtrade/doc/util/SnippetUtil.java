@@ -3,6 +3,7 @@ package com.github.rafasantos.matchandtrade.doc.util;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -23,10 +24,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.Link;
 
 import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.Json;
+import com.matchandtrade.rest.JsonLinkSupport;
 import com.matchandtrade.rest.JsonLinkSupport;
 
 public class SnippetUtil {
@@ -113,10 +116,10 @@ public class SnippetUtil {
 			httpRequest.addHeader(h);
 		}
 		
-		// Remove links (HATEOAS) from the body
+		// Remove links (HATEOAS) from the body when doing POST or PUT
 		if (body instanceof JsonLinkSupport) {
 			JsonLinkSupport jls = (JsonLinkSupport) body;
-			jls.removeLinks();
+			jls.setLinks(new HashSet<Link>());
 		}
 		
 		StringEntity requestBody = new StringEntity(JsonUtil.toJson(body), StandardCharsets.UTF_8);

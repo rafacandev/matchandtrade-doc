@@ -42,11 +42,12 @@ public class DocMakerExecutable {
 			docContentMaker.makeContent();
 			logger.info("Document generation complete.");
 			logger.info(docContentMaker.getReport());		
-			System.exit(0);
 		} catch (Exception e) {
 			logger.error("Error when making the documentation. Exception message: {}", e.getMessage(), e);
 			logger.info(docContentMaker.getReport());
 			System.exit(-1);
+		} finally {
+			System.exit(0);
 		}
 	}
 
