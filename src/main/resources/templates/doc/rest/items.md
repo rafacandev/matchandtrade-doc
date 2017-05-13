@@ -33,6 +33,8 @@ ${ITEMS_SEARCH_SNIPPET}
 
 ${ITEMS_GET_ALL_SNIPPET}
 
+${ITEMS_SEARCH_SNIPPET}
+
 [1]: trade-memberships.md
 [2]: users.md
 [3]: trades.md
