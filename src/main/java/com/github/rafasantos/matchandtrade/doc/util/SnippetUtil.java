@@ -30,7 +30,6 @@ import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.Json;
 import com.matchandtrade.rest.JsonLinkSupport;
-import com.matchandtrade.rest.JsonLinkSupport;
 
 public class SnippetUtil {
 

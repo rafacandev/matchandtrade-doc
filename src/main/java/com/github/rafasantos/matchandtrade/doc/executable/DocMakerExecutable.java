@@ -18,7 +18,7 @@ public class DocMakerExecutable {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
 
-	public static void main(String[] arguments) {
+	public static void main(String[] arguments) throws Throwable {
 		// TODO Better arguments handling
 		if (arguments.length == 0) {
 			arguments = new String[4];
@@ -51,7 +51,7 @@ public class DocMakerExecutable {
 		}
 	}
 
-	private static void startMatchAndTradeWebServer(String[] arguments) throws IOException {
+	private static void startMatchAndTradeWebServer(String[] arguments) throws Throwable {
 		PropertiesProvider.buildAppProperties(arguments);
 		WebserviceApplication.main(arguments);
 	}
