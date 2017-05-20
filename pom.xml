@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<com.matchandtrade.mat-web.version>0.0.2-SNAPSHOT</com.matchandtrade.mat-web.version>
+		<com.matchandtrade.matchandtrade-web-api.version>0.0.3-SNAPSHOT</com.matchandtrade.matchandtrade-web-api.version>
 		<org.apache.httpcomponents.httpclient>4.5.2</org.apache.httpcomponents.httpclient>
 		<org.apache.commons-io.version>2.5</org.apache.commons-io.version>
 		<org.slf4j.version>1.7.25</org.slf4j.version>
@@ -22,8 +22,8 @@
 		<!-- Match and Trade Web -->
 		<dependency>
 			<groupId>com.matchandtrade</groupId>
-			<artifactId>mat-web</artifactId>
-			<version>${com.matchandtrade.mat-web.version}</version>
+			<artifactId>matchandtrade-web-api</artifactId>
+			<version>${com.matchandtrade.matchandtrade-web-api.version}</version>
 		</dependency>
 
 		<!-- Apache HttpComponents -->
