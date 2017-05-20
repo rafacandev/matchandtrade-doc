@@ -23,9 +23,15 @@ name | read-write, unique, 3 min length, 150 max length, must be unique (case in
 ##### Query Parameters
 | Field Name | Description |
 | ---------- | ----------- |
+name | Resources matching `Item.name`
+_pageSize | See [pagination][5]
+_pageNumber | See [pagination][5]
+
 
 #### Examples
 ${ITEMS_POST_SNIPPET}
+
+${ITEMS_PUT_SNIPPET}
 
 ${ITEMS_GET_SNIPPET}
 
@@ -33,9 +39,8 @@ ${ITEMS_SEARCH_SNIPPET}
 
 ${ITEMS_GET_ALL_SNIPPET}
 
-${ITEMS_SEARCH_SNIPPET}
-
 [1]: trade-memberships.md
 [2]: users.md
 [3]: trades.md
 [4]: authentications.md
+[5]: ../rest-guide.md
