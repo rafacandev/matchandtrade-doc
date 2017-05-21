@@ -9,7 +9,7 @@ import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 
 
-public class RestTradesMaker implements OutputMaker {
+public class RestTradeMaker implements OutputMaker {
 	
 	public static final String BASE_URL = "/rest/v1/trades/";
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";

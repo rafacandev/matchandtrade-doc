@@ -4,8 +4,8 @@ import org.apache.http.Header;
 
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
-import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
-import com.matchandtrade.doc.maker.rest.RestTradesMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.RestUtil;
@@ -42,9 +42,9 @@ public class RestUseCaseMaker implements OutputMaker {
 		// Assemble Trade snippet		
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Trading board-games in Toronto.");
-		RequestResponseHolder requestResponseTrades = RequestResponseUtil.buildPostRequestResponse(RestTradesMaker.BASE_URL, tradeJson);
+		RequestResponseHolder requestResponseTrades = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL, tradeJson);
 		String tradesPostSnippet = TemplateUtil.buildSnippet(requestResponseTrades.getHttpRequest(), requestResponseTrades.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, RestTradesMaker.TRADES_POST_SNIPPET, tradesPostSnippet);
+		template = TemplateUtil.replacePlaceholder(template, RestTradeMaker.TRADES_POST_SNIPPET, tradesPostSnippet);
 		tradeJson = JsonUtil.fromHttpResponse(requestResponseTrades.getHttpResponse(), TradeJson.class);
 		
 		// Assemble authentication snippet for a second user
@@ -67,9 +67,9 @@ public class RestUseCaseMaker implements OutputMaker {
 		TradeMembershipJson tradeMembershipJson = new TradeMembershipJson();
 		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
 		tradeMembershipJson.setUserId(userJsonSecond.getUserId());;
-		RequestResponseHolder requestResponseTradeMemberhips = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipsMaker.BASE_URL, tradeMembershipJson);
+		RequestResponseHolder requestResponseTradeMemberhips = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipMaker.BASE_URL, tradeMembershipJson);
 		String tradeMemberhipsPostSnippet = TemplateUtil.buildSnippet(requestResponseTradeMemberhips.getHttpRequest(), requestResponseTradeMemberhips.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, RestTradeMembershipsMaker.TRADES_MEMBERSHIP_POST_SNIPPET, tradeMemberhipsPostSnippet);
+		template = TemplateUtil.replacePlaceholder(template, RestTradeMembershipMaker.TRADES_MEMBERSHIP_POST_SNIPPET, tradeMemberhipsPostSnippet);
 
 		return template;
 	}

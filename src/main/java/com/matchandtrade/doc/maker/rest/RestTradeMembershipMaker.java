@@ -12,7 +12,7 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 
 
-public class RestTradeMembershipsMaker implements OutputMaker {
+public class RestTradeMembershipMaker implements OutputMaker {
 	
 	public static final String BASE_URL = "/rest/v1/trade-memberships/";
 	public static final String TRADES_MEMBERSHIP_POST_SNIPPET = "TRADES_MEMBERSHIP_POST_SNIPPET";

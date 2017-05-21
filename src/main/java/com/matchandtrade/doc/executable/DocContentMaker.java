@@ -17,9 +17,9 @@ import com.matchandtrade.doc.maker.RestUseCaseMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestItemMaker;
-import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
-import com.matchandtrade.doc.maker.rest.RestTradesMaker;
-import com.matchandtrade.doc.maker.rest.RestUsersMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMaker;
+import com.matchandtrade.doc.maker.rest.RestUserMaker;
 import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {
@@ -44,9 +44,9 @@ public class DocContentMaker {
 		docMakers.add(new DevelopmentGuide());
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationMaker());
-		docMakers.add(new RestTradesMaker());
-		docMakers.add(new RestUsersMaker());
-		docMakers.add(new RestTradeMembershipsMaker());
+		docMakers.add(new RestTradeMaker());
+		docMakers.add(new RestUserMaker());
+		docMakers.add(new RestTradeMembershipMaker());
 		docMakers.add(new RestGuideMaker());
 		docMakers.add(new RestUseCaseMaker());
 		docMakers.add(new RestItemMaker());
