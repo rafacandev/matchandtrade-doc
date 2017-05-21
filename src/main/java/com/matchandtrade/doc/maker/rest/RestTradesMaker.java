@@ -23,33 +23,39 @@ public class RestTradesMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		TradeJson firstTradeJson = new TradeJson();
-		firstTradeJson.setName("Board games");
-		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(BASE_URL, firstTradeJson);
+		// TRADES_POST_SNIPPET
+		TradeJson tradeJson = new TradeJson();
+		tradeJson.setName("Board games");
+		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(BASE_URL, tradeJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
-		firstTradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
+		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
 		
-		firstTradeJson.setName("Board games in Toronto");
-		Integer tradeId = firstTradeJson.getTradeId();
-		firstTradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + tradeId, firstTradeJson);
+		// TRADES_PUT_SNIPPET
+		tradeJson.setName("Board games in Toronto");
+		Integer tradeId = tradeJson.getTradeId();
+		tradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
+		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + tradeId, tradeJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet);
 		
+		// TRADES_GET_SNIPPET
 		TradeJson postResponse = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
 		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + postResponse.getTradeId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
 
+		// TRADES_SEARCH_SNIPPET
 		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "?name=Board%20games%20in%20Toronto&_pageNumber=1&_pageSize=2");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet);
 
+		// TRADES_GET_ALL_SNIPPET
 		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getAllSnippet);
 		
+		// TRADES_DELETE_SNIPPET
 		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + postResponse.getTradeId());
 		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, delSnippet);
