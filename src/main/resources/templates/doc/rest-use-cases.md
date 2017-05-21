@@ -2,24 +2,20 @@ Use Cases
 =========
 Typical use cases usage.
 
-Create a Trade
---------------
+#### Create a Trade
 Authenticate to the application.
 ${AUTHENTICATE_SNIPPET}
 
-Verify the authentication details. Note that you need to pass the `Authorization` header obtained on the previous response. 
+Verify the authentication details. Note that you need to pass the `Authorization` header to all secured endpoints. 
 ${AUTHENTICATIONS_SNIPPET}
 
 Create a [Trade][3]
 ${TRADES_POST_SNIPPET}
 
-Get [Trade][3] details. Note that the state is set to `SUBMITTING_ITEMS` meaning that [users][4] are allowed to subscribe to the trade and submit items.
-// TODO
-${TRADES_GET_SNIPPET}
+Note that the `state` for the created [trade][3] is `SUBMITTING_ITEMS` meaning that [users][4] are allowed to subscribe and submit [items][13].
 
-Became Member of a Trade
-------------------------
-Authenticate as a second [user][4] which is going to become a _member_ of [trade][3] previously created;
+#### Became Member of a Trade
+Authenticate with a second [user][4] which is going to become a _member_ of [trade][3] previously created.
 ${AUTHENTICATE_SNIPPET_SECOND}
 
 Verify the authentication details for the second user. The `userId` is going to be used on [TradeMemberships][4].

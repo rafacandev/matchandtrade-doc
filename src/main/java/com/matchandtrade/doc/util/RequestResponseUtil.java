@@ -34,9 +34,12 @@ import com.matchandtrade.rest.JsonLinkSupport;
 
 public class RequestResponseUtil {
 
+	private static final String BASE_URL = "/authenticate";
+
 	public enum MethodType {POST, PUT}
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(RequestResponseUtil.class);
+	
 	
 	// Utility classes should not have public constructors
 	private RequestResponseUtil() {}
@@ -46,7 +49,7 @@ public class RequestResponseUtil {
 	 * @return RequestResponseHolder for authenticate
 	 */
 	public static RequestResponseHolder buildAuthenticateRequestResponse() {
-		RequestResponseHolder result = RequestResponseUtil.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
+		RequestResponseHolder result = RequestResponseUtil.buildGetRequestResponse(BASE_URL, new ArrayList<Header>(), HttpStatus.SC_OK);
 
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
@@ -54,13 +57,13 @@ public class RequestResponseUtil {
 			headers.add(h.getName());
 		}
 		AssertUtil.isTrue(headers.toString().contains("Authorization"));
-
+		result.setAuthorizationHeader(RestUtil.buildAuthorizationHeaderFromResponse(result.getHttpResponse()));
 		return result;
 	}
 	
 	private static List<Header> buildDefaultHeaders() {
 		List<Header> defaultHeaders = new ArrayList<>();
-		defaultHeaders.add(RestUtil.getAuthenticationHeader());
+		defaultHeaders.add(RestUtil.getAuthorizationHeader());
 		defaultHeaders.add(new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON));
 		return defaultHeaders;
 	}

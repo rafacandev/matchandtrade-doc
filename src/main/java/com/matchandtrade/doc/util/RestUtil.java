@@ -18,7 +18,7 @@ import com.matchandtrade.rest.v1.json.UserJson;
 
 public class RestUtil {
 
-	private static Header authenticationHeader = null;
+	private static Header authorizationHeader = null;
 	
 	// Utility classes, which are a collection of static members, are not meant to be instantiated.
 	private RestUtil() {}
@@ -52,20 +52,24 @@ public class RestUtil {
 	}
 	
 	/**
-	 * Get an Authentication header to be used in secured requests.
-	 * The header is generated once and reused.
+	 * Get the current Authentication header. The header is generated once and reused.
 	 * 
-	 * @return an authenticated header
+	 * @return authorization header
 	 */
-	public static Header getAuthenticationHeader() {
-		if (authenticationHeader == null) {
+	public static Header getAuthorizationHeader() {
+		if (authorizationHeader == null) {
 			RequestResponseHolder requestResponseHolder = RequestResponseUtil.buildAuthenticateRequestResponse();
-			authenticationHeader = getAuthenticationHeaderFromResponse(requestResponseHolder.getHttpResponse());
+			authorizationHeader = buildAuthorizationHeaderFromResponse(requestResponseHolder.getHttpResponse());
 		}
-		return authenticationHeader;
+		return authorizationHeader;
 	}
 	
-	private static Header getAuthenticationHeaderFromResponse(HttpResponse httpResponse) {
+	/**
+	 * Builds a Authorization header based on a HttpResponse
+	 * @param httpResponse
+	 * @return
+	 */
+	public static Header buildAuthorizationHeaderFromResponse(HttpResponse httpResponse) {
 		Header result = null;
 		for (Header h : httpResponse.getAllHeaders()) {
 			if (h.getName().equals("Authorization")) {
@@ -77,7 +81,7 @@ public class RestUtil {
 	}
 
 	public static void setAuthenticationHeader(Header header) {
-		authenticationHeader = header;
+		authorizationHeader = header;
 	}
 
 }

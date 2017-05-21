@@ -9,6 +9,7 @@ import org.apache.http.HttpStatus;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.RequestResponseUtil;
+import com.matchandtrade.doc.util.RestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 public class RestAuthenticateMaker implements OutputMaker {
@@ -20,6 +21,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	public String buildDocContent() {
 		// AUTHENTICATE_SNIPPET
 		String template = TemplateUtil.buildTemplate(getDocLocation());
+		RestUtil.setAuthenticationHeader(null);
 		RequestResponseHolder authenticateRequesResponse = RequestResponseUtil.buildAuthenticateRequestResponse();
 		String authenticateSnippet = TemplateUtil.buildSnippet(authenticateRequesResponse.getHttpRequest(), authenticateRequesResponse.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, authenticateSnippet);
