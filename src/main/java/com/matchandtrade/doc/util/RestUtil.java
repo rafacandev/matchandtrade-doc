@@ -4,19 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.ws.rs.core.MediaType;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.HttpClients;
 
-import com.matchandtrade.doc.executable.PropertiesProvider;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestUserMaker;
 import com.matchandtrade.exception.DocMakerException;
