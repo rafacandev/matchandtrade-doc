@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.maker.rest;
 
 import java.util.ArrayList;
 import java.util.HashSet;

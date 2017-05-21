@@ -13,12 +13,12 @@ import com.github.rafasantos.matchandtrade.doc.maker.DevelopmentGuide;
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestItemMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUsersMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.matchandtrade.doc.maker.rest.RestItemMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
+import com.matchandtrade.doc.maker.rest.RestTradesMaker;
+import com.matchandtrade.doc.maker.rest.RestUsersMaker;
 import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {

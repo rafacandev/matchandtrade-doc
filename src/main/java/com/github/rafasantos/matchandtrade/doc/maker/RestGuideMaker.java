@@ -2,10 +2,10 @@ package com.github.rafasantos.matchandtrade.doc.maker;
 
 import org.apache.http.Header;
 
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
+import com.matchandtrade.doc.maker.rest.RestTradesMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.RestUtil;
