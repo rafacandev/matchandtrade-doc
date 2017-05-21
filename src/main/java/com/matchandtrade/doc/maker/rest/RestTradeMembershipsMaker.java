@@ -1,10 +1,12 @@
 package com.matchandtrade.doc.maker.rest;
 
+import org.apache.http.Header;
+
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RestUtil;
 import com.matchandtrade.doc.util.RequestResponseUtil;
+import com.matchandtrade.doc.util.RestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
@@ -22,21 +24,25 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-		
-		RequestResponseHolder post = buildPostJson("Board games in New York");
+
+		// TRADES_MEMBERSHIP_POST_SNIPPET
+		RequestResponseHolder post = buildPostJson("Board games in Vancouver", null);
 		TradeMembershipJson postJson = JsonUtil.fromHttpResponse(post.getHttpResponse(), TradeMembershipJson.class);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
 		
+		// TRADES_MEMBERSHIP_GET_SNIPPET
 		TradeMembershipJson postResponseJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeMembershipJson.class);
 		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
 
+		// TRADES_MEMBERSHIP_GET_ALL_SNIPPET
 		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
 
+		// TRADES_MEMBERSHIP_SEARCH_SNIPPET
 		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(
 			BASE_URL+ "?userId="
 			+ RestUtil.getAuthenticatedUser().getUserId()
@@ -44,6 +50,7 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
 
+		// TRADES_MEMBERSHIP_DELETE_SNIPPET
 		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
 		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
@@ -51,18 +58,28 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		return template;
 	}
 	
-	public static RequestResponseHolder buildPostJson(String tradeName) {
+	/**
+	 * Creates a new Trade and a new TradeMembership associated with the created Trade.
+	 * The created TradeMembership is a <i>member</i>. Since Trades creates a TradeMembership <i>owner</i> by default,
+	 * this method requires a <i>newAuthenticationHeader</i> to be used when creating the TradeMembership.
+	 * You can pass null as <i>newAuthenticationHeader</i> which is going result in a new authentication.
+	 *
+	 * @param tradeName
+	 * @param newAuthenticationHeader
+	 * @return
+	 */
+	public static RequestResponseHolder buildPostJson(String tradeName, Header newAuthenticationHeader) {
 		// Create a new trade
-		TradeJson trade = new TradeJson();
-		trade.setName(tradeName);
-		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
-		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
-		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
-		RestUtil.setAuthenticationHeader(null);
-		// Become member of one of the created trade
+		TradeJson tradeJson = new TradeJson();
+		tradeJson.setName(tradeName);
+		RequestResponseHolder trade = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", tradeJson);
+		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(trade.getHttpResponse()), TradeJson.class);
+		// Set authentication header
+		RestUtil.setAuthenticationHeader(newAuthenticationHeader);
+		// Create new TradeMembership, it is going to be member provided that newAuthenticationHeader is different from the current authentication header 
 		TradeMembershipJson postJson = new TradeMembershipJson();
 		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
-		postJson.setTradeId(trade.getTradeId());
+		postJson.setTradeId(tradeJson.getTradeId());
 		return RequestResponseUtil.buildPostRequestResponse(BASE_URL, postJson);
 	}
 

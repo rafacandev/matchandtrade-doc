@@ -23,13 +23,13 @@ public class RestItemMaker implements OutputMaker {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
 		// Create a trade membership
-		RequestResponseHolder tradeMembershipRRH = RestTradeMembershipsMaker.buildPostJson("Board games in Montreal");
-		TradeMembershipJson tradeMembership = JsonUtil.fromHttpResponse(tradeMembershipRRH.getHttpResponse(), TradeMembershipJson.class);
+		RequestResponseHolder tradeMembership = RestTradeMembershipsMaker.buildPostJson("Board games in Montreal", null);
+		TradeMembershipJson tradeMembershipJson = JsonUtil.fromHttpResponse(tradeMembership.getHttpResponse(), TradeMembershipJson.class);
 
 		// ITEMS_POST_SNIPPET
 		ItemJson postJson = new ItemJson();
 		postJson.setName("Pandemic Legacy: Season 1");
-		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL, postJson);
+		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + BASE_URL, postJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_POST_SNIPPET, postSnippet);
 		postJson = JsonUtil.fromHttpResponse(post.getHttpResponse(), ItemJson.class);
@@ -38,22 +38,22 @@ public class RestItemMaker implements OutputMaker {
 		Integer itemId = postJson.getItemId();
 		postJson.setItemId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL
 		postJson.setName(postJson.getName() + " After PUT");
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL + "/" + itemId , postJson);
+		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + BASE_URL + "/" + itemId , postJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_PUT_SNIPPET, putSnippet);
 
 		// ITEMS_GET_SNIPPET
-		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL + "/" + itemId);
+		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + BASE_URL + "/" + itemId);
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_GET_SNIPPET, getSnippet);
 
 		// ITEMS_GET_ALL_SNIPPET
-		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL);
+		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + BASE_URL);
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_GET_ALL_SNIPPET, getAllSnippet);
 
 		// ITEMS_SEARCH_SNIPPET
-		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembership.getTradeMembershipId() + BASE_URL + "?name=Pandemic%20Legacy:%20Season%201%20After%20PUT");
+		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(RestTradeMembershipsMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + BASE_URL + "?name=Pandemic%20Legacy:%20Season%201%20After%20PUT");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_SEARCH_SNIPPET, searchSnippet);
 		
