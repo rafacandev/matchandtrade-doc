@@ -16,9 +16,9 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.HttpClients;
 
-import com.github.rafasantos.matchandtrade.doc.executable.PropertiesProvider;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.doc.executable.PropertiesProvider;
 import com.matchandtrade.rest.v1.json.AuthenticationJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 

@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.executable;
+package com.matchandtrade.doc.executable;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -86,7 +86,7 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
-							<mainClass>com.github.rafasantos.matchandtrade.doc.executable.DocMakerExecutable</mainClass>
+							<mainClass>com.matchandtrade.doc.executable.DocMakerExecutable</mainClass>
 							<arguments>
 								<argument>-cf</argument>
 								<argument>${basedir}/src/config/matchandtrade.properties</argument>
