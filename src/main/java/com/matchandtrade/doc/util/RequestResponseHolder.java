@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.util;
+package com.matchandtrade.doc.util;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;

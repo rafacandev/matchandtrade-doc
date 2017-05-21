@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.util;
+package com.matchandtrade.doc.util;
 
 import com.matchandtrade.exception.DocMakerException;
 

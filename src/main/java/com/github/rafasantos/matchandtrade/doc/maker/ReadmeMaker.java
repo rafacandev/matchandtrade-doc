@@ -2,7 +2,7 @@ package com.github.rafasantos.matchandtrade.doc.maker;
 
 import java.io.IOException;
 
-import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.exception.DocMakerException;
 
 public class ReadmeMaker implements OutputMaker {

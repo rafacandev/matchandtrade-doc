@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.util;
+package com.matchandtrade.doc.util;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

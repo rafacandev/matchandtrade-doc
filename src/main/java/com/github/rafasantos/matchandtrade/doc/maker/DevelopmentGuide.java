@@ -1,7 +1,7 @@
 package com.github.rafasantos.matchandtrade.doc.maker;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
-import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 
 public class DevelopmentGuide implements OutputMaker {
 

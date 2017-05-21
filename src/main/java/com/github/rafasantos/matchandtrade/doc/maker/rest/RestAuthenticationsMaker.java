@@ -1,9 +1,9 @@
 package com.github.rafasantos.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
-import com.github.rafasantos.matchandtrade.doc.util.SnippetUtil;
-import com.github.rafasantos.matchandtrade.doc.util.RequestResponseHolder;
-import com.github.rafasantos.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.RequestResponseHolder;
+import com.matchandtrade.doc.util.SnippetUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 
 
 public class RestAuthenticationsMaker implements OutputMaker {
