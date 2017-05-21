@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.exception;
+package com.matchandtrade.exception;
 
 public class DocMakerException extends RuntimeException {
 

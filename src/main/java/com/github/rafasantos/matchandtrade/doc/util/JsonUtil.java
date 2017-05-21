@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.exception.DocMakerException;
 
 /**
  * Utility class for common JSON manipulations

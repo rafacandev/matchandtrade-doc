@@ -13,8 +13,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 
-import com.github.rafasantos.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.config.AuthenticationProperties;
+import com.matchandtrade.exception.DocMakerException;
 
 public class TemplateUtil {
 

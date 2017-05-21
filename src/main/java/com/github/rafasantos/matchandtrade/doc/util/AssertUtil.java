@@ -1,6 +1,6 @@
 package com.github.rafasantos.matchandtrade.doc.util;
 
-import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.exception.DocMakerException;
 
 public class AssertUtil {
 

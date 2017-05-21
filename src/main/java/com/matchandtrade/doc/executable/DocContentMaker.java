@@ -19,7 +19,7 @@ import com.github.rafasantos.matchandtrade.doc.maker.rest.RestItemMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestTradesMaker;
 import com.github.rafasantos.matchandtrade.doc.maker.rest.RestUsersMaker;
-import com.github.rafasantos.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {
 	
