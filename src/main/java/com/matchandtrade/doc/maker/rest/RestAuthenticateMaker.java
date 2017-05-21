@@ -12,7 +12,7 @@ import org.apache.http.HttpStatus;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.AssertUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.SnippetUtil;
+import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 public class RestAuthenticateMaker implements OutputMaker {
@@ -27,7 +27,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 	 * @return RequestResponseHolder for authenticate
 	 */
 	public RequestResponseHolder buildAuthenticateRequestResponse() {
-		RequestResponseHolder result = SnippetUtil.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
+		RequestResponseHolder result = RequestResponseUtil.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
 
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();
@@ -49,7 +49,7 @@ public class RestAuthenticateMaker implements OutputMaker {
 			}
 		}
 
-		RequestResponseHolder result = SnippetUtil.buildGetRequestResponse("/authenticate/sign-out", authenticatedHeaders, HttpStatus.SC_RESET_CONTENT);
+		RequestResponseHolder result = RequestResponseUtil.buildGetRequestResponse("/authenticate/sign-out", authenticatedHeaders, HttpStatus.SC_RESET_CONTENT);
 		
 		// Assert if contains Authorization header
 		Set<String> headers = new HashSet<>();

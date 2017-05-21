@@ -4,7 +4,7 @@ import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.SnippetUtil;
+import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
@@ -29,22 +29,22 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
 		
 		TradeMembershipJson postResponseJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeMembershipJson.class);
-		RequestResponseHolder get = SnippetUtil.buildGetRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
+		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
 
-		RequestResponseHolder getAll = SnippetUtil.buildGetRequestResponse(BASE_URL);
+		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
 
-		RequestResponseHolder search = SnippetUtil.buildGetRequestResponse(
+		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(
 			BASE_URL+ "?userId="
 			+ RestUtil.getAuthenticatedUser().getUserId()
 			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=10");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
 
-		RequestResponseHolder del = SnippetUtil.buildDeleteRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
+		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
 		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
 		
@@ -55,7 +55,7 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		// Create a new trade
 		TradeJson trade = new TradeJson();
 		trade.setName(tradeName);
-		RequestResponseHolder tradeRRH = SnippetUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
+		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", trade);
 		trade = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
 		// Set authentication header as null to force to authenticate as a new user because the previous user is already the owner of the previous trade
 		RestUtil.setAuthenticationHeader(null);
@@ -63,7 +63,7 @@ public class RestTradeMembershipsMaker implements OutputMaker {
 		TradeMembershipJson postJson = new TradeMembershipJson();
 		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
 		postJson.setTradeId(trade.getTradeId());
-		return SnippetUtil.buildPostRequestResponse(BASE_URL, postJson);
+		return RequestResponseUtil.buildPostRequestResponse(BASE_URL, postJson);
 	}
 
 	@Override

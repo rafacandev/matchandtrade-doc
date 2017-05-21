@@ -31,15 +31,14 @@ import com.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.Json;
 import com.matchandtrade.rest.JsonLinkSupport;
 
-public class SnippetUtil {
+public class RequestResponseUtil {
 
 	public enum MethodType {POST, PUT}
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(SnippetUtil.class);
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(RequestResponseUtil.class);
 	
 	// Utility classes should not have public constructors
-	private SnippetUtil() {}
+	private RequestResponseUtil() {}
 	
 	private static List<Header> buildDefaultHeaders() {
 		List<Header> defaultHeaders = new ArrayList<>();

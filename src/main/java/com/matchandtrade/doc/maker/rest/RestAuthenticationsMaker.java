@@ -2,7 +2,7 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.SnippetUtil;
+import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 
@@ -13,7 +13,7 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	public static final String BASE_URL = "/rest/v1/authentications/";
 	
 	public RequestResponseHolder buildGetAuthenticationsRequestResponse() {
-		return SnippetUtil.buildGetRequestResponse(BASE_URL);
+		return RequestResponseUtil.buildGetRequestResponse(BASE_URL);
 	}
 
 	@Override
