@@ -14,4 +14,4 @@ The `Authorization` header acts as a session token and needs to be included to a
 #### Examples
 ${AUTHENTICATE_SNIPPET}
 
-${SIGN_OFF_SNIPPET}
+${SIGN_OUT_SNIPPET}

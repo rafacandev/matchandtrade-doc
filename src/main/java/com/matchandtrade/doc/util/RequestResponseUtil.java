@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.core.MediaType;
 
@@ -39,6 +40,23 @@ public class RequestResponseUtil {
 	
 	// Utility classes should not have public constructors
 	private RequestResponseUtil() {}
+	
+	/**
+	 * Build a RequestResponseHolder from GET /authenticate.
+	 * @return RequestResponseHolder for authenticate
+	 */
+	public static RequestResponseHolder buildAuthenticateRequestResponse() {
+		RequestResponseHolder result = RequestResponseUtil.buildGetRequestResponse("/authenticate", new ArrayList<Header>(), HttpStatus.SC_OK);
+
+		// Assert if contains Authorization header
+		Set<String> headers = new HashSet<>();
+		for (Header h : result.getHttpResponse().getAllHeaders()) {
+			headers.add(h.getName());
+		}
+		AssertUtil.isTrue(headers.toString().contains("Authorization"));
+
+		return result;
+	}
 	
 	private static List<Header> buildDefaultHeaders() {
 		List<Header> defaultHeaders = new ArrayList<>();

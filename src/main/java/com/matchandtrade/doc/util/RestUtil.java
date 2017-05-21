@@ -3,6 +3,9 @@ package com.matchandtrade.doc.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.ws.rs.core.MediaType;
 
@@ -10,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ByteArrayEntity;
@@ -34,12 +38,14 @@ public class RestUtil {
 	 */
 	public static Header getAuthenticationHeader() {
 		if (authenticationHeader == null) {
-			RestAuthenticateMaker authenticate = new RestAuthenticateMaker();
-			RequestResponseHolder requestResponseHolder = authenticate.buildAuthenticateRequestResponse();
+			RequestResponseHolder requestResponseHolder = RequestResponseUtil.buildAuthenticateRequestResponse();
 			authenticationHeader = getAuthenticationHeaderFromResponse(requestResponseHolder.getHttpResponse());
 		}
 		return authenticationHeader;
 	}
+	
+	
+	
 	
 	public static void setAuthenticationHeader(Header header) {
 		authenticationHeader = header;

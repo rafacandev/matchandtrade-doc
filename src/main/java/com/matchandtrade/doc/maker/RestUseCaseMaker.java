@@ -26,7 +26,7 @@ public class RestUseCaseMaker implements OutputMaker {
 		
 		// Assemble authentication snippet for the first user
 		RestAuthenticateMaker fUserAuthenticate = new RestAuthenticateMaker();
-		RequestResponseHolder fUserAuthenticateRRH = fUserAuthenticate.buildAuthenticateRequestResponse();
+		RequestResponseHolder fUserAuthenticateRRH = RequestResponseUtil.buildAuthenticateRequestResponse();
 		String fUserAuthenticateSnippet = TemplateUtil.buildSnippet(fUserAuthenticateRRH.getHttpRequest(), fUserAuthenticateRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestAuthenticateMaker.AUTHENTICATE_SNIPPET, fUserAuthenticateSnippet);
 
@@ -48,7 +48,7 @@ public class RestUseCaseMaker implements OutputMaker {
 		tradeJson = JsonUtil.fromHttpResponse(requestResponseTrades.getHttpResponse(), TradeJson.class);
 		
 		// Assemble authentication snippet for a second user
-		RequestResponseHolder sUserAuthenticateRRH = fUserAuthenticate.buildAuthenticateRequestResponse();
+		RequestResponseHolder sUserAuthenticateRRH = RequestResponseUtil.buildAuthenticateRequestResponse();
 		String sUserAuthenticateSecond = TemplateUtil.buildSnippet(sUserAuthenticateRRH.getHttpRequest(), sUserAuthenticateRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET_SECOND, sUserAuthenticateSecond);
 
