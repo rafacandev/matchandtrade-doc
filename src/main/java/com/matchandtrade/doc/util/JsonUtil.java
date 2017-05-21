@@ -17,9 +17,39 @@ import com.matchandtrade.exception.DocMakerException;
  *
  */
 public class JsonUtil {
-
+	
 	private static ObjectMapper objectMapper;
 
+	// Utility classes, which are a collection of static members, are not meant to be instantiated.
+	private JsonUtil() { }
+	
+	/**
+	 * Parse an JSON Object from a string.
+	 * @param o
+	 * @return JSON string
+	 */
+	public static <T> T fromHttpResponse(HttpResponse httpResponse, Class<T> type ) {
+		try {
+			String response = RestUtil.buildResponseBodyString(httpResponse);
+			return fromString(response, type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from HttpResponse to Json object." + e);
+		}
+	}
+	
+	/**
+	 * Parse an JSON Object from a string.
+	 * @param o
+	 * @return JSON string
+	 */
+	public static <T> T fromString(String string, Class<T> type ) {
+		try {
+			return getObjectMapper().readValue(string, type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
+		}
+	}
+	
 	/**
 	 * Instantiate objectMapper with default configuration if it is null, then, return objectMapper. 
 	 * @return objectMapper with default config
@@ -51,7 +81,8 @@ public class JsonUtil {
 			return json;
 		}
 	}
-	
+
+
 	/**
 	 * Parse an object to a JSON string.
 	 * @param o
@@ -62,34 +93,6 @@ public class JsonUtil {
 			return getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(o);
 		} catch (JsonProcessingException e) {
 			throw new DocMakerException("Not able to parse object to string", e);
-		}
-	}
-	
-	/**
-	 * Parse an JSON Object from a string.
-	 * @param o
-	 * @return JSON string
-	 */
-	public static <T> T fromString(String string, Class<T> type ) {
-		try {
-			return getObjectMapper().readValue(string, type);
-		} catch (Exception e) {
-			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
-		}
-	}
-
-
-	/**
-	 * Parse an JSON Object from a string.
-	 * @param o
-	 * @return JSON string
-	 */
-	public static <T> T fromHttpResponse(HttpResponse httpResponse, Class<T> type ) {
-		try {
-			String response = RestUtil.buildResponseBodyString(httpResponse);
-			return fromString(response, type);
-		} catch (Exception e) {
-			throw new DocMakerException("Not able to parse from HttpResponse to Json object." + e);
 		}
 	}
 
