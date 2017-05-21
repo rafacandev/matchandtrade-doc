@@ -17,15 +17,15 @@ public class RestUsersMaker implements OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 
-		// PUT /users/{userId}
-		UserJson requestJson = new UserJson();
-		requestJson.setEmail(RestUtil.getAuthenticatedUser().getEmail());
-		requestJson.setName("Scott Summers");
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId(), requestJson);
+		// USERS_PUT_SNIPPET
+		UserJson userJson = new UserJson();
+		userJson.setEmail(RestUtil.getAuthenticatedUser().getEmail());
+		userJson.setName("Scott Summers");
+		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId(), userJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_SNIPPET, putSnippet);
 
-		// GET users/{userId}
+		// USERS_GET_SNIPPET
 		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
