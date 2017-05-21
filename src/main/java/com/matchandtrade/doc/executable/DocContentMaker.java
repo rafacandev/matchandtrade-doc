@@ -15,7 +15,7 @@ import com.matchandtrade.doc.maker.ReadmeMaker;
 import com.matchandtrade.doc.maker.RestGuideMaker;
 import com.matchandtrade.doc.maker.RestUseCaseMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestItemMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
 import com.matchandtrade.doc.maker.rest.RestTradesMaker;
@@ -43,7 +43,7 @@ public class DocContentMaker {
 		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
 		docMakers.add(new RestAuthenticateMaker());
-		docMakers.add(new RestAuthenticationsMaker());
+		docMakers.add(new RestAuthenticationMaker());
 		docMakers.add(new RestTradesMaker());
 		docMakers.add(new RestUsersMaker());
 		docMakers.add(new RestTradeMembershipsMaker());

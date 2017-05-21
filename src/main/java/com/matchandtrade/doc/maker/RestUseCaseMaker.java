@@ -3,7 +3,7 @@ package com.matchandtrade.doc.maker;
 import org.apache.http.Header;
 
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
-import com.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
+import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipsMaker;
 import com.matchandtrade.doc.maker.rest.RestTradesMaker;
 import com.matchandtrade.doc.util.JsonUtil;
@@ -35,9 +35,9 @@ public class RestUseCaseMaker implements OutputMaker {
 		RestUtil.setAuthenticationHeader(firstUserAuthorizationHeader);
 		
 		// Assemble authentications snippet
-		RequestResponseHolder authenticationsRRH = RequestResponseUtil.buildGetRequestResponse(RestAuthenticationsMaker.BASE_URL);
+		RequestResponseHolder authenticationsRRH = RequestResponseUtil.buildGetRequestResponse(RestAuthenticationMaker.BASE_URL);
 		String authenticationsSnippet = TemplateUtil.buildSnippet(authenticationsRRH.getHttpRequest(), authenticationsRRH.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
 		
 		// Assemble Trade snippet		
 		TradeJson tradeJson = new TradeJson();
@@ -57,8 +57,8 @@ public class RestUseCaseMaker implements OutputMaker {
 		RestUtil.setAuthenticationHeader(secondUserAuthorizationHeader);
 
 		// Assemble authentications snippet for the second user		
-		RestAuthenticationsMaker sUserAuthentication = new RestAuthenticationsMaker();
-		RequestResponseHolder sUserAuthenticationsRRH = sUserAuthentication.buildGetAuthenticationsRequestResponse();
+		RestAuthenticationMaker sUserAuthentication = new RestAuthenticationMaker();
+		RequestResponseHolder sUserAuthenticationsRRH = RequestResponseUtil.buildGetRequestResponse(RestAuthenticationMaker.BASE_URL);
 		String sUserAuthenticationSnippet = TemplateUtil.buildSnippet(sUserAuthenticationsRRH.getHttpRequest(), sUserAuthenticationsRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET_SECOND, sUserAuthenticationSnippet);
 		UserJson userJsonSecond = JsonUtil.fromHttpResponse(sUserAuthenticationsRRH.getHttpResponse(), UserJson.class);

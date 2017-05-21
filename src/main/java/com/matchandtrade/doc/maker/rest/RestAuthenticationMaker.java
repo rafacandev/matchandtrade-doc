@@ -6,21 +6,17 @@ import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 
-public class RestAuthenticationsMaker implements OutputMaker {
+public class RestAuthenticationMaker implements OutputMaker {
 	
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
-	
 	public static final String BASE_URL = "/rest/v1/authentications/";
-	
-	public RequestResponseHolder buildGetAuthenticationsRequestResponse() {
-		return RequestResponseUtil.buildGetRequestResponse(BASE_URL);
-	}
 
 	@Override
 	public String buildDocContent() {
-		RequestResponseHolder requestResponse = buildGetAuthenticationsRequestResponse();
+		// AUTHENTICATIONS_SNIPPET
+		RequestResponseHolder authentication = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-		String snippet = TemplateUtil.buildSnippet(requestResponse.getHttpRequest(), requestResponse.getHttpResponse());
+		String snippet = TemplateUtil.buildSnippet(authentication.getHttpRequest(), authentication.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET, snippet);
 		return template;
 	}

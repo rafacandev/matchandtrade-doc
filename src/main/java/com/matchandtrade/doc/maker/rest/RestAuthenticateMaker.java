@@ -18,13 +18,13 @@ public class RestAuthenticateMaker implements OutputMaker {
 
 	@Override
 	public String buildDocContent() {
-		// GET /authenticate
+		// AUTHENTICATE_SNIPPET
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		RequestResponseHolder authenticateRequesResponse = RequestResponseUtil.buildAuthenticateRequestResponse();
 		String authenticateSnippet = TemplateUtil.buildSnippet(authenticateRequesResponse.getHttpRequest(), authenticateRequesResponse.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, authenticateSnippet);
 		
-		// GET /authenticate/sign-out
+		// SIGN_OUT_SNIPPET
 		List<Header> signOutHeaders = new ArrayList<>();
 		signOutHeaders.add(authenticateRequesResponse.getAuthorizationHeader());
 		RequestResponseHolder signOut = RequestResponseUtil.buildGetRequestResponse("/authenticate/sign-out", signOutHeaders, HttpStatus.SC_RESET_CONTENT);
