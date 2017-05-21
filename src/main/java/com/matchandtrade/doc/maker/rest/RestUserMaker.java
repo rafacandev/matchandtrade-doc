@@ -10,6 +10,7 @@ import com.matchandtrade.rest.v1.json.UserJson;
 
 public class RestUserMaker implements OutputMaker {
 	
+	public static final String BASE_URL = "/rest/v1/users/";
 	private static final String USERS_GET_SNIPPET = "USERS_GET_SNIPPET";
 	private static final String USERS_PUT_SNIPPET = "USERS_PUT_SNIPPET";
 	
@@ -21,12 +22,12 @@ public class RestUserMaker implements OutputMaker {
 		UserJson userJson = new UserJson();
 		userJson.setEmail(RestUtil.getAuthenticatedUser().getEmail());
 		userJson.setName("Scott Summers");
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId(), userJson);
+		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse( BASE_URL + RestUtil.getAuthenticatedUser().getUserId(), userJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_SNIPPET, putSnippet);
 
 		// USERS_GET_SNIPPET
-		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse("/rest/v1/users/" + RestUtil.getAuthenticatedUser().getUserId());
+		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + RestUtil.getAuthenticatedUser().getUserId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippet);
 		
