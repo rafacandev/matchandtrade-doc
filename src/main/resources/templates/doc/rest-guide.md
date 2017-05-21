@@ -2,8 +2,7 @@ RESTful Documentation
 =====================
 Match And Trade provides a powerful RESTful API which other applications may interact with.
 
-Resources
----------
+### Resources
 Here is the list of resources available thought the RESTful API.
 
 * [authenticate][1]
@@ -13,14 +12,26 @@ Here is the list of resources available thought the RESTful API.
 * [trade-memberships/{tradeMembershipId}/items][13]
 * [users][4]
 
-General Guidelines
-------------------
-Generally speaking, _resources_ have consistent behavior which _endpoints_ may vary in format and behavior.
+### Use Cases
+Check out the [use cases][14] page for typical usage with examples.
 
 ### Endpoints vs Resources
-_Resource_ URLs are a specialized _endpoints_ which provides standard operations over a resource. In this application, all _resources_ support HATEOAS, pagination and follow standard query parameters.
+Generally speaking, _resources_ have consistent format and behavior whereas _endpoints_ may vary in format and behavior.
 
-On the other hand, _endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]). See [Web Services - Terminology][5] for more details.
+_Resource_ URLs are a specialized _endpoints_ which provides standard operations over a resource. Example: _resources_ support HATEOAS, pagination and query parameters are relevant to the given resource.
+
+_Endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]). See [Web Services - Terminology][5] for more details.
+
+### HATEOAS
+The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
+
+### Expanding
+Expanding resources (see [Atlassian API][7] for an example) is discouraged while multiple asynchronous calls are favored.
+
+### Pagination
+REST clients should rely on the pagination information which is included in responses with multiple results. Our pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
+
+When performing a GET to resources that returns an array you can pass the query parameters `_pageSize` to indicate the number of records returned in a page and `_pageNumber` to indicate which page number you want to return. Note that page numbers start at number 1.
 
 ### PUT vs PATCH
 `PUT` requests are favored over `PATH` requests. While `PATH` may offer smaller payloads, it also introduces development complexity for little benefit.
@@ -50,40 +61,8 @@ Status:   HTTP/1.1 200
 }
 ```
 
-
-### HATEOAS
-The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
-
-### Expanding
-Expanding resources (see [Atlassian API][7] for an example) is discouraged while multiple asynchronous calls are favored.
-
 ### Many To Many Relationships
 Relationships are treated as resources similarly to what is described on this [post][6].
-
-### Pagination
-REST clients should rely on the pagination information which is included in responses with multiple results. Our pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
-
-When performing a GET to resources that returns an array you can pass the query parameters `_pageSize` to indicate the number of records returned in a page and `_pageNumber` to indicate which page number you want to return. Note that page numbers start at number 1.
-
-Typical Workflow
-----------------
-Authenticate to the application.
-${AUTHENTICATE_SNIPPET}
-
-Verify the authentication details. Note that you need to pass the `Authorization` header obtained on the previous response. 
-${AUTHENTICATIONS_SNIPPET}
-
-Create a [Trade][3]
-${TRADES_POST_SNIPPET}
-
-Authenticate as a second [user][4] which is going to become a [trade][3] _member_;
-${AUTHENTICATE_SNIPPET_SECOND}
-
-Verify the authentication details for the second user. The `userId` is going to be used on [TradeMemberships][4].
-${AUTHENTICATIONS_SNIPPET_SECOND}
-
-The second user becomes member of the [trade][3].
-${TRADES_MEMBERSHIP_POST_SNIPPET}
 
 
 [1]: rest/authenticate.md
@@ -99,3 +78,4 @@ ${TRADES_MEMBERSHIP_POST_SNIPPET}
 [11]: http://www.rfc-editor.org/rfc/rfc5988.txt "rfc5988"
 [12]: rest/trade-memberships.md
 [13]: rest/items.md
+[14]: rest-use-cases.md
