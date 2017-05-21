@@ -9,7 +9,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.AssertUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.SnippetUtil;

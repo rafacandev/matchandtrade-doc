@@ -1,6 +1,6 @@
 package com.matchandtrade.doc.maker.rest;
 
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.SnippetUtil;

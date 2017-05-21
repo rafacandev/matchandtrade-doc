@@ -9,10 +9,10 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.rafasantos.matchandtrade.doc.maker.DevelopmentGuide;
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.ReadmeMaker;
-import com.github.rafasantos.matchandtrade.doc.maker.RestGuideMaker;
+import com.matchandtrade.doc.maker.DevelopmentGuide;
+import com.matchandtrade.doc.maker.OutputMaker;
+import com.matchandtrade.doc.maker.ReadmeMaker;
+import com.matchandtrade.doc.maker.RestGuideMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationsMaker;
 import com.matchandtrade.doc.maker.rest.RestItemMaker;

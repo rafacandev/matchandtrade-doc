@@ -1,4 +1,4 @@
-package com.github.rafasantos.matchandtrade.doc.maker;
+package com.matchandtrade.doc.maker;
 
 public interface OutputMaker {
 	

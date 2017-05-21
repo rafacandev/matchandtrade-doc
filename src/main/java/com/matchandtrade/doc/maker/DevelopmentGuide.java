@@ -1,6 +1,6 @@
-package com.github.rafasantos.matchandtrade.doc.maker;
+package com.matchandtrade.doc.maker;
 
-import com.github.rafasantos.matchandtrade.doc.maker.OutputMaker;
+import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 public class DevelopmentGuide implements OutputMaker {
