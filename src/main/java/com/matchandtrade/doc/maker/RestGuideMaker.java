@@ -6,8 +6,7 @@ public class RestGuideMaker implements OutputMaker {
 	
 	@Override
 	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
-		return template;
+		return TemplateUtil.buildTemplate(getDocLocation());
 	}
 	
 	@Override
