@@ -34,6 +34,11 @@ public class RestGuideMaker implements OutputMaker {
 		Header firstUserAuthorizationHeader = fUserAuthenticateRRH.getHttpResponse().getHeaders("Authorization")[0];
 		RestUtil.setAuthenticationHeader(firstUserAuthorizationHeader);
 		
+		// Assemble authentications snippet
+		RequestResponseHolder authenticationsRRH = SnippetUtil.buildGetRequestResponse(RestAuthenticationsMaker.BASE_URL);
+		String authenticationsSnippet = TemplateUtil.buildSnippet(authenticationsRRH.getHttpRequest(), authenticationsRRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, RestAuthenticationsMaker.AUTHENTICATIONS_SNIPPET, authenticationsSnippet);
+		
 		// Assemble Trade snippet		
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Trading board-games in Toronto.");

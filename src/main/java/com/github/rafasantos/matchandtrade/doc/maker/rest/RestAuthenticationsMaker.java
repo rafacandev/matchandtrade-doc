@@ -10,8 +10,10 @@ public class RestAuthenticationsMaker implements OutputMaker {
 	
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	
+	public static final String BASE_URL = "/rest/v1/authentications/";
+	
 	public RequestResponseHolder buildGetAuthenticationsRequestResponse() {
-		return SnippetUtil.buildGetRequestResponse("/rest/v1/authentications/");
+		return SnippetUtil.buildGetRequestResponse(BASE_URL);
 	}
 
 	@Override
