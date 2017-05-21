@@ -20,22 +20,9 @@ public class TemplateUtil {
 
 	public static final String TEMPLATE_ROOT_LOCATION = "templates/";
 	
-	public static String replacePlaceholder(String template, String placeholder, String replacement) {
-		return template.replace("${" + placeholder + "}", replacement);
-	}
-
-	public static String buildTemplate(String resourceLocation) {
-		String result;
-		try {
-			String templatePath = TemplateUtil.class.getClassLoader().getResource(TEMPLATE_ROOT_LOCATION + resourceLocation).getFile();
-			File templateFile = new File(templatePath);
-			result = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
-		} catch (Exception e) {
-			throw new DocMakerException("Not able to build template from resource: " + resourceLocation + ". Exception message: " + e.getMessage());
-		}
-		return result;
-	}
-
+	// Utility classes, which are a collection of static members, are not meant to be instantiated.
+	private TemplateUtil() { }
+	
 	private static Header[] buildResponseHeaders(HttpResponse httpResponse) {
 		Header[] authorizationHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
 		Header[] paginationTotalCount = httpResponse.getHeaders("X-Pagination-Total-Count");
@@ -45,6 +32,12 @@ public class TemplateUtil {
 		return responseHeaders;
 	}
 
+	/**
+	 * Build a snippet based on a HttpRequestBase and HttpResponse
+	 * @param httpRequest
+	 * @param httpResponse
+	 * @return
+	 */
 	public static String buildSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
 		StringBuilder result = new StringBuilder();;
 		try {
@@ -108,6 +101,28 @@ public class TemplateUtil {
 			throw new DocMakerException(e);
 		}
 		return result.toString();
+	}
+
+	/**
+	 * Build a string representation for a given template
+	 * 
+	 * @param templateRelativePath
+	 * @return
+	 */
+	public static String buildTemplate(String templateRelativePath) {
+		String result;
+		try {
+			String templatePath = TemplateUtil.class.getClassLoader().getResource(TEMPLATE_ROOT_LOCATION + templateRelativePath).getFile();
+			File templateFile = new File(templatePath);
+			result = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to build template from resource: " + templateRelativePath + ". Exception message: " + e.getMessage());
+		}
+		return result;
+	}
+
+	public static String replacePlaceholder(String template, String placeholder, String replacement) {
+		return template.replace("${" + placeholder + "}", replacement);
 	}
 
 }
