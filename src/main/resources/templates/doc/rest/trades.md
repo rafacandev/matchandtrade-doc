@@ -1,7 +1,7 @@
 Trades
 ======
-_Resource_ for trades. Trades are one of the the central components of Match and Trade. The [user][1] who creates a trade becomes the _organizer_ while other [users][1] can join the trade and become _members_.
-_Members_ submit their `TODO Trade Items`. Later the _organizer_ closes the trade and the application generates the results of the trade.
+_Resource_ for trades. Trades are the the central components of the system. The [user][1] who creates a trade becomes the _organizer_ while other [users][1] can subscribe the trade and become _members_.
+_Members_ submit their [items][3] through a [trade membership][4]. Later the _organizer_ closes the trade and the system generates the results of the trade.
 
 #### Operations
 * `POST rest/v1/trades/`
@@ -46,3 +46,5 @@ ${TRADES_DELETE_SNIPPET}
 
 [1]: users.md
 [2]: ../rest-guide.md
+[3]: items.md
+[4]: trade-memberships.md

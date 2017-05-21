@@ -2,7 +2,7 @@ RESTful Documentation
 =====================
 Match And Trade provides a powerful RESTful API which other applications may interact with.
 
-### Resources
+#### Resources
 Here is the list of resources available thought the RESTful API.
 
 * [authenticate][1]
@@ -12,28 +12,28 @@ Here is the list of resources available thought the RESTful API.
 * [trade-memberships/{tradeMembershipId}/items][13]
 * [users][4]
 
-### Use Cases
+#### Use Cases
 Check out the [use cases][14] page for typical usage with examples.
 
-### Endpoints vs Resources
+#### Endpoints vs Resources
 Generally speaking, _resources_ have consistent format and behavior whereas _endpoints_ may vary in format and behavior.
 
 _Resource_ URLs are a specialized _endpoints_ which provides standard operations over a resource. Example: _resources_ support HATEOAS, pagination and query parameters are relevant to the given resource.
 
 _Endpoint_ URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]). See [Web Services - Terminology][5] for more details.
 
-### HATEOAS
+#### HATEOAS
 The importance of HATEOAS cannot be emphasized enough. This application uses the [Spring HATEOAS][8] approach to handle hypermedia.
 
-### Expanding
+#### Expanding
 Expanding resources (see [Atlassian API][7] for an example) is discouraged while multiple asynchronous calls are favored.
 
-### Pagination
+#### Pagination
 REST clients should rely on the pagination information which is included in responses with multiple results. Our pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
 
 When performing a GET to resources that returns an array you can pass the query parameters `_pageSize` to indicate the number of records returned in a page and `_pageNumber` to indicate which page number you want to return. Note that page numbers start at number 1.
 
-### PUT vs PATCH
+#### PUT vs PATCH
 `PUT` requests are favored over `PATH` requests. While `PATH` may offer smaller payloads, it also introduces development complexity for little benefit.
 
 Additionally, when doing a `PUT` or `PATCH` it is recommended to do not include the `id` for the given resource in the payload. For example, when doing a `PUT /trades/{tradeId}` do not include `tradeId` in the payload, it will be simply ignored.
@@ -61,7 +61,7 @@ Status:   HTTP/1.1 200
 }
 ```
 
-### Many To Many Relationships
+#### Many To Many Relationships
 Relationships are treated as resources similarly to what is described on this [post][6].
 
 
