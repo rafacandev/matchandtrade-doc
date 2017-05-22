@@ -42,13 +42,13 @@ public class DocContentMaker {
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
 		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
+		docMakers.add(new RestGuideMaker());
+		docMakers.add(new RestUseCaseMaker());
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationMaker());
 		docMakers.add(new RestTradeMaker());
 		docMakers.add(new RestUserMaker());
 		docMakers.add(new RestTradeMembershipMaker());
-		docMakers.add(new RestGuideMaker());
-		docMakers.add(new RestUseCaseMaker());
 		docMakers.add(new RestItemMaker());
 
 		HtmlParser htmlParser = new HtmlParser();

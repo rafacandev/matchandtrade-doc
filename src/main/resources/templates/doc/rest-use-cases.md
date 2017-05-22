@@ -14,15 +14,33 @@ ${TRADES_POST_SNIPPET}
 
 Note that the `state` for the created [trade][3] is `SUBMITTING_ITEMS` meaning that [users][4] are allowed to subscribe and submit [items][13].
 
-#### Became Member of a Trade
+Find the [trade membership][12] associated with the _owner_.
+${TRADE_MEMBERSHIP_OWNER}
+
+Add two items to be traded by the _owner_.
+${ITEM_ONE}
+${ITEM_TWO}
+
+#### A Second User Subscribes to the Trade
 Authenticate with a second [user][4] which is going to become a _member_ of [trade][3] previously created.
 ${AUTHENTICATE_SNIPPET_SECOND}
 
-Verify the authentication details for the second user. The `userId` is going to be used on [TradeMemberships][4].
+Verify the authentication details for the second user. The `userId` is going to be used on the next step.
 ${AUTHENTICATIONS_SNIPPET_SECOND}
 
-Become member of the [trade][3].
+The second [user][4] subscribes to the [trade][3].
 ${TRADES_MEMBERSHIP_POST_SNIPPET}
+
+Add three [items][13] to be traded by the _member_.
+${ITEM_THREE}
+${ITEM_FOUR}
+${ITEM_FIVE}
+
+#### Change the Trade to State to MATCHING_ITEMS
+The [trade][3] _owner_ decides that is time to start the `MATCHING_ITEMS` phase by changing the `Trade.state`.   
+${TRADE_MATCHING_ITEMS_SNIPPET}
+
+
 
 
 [1]: rest/authenticate.md

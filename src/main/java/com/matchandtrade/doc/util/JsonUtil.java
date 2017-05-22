@@ -1,6 +1,7 @@
 package com.matchandtrade.doc.util;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 
@@ -45,6 +46,20 @@ public class JsonUtil {
 	public static <T> T fromString(String string, Class<T> type ) {
 		try {
 			return getObjectMapper().readValue(string, type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
+		}
+	}
+
+	/**
+	 * Parse an JSON Object from a string.
+	 * @param <T>
+	 * @param o
+	 * @return JSON string
+	 */
+	public static List<?> fromStringToMap(String string) {
+		try {
+			return getObjectMapper().readValue(string, List.class);
 		} catch (Exception e) {
 			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
 		}
