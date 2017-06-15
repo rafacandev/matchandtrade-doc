@@ -1,0 +1,26 @@
+<!-- See: http://logback.qos.ch/manual/configuration.html -->
+<configuration debug="false" scan="false" packagingData="false">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!-- TRACE: Log all Request/Response via RequesResponseUtil. -->
+    <logger name="com.matchandtrade.doc" level="INFO" />
+    
+    <!-- TRACE: Log all SQL DML statements as they are executed -->
+	<logger level="INFO" name="org.hibernate.SQL"/>
+	<!-- TRACE: Log all JDBC parameters -->
+	<logger level="INFO" name="org.hibernate.type"/>
+	<!-- TRACE: Log transaction related activity -->
+	<logger level="INFO" name="org.hibernate.transaction"/>
+	<!-- TRACE: Log all second-level cache activity -->
+	<logger level="INFO" name="org.hibernate.cache"/>
+	
+</configuration>
