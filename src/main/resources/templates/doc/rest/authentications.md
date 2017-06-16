@@ -11,9 +11,10 @@ _Resource_ for authentications. It returns information about the current authent
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-userId | read-only | The [user][2] associated with this authentication, this value is created during the sign-up process
+userId | read-only | The [user][2] associated with this authentication, this value is created during the sign-up (first successful [authenticate][1])
 
 #### Example
 ${AUTHENTICATIONS_SNIPPET}
 
+[1]: authenticate.md
 [2]: users.md

@@ -1,6 +1,6 @@
 Trade Memberships
 =================
-_Resource_ for Trade Memberships. [Users][1] who wants to subscribe to a [trade][2] need create a trade membership.  
+_Resource_ for Trade Memberships. [Users][1] who want to subscribe to a [trade][2] need create a trade membership.  
 
 #### Operations
 * `POST rest/v1/trade-memberships/`
@@ -15,9 +15,9 @@ _Resource_ for Trade Memberships. [Users][1] who wants to subscribe to a [trade]
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-tradeMembershipId | read-only | Id associated with this resource
 userId | read-write | Must belong to an existing `user`
 tradeId | read-write | Must belong to an existing `trade`
+tradeMembershipId | read-only | Id associated with this resource
 
 ##### Query Parameters
 | Field Name | Description |
@@ -28,7 +28,8 @@ _pageSize | See [pagination][3]
 _pageNumber | See [pagination][3]
 
 #### Rules
-* Cannot delete the owner of a [trade][2]
+* Cannot delete the owner of an existing [trade][2]
+* Cannot create more than one trade membership for the same [trade][2]
 
 #### Examples
 ${TRADES_MEMBERSHIP_POST_SNIPPET}

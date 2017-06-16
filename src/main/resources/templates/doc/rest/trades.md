@@ -1,6 +1,6 @@
 Trades
 ======
-_Resource_ for trades. Trades are the the central components of the system. The [user][1] who creates a trade becomes the _organizer_ while other [users][1] can subscribe the trade and become _members_.
+_Resource_ for trades. Trades are the the central components of the system. The [user][1] who creates a trade becomes the _organizer_ while other [users][1] can subscribe to the trade and become _members_.
 _Members_ submit their [items][3] through a [trade membership][4]. Later the _organizer_ closes the trade and the system generates the results of the trade.
 
 #### Operations
@@ -17,8 +17,17 @@ _Members_ submit their [items][3] through a [trade membership][4]. Later the _or
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-name | read-write, unique, 3 min length, 150 max length | The name of this trade
-tradeId | read-only | Id associated with this resource
+state	| read-write, enumeration (see values below) | The state of this trade, states drive how to interact with the trade.
+name	| read-write, unique, 3 min length, 150 max length | The name of this trade
+tradeId	| read-only | Id associated with this resource
+
+##### State
+| Name | Description |
+| ---- | ----------- |
+SUBMITTING_ITEMS | Default state when a trade is created. Indicates that users can join the trade and submit [items][3].
+MATCHING_ITEMS | [Users][1] can match [items][3] in the trade. Other [users][1] cannot join the trade nor submit [items][3].
+GENERATING_TRADES | The system is generating the trade results.
+CLOSED | The trade is in ready-only mode
 
 ##### Query Parameters
 | Field Name | Description |
@@ -29,7 +38,8 @@ _pageNumber | See [pagination][2]
 
 #### Rules
 * When a new trade is created, the [user][1] associated to the `Authorization` header will be the trade _organizer_.
-* Only the trade _organizer_ can delete a trade.
+* Only the trade _organizer_ can DELETE a trade.
+* Only the trade _organizer_ can PUT a trade.
 
 #### Examples
 ${TRADES_POST_SNIPPET}
