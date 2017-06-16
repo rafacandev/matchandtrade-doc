@@ -7,6 +7,7 @@ import com.matchandtrade.doc.util.RestUtil;
 import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
+import com.matchandtrade.rest.v1.json.TradeJson.State;
 
 
 public class RestTradeMaker implements OutputMaker {
@@ -33,6 +34,7 @@ public class RestTradeMaker implements OutputMaker {
 		
 		// TRADES_PUT_SNIPPET
 		tradeJson.setName("Board games in Toronto");
+		tradeJson.setState(State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
 		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + tradeId, tradeJson);
