@@ -6,7 +6,7 @@ _Resource_ for ZZZ. Description of this endpoint.
 * `POST rest/v1/end-point/`
 * `PUT rest/v1/end-point/{id}`
 * `GET rest/v1/end-point/{id}`
-* `GET rest/v1/end-point?{id}`
+* `GET rest/v1/end-point?{queryParameters}`
 * `GET rest/v1/end-point/`
 * `DELETE rest/v1/end-point/{id}`
 

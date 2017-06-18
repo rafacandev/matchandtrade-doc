@@ -20,6 +20,7 @@ import com.matchandtrade.doc.maker.rest.RestItemMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMaker;
 import com.matchandtrade.doc.maker.rest.RestUserMaker;
+import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
 import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {
@@ -50,6 +51,7 @@ public class DocContentMaker {
 		docMakers.add(new RestUserMaker());
 		docMakers.add(new RestTradeMembershipMaker());
 		docMakers.add(new RestItemMaker());
+		docMakers.add(new RestWantItemMaker());
 
 		HtmlParser htmlParser = new HtmlParser();
 		try {

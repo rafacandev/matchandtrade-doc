@@ -59,28 +59,38 @@ public class RestTradeMembershipMaker implements OutputMaker {
 	}
 	
 	/**
-	 * Creates a new Trade and a new TradeMembership associated with the created Trade.
-	 * The created TradeMembership is a <i>member</i>. Since Trades creates a TradeMembership <i>owner</i> by default,
-	 * this method requires a <i>newAuthenticationHeader</i> to be used when creating the TradeMembership.
-	 * You can pass null as <i>newAuthenticationHeader</i> which is going result in a new authentication.
+	 * Creates a new Trade with the given {@code tradeName} and calls @{code buildPostJson(TradeJson, Header}
 	 *
 	 * @param tradeName
 	 * @param newAuthenticationHeader
 	 * @return
 	 */
 	public static RequestResponseHolder buildPostJson(String tradeName, Header newAuthenticationHeader) {
-		// Create a new trade
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName(tradeName);
-		RequestResponseHolder trade = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", tradeJson);
-		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(trade.getHttpResponse()), TradeJson.class);
+		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", tradeJson);
+		TradeJson tradeJsonResponse = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
+		return buildPostJson(tradeJsonResponse, newAuthenticationHeader);
+	}
+
+	/**
+	 * Creates a new TradeMembership associated with the created Trade.
+	 * The created TradeMembership is a <i>member</i>. Since Trades creates a TradeMembership <i>owner</i> by default,
+	 * this method requires a <i>newAuthenticationHeader</i> to be used when creating the TradeMembership.
+	 * You can pass null as <i>newAuthenticationHeader</i> which is going result in a new authentication.
+	 *
+	 * @param tradeJson
+	 * @param newAuthenticationHeader
+	 * @return
+	 */
+	public static RequestResponseHolder buildPostJson(TradeJson tradeJson, Header newAuthenticationHeader) {
 		// Set authentication header
 		RestUtil.setAuthenticationHeader(newAuthenticationHeader);
 		// Create new TradeMembership, it is going to be member provided that newAuthenticationHeader is different from the current authentication header 
-		TradeMembershipJson postJson = new TradeMembershipJson();
-		postJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
-		postJson.setTradeId(tradeJson.getTradeId());
-		return RequestResponseUtil.buildPostRequestResponse(BASE_URL, postJson);
+		TradeMembershipJson tradeMembershipJson = new TradeMembershipJson();
+		tradeMembershipJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
+		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
+		return RequestResponseUtil.buildPostRequestResponse(BASE_URL, tradeMembershipJson);
 	}
 
 	@Override

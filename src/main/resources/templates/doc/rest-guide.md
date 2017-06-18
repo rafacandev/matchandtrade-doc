@@ -10,6 +10,7 @@ Here is the list of resources available thought the RESTful API.
 * [trades][3]
 * [trade-memberships][12]
 * [trade-memberships/{tradeMembershipId}/items][13]
+* [trade-memberships/{tradeMembershipId}/items/{itemId}/want-items][15]
 * [users][4]
 
 #### Use Cases
@@ -79,3 +80,4 @@ Relationships are treated as resources similarly to what is described on this [p
 [12]: rest/trade-memberships.md
 [13]: rest/items.md
 [14]: rest-use-cases.md
+[15]: rest/want-items.md
