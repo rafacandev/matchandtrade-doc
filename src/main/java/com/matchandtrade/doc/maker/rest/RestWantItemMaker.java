@@ -16,6 +16,7 @@ public class RestWantItemMaker implements OutputMaker {
 	
 	public static final String BASE_URL = "/want-items";
 	public static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";
+	public static final String WANT_ITEMS_GET_SNIPPET = "WANT_ITEMS_GET_SNIPPET";
 	
 	@Override
 	public String buildDocContent() {
@@ -49,10 +50,17 @@ public class RestWantItemMaker implements OutputMaker {
 		String url = RestTradeMembershipMaker.BASE_URL + tradeMembershipAlphaJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + itemAlphaJson.getItemId() + BASE_URL;
 		WantItemJson wantItemJson = new WantItemJson();
 		wantItemJson.setPriority(1);
-		wantItemJson.setItem(itemBetaJson);
+		wantItemJson.setItemId(itemBetaJson.getItemId());
 		RequestResponseHolder wantItemRRH = RequestResponseUtil.buildPostRequestResponse(url, wantItemJson);
 		String wantItemSnippet = TemplateUtil.buildSnippet(wantItemRRH.getHttpRequest(), wantItemRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_SNIPPET, wantItemSnippet);
+		
+		
+		// WANT_ITEMS_GET_SNIPPET
+		RequestResponseHolder wantItemGetRRH = RequestResponseUtil.buildGetRequestResponse(url);
+		String wantItemGetSnippet = TemplateUtil.buildSnippet(wantItemGetRRH.getHttpRequest(), wantItemGetRRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_SNIPPET, wantItemGetSnippet);
+		
 		return template;
 	}
 

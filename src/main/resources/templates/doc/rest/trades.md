@@ -18,7 +18,7 @@ _Members_ submit their [items][3] through a [trade membership][4]. Later the _or
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
 state	| read-write, enumeration (see values below) | The state of this trade, states drive how to interact with the trade.
-name	| read-write, unique, 3 min length, 150 max length | The name of this trade
+name	| read-write, mandatory, unique, 3 min length, 150 max length | The name of this trade
 tradeId	| read-only | Id associated with this resource
 
 ##### State

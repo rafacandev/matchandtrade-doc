@@ -4,7 +4,6 @@ _Resource_ for Want Items. A Want Item is an [item][2] that could be exchanged f
 
 #### Operations
 * `POST /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/`
-* `PUT /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/{wantItemId}`
 * `GET /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/{wantItemId}`
 * `GET /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/`
 * `DELETE /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/{wantItemId}`
@@ -15,16 +14,19 @@ _Resource_ for Want Items. A Want Item is an [item][2] that could be exchanged f
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-itemId | ready-write | Must belong to an existing [item][2]
-priority | integer between 1 and 1000 | Priority for this [WantItem][1]. The lower the number the more wanted the [item][2] is.
+itemId | ready-write, mandatory | Must belong to an existing [item][2] within the same [trade][3]
+priority | ready-write, mandatory, integer between 1 and 1000 | Priority for this [WantItem][1]. The lower the number the more wanted the [item][2] is.
 wantItemId | read-only | Id associated with this resource
 
 #### Rules
-TODO
+* `WantItem.itemId` must belong to an existing [item][2] within the current [trade][3].
 
 #### Examples
 ${WANT_ITEMS_POST_SNIPPET}
 
+${WANT_ITEMS_GET_SNIPPET}
+
 
 [1]: #WantItem
 [2]: items.md
+[3]: trades.md

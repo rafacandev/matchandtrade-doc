@@ -18,7 +18,7 @@ _Resource_ for Items. Items are included in a [trade membership][1] to indicate 
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
 itemId | read-only | Id associated with this resource
-name | read-write, unique, 3 min length, 150 max length, unique (case insensitive) within the [TradeMembership][1] | Name of this item
+name | read-write, mandatory, unique, 3 min length, 150 max length, unique (case insensitive) within the [TradeMembership][1] | Name of this item
 
 ##### Query Parameters
 | Field Name | Description |

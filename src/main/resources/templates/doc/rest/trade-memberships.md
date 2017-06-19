@@ -15,8 +15,8 @@ _Resource_ for Trade Memberships. [Users][1] who want to subscribe to a [trade][
 #### Resource
 | Field Name | Rules | Description |
 | ---------- | ----- | ----------- |
-userId | read-write | Must belong to an existing [user][1]
-tradeId | read-write | Must belong to an existing [trade][2]
+userId | read-write, mandatory | Must belong to an existing [user][1]
+tradeId | read-write, mandatory | Must belong to an existing [trade][2]
 tradeMembershipId | read-only | Id associated with this resource
 
 ##### Query Parameters
