@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<com.matchandtrade.matchandtrade-web-api.version>0.0.3-SNAPSHOT</com.matchandtrade.matchandtrade-web-api.version>
-		<org.apache.httpcomponents.httpclient>4.5.2</org.apache.httpcomponents.httpclient>
+		<org.apache.httpcomponents.httpclient>4.5.3</org.apache.httpcomponents.httpclient>
 		<org.apache.commons-io.version>2.5</org.apache.commons-io.version>
 		<org.slf4j.version>1.7.25</org.slf4j.version>
 		<com.vladsch.flexmark-all.version>0.18.5</com.vladsch.flexmark-all.version>
