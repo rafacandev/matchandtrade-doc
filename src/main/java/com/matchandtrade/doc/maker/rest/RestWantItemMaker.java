@@ -25,7 +25,7 @@ public class RestWantItemMaker implements OutputMaker {
 		// Create a trade membership
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games in Calgary");
-		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL, tradeJson);
+		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL + "/", tradeJson);
 		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
 		
 		// TradeMembership alpha

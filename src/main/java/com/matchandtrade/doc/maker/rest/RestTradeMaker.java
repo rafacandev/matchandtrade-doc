@@ -12,7 +12,7 @@ import com.matchandtrade.rest.v1.json.TradeJson.State;
 
 public class RestTradeMaker implements OutputMaker {
 	
-	public static final String BASE_URL = "/rest/v1/trades/";
+	public static final String BASE_URL = "/rest/v1/trades";
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
@@ -27,7 +27,7 @@ public class RestTradeMaker implements OutputMaker {
 		// TRADES_POST_SNIPPET
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games");
-		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(BASE_URL, tradeJson);
+		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(BASE_URL + "/", tradeJson);
 		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
 		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
@@ -37,13 +37,13 @@ public class RestTradeMaker implements OutputMaker {
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + tradeId, tradeJson);
+		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + "/" + tradeId, tradeJson);
 		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet);
 		
 		// TRADES_GET_SNIPPET
 		TradeJson postResponse = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
-		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + postResponse.getTradeId());
+		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "/" + postResponse.getTradeId());
 		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
 
@@ -53,12 +53,12 @@ public class RestTradeMaker implements OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet);
 
 		// TRADES_GET_ALL_SNIPPET
-		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
+		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "/");
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getAllSnippet);
 		
 		// TRADES_DELETE_SNIPPET
-		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + postResponse.getTradeId());
+		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + "/" + postResponse.getTradeId());
 		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, delSnippet);
 		

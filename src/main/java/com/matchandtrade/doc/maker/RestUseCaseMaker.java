@@ -49,7 +49,7 @@ public class RestUseCaseMaker implements OutputMaker {
 		// TRADES_POST_SNIPPET
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games in Ottawa");
-		RequestResponseHolder trade = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL, tradeJson);
+		RequestResponseHolder trade = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL + "/", tradeJson);
 		String tradesSnippet = TemplateUtil.buildSnippet(trade.getHttpRequest(), trade.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, RestTradeMaker.TRADES_POST_SNIPPET, tradesSnippet);
 		tradeJson = JsonUtil.fromHttpResponse(trade.getHttpResponse(), TradeJson.class);
@@ -129,7 +129,7 @@ public class RestUseCaseMaker implements OutputMaker {
 		// TRADES_MATCHING_ITEMS_SNIPPET
 		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
-		RequestResponseHolder tradeMatching = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + tradeJson.getTradeId(), tradeJson);
+		RequestResponseHolder tradeMatching = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeJson.getTradeId(), tradeJson);
 		String tradeMatchingSnippet = TemplateUtil.buildSnippet(tradeMatching.getHttpRequest(), tradeMatching.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradeMatchingSnippet);
 		

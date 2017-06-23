@@ -43,7 +43,6 @@ public class DocContentMaker {
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
 		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
-		docMakers.add(new RestGuideMaker());
 		docMakers.add(new RestUseCaseMaker());
 		docMakers.add(new RestAuthenticateMaker());
 		docMakers.add(new RestAuthenticationMaker());
@@ -52,6 +51,7 @@ public class DocContentMaker {
 		docMakers.add(new RestTradeMembershipMaker());
 		docMakers.add(new RestItemMaker());
 		docMakers.add(new RestWantItemMaker());
+		docMakers.add(new RestGuideMaker());
 
 		HtmlParser htmlParser = new HtmlParser();
 		try {

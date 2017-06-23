@@ -30,15 +30,20 @@ The importance of HATEOAS cannot be emphasized enough. This application uses the
 Expanding resources (see [Atlassian API][7] for an example) is discouraged while multiple asynchronous calls are favored.
 
 #### Pagination
-REST clients should rely on the pagination information which is included in responses with multiple results. Our pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
+REST clients should rely on the pagination information which is included in responses with multiple results. The pagination follows the [LinkHeader][10] specification along with [RFC5988][11]. It works similarly to [GitHub's pagination][9].
 
-When performing a GET to resources that returns an array you can pass the query parameters `_pageSize` to indicate the number of records returned in a page and `_pageNumber` to indicate which page number you want to return. Note that page numbers start at number 1.
+When performing a GET to resources that returns an array you can pass the query parameters `_pageSize` to indicate the number of records returned in a page and `_pageNumber` to indicate which page number you want to return. Note that `_pageNumber` start at number 1.
+
+Example:
+${REST_GUIDE_PAGINATION}
+
 
 #### PUT vs PATCH
 `PUT` requests are favored over `PATH` requests. While `PATH` may offer smaller payloads, it also introduces development complexity for little benefit.
 
 Additionally, when doing a `PUT` or `PATCH` it is recommended to do not include the `id` for the given resource in the payload. For example, when doing a `PUT /trades/{tradeId}` do not include `tradeId` in the payload, it will be simply ignored.
 
+Example:
 ```
 -----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/1
