@@ -1,102 +1,76 @@
-Development Guide
-=================
-This guide provides detailed information for those who want to develop and/or customize the application.
+<h1>Development Guide</h1>
+<p>This guide provides detailed information for those who want to develop and/or customize the application.</p>
 
-Technology Stack
-----------------
-* [Java JDK][1]
-* [Spring Boot][5]
-* [RESTful Service][6]
-* [Maven][2]
-* [Angular 2][7]
+<h2>Technology Stack</h2>
+<ul>
+	<li>Java JDK</li>
+	<li>Spring Boot</li>
+	<li>RESTful Service</li>
+	<li>Maven</li>
+	<li>Angular 2</li>
+</ul>
 
-### Requirements
-* Java JDK version 8 or higher
-* Maven
+<h3>Requirements</h3>
+<ul>
+	<li>Java JDK version 8 or higher</li>
+	<li>Maven</li>
+</ul>
 
-Clone the source code:
+<p>Clone the source code:</p>
+<div class='code'>git clone https://github.com/rafasantos/matchandtrade.git</div>
 
-```
-git clone https://github.com/rafasantos/matchandtrade.git
-```
-Build the source code. The files will be generated on the `/target` folder:
+<p>Build the source code. The files will be generated on the <span class='incode'>/target</span> folder:</p>
+<div class='code'>mvn package</div>
 
-```
-mvn package
-```
+<p>Start the RESTful web server:</p>
+<div class='code'>java -jar /target/webservice-0.0.1-SNAPSHOT.jar</div>
 
-Start the RESTful web server:
-```
-java -jar /target/webservice-0.0.1-SNAPSHOT.jar
-```
+<h2>Build and Run</h2>
 
-Build and Run
--------------
-Build and run the website using maven directly:
+<p>Build and run the website using maven directly:</p>
+<div class='code'>mvn spring-boot:run</div>
 
-`mvn spring-boot:run`
+<p>Run unit tests:</p>
+<div class='code'>mvn test</div>
 
-Run unit tests:
+<p>Run integration tests (including unit tests):</p>
+<div class='code'>mvn verify</div>
 
-`mvn test`
+<p>Run only the integration test (excluding unit tests):</p>
+<div class='code'>mvn test-compile failsafe:integration-test</div>
 
-Run integration tests (including unit tests):
+<p>Generate maven web site. Files will be generated at `/target/site`:</p>
+<div class='code'>mvn site</div>
 
-`mvn verify`
+<p>You can change the logging level with the property `logging.level.root=DESIRED_LOGGING_LEVEL` or changing the `logback.xml`.<br>
+Examples</p>
 
-Run only the integration test (excluding unit tests):
-
-`mvn test-compile failsafe:integration-test`
-
-Generate maven web site. Files will be generated at `/target/site`:
-
-`mvn site`
-
-Swagger page:
-
-`http://localhost:8080/swagger-ui.html`
-
-You can change the logging level with the property `logging.level.root=DESIRED_LOGGING_LEVEL` or changing the `logback.xml`.
-
-Examples:
-```
-mvn spring-boot:run -Dlogging.level.root=debug
+<div class='code'>mvn spring-boot:run -Dlogging.level.root=debug
 mvn test -Dlogging.level.root=debug
 java -jar /target/webservice-0.0.1-SNAPSHOT.jar -Dlogging.level.root=debug
-```
+</div>
 
-Spring MVC for Rest
-===================
-Checkout the [Response for GET/POST/PUT/DELETE in REST web service][8] tutorial to get started with Spring MVC geared towards RESTful applications.
+<h2>Spring MVC for Rest</h2>
 
+<p>Checkout the <a href='http://shengwangi.blogspot.ca/2016/02/response-for-get-post-put-delete-in-rest.html'>Response for GET/POST/PUT/DELETE in REST web service</a> tutorial to get started with Spring MVC geared towards RESTful applications.K</p>
 
-Unit Test and Integration Test
-==============================
-Unit tests and integration tests are executed via `mvn` and configured with the maven plugins `maven-surefire-plugin` and `maven-failsafe-plugin` respectively.
+<h2>Unit Test and Integration Test</h2>
 
-Run the unit tests with the command `mvn test` and the integration tests with the command `mvn verify`.
+<p>Unit tests and integration tests are executed via `mvn` and configured with the maven plugins `maven-surefire-plugin` and `maven-failsafe-plugin` respectively.</p>
 
-### Writing Unit Test and Integration Test
-As mentioned on the *Unit Test and Integration Test* section, use `mvn test` to run unit tests and `mvn verify` to run integration tests.
+<p>Run the unit tests with the command `mvn test` and the integration tests with the command `mvn verify`.</p>
 
-Unit tests should be placed on the folder `src/test/*` must be atomic (does not depend on anything to run) and executed in any order. The file name also needs to end on `*UT.java`. Look at the file `src/test/java/com/matchandtrade/authentication/AuthenticationServletUT.java` for an example.
+<h3>Writing Unit Test and Integration Test</h3>
+<p>As mentioned on the *Unit Test and Integration Test* section, use `mvn test` to run unit tests and `mvn verify` to run integration tests.</p>
 
-Integration tests are also placed on `src/test/*` and may not be atomic (depending on environment or other components) and must be executed within a test suite. The test suite file name needs to end on `*Suite.java` while the integration test needs to end on `*IT.java`. Look at the file `src/test/java/com/matchandtrade/rest/v1/controller/UserControllerSuite.java` for an example.
+<p>Unit tests should be placed on the folder `src/test/*` must be atomic (does not depend on anything to run) and executed in any order. The file name also needs to end on `*UT.java`. Look at the file `src/test/java/com/matchandtrade/authentication/AuthenticationServletUT.java` for an example.</p>
 
-To run one single unit test use `mvn -Dtest=TEST_NAME verify`. To run one singe integration test use `mvn -Dit.test=INTEGRATION_TEST_NAME verify`. See maven [surefire][3] and [failsave][4] pulgins documentation. 
+<p>Integration tests are also placed on `src/test/*` and may not be atomic (depending on environment or other components) and must be executed within a test suite. The test suite file name needs to end on `*Suite.java` while the integration test needs to end on `*IT.java`. Look at the file `src/test/java/com/matchandtrade/rest/v1/controller/UserControllerSuite.java` for an example.</p>
 
-
-### Maven Site
-Maven is also capable to generate a very useful site which describing the project dependency tree, license, plugins, and testing reports.
-
-To generate the maven site you need to issue the command `mvn site`. Open the file `target/site/index.xml` with your web-browser.
+<p>To run one single unit test use `mvn -Dtest=TEST_NAME verify`. To run one singe integration test use `mvn -Dit.test=INTEGRATION_TEST_NAME verify`. See maven <a href='https://maven.apache.org/surefire/maven-surefire-plugin/examples/single-test.html'>surefire</a> and <a href='https://maven.apache.org/surefire/maven-failsafe-plugin/examples/single-test.html'>failsafe</a> pulgins documentation.</p> 
 
 
-[1]: https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html "Install Java JDK"
-[2]: http://maven.apache.org/install.html "Install Maven"
-[3]: https://maven.apache.org/surefire/maven-surefire-plugin/examples/single-test.html "Maven surefire"
-[4]: https://maven.apache.org/surefire/maven-failsafe-plugin/examples/single-test.html "Maven failsafe"
-[5]: https://projects.spring.io/spring-boot "Spring Boot"
-[6]: https://en.wikipedia.org/wiki/Representational_state_transfer "RESTful Web Services on Wikipedia"
-[7]: https://angular.io/
-[8]: http://shengwangi.blogspot.ca/2016/02/response-for-get-post-put-delete-in-rest.html
+<h2>Maven Site</h2>
+<p>Maven is also capable to generate a very useful site which describing the project dependency tree, license, plugins, and testing reports.</p>
+
+<p>To generate the maven site you need to issue the command `mvn site`. Open the file `target/site/index.xml` with your web-browser.</p>

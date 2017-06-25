@@ -10,7 +10,7 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
 
 
-public class RestTradeMaker implements OutputMaker {
+public class RestTradeMaker extends OutputMaker {
 	
 	public static final String BASE_URL = "/rest/v1/trades";
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
@@ -67,7 +67,7 @@ public class RestTradeMaker implements OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/trades.md";
+		return "trades.html";
 	}
 
 }

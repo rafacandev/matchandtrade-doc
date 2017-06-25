@@ -1,20 +1,31 @@
-Authentications
-===============
-_Resource_ for authentications. It returns information about the current authenticated session, typically used to get the `userId` associated with the current session.
+<h1>Authentications</h1>
+<p>
+	<i>_Resource_</i> for authentications. It returns information about the current authenticated session, typically used to get the <span class='incode'>userId</span> associated with the current session.
+</p>
 
-#### Operations
-* `GET rest/v1/authentications`
+<h3>Operations</h3>
+<ul>
+	<li><span class='GET rest/v1/authentications'></span></li>
+</ul>
 
-#### Authorization
-* Only authenticated clients.
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
 
-#### Resource
-| Field Name | Rules | Description |
-| ---------- | ----- | ----------- |
-userId | read-only | The [user][2] associated with this authentication, this value is created during the sign-up (first successful [authenticate][1])
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>userId</td>
+		<td>read-only</td>
+		<td>The <a href='users.html'>user</a> associated with this authentication, this value is created during the sign-up (first successful <a href='authenticate.html'>authenticate)</a></td>
+	</tr>
+</table>
 
-#### Example
+<h3>Example</h3>
 ${AUTHENTICATIONS_SNIPPET}
-
-[1]: authenticate.md
-[2]: users.md

@@ -8,7 +8,7 @@ import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 
-public class RestUserMaker implements OutputMaker {
+public class RestUserMaker extends OutputMaker {
 	
 	public static final String BASE_URL = "/rest/v1/users/";
 	private static final String USERS_GET_SNIPPET = "USERS_GET_SNIPPET";

@@ -12,7 +12,7 @@ import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.RestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
-public class RestAuthenticateMaker implements OutputMaker {
+public class RestAuthenticateMaker extends OutputMaker {
 
 	public static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
 	public static final String SIGN_OUT_SNIPPET = "SIGN_OUT_SNIPPET";
@@ -37,6 +37,6 @@ public class RestAuthenticateMaker implements OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/authenticate.md";
+		return "authenticate.html";
 	}
 }

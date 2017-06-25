@@ -9,7 +9,7 @@ import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 
 
-public class RestItemMaker implements OutputMaker {
+public class RestItemMaker extends OutputMaker {
 	
 	public static final String BASE_URL = "/items";
 	public static final String ITEMS_POST_SNIPPET = "ITEMS_POST_SNIPPET";

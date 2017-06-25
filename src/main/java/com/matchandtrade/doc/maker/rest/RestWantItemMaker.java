@@ -12,7 +12,7 @@ import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.WantItemJson;
 
 
-public class RestWantItemMaker implements OutputMaker {
+public class RestWantItemMaker extends OutputMaker {
 	
 	public static final String BASE_URL = "/want-items";
 	public static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";

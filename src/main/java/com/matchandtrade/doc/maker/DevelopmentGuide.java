@@ -3,7 +3,7 @@ package com.matchandtrade.doc.maker;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.TemplateUtil;
 
-public class DevelopmentGuide implements OutputMaker {
+public class DevelopmentGuide extends OutputMaker {
 
 	@Override
 	public String buildDocContent() {
@@ -12,6 +12,6 @@ public class DevelopmentGuide implements OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/development-guide.md";
+		return "development-guide.html";
 	}
 }

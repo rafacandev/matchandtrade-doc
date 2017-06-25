@@ -42,7 +42,7 @@ public class TemplateUtil {
 		StringBuilder result = new StringBuilder();;
 		try {
 			// Start snippet
-			result.append("```\n");
+			result.append("<div class='code'>");
 			result.append("-----  Request  -----\n");
 			// Request URL
 			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
@@ -96,7 +96,7 @@ public class TemplateUtil {
 					result.append(responseBody);
 				}
 			}
-			result.append("\n```");
+			result.append("\n</div>");
 		} catch (Exception e) {
 			throw new DocMakerException(e);
 		}

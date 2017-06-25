@@ -7,7 +7,7 @@ import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 
-public class RestGuideMaker implements OutputMaker {
+public class RestGuideMaker extends OutputMaker {
 	
 	public static final String REST_GUIDE_PAGINATION = "REST_GUIDE_PAGINATION";
 	
@@ -29,6 +29,6 @@ public class RestGuideMaker implements OutputMaker {
 	
 	@Override
 	public String getDocLocation() {
-		return "doc/rest-guide.md";
+		return "rest-guide.html";
 	}
 }

@@ -1,17 +1,24 @@
-Authenticate
-============
-_Endpoint_ for authentication. It redirects the client to an oAuth server and returns back to the client with a header called `Authorization`.
+<h1>Authenticate</h1>
+<p>
+	<i>_Endpoint_</i> for authentication. It redirects the client to an oAuth server and returns back to the client with a header called <span class='incode'>Authorization</span>.
+</p>
 
+<p>
 The `Authorization` header acts as a session token and needs to be included to any secured URL.
+</p>
 
-#### Operations
-* `GET authenticate`
-* `GET authenticate/sign-out`
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>GET authenticate</span></li>
+	<li><span class='incode'>GET authenticate/sign-out</span></li>
+</ul>
 
-#### Authorization
-* Public
+<h3>Authorization</h3>
+<ul>
+	<li>Public</li>
+</ul>
 
-#### Examples
+<h3>Examples</h3>
 ${AUTHENTICATE_SNIPPET}
 
 ${SIGN_OUT_SNIPPET}

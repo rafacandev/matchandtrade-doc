@@ -6,7 +6,7 @@ import com.matchandtrade.doc.util.RequestResponseUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 
-public class RestAuthenticationMaker implements OutputMaker {
+public class RestAuthenticationMaker extends OutputMaker {
 	
 	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 	public static final String BASE_URL = "/rest/v1/authentications/";
@@ -23,7 +23,7 @@ public class RestAuthenticationMaker implements OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/authentications.md";
+		return "authentications.html";
 	}
 
 }

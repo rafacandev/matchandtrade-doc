@@ -18,7 +18,7 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
-public class RestUseCaseMaker implements OutputMaker {
+public class RestUseCaseMaker extends OutputMaker {
 	
 	private static final String AUTHENTICATE_SNIPPET_SECOND = "AUTHENTICATE_SNIPPET_SECOND";
 	private static final String AUTHENTICATIONS_SNIPPET_SECOND = "AUTHENTICATIONS_SNIPPET_SECOND";

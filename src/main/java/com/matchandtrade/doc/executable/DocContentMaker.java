@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.matchandtrade.doc.maker.CssMaker;
 import com.matchandtrade.doc.maker.DevelopmentGuide;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.maker.ReadmeMaker;
@@ -29,6 +30,16 @@ public class DocContentMaker {
 	
 	private String destinationFolder;
 	private StringBuilder report = new StringBuilder();
+	private final String HTML_HEADER = "<!DOCTYPE html>\n" + 
+			"<html>\n" +
+			"	<head>\n" +
+			"		<meta charset='UTF-8'>\n" +
+			"		<link rel='stylesheet' href='css/combined-style.css'>\n" +
+			"		<title>Match and Trade - Documentation</title>\n" +
+			"	</head>\n" +
+			"<body>\n";
+	private final String HTML_FOOTER = "</body>\n</html>\n";
+	
 	
 	public DocContentMaker(String destinationFolder) {
 		this.destinationFolder = destinationFolder;
@@ -41,6 +52,7 @@ public class DocContentMaker {
 	public void makeContent() {
 		// TODO Scan all files instead of instantiate one by one manually
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
+		docMakers.add(new CssMaker());
 		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
 		docMakers.add(new RestUseCaseMaker());
@@ -52,26 +64,21 @@ public class DocContentMaker {
 		docMakers.add(new RestItemMaker());
 		docMakers.add(new RestWantItemMaker());
 		docMakers.add(new RestGuideMaker());
-
-		HtmlParser htmlParser = new HtmlParser();
 		try {
 			report.append("\n==== DocContentMaker Report ============\n");
-			
 			for(OutputMaker t : docMakers) {
 				logger.info("Making content for {} with template doc located at {}.", t.getClass().getName(), t.getDocLocation());
 				report.append(t.getClass().getSimpleName()+": ");
-				// Generate Markdown documents
-				String docContent = t.buildDocContent();
+				// Generate HTML documents
+				String docContent = null;
+				if (t.requiresHeaderAndFooter()) {
+					docContent = HTML_HEADER + t.buildDocContent() + HTML_FOOTER;
+				} else {
+					docContent = t.buildDocContent();
+				}
 				String docLocation = t.getDocLocation();
 				File docFile = new File(destinationFolder + File.separator + docLocation);
 				FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
-				// Also generate HTML files derived from MarkDown files for easier visualization
-				File htmlFile = HtmlParser.optainHtmlFile(docFile);
-				String docContentAsHtml = htmlParser.parseMarkDownToHTML(docContent);
-				String styleHead = HtmlParser.getGitHubStyleHead();
-				String styleTail = HtmlParser.getGitHubStyleTail();
-				String htmlContetn = styleHead + docContentAsHtml + styleTail;
-				FileUtils.write(htmlFile, htmlContetn, StandardCharsets.UTF_8);
 				report.append("Success.\n");
 			}
 		} catch (Exception e) {
@@ -81,5 +88,4 @@ public class DocContentMaker {
 			report.append("========================================");
 		}
 	}
-
 }
