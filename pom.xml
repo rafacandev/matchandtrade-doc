@@ -54,11 +54,6 @@
 		    <version>${org.slf4j.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.vladsch.flexmark</groupId>
-			<artifactId>flexmark-all</artifactId>
-			<version>${com.vladsch.flexmark-all.version}</version>
-		</dependency>
 	</dependencies>
 
 	<build>
