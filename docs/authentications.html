@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Authentications</h1>
+<p>
+	<i>_Resource_</i> for authentications. It returns information about the current authenticated session, typically used to get the <span class='incode'>userId</span> associated with the current session.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='GET rest/v1/authentications'></span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>userId</td>
+		<td>read-only</td>
+		<td>The <a href='users.html'>user</a> associated with this authentication, this value is created during the sign-up (first successful <a href='authenticate.html'>authenticate)</a></td>
+	</tr>
+</table>
+
+<h3>Example</h3>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/authentications/
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "userId" : 4,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/authentications/"
+  } ]
+}
+</div>
+</body>
+</html>

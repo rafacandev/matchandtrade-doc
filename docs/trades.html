@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Trades</h1>
+<p>
+	<i>_Resource_</i> for trades. Trades are the the central components of the system.
+	The <a href='users.html'>user</a> who creates a trade becomes the _organizer_ while other <a href='users.html'>users</a> can subscribe to the trade and become <i>members</i>.
+	<i>Members</i> submit their <a href='items.html'>items</a> through a <a href='trade-memberships.html'></a>trade membership. Later the <i>organizer</i> closes the trade and the system generates the results of the trade.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/trades/</span></li>
+	<li><span class='incode'>PUT rest/v1/trades/{tradeId}</span></li>
+	<li><span class='incode'>GET rest/v1/trades/{tradeId}</span></li>
+	<li><span class='incode'>GET rest/v1/trades?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/trades/</span></li>
+	<li><span class='incode'>DELETE rest/v1/trades/{tradeId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>state</td>
+		<td>read-write, enumeration (see State Values table below)</td>
+		<td>The state of this trade, states drive how to interact with the trade</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>The name of this trade</td>
+	</tr>
+	<tr>
+		<td>tradeId</td>
+		<td>ready-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+</table>
+
+<h4>State Values</h4>
+<table>
+	<tr>
+		<th>Value</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>SUBMITTING_ITEMS</td>
+		<td>Default state when a trade is created. Indicates that users can join the trade and submit <a href='items.html'>items</a></td>
+	</tr>
+	<tr>
+		<td>MATCHING_ITEMS</td>
+		<td><a href='users.html'>Users</a> can match <a href='items.html'>items</a> in the trade. Other <a href='users.html'>users</a> cannot join the trade nor submit <a href='items.html'>items</a></td>
+	</tr>
+	<tr>
+		<td>GENERATING_TRADES</td>
+		<td>The system is generating the trade results</td>
+	</tr>
+	<tr>
+		<td>CLOSED</td>
+		<td>The trade is in ready-only mode</td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>Resources matching <span class='incode'>Trade.name</span></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Rules</h3>
+<ul>
+	<li>When a new trade is created, the <a href='users.html'>user</a> associated to the `Authorization` header will be the trade <i>organizer</i></li>
+	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a trade</li>
+	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a trade</li>
+</ul>
+
+<h3>Examples</h3>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trades/
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+{
+  "name" : "Board games"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Board games",
+  "tradeId" : 2,
+  "state" : "SUBMITTING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/2"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/trades/2
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+{
+  "name" : "Board games in Toronto",
+  "state" : "MATCHING_ITEMS"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Board games in Toronto",
+  "tradeId" : 2,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/2"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades/2
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Board games in Toronto",
+  "tradeId" : 2,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/2"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&_pageNumber=1&_pageSize=2
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 1}
+
+[ {
+  "name" : "Board games in Toronto",
+  "tradeId" : 2,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/2"
+  } ]
+} ]
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades/
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 2}
+
+[ {
+  "name" : "Board games in Ottawa",
+  "tradeId" : 1,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}, {
+  "name" : "Board games in Toronto",
+  "tradeId" : 2,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/2"
+  } ]
+} ]
+</div>
+
+<div class='code'>-----  Request  -----
+DELETE http://localhost:8081/rest/v1/trades/2
+Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 204 
+
+</div>
+</body>
+</html>

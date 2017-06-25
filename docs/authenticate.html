@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Authenticate</h1>
+<p>
+	<i>_Endpoint_</i> for authentication. It redirects the client to an oAuth server and returns back to the client with a header called <span class='incode'>Authorization</span>.
+</p>
+
+<p>
+The `Authorization` header acts as a session token and needs to be included to any secured URL.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>GET authenticate</span></li>
+	<li><span class='incode'>GET authenticate/sign-out</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Public</li>
+</ul>
+
+<h3>Examples</h3>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/authenticate
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {Authorization: 9022-7062-8927}
+
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/authenticate/sign-out
+Headers:  {Authorization: 9022-7062-8927}
+
+-----  Response  -----
+Status:   HTTP/1.1 205 
+
+</div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>RESTful Documentation</h1>
+
+<p>Match And Trade provides a powerful RESTful API which other applications may interact with.</p>
+
+<h2>Resources</h2>
+Here is the list of resources available thought the RESTful API.
+
+<ul>
+	<li><a href='authenticate.html'>authenticate</a></li>
+	<li><a href='authentications.html'>authentications</a></li>
+	<li><a href='trades.html'>trades</a></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+* [trade-memberships][12]
+* [trade-memberships/{tradeMembershipId}/items][13]
+* [trade-memberships/{tradeMembershipId}/items/{itemId}/want-items][15]
+* [users][4]
+
+<h2>Use Cases</h2>
+<p>
+	Check out the [use cases][14] page for typical usage with examples
+</p>
+
+<h2>Endpoints vs Resources</h2>
+<p>
+	Generally speaking, <i>resources</i> have consistent format and behavior whereas <i>endpoints</i> may vary in format and behavior.
+	<i>Resource</i> URLs are a specialized <i>endpoints</i> which provides standard operations over a resource. Example: <i>resources</i> support HATEOAS, pagination and query parameters are relevant to the given resource.
+	
+	<i>Endpoint</i> URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: [authenticate][1]). See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
+</p>
+
+<h2>HATEOAS</h2>
+<p>
+	The importance of HATEOAS cannot be emphasized enough. This application uses the <a href='https://spring.io/understanding/HATEOAS'>Spring HATEOAS</a> approach to handle hypermedia
+</p>
+
+<h2>Expanding</h2>
+<p>
+	Expanding resources (see <a href='https://developer.atlassian.com/confdev/confluence-server-rest-api/expansions-in-the-rest-api'>Atlassian API</a> for an example) is discouraged while multiple asynchronous calls are favored.
+</p>
+
+<h2>Pagination</h2>
+<p>
+	REST clients should rely on the pagination information which is included in responses with multiple results. The pagination follows the <a href='https://www.w3.org/wiki/LinkHeader'>LinkHeader</a> specification along with <a href='http://www.rfc-editor.org/rfc/rfc5988.txt'>RFC5988</a>. It works similarly to <a href='https://developer.github.com/guides/traversing-with-pagination'>GitHub's pagination</a>.
+</p>
+<p>
+	When performing a GET to resources that returns an array you can pass the query parameters <span class='incode'>_pageSize</span> to indicate the number of records returned in a page and <span class='incode'>_pageNumber</span> to indicate which page number you want to return. Note that <span class='incode'>_pageNumber</span> start at number 1.
+</p>
+
+Example:
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades?_pageNumber=2&_pageSize=2
+Headers:  {Authorization: 7449-8701-9362}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 5}{Link: <http://localhost:8081/rest/v1/trades?_pageSize=2&_pageNumber=3>; rel="nextPage"}{Link: <http://localhost:8081/rest/v1/trades?_pageSize=2&_pageNumber=1>; rel="previousPage"}
+
+[ {
+  "name" : "Board games in Montreal",
+  "tradeId" : 4,
+  "state" : "SUBMITTING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/4"
+  } ]
+}, {
+  "name" : "Board games in Calgary",
+  "tradeId" : 5,
+  "state" : "SUBMITTING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/5"
+  } ]
+} ]
+</div>
+
+
+<h2>PUT vs PATCH</h2>
+<p><span class='incode'>PUT</span> requests are favored over <span class='incode'>PATH</span> requests. While <span class='incode'>PATH</span> may offer smaller payloads, it also introduces development complexity for little benefit.</p>
+
+<p>Additionally, when doing a <span class='incode'>PUT</span> or <span class='incode'>PATCH</span> it is recommended to do not include the <span class='incode'>id</span> for the given resource in the payload. For example, when doing a <span class='incode'>PUT /trades/{tradeId}</span> do not include <span class='incode'>tradeId</span> in the payload, it will be simply ignored.</p>
+
+<p>Example:</p>
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/trades/1
+Headers:  {Authorization: 7075-1255-9178}{Content-Type: application/json}
+
+{
+  // Do not enter tradeId in this payload, it will be ignored.
+  "name" : "Name to update"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Name to update",
+  "tradeId" : 1,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}
+</div>
+
+<h2>Many To Many Relationships</h2>
+<p>Relationships are treated as resources similarly to what is described on this <a href='https://rafaelsantosbra.wordpress.com/2016/10/18/many-to-many-relationships-for-rest-api-with-a-relationship-attribute/'>blog post</a>.</p>
+
+
+[1]: rest/authenticate.md
+[2]: rest/authentications.md
+[3]: rest/trades.md
+[4]: rest/users.md
+[12]: rest/trade-memberships.md
+[13]: rest/items.md
+[14]: rest-use-cases.md
+[15]: rest/want-items.md</body>
+</html>
