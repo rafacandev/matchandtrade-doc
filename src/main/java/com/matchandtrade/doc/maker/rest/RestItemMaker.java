@@ -62,7 +62,7 @@ public class RestItemMaker extends OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/items.md";
+		return "items.html";
 	}
 
 }

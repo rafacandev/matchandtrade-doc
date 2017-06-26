@@ -1,0 +1,72 @@
+<h1>Item</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Items</span>.
+	<span class='incode'>Items</span> are included in a <a href='trade-memberships.html'>TradeMembership</a> to indicate which <span class='incode'>Items</span>
+	<a href='users.html'>User</a> wants to exchange in a <a href='trades.html'>Trade</a>.  
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>PUT rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>DELETE rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+	<li>The URL parameter <span class='incode'>{tradeMembershipId}</span> must be associated to the client's <span class='incode'>userId</span></li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>itemId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>Name of this <span class='incode'>Item</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>Resources matching <span class='incode'>Item.name</span></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Examples</h3>
+${ITEMS_POST_SNIPPET}
+
+${ITEMS_PUT_SNIPPET}
+
+${ITEMS_GET_SNIPPET}
+
+${ITEMS_SEARCH_SNIPPET}
+
+${ITEMS_GET_ALL_SNIPPET}
