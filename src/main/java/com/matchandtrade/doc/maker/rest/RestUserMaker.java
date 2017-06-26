@@ -1,3 +1,4 @@
+
 package com.matchandtrade.doc.maker.rest;
 
 import com.matchandtrade.doc.maker.OutputMaker;
@@ -36,7 +37,7 @@ public class RestUserMaker extends OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/users.md";
+		return "users.html";
 	}
 
 }

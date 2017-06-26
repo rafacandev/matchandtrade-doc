@@ -95,7 +95,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return "doc/rest/trade-memberships.md";
+		return "trade-memberships.html";
 	}
 
 }
