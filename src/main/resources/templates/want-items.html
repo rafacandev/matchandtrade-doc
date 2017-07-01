@@ -1,0 +1,81 @@
+<h1>WantItem</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>WantItem</span>.
+	A <span class='incode'>WantItem</span> is an <a href='items.html'>Item</a>
+	that wants be exchanged for another <a href='items.html'>Item</a>.
+	Example: the URL <span class='incode'>GET /rest/v1/trade-memberships/1/items/2/want-items</span>
+	means: <i>get all the <a href='items.html'>Items</a> that want to be exchanged for the <span class='incode'>Item.itemId: 2</span></i>.  
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/{wantItemId}</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items?{queryParameters}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}/want-items/{wantItemId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>itemId</td>
+		<td>read-write, mandatory</td>
+		<td>Must belong to an existing <a href='items.html'>Item</a> within the same <a href='trades.html'>Trade</a> but within a different <a href='trade-memberships.htmls'>TradeMembership</a></td>
+	</tr>
+	<tr>
+		<td>priority</td>
+		<td>read-write, mandatory, integer, 1 min value, 1000 max value</td>
+		<td>
+			Priority for this <span class='incode'>WantItem</span>.
+			The lower the priority the more wanted the <a href='items.html'>Item</a> is
+		</td>
+	</tr>
+	<tr>
+		<td>wantItemId</td>
+		<td>ready-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+</table>
+
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Rules</h3>
+<ul>
+	<li>
+		<span class='incode'>WantItem.itemId</span> must belong to an existing <a href='items.html'>Item</a> within the
+		<a href='trades.html'>Trade</a> associated with the <span class='incode'>trade-memberships/{tradeMembershipId}</span>.
+		This concept my be confusing at first, see <a href='use-cases.html'>Use Cases</a> for a demonstration.
+	</li>
+</ul>
+
+<h3>Examples</h3>
+${WANT_ITEMS_POST_SNIPPET}
+
+${WANT_ITEMS_GET_SNIPPET}
+
+${WANT_ITEMS_GET_ALL_SNIPPET}

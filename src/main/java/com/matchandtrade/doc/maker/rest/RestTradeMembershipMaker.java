@@ -46,7 +46,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(
 			BASE_URL+ "?userId="
 			+ RestUtil.getAuthenticatedUser().getUserId()
-			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=10");
+			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=3");
 		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
 
