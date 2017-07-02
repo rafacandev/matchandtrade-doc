@@ -38,7 +38,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
 
 		// TRADES_MEMBERSHIP_GET_ALL_SNIPPET
-		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL);
+		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "?_pageNumber=1&_pageSize=3");
 		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
 

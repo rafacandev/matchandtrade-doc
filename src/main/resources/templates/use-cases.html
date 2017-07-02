@@ -1,0 +1,103 @@
+<h1>Use Cases</h1>
+This page describes a typical use case with the following workflow:
+
+<ul>
+  <li>
+	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
+  </li>
+  <li>
+  	Get the <a href='authentications.html'>Authentication</a> details.
+  	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
+  </li>
+  <li>
+  	Create a <a href='trades'>Trade</a>.
+	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
+  </li>
+  <li>
+  	Add  some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  </li>
+  <li>
+  	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
+  </li>
+  <li>
+	Get the <a href='authentications.html'>Authentication</a> details for the second user.
+  </li>
+  <li>
+	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  </li>
+  <li>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+  </li>
+  <li>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+  </li>
+  <li>
+	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+  </li>
+</ul>
+
+<p>
+	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
+</p>
+${AUTHENTICATE_SNIPPET}
+
+<p>
+	Get the <a href='authentications.html'>Authentication</a> details.
+	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
+</p>
+${AUTHENTICATIONS_SNIPPET}
+
+<p>
+  	Create a <a href='trades'>Trade</a>.
+	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
+</p>
+${TRADES_POST_SNIPPET}
+
+
+Get the <a href='trade-memeberships.html'>TradeMembership</a> associated with the <a href='trades.html'>Trade</a>.
+${TRADE_MEMBERSHIP_OWNER}
+
+<p>
+	Add some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+</p>
+${ITEM_ONE}
+${ITEM_TWO}
+
+<p>
+	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
+</p>
+${AUTHENTICATE_SNIPPET_SECOND}
+
+<p>
+	Get the <a href='authentications.html'>Authentication</a> details for the second user.
+</p>
+${AUTHENTICATIONS_SNIPPET_SECOND}
+
+<p>
+	The second <a href='users.html'>User</a> becomes member of the <a href='trade.html'>Trade</a>.
+</p>
+${TRADES_MEMBERSHIP_POST_SNIPPET}
+
+<p>
+	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+</p>
+${ITEM_THREE}
+${ITEM_FOUR}
+${ITEM_FIVE}
+
+<p>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+</p>
+${TRADE_MATCHING_ITEMS_SNIPPET}
+
+<p>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+</p>
+${WANT_ITEMS_ONE}
+
+<p>
+	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+</p>
+${WANT_ITEMS_TWO}

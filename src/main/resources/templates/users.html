@@ -1,9 +1,8 @@
 <h1>Users</h1>
 <p>
 <p>
-	<i>Resource</i> for users.
-	Typically, users are created in the application on the first time they authenticate in the system.
-	See <a href='authenticate.html'>authenticate</a> for more details.
+	<i>Resource</i> for <span class='incode'>Users</span>.
+	Typically, <span class='incode'>Users</span> are created on the first time they <a href='authenticate.html'>Authenticate</a> in the system.
 </p>
 
 <h3>Operations</h3>
@@ -16,10 +15,10 @@
 <ul>
 	<li>Only authenticated clients</li>
 	<li>
-		Clients can only get the resource associated with their own authenticated session.
-		In other words, firstly the client needs to get the <span class='incode'>userId</span> from <a href='authentications.html'>authentications</a> and pass it in the URL.
+		<span class='incode'>{userId}</span> must be the value associated with the <span class='incode'>Authentication</span> header.
+		In other words, firstly the client needs to get the <span class='incode'>userId</span> from <a href='authentications.html'>Authentications</a> and pass it in the URL.
 	</li>
-</ul>
+</ul>	
 
 <h3>Resource</h3>
 <table>
@@ -31,12 +30,12 @@
 	<tr>
 		<td>email</td>
 		<td>read-only</td>
-		<td>The user's email address, this value is assigned by the Authentication Authority (e.g: Google oAuth) during the sign-up process</td>
+		<td>The email of this <span class='incode'>User</span>, this value is assigned by the Authentication Authority (e.g.: Google oAuth) during the sign-up process</td>
 	</tr>
 	<tr>
 		<td>name</td>
 		<td>read-write, 150 max length</td>
-		<td>The user's name this value is firstly assigned by the Authentication Authority during the sign-up process</td>
+		<td>The name of this <span class='incode'>User</span>. This value is firstly assigned by the Authentication Authority (e.g.: Google oAuth)during the sign-up process</td>
 	</tr>
 	<tr>
 		<td>userId</td>

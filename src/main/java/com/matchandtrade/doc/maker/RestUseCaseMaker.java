@@ -7,6 +7,7 @@ import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestItemMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
+import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
 import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.RequestResponseHolder;
 import com.matchandtrade.doc.util.RequestResponseUtil;
@@ -17,6 +18,7 @@ import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
+import com.matchandtrade.rest.v1.json.WantItemJson;
 
 public class RestUseCaseMaker extends OutputMaker {
 	
@@ -29,6 +31,8 @@ public class RestUseCaseMaker extends OutputMaker {
 	private static final String ITEM_FIVE = "ITEM_FIVE";
 	private static final String TRADE_MEMBERSHIP_OWNER = "TRADE_MEMBERSHIP_OWNER"; 
 	private static final String TRADE_MATCHING_ITEMS_SNIPPET = "TRADE_MATCHING_ITEMS_SNIPPET"; 
+	private static final String WANT_ITEMS_ONE = "WANT_ITEMS_ONE";
+	private static final String WANT_ITEMS_TWO = "WANT_ITEMS_TWO";
 	
 	@Override
 	public String buildDocContent() {
@@ -133,11 +137,29 @@ public class RestUseCaseMaker extends OutputMaker {
 		String tradeMatchingSnippet = TemplateUtil.buildSnippet(tradeMatching.getHttpRequest(), tradeMatching.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradeMatchingSnippet);
 		
+		//WANT_ITEMS_ONE
+		WantItemJson ownerWantItem = new WantItemJson();
+		ownerWantItem.setPriority(0);
+		ownerWantItem.setItemId(itemThreeJson.getItemId());
+		String ownerWantItemUrl = RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL + "/" + itemOneJson.getItemId() + RestWantItemMaker.BASE_URL ; 
+		RequestResponseHolder ownerWantItemRRH = RequestResponseUtil.buildPostRequestResponse(ownerWantItemUrl, ownerWantItem);
+		String ownerWantItemSnippet = TemplateUtil.buildSnippet(ownerWantItemRRH.getHttpRequest(), ownerWantItemRRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_ONE, ownerWantItemSnippet);
+
+		//WANT_ITEMS_ONE
+		WantItemJson memberWantItem = new WantItemJson();
+		memberWantItem.setPriority(0);
+		memberWantItem.setItemId(itemOneJson.getItemId());
+		String memberWantItemUrl = RestTradeMembershipMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + itemThreeJson.getItemId() + RestWantItemMaker.BASE_URL ; 
+		RequestResponseHolder memberWantItemRRH = RequestResponseUtil.buildPostRequestResponse(memberWantItemUrl, memberWantItem);
+		String memberWantItemSnippet = TemplateUtil.buildSnippet(memberWantItemRRH.getHttpRequest(), memberWantItemRRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_TWO, memberWantItemSnippet);
+		
 		return template;
 	}
 	
 	@Override
 	public String getDocLocation() {
-		return "doc/rest-use-cases.md";
+		return "use-cases.html";
 	}
 }
