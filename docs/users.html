@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Users</h1>
+<p>
+<p>
+	<i>Resource</i> for <span class='incode'>Users</span>.
+	Typically, <span class='incode'>Users</span> are created on the first time they <a href='authenticate.html'>Authenticate</a> in the system.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>PUT rest/v1/users/{userId}</span></li>
+	<li><span class='incode'>GET rest/v1/users/{userId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+	<li>
+		<span class='incode'>{userId}</span> must be the value associated with the <span class='incode'>Authentication</span> header.
+		In other words, firstly the client needs to get the <span class='incode'>userId</span> from <a href='authentications.html'>Authentications</a> and pass it in the URL.
+	</li>
+</ul>	
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>email</td>
+		<td>read-only</td>
+		<td>The email of this <span class='incode'>User</span>, this value is assigned by the Authentication Authority (e.g.: Google oAuth) during the sign-up process</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, 150 max length</td>
+		<td>The name of this <span class='incode'>User</span>. This value is firstly assigned by the Authentication Authority (e.g.: Google oAuth)during the sign-up process</td>
+	</tr>
+	<tr>
+		<td>userId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>Resources matching <span class='incode'>User.name</span></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Examples</h3>
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/users/4
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+
+{
+  "email" : "1499111506494@test.com",
+  "name" : "Scott Summers"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "email" : "1499111506494@test.com",
+  "name" : "Scott Summers",
+  "userId" : 4,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/users/4"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/users/4
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "email" : "1499111506494@test.com",
+  "name" : "Scott Summers",
+  "userId" : 4,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/users/4"
+  } ]
+}
+</div></body>
+</html>

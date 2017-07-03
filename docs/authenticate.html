@@ -8,11 +8,12 @@
 <body>
 <h1>Authenticate</h1>
 <p>
-	<i>_Endpoint_</i> for authentication. It redirects the client to an oAuth server and returns back to the client with a header called <span class='incode'>Authorization</span>.
+	<i>Endpoint</i> to authenticate on the system.
+	It redirects the client to an oAuth server (e.g.: Google oAuth) and returns with a header called <span class='incode'>Authorization</span>.
 </p>
 
 <p>
-The `Authorization` header acts as a session token and needs to be included to any secured URL.
+The <span class='incode'>Authorization</span> header acts as a session token and needs to be included to any secured URL.
 </p>
 
 <h3>Operations</h3>
@@ -32,13 +33,13 @@ GET http://localhost:8081/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  {Authorization: 9022-7062-8927}
+Headers:  {Authorization: 7677-1742-2522}
 
 </div>
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/authenticate/sign-out
-Headers:  {Authorization: 9022-7062-8927}
+Headers:  {Authorization: 7677-1742-2522}
 
 -----  Response  -----
 Status:   HTTP/1.1 205 

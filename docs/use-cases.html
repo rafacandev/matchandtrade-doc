@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Use Cases</h1>
+This page describes a typical use case with the following workflow:
+
+<ul>
+  <li>
+	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
+  </li>
+  <li>
+  	Get the <a href='authentications.html'>Authentication</a> details.
+  	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
+  </li>
+  <li>
+  	Create a <a href='trades'>Trade</a>.
+	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
+  </li>
+  <li>
+  	Add  some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  </li>
+  <li>
+  	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
+  </li>
+  <li>
+	Get the <a href='authentications.html'>Authentication</a> details for the second user.
+  </li>
+  <li>
+	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  </li>
+  <li>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+  </li>
+  <li>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+  </li>
+  <li>
+	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+  </li>
+</ul>
+
+<p>
+	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
+</p>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/authenticate
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {Authorization: 7367-2531-4654}
+
+</div>
+
+<p>
+	Get the <a href='authentications.html'>Authentication</a> details.
+	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
+</p>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/authentications/
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "userId" : 1,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/authentications/"
+  } ]
+}
+</div>
+
+<p>
+  	Create a <a href='trades'>Trade</a>.
+	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trades/
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "name" : "Board games in Ottawa"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Board games in Ottawa",
+  "tradeId" : 1,
+  "state" : "SUBMITTING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}
+</div>
+
+
+Get the <a href='trade-memeberships.html'>TradeMembership</a> associated with the <a href='trades.html'>Trade</a>.
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/?tradeId=1&userId=1
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 1}
+
+[ {
+  "tradeMembershipId" : 1,
+  "userId" : 1,
+  "tradeId" : 1,
+  "type" : "OWNER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1"
+  } ]
+} ]
+</div>
+
+<p>
+	Add some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/1/items
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "name" : "Pandemic Legacy: Season 1"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Pandemic Legacy: Season 1",
+  "itemId" : 1,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1/items/1"
+  } ]
+}
+</div>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/1/items
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "name" : "Pandemic Legacy: Season 2"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Pandemic Legacy: Season 2",
+  "itemId" : 2,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1/items/2"
+  } ]
+}
+</div>
+
+<p>
+	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
+</p>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/authenticate
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {Authorization: 3267-2578-9179}
+
+</div>
+
+<p>
+	Get the <a href='authentications.html'>Authentication</a> details for the second user.
+</p>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/authentications/
+Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "userId" : 2,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/authentications/"
+  } ]
+}
+</div>
+
+<p>
+	The second <a href='users.html'>User</a> becomes member of the <a href='trade.html'>Trade</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/
+Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+
+{
+  "tradeId" : 1,
+  "userId" : 2
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "tradeMembershipId" : 2,
+  "userId" : 2,
+  "tradeId" : 1,
+  "type" : "MEMBER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1"
+  } ]
+}
+</div>
+
+<p>
+	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/2/items
+Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+
+{
+  "name" : "No Thanks!"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "No Thanks!",
+  "itemId" : 3,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/3"
+  } ]
+}
+</div>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/2/items
+Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+
+{
+  "name" : "Carcassonne"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Carcassonne",
+  "itemId" : 4,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/4"
+  } ]
+}
+</div>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/2/items
+Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+
+{
+  "name" : "Stone Age"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Stone Age",
+  "itemId" : 5,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/5"
+  } ]
+}
+</div>
+
+<p>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+</p>
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/trades/1
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "name" : "Board games in Ottawa",
+  "state" : "MATCHING_ITEMS",
+  "tradeId" : 1
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Board games in Ottawa",
+  "tradeId" : 1,
+  "state" : "MATCHING_ITEMS",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}
+</div>
+
+<p>
+	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/1/items/1/want-items
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "itemId" : 3,
+  "priority" : 0,
+  "wantItemId" : null
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "wantItemId" : 1,
+  "itemId" : 3,
+  "priority" : 0,
+  "_links" : [ {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1/items/3"
+  }, {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1/items/1/want-items/3"
+  } ]
+}
+</div>
+
+<p>
+	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+</p>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/2/items/3/want-items
+Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+
+{
+  "itemId" : 1,
+  "priority" : 0,
+  "wantItemId" : null
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "wantItemId" : 2,
+  "itemId" : 1,
+  "priority" : 0,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/3/want-items/1"
+  }, {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/1"
+  } ]
+}
+</div>
+</body>
+</html>

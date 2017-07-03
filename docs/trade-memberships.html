@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>TradeMembership</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>TradeMemberships</span>.
+	<a href='users.html'>Users</a> who want to subscribe to a <a href='trades.html'>Trade</a> need create a <span class='incode'>TradeMembership</span>.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/trade-memberships/</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/</span></li>
+	<li><span class='incode'>DELETE rest/v1/trade-memberships/{tradeMembershipId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>userId</td>
+		<td>read-write, mandatory</td>
+		<td>Must belong to an existing <a href='users.html'>User</a></td>
+	</tr>
+	<tr>
+		<td>tradeId</td>
+		<td>read-write, mandatory</td>
+		<td>Must belong to an existing <a href='trades.html'>Trade</a></td>
+	</tr>
+	<tr>
+		<td>tradeMembershipId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>userId</td>
+		<td>Resources matching <span class='incode'>User.userId</span></td>
+	</tr>
+	<tr>
+		<td>tradeId</td>
+		<td>Resources matching <span class='incode'>Trade.tradeId</span></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Rules</h3>
+<ul>
+	<li>Cannot delete the owner of an existing <a href='tades.html'>Trade</a></li>
+	<li>Cannot create more than one <span class='incode'>TradeMembership</span> for the same <a href='tades.html'>Trade</a></li>
+</ul>
+
+<h3>Examples</h3>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/
+Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+
+{
+  "tradeId" : 3,
+  "userId" : 5
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "tradeMembershipId" : 7,
+  "userId" : 5,
+  "tradeId" : 3,
+  "type" : "MEMBER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/3"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/7
+Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "tradeMembershipId" : 7,
+  "userId" : 5,
+  "tradeId" : 3,
+  "type" : "MEMBER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/3"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/?userId=5&tradeId=3&_pageNumber=1&_pageSize=3
+Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 1}
+
+[ {
+  "tradeMembershipId" : 7,
+  "userId" : 5,
+  "tradeId" : 3,
+  "type" : "MEMBER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/3"
+  } ]
+} ]
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/?_pageNumber=1&_pageSize=3
+Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 5}{Link: <http://localhost:8081/rest/v1/trade-memberships/?_pageSize=3&_pageNumber=2>; rel="nextPage"}
+
+[ {
+  "tradeMembershipId" : 1,
+  "userId" : 1,
+  "tradeId" : 1,
+  "type" : "OWNER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1"
+  } ]
+}, {
+  "tradeMembershipId" : 2,
+  "userId" : 2,
+  "tradeId" : 1,
+  "type" : "MEMBER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1"
+  } ]
+}, {
+  "tradeMembershipId" : 3,
+  "userId" : null,
+  "tradeId" : 1,
+  "type" : "OWNER",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/1"
+  } ]
+} ]
+</div>
+
+<div class='code'>-----  Request  -----
+DELETE http://localhost:8081/rest/v1/trade-memberships/7
+Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 204 
+
+</div></body>
+</html>

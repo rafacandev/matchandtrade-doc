@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='UTF-8'>
+		<link rel='stylesheet' href='css/combined-style.css'>
+		<title>Match and Trade - Documentation</title>
+	</head>
+<body>
+<h1>Item</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Items</span>.
+	<span class='incode'>Items</span> are included in a <a href='trade-memberships.html'>TradeMembership</a> to indicate which <span class='incode'>Items</span>
+	a <a href='users.html'>User</a> wants to exchange in a <a href='trades.html'>Trade</a>.  
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>PUT rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/trade-memberships/{tradeMembershipId}/items/</span></li>
+	<li><span class='incode'>DELETE rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+	<li>The URL parameter <span class='incode'>{tradeMembershipId}</span> must be associated to the client's <span class='incode'>userId</span></li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>itemId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>Name of this <span class='incode'>Item</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>Resources matching <span class='incode'>Item.name</span></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Examples</h3>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/9/items
+Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+
+{
+  "name" : "Pandemic Legacy: Season 1"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "name" : "Pandemic Legacy: Season 1",
+  "itemId" : 6,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/trade-memberships/9/items/6
+Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+
+{
+  "name" : "Pandemic Legacy: Season 1 After PUT"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Pandemic Legacy: Season 1 After PUT",
+  "itemId" : 6,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/9/items/6
+Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Pandemic Legacy: Season 1 After PUT",
+  "itemId" : 6,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+  } ]
+}
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/9/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
+Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 1}
+
+[ {
+  "name" : "Pandemic Legacy: Season 1 After PUT",
+  "itemId" : 6,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+  } ]
+} ]
+</div>
+
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trade-memberships/9/items
+Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  {X-Pagination-Total-Count: 1}
+
+[ {
+  "name" : "Pandemic Legacy: Season 1 After PUT",
+  "itemId" : 6,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+  } ]
+} ]
+</div>
+</body>
+</html>

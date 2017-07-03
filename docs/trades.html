@@ -6,11 +6,14 @@
 		<title>Match and Trade - Documentation</title>
 	</head>
 <body>
+
 <h1>Trades</h1>
 <p>
-	<i>_Resource_</i> for trades. Trades are the the central components of the system.
-	The <a href='users.html'>user</a> who creates a trade becomes the _organizer_ while other <a href='users.html'>users</a> can subscribe to the trade and become <i>members</i>.
-	<i>Members</i> submit their <a href='items.html'>items</a> through a <a href='trade-memberships.html'></a>trade membership. Later the <i>organizer</i> closes the trade and the system generates the results of the trade.
+	<i>Resource</i> for <span class='incode'>Trades</span>. <span class='incode'>Trades</span> are the the central components of the system.
+	The <a href='users.html'>User</a> who creates a <span class='incode'>Trade</span> becomes the <i>organizer</i>
+	while other <a href='users.html'>Users</a> can subscribe to the <span class='incode'>Trade</span> and become <i>members</i>.
+	<i>Members</i> submit their <a href='items.html'>Items</a> through a <a href='trade-memberships.html'>TradeMembership</a>.
+	Later the <i>organizer</i> closes the <span class='incode'>Trade</span> and the system generates the results of the <span class='incode'>Trade</span>.
 </p>
 
 <h3>Operations</h3>
@@ -36,14 +39,14 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>state</td>
-		<td>read-write, enumeration (see State Values table below)</td>
-		<td>The state of this trade, states drive how to interact with the trade</td>
-	</tr>
-	<tr>
 		<td>name</td>
 		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
 		<td>The name of this trade</td>
+	</tr>
+	<tr>
+		<td>state</td>
+		<td>read-write, enumeration (see State Values table below)</td>
+		<td>The state of this trade, states drive how to interact with the <span class='incode'>Trade</span></td>
 	</tr>
 	<tr>
 		<td>tradeId</td>
@@ -60,7 +63,7 @@
 	</tr>
 	<tr>
 		<td>SUBMITTING_ITEMS</td>
-		<td>Default state when a trade is created. Indicates that users can join the trade and submit <a href='items.html'>items</a></td>
+		<td>Default state when a <span class='incode'>Trade</span> is created. Indicates that <a href='users.html'>Users</a> can join the <span class='incode'>Trade</span> and submit <a href='items.html'>Items</a></td>
 	</tr>
 	<tr>
 		<td>MATCHING_ITEMS</td>
@@ -68,11 +71,11 @@
 	</tr>
 	<tr>
 		<td>GENERATING_TRADES</td>
-		<td>The system is generating the trade results</td>
+		<td>The system is generating the <span class='incode'>Trade</span> results</td>
 	</tr>
 	<tr>
 		<td>CLOSED</td>
-		<td>The trade is in ready-only mode</td>
+		<td>The <span class='incode'>Trade</span> is in ready-only mode</td>
 	</tr>
 </table>
 
@@ -98,15 +101,16 @@
 
 <h3>Rules</h3>
 <ul>
-	<li>When a new trade is created, the <a href='users.html'>user</a> associated to the `Authorization` header will be the trade <i>organizer</i></li>
-	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a trade</li>
-	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a trade</li>
+	<li>When a new <span class='incode'>Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class='incode'>Authorization</span> header becomes the <span class='incode'>Trade</span> <i>organizer</i>.
+	Hence the system creates a <a href='trade-memberships.html'>TradeMembership.type=OWNER</a></li>
+	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a <span class='incode'>Trade</span></li>
+	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a <span class='incode'>Trade</span></li>
 </ul>
 
 <h3>Examples</h3>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trades/
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 {
   "name" : "Board games"
@@ -128,7 +132,7 @@ Status:   HTTP/1.1 201
 
 <div class='code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 {
   "name" : "Board games in Toronto",
@@ -151,7 +155,7 @@ Status:   HTTP/1.1 200
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -169,7 +173,7 @@ Status:   HTTP/1.1 200
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&_pageNumber=1&_pageSize=2
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -188,7 +192,7 @@ Headers:  {X-Pagination-Total-Count: 1}
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades/
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -215,7 +219,7 @@ Headers:  {X-Pagination-Total-Count: 2}
 
 <div class='code'>-----  Request  -----
 DELETE http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 9396-644-7794}{Content-Type: application/json}
+Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
