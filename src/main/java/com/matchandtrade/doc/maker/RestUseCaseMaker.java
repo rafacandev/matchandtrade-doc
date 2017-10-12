@@ -146,7 +146,8 @@ public class RestUseCaseMaker extends OutputMaker {
 		String ownerWantItemSnippet = TemplateUtil.buildSnippet(ownerWantItemRRH.getHttpRequest(), ownerWantItemRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_ONE, ownerWantItemSnippet);
 
-		//WANT_ITEMS_ONE
+		//WANT_ITEMS_TWO
+		RestUtil.setAuthenticationHeader(secondAuthenticate.getAuthorizationHeader());
 		WantItemJson memberWantItem = new WantItemJson();
 		memberWantItem.setPriority(0);
 		memberWantItem.setItemId(itemOneJson.getItemId());
