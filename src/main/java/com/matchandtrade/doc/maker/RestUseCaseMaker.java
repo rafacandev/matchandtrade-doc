@@ -1,6 +1,14 @@
 package com.matchandtrade.doc.maker;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.core.MediaType;
+
+import org.apache.http.Header;
+import org.apache.http.HttpHeaders;
+import org.apache.http.message.BasicHeader;
 
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
@@ -33,6 +41,7 @@ public class RestUseCaseMaker extends OutputMaker {
 	private static final String TRADE_MATCHING_ITEMS_SNIPPET = "TRADE_MATCHING_ITEMS_SNIPPET"; 
 	private static final String WANT_ITEMS_ONE = "WANT_ITEMS_ONE";
 	private static final String WANT_ITEMS_TWO = "WANT_ITEMS_TWO";
+	private static final String TRADE_RESULTS = "TRADE_RESULTS";
 	
 	@Override
 	public String buildDocContent() {
@@ -70,7 +79,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		
 		// ITEM_ONE
 		ItemJson itemOneJson = new ItemJson();
-		itemOneJson.setName("Pandemic Legacy: Season 1");
+		itemOneJson.setName("Pandemic,Legacy: Season 1");
 		RequestResponseHolder itemOne = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL, itemOneJson);
 		String itemOneSnippet = TemplateUtil.buildSnippet(itemOne.getHttpRequest(), itemOne.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEM_ONE, itemOneSnippet);
@@ -155,6 +164,11 @@ public class RestUseCaseMaker extends OutputMaker {
 		RequestResponseHolder memberWantItemRRH = RequestResponseUtil.buildPostRequestResponse(memberWantItemUrl, memberWantItem);
 		String memberWantItemSnippet = TemplateUtil.buildSnippet(memberWantItemRRH.getHttpRequest(), memberWantItemRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_TWO, memberWantItemSnippet);
+		
+		String tradeResultURL = RestTradeMaker.BASE_URL + "/" + tradeJson.getTradeId() + "/results";
+		RequestResponseHolder tradeResultRRH = RequestResponseUtil.buildGetRequestResponse(tradeResultURL);
+		String tradeResultSnippet = TemplateUtil.buildSnippet(tradeResultRRH.getHttpRequest(), tradeResultRRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultSnippet);
 		
 		return template;
 	}
