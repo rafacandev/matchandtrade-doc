@@ -114,6 +114,9 @@ public class RequestResponseUtil {
 		String snippet = TemplateUtil.buildSnippet(httpRequest, httpResponse);
 		LOGGER.debug(snippet);
 		if (httpResponse.getStatusLine().getStatusCode() != httpStatus) {
+			if (!LOGGER.isDebugEnabled()) {
+				LOGGER.info("RequesResponse assetion failed: \n" + snippet);
+			}
 			throw new DocMakerException("Expected [" + httpStatus + "] but found [" + httpResponse.getStatusLine().getStatusCode() + "].");
 		}
 	}
