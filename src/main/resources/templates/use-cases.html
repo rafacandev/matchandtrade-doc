@@ -11,55 +11,55 @@ and finally generate the <a href='trade-results.html'>TradeResults</a>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
 	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
-${AUTHENTICATE_SNIPPET}
+${OWNER_AUTHENTICATE_SNIPPET}
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
-${AUTHENTICATIONS_SNIPPET}
+${OWNER_AUTHENTICATIONS_SNIPPET}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
-${TRADES_POST_SNIPPET}
+${OWNER_TRADES_POST_SNIPPET}
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-${TRADE_MEMBERSHIP_OWNER}
+${OWNER_TRADE_MEMBERSHIP_SNIPPET}
 
 <p>
   	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${ITEM_ONE}
-${ITEM_TWO}
+${OWNER_ITEM_ONE_SNIPPET}
+${OWNER_ITEM_TWO_SNIPPET}
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
   	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
-${AUTHENTICATE_SNIPPET_SECOND}
+${MEMBER_AUTHENTICATE_SNIPPET}
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
-${AUTHENTICATIONS_SNIPPET_SECOND}
+${MEMBER_AUTHENTICATIONS_SNIPPET}
 
 <p>
 	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
 </p>
-${TRADES_MEMBERSHIP_POST_SNIPPET}
+${MEMBER_TRADES_MEMBERSHIP_SNIPPET}
 
 <p>
   	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${ITEM_THREE}
-${ITEM_FOUR}
-${ITEM_FIVE}
+${MEMBER_ITEM_ONE}
+${MEMBER_ITEM_TWO}
+${MEMBER_ITEM_THREE}
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
@@ -70,18 +70,18 @@ ${TRADE_MATCHING_ITEMS_SNIPPET}
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
 	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
-	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>No Thanks!</i> in exchange.
+	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
-${WANT_ITEMS_ONE}
+${OWNER_WANT_ITEMS_ONE}
 
 <p>
 	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
 	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
-	She offers <i>No Thanks!</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
-	She also offers <i>No Thanks!</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
+	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
+	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
-${WANT_ITEMS_TWO}
-${WANT_ITEMS_THREE}
+${MEMBER_WANT_ITEMS_ONE}
+${MEMBER_WANT_ITEMS_TWO}
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS_ENDED</span>.
@@ -89,6 +89,13 @@ ${WANT_ITEMS_THREE}
 ${TRADE_MATCHING_ITEMS_ENDED}
 
 <p>
-	Olavo gets the <a href='trade-results.html'>TradeResults</a>.
+	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
+	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_item_id=1</span>)
+	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_item_id=3</span>)<br>
+
+	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_item_id=3</span>)
+	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_item_id=1</span>)<br>
+
+	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
 </p>
 ${TRADE_RESULTS}

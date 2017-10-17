@@ -122,6 +122,9 @@ public class TemplateUtil {
 	}
 
 	public static String replacePlaceholder(String template, String placeholder, String replacement) {
+		if (!template.contains(placeholder)) {
+			throw new DocMakerException("Not able to find any placeholder: ${" + placeholder +"}");
+		}
 		return template.replace("${" + placeholder + "}", replacement);
 	}
 
