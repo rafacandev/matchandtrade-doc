@@ -1,43 +1,11 @@
 <h1>Use Cases</h1>
-This page describes a typical use case with the following workflow:
+<p>
+This page describes a typical use case where a <a href='users.html'>User</a> creates a <a href='trades.html'>Trade</a>
+<a href='users.html'>Users</a> submit and match <a href='items.html'>Items</a>
+and finally generate the <a href='trade-results.html'>TradeResults</a>
+</p>
 
-<ul>
-	<li>
-		Olavo <a href='authenticate.html'>Authenticates</a> on the system.
-		<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
-	</li>
-	<li>
-		Olavo gets his <a href='authentications.html'>Authentication</a> details.
-	</li>
-	<li>
-	  	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
-		The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
-		meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
-	</li>
-	<li>
-		Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
-	</li>
-	<li>
-	  	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
-	</li>
-	<li>
-	  	Maria <a href='authenticate.html'>Authenticates</a> on the system.
-		<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
-	</li>
-	<li>
-		Maria gets her <a href='authentications.html'>Authentication</a> details.
-	</li>
-	<li>
-		Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
-	</li>
-	<li>
-	  	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
-	</li>
-	<li>
-		Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
-		<i>Note that only <a href='trades'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
-	</li>
-</ul>
+<p></p>
 
 <p>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
@@ -47,7 +15,7 @@ ${AUTHENTICATE_SNIPPET}
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
-	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
+	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
 ${AUTHENTICATIONS_SNIPPET}
 
@@ -77,6 +45,7 @@ ${AUTHENTICATE_SNIPPET_SECOND}
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
+	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
 ${AUTHENTICATIONS_SNIPPET_SECOND}
 
@@ -100,21 +69,26 @@ ${TRADE_MATCHING_ITEMS_SNIPPET}
 
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
-	via the <a href='want-items.html'>WantItems</a> endpoint.
+	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>No Thanks!</i> in exchange.
 </p>
 ${WANT_ITEMS_ONE}
 
 <p>
 	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
-	via the <a href='want-items.html'>WantItems</a> endpoint.
+	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	She offers <i>No Thanks!</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
+	She also offers <i>No Thanks!</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
 ${WANT_ITEMS_TWO}
-
+${WANT_ITEMS_THREE}
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
-	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS_ENDED</span>.
 </p>
+${TRADE_MATCHING_ITEMS_ENDED}
 
-
+<p>
+	Olavo gets the <a href='trade-results.html'>TradeResults</a>.
+</p>
 ${TRADE_RESULTS}

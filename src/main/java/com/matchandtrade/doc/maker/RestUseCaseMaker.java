@@ -1,14 +1,6 @@
 package com.matchandtrade.doc.maker;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import javax.ws.rs.core.MediaType;
-
-import org.apache.http.Header;
-import org.apache.http.HttpHeaders;
-import org.apache.http.message.BasicHeader;
 
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
@@ -39,8 +31,10 @@ public class RestUseCaseMaker extends OutputMaker {
 	private static final String ITEM_FIVE = "ITEM_FIVE";
 	private static final String TRADE_MEMBERSHIP_OWNER = "TRADE_MEMBERSHIP_OWNER"; 
 	private static final String TRADE_MATCHING_ITEMS_SNIPPET = "TRADE_MATCHING_ITEMS_SNIPPET"; 
+	private static final String TRADE_MATCHING_ITEMS_ENDED = "TRADE_MATCHING_ITEMS_ENDED"; 
 	private static final String WANT_ITEMS_ONE = "WANT_ITEMS_ONE";
 	private static final String WANT_ITEMS_TWO = "WANT_ITEMS_TWO";
+	private static final String WANT_ITEMS_THREE = "WANT_ITEMS_THREE";
 	private static final String TRADE_RESULTS = "TRADE_RESULTS";
 	
 	@Override
@@ -79,7 +73,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		
 		// ITEM_ONE
 		ItemJson itemOneJson = new ItemJson();
-		itemOneJson.setName("Pandemic,Legacy: Season 1");
+		itemOneJson.setName("Pandemic Legacy: Season 1");
 		RequestResponseHolder itemOne = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL, itemOneJson);
 		String itemOneSnippet = TemplateUtil.buildSnippet(itemOne.getHttpRequest(), itemOne.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, ITEM_ONE, itemOneSnippet);
@@ -142,7 +136,9 @@ public class RestUseCaseMaker extends OutputMaker {
 		// TRADES_MATCHING_ITEMS_SNIPPET
 		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
-		RequestResponseHolder tradeMatching = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeJson.getTradeId(), tradeJson);
+		Integer tradeId = tradeJson.getTradeId();
+		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
+		RequestResponseHolder tradeMatching = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeId, tradeJson);
 		String tradeMatchingSnippet = TemplateUtil.buildSnippet(tradeMatching.getHttpRequest(), tradeMatching.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradeMatchingSnippet);
 		
@@ -164,8 +160,27 @@ public class RestUseCaseMaker extends OutputMaker {
 		RequestResponseHolder memberWantItemRRH = RequestResponseUtil.buildPostRequestResponse(memberWantItemUrl, memberWantItem);
 		String memberWantItemSnippet = TemplateUtil.buildSnippet(memberWantItemRRH.getHttpRequest(), memberWantItemRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_TWO, memberWantItemSnippet);
+
+		//WANT_ITEMS_TWO
+		WantItemJson memberWantItem2 = new WantItemJson();
+		memberWantItem2.setPriority(1);
+		memberWantItem2.setItemId(itemTwoJson.getItemId());
+		String memberWantItem2Url = RestTradeMembershipMaker.BASE_URL + tradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + itemThreeJson.getItemId() + RestWantItemMaker.BASE_URL ; 
+		RequestResponseHolder memberWantItem2RRH = RequestResponseUtil.buildPostRequestResponse(memberWantItem2Url, memberWantItem2);
+		String memberWantItem2Snippet = TemplateUtil.buildSnippet(memberWantItem2RRH.getHttpRequest(), memberWantItem2RRH.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_THREE, memberWantItem2Snippet);
 		
-		String tradeResultURL = RestTradeMaker.BASE_URL + "/" + tradeJson.getTradeId() + "/results";
+
+		
+		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
+		tradeJson.setState(TradeJson.State.MATCHING_ITEMS_ENDED);
+		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
+		RequestResponseHolder tradeMatchingEnded = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeId, tradeJson);
+		String tradeMatchingEndedSnippet = TemplateUtil.buildSnippet(tradeMatchingEnded.getHttpRequest(), tradeMatchingEnded.getHttpResponse());
+		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_ENDED, tradeMatchingEndedSnippet);
+		
+		
+		String tradeResultURL = RestTradeMaker.BASE_URL + "/" + tradeId + "/results";
 		RequestResponseHolder tradeResultRRH = RequestResponseUtil.buildGetRequestResponse(tradeResultURL);
 		String tradeResultSnippet = TemplateUtil.buildSnippet(tradeResultRRH.getHttpRequest(), tradeResultRRH.getHttpResponse());
 		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultSnippet);
