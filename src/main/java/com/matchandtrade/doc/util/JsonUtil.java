@@ -52,20 +52,6 @@ public class JsonUtil {
 	}
 
 	/**
-	 * Parse an JSON Object from a string.
-	 * @param <T>
-	 * @param o
-	 * @return JSON string
-	 */
-	public static List<?> fromStringToMap(String string) {
-		try {
-			return getObjectMapper().readValue(string, List.class);
-		} catch (Exception e) {
-			throw new DocMakerException("Not able to parse from string to Json object. String value: " + string, e);
-		}
-	}
-	
-	/**
 	 * Instantiate objectMapper with default configuration if it is null, then, return objectMapper. 
 	 * @return objectMapper with default config
 	 */
