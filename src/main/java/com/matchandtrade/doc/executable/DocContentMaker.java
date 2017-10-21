@@ -34,6 +34,7 @@ public class DocContentMaker {
 			"	<head>\n" +
 			"		<meta charset='UTF-8'>\n" +
 			"		<link rel='stylesheet' href='css/combined-style.css'>\n" +
+			"		<link rel='stylesheet' href='" + CssMaker.CSS_LOCATION + "'>\n" +
 			"		<title>Match and Trade - Documentation</title>\n" +
 			"	</head>\n" +
 			"<body>\n";

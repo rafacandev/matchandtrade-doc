@@ -4,21 +4,16 @@ import com.matchandtrade.doc.util.TemplateUtil;
 
 public class CssMaker extends OutputMaker {
 
+	public static final String CSS_LOCATION = "css/matchandtrade-doc-style.css";
+	
 	@Override
 	public String buildDocContent() {
-		String semantic = TemplateUtil.buildTemplate("css/semantic.min.css");
-		String customCss = "\n\n"
-				+ "body {margin-left:10px; margin-right:10px; line-height: 1.5;}\n"
-				+ "table, td, th {border: 1px solid black;padding:5px;}\n"
-				+ "th {background-color: #CFFED7;}\n"
-				+ ".code {background-color: #EAF6EC; font-family: monospace; white-space: pre; font-size:small; padding: 5px; margin: 10px;}\n"
-				+ ".incode {background-color: #EAF6EC; font-family: monospace; white-space: pre; font-size:small; padding: 3px;}\n";
-		return semantic + customCss;
+		return TemplateUtil.buildTemplate(getDocLocation());
 	}
 
 	@Override
 	public String getDocLocation() {
-		return "css/combined-style.css";
+		return CSS_LOCATION;
 	}
 	
 	@Override

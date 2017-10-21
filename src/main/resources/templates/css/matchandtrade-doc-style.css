@@ -1,0 +1,31 @@
+body {
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 1.5;
+}
+
+table, td, th {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+th {
+	background-color: #CFFED7;
+}
+
+.code {
+	background-color: #EAF6EC;
+	font-family: monospace;
+	white-space: pre;
+	font-size: small;
+	padding: 5px;
+	margin: 10px;
+}
+
+.incode {
+	background-color: #EAF6EC;
+	font-family: monospace;
+	white-space: pre;
+	font-size: small;
+	padding: 3px;
+}
