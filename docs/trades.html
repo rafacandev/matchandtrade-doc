@@ -110,7 +110,7 @@
 <h3>Examples</h3>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trades/
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 {
   "name" : "Board games"
@@ -132,7 +132,7 @@ Status:   HTTP/1.1 201
 
 <div class='code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 {
   "name" : "Board games in Toronto",
@@ -155,7 +155,7 @@ Status:   HTTP/1.1 200
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -173,7 +173,7 @@ Status:   HTTP/1.1 200
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&_pageNumber=1&_pageSize=2
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -192,7 +192,7 @@ Headers:  {X-Pagination-Total-Count: 1}
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades/
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -201,7 +201,7 @@ Headers:  {X-Pagination-Total-Count: 2}
 [ {
   "name" : "Board games in Ottawa",
   "tradeId" : 1,
-  "state" : "MATCHING_ITEMS",
+  "state" : "MATCHING_ITEMS_ENDED",
   "_links" : [ {
     "rel" : "self",
     "href" : "http://localhost:8081/rest/v1/trades/1"
@@ -219,7 +219,7 @@ Headers:  {X-Pagination-Total-Count: 2}
 
 <div class='code'>-----  Request  -----
 DELETE http://localhost:8081/rest/v1/trades/2
-Headers:  {Authorization: 4112-2919-1732}{Content-Type: application/json}
+Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 204 

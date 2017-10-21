@@ -7,63 +7,34 @@
 	</head>
 <body>
 <h1>Use Cases</h1>
-This page describes a typical use case with the following workflow:
+<p>
+This page describes a typical use case where a <a href='users.html'>User</a> creates a <a href='trades.html'>Trade</a>
+<a href='users.html'>Users</a> submit and match <a href='items.html'>Items</a>
+and finally generate the <a href='trade-results.html'>TradeResults</a>
+</p>
 
-<ul>
-  <li>
-	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
-  </li>
-  <li>
-  	Get the <a href='authentications.html'>Authentication</a> details.
-  	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
-  </li>
-  <li>
-  	Create a <a href='trades'>Trade</a>.
-	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
-	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
-  </li>
-  <li>
-  	Add  some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
-  </li>
-  <li>
-  	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
-  </li>
-  <li>
-	Get the <a href='authentications.html'>Authentication</a> details for the second user.
-  </li>
-  <li>
-	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
-  </li>
-  <li>
-	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
-  </li>
-  <li>
-	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
-  </li>
-  <li>
-	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
-  </li>
-</ul>
+<p></p>
 
 <p>
-	The <a href='users.html'>User</a> <a href='authenticate.html'>Authenticates</a> on the system.
+	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
+	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  {Authorization: 7367-2531-4654}
+Headers:  {Authorization: 3764-7777-9277}
 
 </div>
 
 <p>
-	Get the <a href='authentications.html'>Authentication</a> details.
-	Note that the <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.
+	Olavo gets his <a href='authentications.html'>Authentication</a> details.
+	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/authentications/
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -78,13 +49,13 @@ Status:   HTTP/1.1 200
 </div>
 
 <p>
-  	Create a <a href='trades'>Trade</a>.
-	Note that the <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
-	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> via <a href='trade-memberships.html'>TradeMemberships</a>.
+  	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
+	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trades/
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 {
   "name" : "Board games in Ottawa"
@@ -104,11 +75,12 @@ Status:   HTTP/1.1 201
 }
 </div>
 
-
-Get the <a href='trade-memeberships.html'>TradeMembership</a> associated with the <a href='trades.html'>Trade</a>.
+<p>
+	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
+</p>
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/?tradeId=1&userId=1
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -127,11 +99,11 @@ Headers:  {X-Pagination-Total-Count: 1}
 </div>
 
 <p>
-	Add some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/1/items
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 {
   "name" : "Pandemic Legacy: Season 1"
@@ -151,7 +123,7 @@ Status:   HTTP/1.1 201
 </div>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/1/items
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 {
   "name" : "Pandemic Legacy: Season 2"
@@ -171,23 +143,25 @@ Status:   HTTP/1.1 201
 </div>
 
 <p>
-	A second <a href='users.html'>User</a> <a href='authenticate.html'>authenticates</a> on the system.
+  	Maria <a href='authenticate.html'>Authenticates</a> on the system.
+  	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  {Authorization: 3267-2578-9179}
+Headers:  {Authorization: 2501-2908-3849}
 
 </div>
 
 <p>
-	Get the <a href='authentications.html'>Authentication</a> details for the second user.
+	Maria gets her <a href='authentications.html'>Authentication</a> details.
+	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/authentications/
-Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -202,11 +176,11 @@ Status:   HTTP/1.1 200
 </div>
 
 <p>
-	The second <a href='users.html'>User</a> becomes member of the <a href='trade.html'>Trade</a>.
+	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/
-Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 {
   "tradeId" : 1,
@@ -229,21 +203,21 @@ Status:   HTTP/1.1 201
 </div>
 
 <p>
-	The second <a href='users.html'>User</a> adds some <a href='items.html'>Items</a> to the <a href='trade-memberships.html'>TradeMemberhip</a>.
+  	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/2/items
-Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 {
-  "name" : "No Thanks!"
+  "name" : "Stone Age"
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 
 {
-  "name" : "No Thanks!",
+  "name" : "Stone Age",
   "itemId" : 3,
   "_links" : [ {
     "rel" : "self",
@@ -253,7 +227,7 @@ Status:   HTTP/1.1 201
 </div>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/2/items
-Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 {
   "name" : "Carcassonne"
@@ -273,17 +247,17 @@ Status:   HTTP/1.1 201
 </div>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/2/items
-Headers:  {Authorization: 3267-2578-9179}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 {
-  "name" : "Stone Age"
+  "name" : "No Thanks!"
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 
 {
-  "name" : "Stone Age",
+  "name" : "No Thanks!",
   "itemId" : 5,
   "_links" : [ {
     "rel" : "self",
@@ -293,16 +267,16 @@ Status:   HTTP/1.1 201
 </div>
 
 <p>
-	The <a href='trades.html'>Trade</a>'s <i>owner</i> changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
 <div class='code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/1
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 {
   "name" : "Board games in Ottawa",
-  "state" : "MATCHING_ITEMS",
-  "tradeId" : 1
+  "state" : "MATCHING_ITEMS"
 }
 
 -----  Response  -----
@@ -320,16 +294,17 @@ Status:   HTTP/1.1 200
 </div>
 
 <p>
-	The <a href='trades.html'>Trade</a>'s <i>owner</i> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
+	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/1/items/1/want-items
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
 
 {
   "itemId" : 3,
-  "priority" : 0,
-  "wantItemId" : null
+  "priority" : 0
 }
 
 -----  Response  -----
@@ -350,16 +325,18 @@ Status:   HTTP/1.1 201
 </div>
 
 <p>
-	The second <a href='users.html'>User</a> indicates which <a href='items.html'>Items</a> are <a href='want-items.html'>WantItems</a>.
+	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
+	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
+	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/2/items/3/want-items
-Headers:  {Authorization: 7367-2531-4654}{Content-Type: application/json}
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
 
 {
   "itemId" : 1,
-  "priority" : 0,
-  "wantItemId" : null
+  "priority" : 0
 }
 
 -----  Response  -----
@@ -378,5 +355,85 @@ Status:   HTTP/1.1 201
   } ]
 }
 </div>
-</body>
+<div class='code'>-----  Request  -----
+POST http://localhost:8081/rest/v1/trade-memberships/2/items/3/want-items
+Headers:  {Authorization: 2501-2908-3849}{Content-Type: application/json}
+
+{
+  "itemId" : 2,
+  "priority" : 1
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+
+{
+  "wantItemId" : 3,
+  "itemId" : 2,
+  "priority" : 1,
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/3/want-items/2"
+  }, {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/2/items/2"
+  } ]
+}
+</div>
+
+<p>
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS_ENDED</span>.
+</p>
+<div class='code'>-----  Request  -----
+PUT http://localhost:8081/rest/v1/trades/1
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
+
+{
+  "name" : "Board games in Ottawa",
+  "state" : "MATCHING_ITEMS_ENDED"
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+{
+  "name" : "Board games in Ottawa",
+  "tradeId" : 1,
+  "state" : "MATCHING_ITEMS_ENDED",
+  "_links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8081/rest/v1/trades/1"
+  } ]
+}
+</div>
+
+<p>
+	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
+	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_item_id=1</span>)
+	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_item_id=3</span>)<br>
+
+	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_item_id=3</span>)
+	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_item_id=1</span>)<br>
+
+	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
+</p>
+<div class='code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades/1/results
+Headers:  {Authorization: 3764-7777-9277}{Content-Type: application/json}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+
+offering_user_id,offering_user_name,offering_item_id,offering_item_name,receiving_user_id,receiving_user_name,receiving_item_id,receiving_item_name
+1,1508556063105AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1,2,1508556063757AuthenticationOAuthNewUserMock,3,Stone Age
+2,1508556063757AuthenticationOAuthNewUserMock,3,Stone Age,1,1508556063105AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1
+
+# #############################
+# Summary of Trade [1 : Board games in Ottawa]
+# Total of items: 5
+# Total of traded items: 2
+# Total of items not traded: 3
+# #############################
+
+</div></body>
 </html>

@@ -83,7 +83,7 @@
 <h3>Examples</h3>
 <div class='code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/
-Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+Headers:  {Authorization: 8387-7220-8827}{Content-Type: application/json}
 
 {
   "tradeId" : 3,
@@ -94,7 +94,7 @@ Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
 Status:   HTTP/1.1 201 
 
 {
-  "tradeMembershipId" : 7,
+  "tradeMembershipId" : 8,
   "userId" : 5,
   "tradeId" : 3,
   "type" : "MEMBER",
@@ -106,14 +106,14 @@ Status:   HTTP/1.1 201
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/7
-Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/8
+Headers:  {Authorization: 8387-7220-8827}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 
 {
-  "tradeMembershipId" : 7,
+  "tradeMembershipId" : 8,
   "userId" : 5,
   "tradeId" : 3,
   "type" : "MEMBER",
@@ -126,14 +126,14 @@ Status:   HTTP/1.1 200
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/?userId=5&tradeId=3&_pageNumber=1&_pageSize=3
-Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+Headers:  {Authorization: 8387-7220-8827}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  {X-Pagination-Total-Count: 1}
 
 [ {
-  "tradeMembershipId" : 7,
+  "tradeMembershipId" : 8,
   "userId" : 5,
   "tradeId" : 3,
   "type" : "MEMBER",
@@ -146,11 +146,11 @@ Headers:  {X-Pagination-Total-Count: 1}
 
 <div class='code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/?_pageNumber=1&_pageSize=3
-Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+Headers:  {Authorization: 8387-7220-8827}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  {X-Pagination-Total-Count: 5}{Link: <http://localhost:8081/rest/v1/trade-memberships/?_pageSize=3&_pageNumber=2>; rel="nextPage"}
+Headers:  {X-Pagination-Total-Count: 6}{Link: <http://localhost:8081/rest/v1/trade-memberships/?_pageSize=3&_pageNumber=2>; rel="nextPage"}
 
 [ {
   "tradeMembershipId" : 1,
@@ -172,7 +172,6 @@ Headers:  {X-Pagination-Total-Count: 5}{Link: <http://localhost:8081/rest/v1/tra
   } ]
 }, {
   "tradeMembershipId" : 3,
-  "userId" : null,
   "tradeId" : 1,
   "type" : "OWNER",
   "_links" : [ {
@@ -183,8 +182,8 @@ Headers:  {X-Pagination-Total-Count: 5}{Link: <http://localhost:8081/rest/v1/tra
 </div>
 
 <div class='code'>-----  Request  -----
-DELETE http://localhost:8081/rest/v1/trade-memberships/7
-Headers:  {Authorization: 3751-6445-9550}{Content-Type: application/json}
+DELETE http://localhost:8081/rest/v1/trade-memberships/8
+Headers:  {Authorization: 8387-7220-8827}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 204 

@@ -70,8 +70,8 @@
 
 <h3>Examples</h3>
 <div class='code'>-----  Request  -----
-POST http://localhost:8081/rest/v1/trade-memberships/9/items
-Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+POST http://localhost:8081/rest/v1/trade-memberships/10/items
+Headers:  {Authorization: 1006-9105-7485}{Content-Type: application/json}
 
 {
   "name" : "Pandemic Legacy: Season 1"
@@ -85,14 +85,14 @@ Status:   HTTP/1.1 201
   "itemId" : 6,
   "_links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/10/items/6"
   } ]
 }
 </div>
 
 <div class='code'>-----  Request  -----
-PUT http://localhost:8081/rest/v1/trade-memberships/9/items/6
-Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+PUT http://localhost:8081/rest/v1/trade-memberships/10/items/6
+Headers:  {Authorization: 1006-9105-7485}{Content-Type: application/json}
 
 {
   "name" : "Pandemic Legacy: Season 1 After PUT"
@@ -106,14 +106,14 @@ Status:   HTTP/1.1 200
   "itemId" : 6,
   "_links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/10/items/6"
   } ]
 }
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/9/items/6
-Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/10/items/6
+Headers:  {Authorization: 1006-9105-7485}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -123,14 +123,14 @@ Status:   HTTP/1.1 200
   "itemId" : 6,
   "_links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/10/items/6"
   } ]
 }
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/9/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
-Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/10/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
+Headers:  {Authorization: 1006-9105-7485}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -141,14 +141,14 @@ Headers:  {X-Pagination-Total-Count: 1}
   "itemId" : 6,
   "_links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/10/items/6"
   } ]
 } ]
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/9/items
-Headers:  {Authorization: 8462-6365-2903}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/10/items
+Headers:  {Authorization: 1006-9105-7485}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
@@ -159,7 +159,7 @@ Headers:  {X-Pagination-Total-Count: 1}
   "itemId" : 6,
   "_links" : [ {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/9/items/6"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/10/items/6"
   } ]
 } ]
 </div>

@@ -83,71 +83,70 @@
 
 <h3>Examples</h3>
 <div class='code'>-----  Request  -----
-POST http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items
-Headers:  {Authorization: 7240-9586-7970}{Content-Type: application/json}
+POST http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items
+Headers:  {Authorization: 7803-755-5947}{Content-Type: application/json}
 
 {
   "itemId" : 8,
-  "priority" : 1,
-  "wantItemId" : null
+  "priority" : 1
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 
 {
-  "wantItemId" : 3,
+  "wantItemId" : 4,
   "itemId" : 8,
   "priority" : 1,
   "_links" : [ {
-    "rel" : "item",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/8"
-  }, {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items/8"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items/8"
+  }, {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/8"
   } ]
 }
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items/3
-Headers:  {Authorization: 7240-9586-7970}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items/4
+Headers:  {Authorization: 7803-755-5947}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 
 {
-  "wantItemId" : 3,
+  "wantItemId" : 4,
   "itemId" : 8,
   "priority" : 1,
   "_links" : [ {
-    "rel" : "item",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/8"
-  }, {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items/8"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items/8"
+  }, {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/8"
   } ]
 }
 </div>
 
 <div class='code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items?_pageNumber=1&_pageSize=3
-Headers:  {Authorization: 7240-9586-7970}{Content-Type: application/json}
+GET http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items?_pageNumber=1&_pageSize=3
+Headers:  {Authorization: 7803-755-5947}{Content-Type: application/json}
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  {X-Pagination-Total-Count: 1}
 
 [ {
-  "wantItemId" : 3,
+  "wantItemId" : 4,
   "itemId" : 8,
   "priority" : 1,
   "_links" : [ {
-    "rel" : "item",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/8"
-  }, {
     "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/trade-memberships/11/items/7/want-items/8"
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/7/want-items/8"
+  }, {
+    "rel" : "item",
+    "href" : "http://localhost:8081/rest/v1/trade-memberships/12/items/8"
   } ]
 } ]
 </div>
