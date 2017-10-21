@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -39,48 +40,47 @@ public class TemplateUtil {
 	 * @return
 	 */
 	public static String buildSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
-		StringBuilder result = new StringBuilder();;
+		StringBuilder snippet = new StringBuilder();;
 		try {
 			// Start snippet
-			result.append("<div class='code'>");
-			result.append("-----  Request  -----\n");
+			snippet.append("-----  Request  -----\n");
 			// Request URL
-			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
-			result.append("\n");
+			snippet.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+			snippet.append("\n");
 			// Request headers
 			Header[] headers = httpRequest.getAllHeaders();
 			if (headers.length > 0) {
-				result.append("Headers:  ");
+				snippet.append("Headers:  ");
 				for (int i = 0; i < headers.length; i++) {
-					result.append("{" + headers[i].getName() + ": ");
-					result.append(headers[i].getValue() + "}");
+					snippet.append("{" + headers[i].getName() + ": ");
+					snippet.append(headers[i].getValue() + "}");
 				}
-				result.append("\n");
+				snippet.append("\n");
 			}
 			// Request body
 			if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
-				result.append("\n");
+				snippet.append("\n");
 				HttpEntityEnclosingRequestBase requestBase = (HttpEntityEnclosingRequestBase) httpRequest;
 				String requestBody = IOUtils.toString(requestBase.getEntity().getContent(), StandardCharsets.UTF_8);
 				requestBody = JsonUtil.prettyJson(requestBody);
-				result.append(requestBody);
-				result.append("\n");
+				snippet.append(requestBody);
+				snippet.append("\n");
 			}
-			result.append("\n");			
-			result.append("-----  Response  -----\n");
+			snippet.append("\n");			
+			snippet.append("-----  Response  -----\n");
 			// Response details
-			result.append("Status:   ");
-			result.append(httpResponse.getStatusLine());
-			result.append("\n");
+			snippet.append("Status:   ");
+			snippet.append(httpResponse.getStatusLine());
+			snippet.append("\n");
 			// Response headers
 			Header[] responseHeaders = buildResponseHeaders(httpResponse);
 			if (responseHeaders.length > 0) {
-				result.append("Headers:  ");
+				snippet.append("Headers:  ");
 				for (int i = 0; i < responseHeaders.length; i++) {
-					result.append("{" + responseHeaders[i].getName() + ": ");
-					result.append(responseHeaders[i].getValue() + "}");
+					snippet.append("{" + responseHeaders[i].getName() + ": ");
+					snippet.append(responseHeaders[i].getValue() + "}");
 				}
-				result.append("\n");
+				snippet.append("\n");
 			}
 			// Response body
 			if (httpResponse.getEntity() != null) {
@@ -92,15 +92,15 @@ public class TemplateUtil {
 					throw new DocMakerException(e);
 				}
 				if (responseBody != null && responseBody.length() > 0) {
-					result.append("\n");
-					result.append(responseBody);
+					snippet.append("\n");
+					snippet.append(responseBody);
 				}
 			}
-			result.append("\n</div>");
 		} catch (Exception e) {
 			throw new DocMakerException(e);
 		}
-		return result.toString();
+
+		return "<div class='code'>" + StringEscapeUtils.escapeHtml(snippet.toString()) + "\n</div>";
 	}
 
 	/**
