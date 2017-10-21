@@ -4,8 +4,6 @@ import com.matchandtrade.doc.util.TemplateUtil;
 
 public class CssMaker extends OutputMaker {
 
-	public static final String CSS_LOCATION = "css/matchandtrade-doc-style.css";
-	
 	@Override
 	public String buildDocContent() {
 		return TemplateUtil.buildTemplate(getDocLocation());
@@ -13,7 +11,7 @@ public class CssMaker extends OutputMaker {
 
 	@Override
 	public String getDocLocation() {
-		return CSS_LOCATION;
+		return "css/matchandtrade-doc-style.css";
 	}
 	
 	@Override

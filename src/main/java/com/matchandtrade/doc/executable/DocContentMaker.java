@@ -21,6 +21,7 @@ import com.matchandtrade.doc.maker.rest.RestTradeMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
 import com.matchandtrade.doc.maker.rest.RestUserMaker;
 import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {
@@ -29,15 +30,6 @@ public class DocContentMaker {
 	
 	private String destinationFolder;
 	private StringBuilder report = new StringBuilder();
-	private final String HTML_HEADER = "<!DOCTYPE html>\n" + 
-			"<html>\n" +
-			"	<head>\n" +
-			"		<meta charset='UTF-8'>\n" +
-			"		<link rel='stylesheet' href='css/combined-style.css'>\n" +
-			"		<link rel='stylesheet' href='" + CssMaker.CSS_LOCATION + "'>\n" +
-			"		<title>Match and Trade - Documentation</title>\n" +
-			"	</head>\n" +
-			"<body>\n";
 	private final String HTML_FOOTER = "</body>\n</html>\n";
 	
 	
@@ -71,7 +63,8 @@ public class DocContentMaker {
 				// Generate HTML documents
 				String docContent = null;
 				if (t.requiresHeaderAndFooter()) {
-					docContent = HTML_HEADER + t.buildDocContent() + HTML_FOOTER;
+					String htmlHeader = TemplateUtil.buildTemplate("header.html");
+					docContent = htmlHeader + t.buildDocContent() + HTML_FOOTER;
 				} else {
 					docContent = t.buildDocContent();
 				}

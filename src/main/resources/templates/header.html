@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Match and Trade - Documentation</title>
+
+<link rel='stylesheet' href='css/combined-style.css'>
+<link rel='stylesheet' href='css/matchandtrade-doc-style.css'>
+
+<script>
+function openTab(evt, tabId) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabId).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+</head>
+<body>
