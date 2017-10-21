@@ -5,16 +5,15 @@ import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.Header;
+import org.apache.http.HttpMessage;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 
-import com.matchandtrade.config.AuthenticationProperties;
 import com.matchandtrade.exception.DocMakerException;
 
 public class TemplateUtil {
@@ -24,15 +23,6 @@ public class TemplateUtil {
 	// Utility classes, which are a collection of static members, are not meant to be instantiated.
 	private TemplateUtil() { }
 	
-	private static Header[] buildResponseHeaders(HttpResponse httpResponse) {
-		Header[] authorizationHeaders = httpResponse.getHeaders(AuthenticationProperties.OAuth.AUTHORIZATION_HEADER.toString());
-		Header[] paginationTotalCount = httpResponse.getHeaders("X-Pagination-Total-Count");
-		Header[] responseHeaders = (Header[]) ArrayUtils.addAll(authorizationHeaders, paginationTotalCount);
-		Header[] linkHeaders = httpResponse.getHeaders("Link");
-		responseHeaders = (Header[]) ArrayUtils.addAll(responseHeaders, linkHeaders);
-		return responseHeaders;
-	}
-
 	/**
 	 * Build a snippet based on a HttpRequestBase and HttpResponse
 	 * @param httpRequest
@@ -48,15 +38,7 @@ public class TemplateUtil {
 			snippet.append(httpRequest.getMethod() + " " + httpRequest.getURI());
 			snippet.append("\n");
 			// Request headers
-			Header[] headers = httpRequest.getAllHeaders();
-			if (headers.length > 0) {
-				snippet.append("Headers:  ");
-				for (int i = 0; i < headers.length; i++) {
-					snippet.append("{" + headers[i].getName() + ": ");
-					snippet.append(headers[i].getValue() + "}");
-				}
-				snippet.append("\n");
-			}
+			snippet.append(buildHeadersString(httpRequest));
 			// Request body
 			if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
 				snippet.append("\n");
@@ -73,15 +55,7 @@ public class TemplateUtil {
 			snippet.append(httpResponse.getStatusLine());
 			snippet.append("\n");
 			// Response headers
-			Header[] responseHeaders = buildResponseHeaders(httpResponse);
-			if (responseHeaders.length > 0) {
-				snippet.append("Headers:  ");
-				for (int i = 0; i < responseHeaders.length; i++) {
-					snippet.append("{" + responseHeaders[i].getName() + ": ");
-					snippet.append(responseHeaders[i].getValue() + "}");
-				}
-				snippet.append("\n");
-			}
+			snippet.append(buildHeadersString(httpResponse));
 			// Response body
 			if (httpResponse.getEntity() != null) {
 				String responseBody = "";
@@ -101,6 +75,23 @@ public class TemplateUtil {
 		}
 
 		return "<div class='code'>" + StringEscapeUtils.escapeHtml(snippet.toString()) + "\n</div>";
+	}
+
+	private static String buildHeadersString(HttpMessage httpRequest) {
+		StringBuilder result = new StringBuilder();
+		Header[] headers = httpRequest.getAllHeaders();
+		if (headers.length > 0) {
+			result.append("Headers:  ");
+			for (int i = 0; i < headers.length; i++) {
+				if (i > 0) {
+					result.append("\n          ");
+				}
+				result.append(headers[i].getName() + ": ");
+				result.append(headers[i].getValue());
+			}
+			result.append("\n");
+		}
+		return result.toString();
 	}
 
 	/**
