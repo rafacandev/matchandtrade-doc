@@ -1,7 +1,6 @@
 package com.matchandtrade.doc.util;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 

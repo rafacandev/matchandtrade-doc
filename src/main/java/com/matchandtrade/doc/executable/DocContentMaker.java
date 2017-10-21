@@ -11,15 +11,14 @@ import org.slf4j.LoggerFactory;
 
 import com.matchandtrade.doc.maker.CssMaker;
 import com.matchandtrade.doc.maker.DevelopmentGuide;
+import com.matchandtrade.doc.maker.IndexMaker;
 import com.matchandtrade.doc.maker.OutputMaker;
-import com.matchandtrade.doc.maker.ReadmeMaker;
-import com.matchandtrade.doc.maker.RestGuideMaker;
 import com.matchandtrade.doc.maker.RestUseCaseMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticateMaker;
 import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
 import com.matchandtrade.doc.maker.rest.RestItemMaker;
-import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMaker;
+import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
 import com.matchandtrade.doc.maker.rest.RestUserMaker;
 import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
 import com.matchandtrade.exception.DocMakerException;
@@ -53,7 +52,6 @@ public class DocContentMaker {
 		// TODO Scan all files instead of instantiate one by one manually
 		List<OutputMaker> docMakers = new ArrayList<OutputMaker>();
 		docMakers.add(new CssMaker());
-		docMakers.add(new ReadmeMaker());
 		docMakers.add(new DevelopmentGuide());
 		docMakers.add(new RestUseCaseMaker());
 		docMakers.add(new RestAuthenticateMaker());
@@ -63,7 +61,7 @@ public class DocContentMaker {
 		docMakers.add(new RestTradeMembershipMaker());
 		docMakers.add(new RestItemMaker());
 		docMakers.add(new RestWantItemMaker());
-		docMakers.add(new RestGuideMaker());
+		docMakers.add(new IndexMaker());
 		try {
 			report.append("\n==== DocContentMaker Report ============\n");
 			for(OutputMaker t : docMakers) {
