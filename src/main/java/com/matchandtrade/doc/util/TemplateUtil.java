@@ -20,6 +20,8 @@ public class TemplateUtil {
 
 	public static final String TEMPLATE_ROOT_LOCATION = "templates/";
 	
+	private static int tabIdSequence = 0;
+	
 	// Utility classes, which are a collection of static members, are not meant to be instantiated.
 	private TemplateUtil() { }
 	
@@ -30,32 +32,56 @@ public class TemplateUtil {
 	 * @return
 	 */
 	public static String buildSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
-		StringBuilder snippet = new StringBuilder();;
+		String summarySnippet = buildSummarySnippet(httpRequest, httpResponse);
+		summarySnippet = StringEscapeUtils.escapeHtml(summarySnippet);
+
+		String detailedSnippet = buildDetailedSnippet(httpRequest, httpResponse);
+		detailedSnippet = StringEscapeUtils.escapeHtml(detailedSnippet.toString());
+		
+		int tabId = nextTabId();
+		
+		String summaryTabId = "summaryTab_" + tabId;
+		String httpTabId = "httpTab_" + tabId;
+		String curlTabId = "curlTab_" + tabId;
+		
+		return    "<div class='tab'>"
+				+   "<button id='summaryTabLink_"+tabId+"' class='tablinks' onclick='openTab(event, \""+summaryTabId+"\")'>Summary</button>"
+				+   "<button id='httpTabLink_"+tabId+"' class='tablinks' onclick='openTab(event, \""+httpTabId+"\")'>HTTP</button>"
+				+   "<button id='curlTabLink_"+tabId+"' class='tablinks' onclick='openTab(event, \""+curlTabId+"\")'>curl</button>"
+				+ "</div>"
+				+ "<div id='"+summaryTabId+"' class='tabcontent code'>" + summarySnippet + "</div>"
+				+ "<div id='"+httpTabId+"' class='tabcontent code'>" + detailedSnippet + "</div>"
+				+ "<div id='"+curlTabId+"' class='tabcontent code'>" + "......" + "\n</div>"
+				+ "<script>openTabById('summaryTabLink_"+tabId+"', \""+summaryTabId+"\");</script>";
+	}
+
+	private static String buildDetailedSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
+		StringBuilder result = new StringBuilder();
 		try {
 			// Start snippet
-			snippet.append("-----  Request  -----\n");
+			result.append("-----  Request  -----\n");
 			// Request URL
-			snippet.append(httpRequest.getMethod() + " " + httpRequest.getURI());
-			snippet.append("\n");
+			result.append(httpRequest.getMethod() + " " + httpRequest.getURI());
+			result.append("\n");
 			// Request headers
-			snippet.append(buildHeadersString(httpRequest));
+			result.append(buildHeadersString(httpRequest));
 			// Request body
 			if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
-				snippet.append("\n");
+				result.append("\n");
 				HttpEntityEnclosingRequestBase requestBase = (HttpEntityEnclosingRequestBase) httpRequest;
 				String requestBody = IOUtils.toString(requestBase.getEntity().getContent(), StandardCharsets.UTF_8);
 				requestBody = JsonUtil.prettyJson(requestBody);
-				snippet.append(requestBody);
-				snippet.append("\n");
+				result.append(requestBody);
+				result.append("\n");
 			}
-			snippet.append("\n");			
-			snippet.append("-----  Response  -----\n");
+			result.append("\n");			
+			result.append("-----  Response  -----\n");
 			// Response details
-			snippet.append("Status:   ");
-			snippet.append(httpResponse.getStatusLine());
-			snippet.append("\n");
+			result.append("Status:   ");
+			result.append(httpResponse.getStatusLine());
+			result.append("\n");
 			// Response headers
-			snippet.append(buildHeadersString(httpResponse));
+			result.append(buildHeadersString(httpResponse));
 			// Response body
 			if (httpResponse.getEntity() != null) {
 				String responseBody = "";
@@ -66,15 +92,50 @@ public class TemplateUtil {
 					throw new DocMakerException(e);
 				}
 				if (responseBody != null && responseBody.length() > 0) {
-					snippet.append("\n");
-					snippet.append(responseBody);
+					result.append("\n");
+					result.append(responseBody);
 				}
 			}
 		} catch (Exception e) {
 			throw new DocMakerException(e);
 		}
+		return result.toString();
+	}
 
-		return "<div class='code'>" + StringEscapeUtils.escapeHtml(snippet.toString()) + "\n</div>";
+	private static String buildSummarySnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
+		StringBuilder result = new StringBuilder();
+		try {
+			// Request URL
+			result.append(httpRequest.getMethod() + " " + httpRequest.getURI() + "\n");
+			// Request body
+			if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
+				HttpEntityEnclosingRequestBase requestBase = (HttpEntityEnclosingRequestBase) httpRequest;
+				String requestBody = "Request:  " + IOUtils.toString(requestBase.getEntity().getContent(), StandardCharsets.UTF_8);
+				requestBody = requestBody.replace("\n", "");
+				if (requestBody.length() > 100) {
+					result.append(requestBody.substring(0, 100) + " ...");
+				} else {
+					result.append(requestBody);
+				}
+				result.append("\n");
+			}
+			// Response details
+			result.append("Status:   ");
+			result.append(httpResponse.getStatusLine() + "\n");
+			// Response body
+			if (httpResponse.getEntity() != null) {
+				String responseBody = RestUtil.buildResponseBodyString(httpResponse);
+				if (responseBody != null && responseBody.length() > 0) {
+					if (responseBody.length() > 100) {
+						responseBody = responseBody.substring(0, 100) + " ...";
+					}
+					result.append("Response: " + responseBody);
+				}
+			}
+		} catch (Exception e) {
+			throw new DocMakerException(e);
+		}
+		return result.toString();
 	}
 
 	private static String buildHeadersString(HttpMessage httpRequest) {
@@ -110,6 +171,10 @@ public class TemplateUtil {
 			throw new DocMakerException("Not able to build template from resource: " + templateRelativePath + ". Exception message: " + e.getMessage());
 		}
 		return result;
+	}
+	
+	private static int nextTabId() {
+		return tabIdSequence++;
 	}
 
 	public static String replacePlaceholder(String template, String placeholder, String replacement) {
