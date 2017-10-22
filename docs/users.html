@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='UTF-8'>
-		<link rel='stylesheet' href='css/combined-style.css'>
-		<title>Match and Trade - Documentation</title>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title>Match and Trade - Documentation</title>
+
+<link rel='stylesheet' href='css/matchandtrade-doc-style.css'>
+
+<script>
+function openTab(evt, tabId) {
+    var i, tabcontent, tablinks;
+   	var tabIdEnding = tabId.substring(tabId.length-2);
+
+   	tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+    	if (tabcontent[i].id.endsWith(tabIdEnding)) {
+        	tabcontent[i].style.display = "none";
+    	}
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+    	if (tablinks[i].id.endsWith(tabIdEnding)) {
+        	tablinks[i].className = tablinks[i].className.replace(" active", "");
+    	}
+    }
+	
+    document.getElementById(tabId).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function openTabById(tabLinkId, tabId) {
+    document.getElementById(tabId).style.display = "block";
+    document.getElementById(tabId).className += " active";
+
+    document.getElementById(tabLinkId).className += " active";
+}
+
+</script>
+</head>
 <body>
 <h1>Users</h1>
 <p>
@@ -73,44 +106,57 @@
 </table>
 
 <h3>Examples</h3>
-<div class='code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_62' class='tablinks' onclick='openTab(event, "summaryTab_62")'>Summary</button><button id='httpTabLink_62' class='tablinks' onclick='openTab(event, "httpTab_62")'>HTTP</button><button id='curlTabLink_62' class='tablinks' onclick='openTab(event, "curlTab_62")'>curl</button></div><div id='summaryTab_62' class='tabcontent code'>PUT http://localhost:8081/rest/v1/users/4
+Request:  {  &quot;email&quot; : &quot;1508649905284@test.com&quot;,  &quot;name&quot; : &quot;Scott Summers&quot;}
+Status:   HTTP/1.1 200 
+Response: {&quot;email&quot;:&quot;1508649905284@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:4,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot; ...</div><div id='httpTab_62' class='tabcontent code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/users/4
-Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
+Headers:  Authorization: 2371-7018-7504
+          Content-Type: application/json
 
 {
-  "email" : "1508556073495@test.com",
-  "name" : "Scott Summers"
+  &quot;email&quot; : &quot;1508649905284@test.com&quot;,
+  &quot;name&quot; : &quot;Scott Summers&quot;
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Sun, 22 Oct 2017 05:25:05 GMT
 
 {
-  "email" : "1508556073495@test.com",
-  "name" : "Scott Summers",
-  "userId" : 4,
-  "_links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/users/4"
+  &quot;email&quot; : &quot;1508649905284@test.com&quot;,
+  &quot;name&quot; : &quot;Scott Summers&quot;,
+  &quot;userId&quot; : 4,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/users/4&quot;
   } ]
-}
-</div>
+}</div><div id='curlTab_62' class='tabcontent code'>......
+</div><script>openTabById('summaryTabLink_62', "summaryTab_62");</script>
 
-<div class='code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_66' class='tablinks' onclick='openTab(event, "summaryTab_66")'>Summary</button><button id='httpTabLink_66' class='tablinks' onclick='openTab(event, "httpTab_66")'>HTTP</button><button id='curlTabLink_66' class='tablinks' onclick='openTab(event, "curlTab_66")'>curl</button></div><div id='summaryTab_66' class='tabcontent code'>GET http://localhost:8081/rest/v1/users/4
+Status:   HTTP/1.1 200 
+Response: {&quot;email&quot;:&quot;1508649905284@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:4,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot; ...</div><div id='httpTab_66' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/users/4
-Headers:  {Authorization: 4805-5192-7202}{Content-Type: application/json}
+Headers:  Authorization: 2371-7018-7504
+          Content-Type: application/json
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Sun, 22 Oct 2017 05:25:05 GMT
 
 {
-  "email" : "1508556073495@test.com",
-  "name" : "Scott Summers",
-  "userId" : 4,
-  "_links" : [ {
-    "rel" : "self",
-    "href" : "http://localhost:8081/rest/v1/users/4"
+  &quot;email&quot; : &quot;1508649905284@test.com&quot;,
+  &quot;name&quot; : &quot;Scott Summers&quot;,
+  &quot;userId&quot; : 4,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/users/4&quot;
   } ]
-}
-</div></body>
+}</div><div id='curlTab_66' class='tabcontent code'>......
+</div><script>openTabById('summaryTabLink_66', "summaryTab_66");</script></body>
 </html>
