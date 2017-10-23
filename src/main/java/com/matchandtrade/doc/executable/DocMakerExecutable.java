@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.matchandtrade.WebserviceApplication;
 import com.matchandtrade.doc.config.PropertiesLoader;
-import com.matchandtrade.doc.config.PropertyKey;
 
 
 /**
@@ -50,7 +49,7 @@ public class DocMakerExecutable {
 			logger.info(docContentMaker.getReport());
 			System.exit(-1);
 		} finally {
-			if (PropertiesLoader.getSystemProperty(PropertyKey.STOP_WEBSERVER).equalsIgnoreCase("true")) {
+			if (PropertiesLoader.stopWebService()) {
 				System.exit(0);
 			}
 		}
