@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.matchandtrade.WebserviceApplication;
+import com.matchandtrade.doc.config.PropertiesLoader;
+import com.matchandtrade.doc.config.PropertyKey;
 
 
 /**
@@ -19,6 +21,7 @@ public class DocMakerExecutable {
 	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
 
 	public static void main(String[] arguments) throws Throwable {
+		PropertiesLoader.loadConfigurationProperties();
 		// TODO Better arguments handling
 		if (arguments.length == 0) {
 			arguments = new String[4];
@@ -47,7 +50,9 @@ public class DocMakerExecutable {
 			logger.info(docContentMaker.getReport());
 			System.exit(-1);
 		} finally {
-			System.exit(0);
+			if (PropertiesLoader.getSystemProperty(PropertyKey.STOP_WEBSERVER).equalsIgnoreCase("true")) {
+				System.exit(0);
+			}
 		}
 	}
 
