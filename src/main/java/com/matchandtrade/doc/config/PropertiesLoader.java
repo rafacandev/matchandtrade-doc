@@ -1,9 +1,12 @@
 package com.matchandtrade.doc.config;
 
+import com.matchandtrade.config.AppConfigurationProperties;
+
 public class PropertiesLoader {
 	
 	public enum Key {
-		DOC_DESTINATION_FOLDER("matchandtrade.doc.destination.folder","target/doc-maker"),
+		CONFIG_FILE(AppConfigurationProperties.Keys.CONFIG_FILE.getKey(), "src/config/matchandtrade.properties"),
+		DESTINATION_FOLDER("matchandtrade.doc.destination.folder","target/doc-maker"),
 		STOP_WEBSERVER("matchandtrade.doc.stop.webserver","true");
 
 		private final String defaultValue;
@@ -34,8 +37,6 @@ public class PropertiesLoader {
 			return key + "=" + defaultValue;
 		}
 	}
-
-	
 	
 	public static void loadConfigurationProperties() {
 		for (int i = 0; i < Key.values().length; i++) {
@@ -45,18 +46,28 @@ public class PropertiesLoader {
 		}
 	}
 	
+	public static String serverUrl() {
+		return "http://localhost:" + System.getProperty("server.port");
+	}
+	
 	public static String getProperty(Key k) {
 		return System.getProperty(k.getKey());
 	}
 	
-	public static boolean stopWebService() {
-		String p = System.getProperty(Key.STOP_WEBSERVER.getKey());
-		if (p == null) {
-			return Boolean.valueOf(Key.STOP_WEBSERVER.getDefaultValue());
-		} else {
-			return Boolean.valueOf(p);
-		}
+	public static void setProperty(Key k, String value) {
+		System.setProperty(k.getKey(), value);
 	}
 	
+	public static boolean stopWebService() {
+		String p = System.getProperty(Key.STOP_WEBSERVER.getKey());
+		return Boolean.valueOf(p);
+	}
+	public static String configFile() {
+		return System.getProperty(Key.CONFIG_FILE.getKey());
+	}
+
+	public static String destinationFolder() {
+		return System.getProperty(Key.DESTINATION_FOLDER.getKey());
+	}
 	
 }

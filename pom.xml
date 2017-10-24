@@ -82,12 +82,6 @@
 						</goals>
 						<configuration>
 							<mainClass>com.matchandtrade.doc.executable.DocMakerExecutable</mainClass>
-							<arguments>
-								<argument>-cf</argument>
-								<argument>${basedir}/src/config/matchandtrade.properties</argument>
-								<argument>--destination-folder</argument>
-								<argument>${basedir}/target/doc-maker</argument>
-							</arguments>
 						</configuration>
 					</execution>
 				</executions>

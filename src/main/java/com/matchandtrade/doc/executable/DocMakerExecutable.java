@@ -10,10 +10,8 @@ import com.matchandtrade.doc.config.PropertiesLoader;
 
 
 /**
- * If no arguments are provided, then it will attribute the following values:
- * <code>
- * -cf src/config/matchandtrade.properties --destination-folder target/doc-maker
- * </code>
+ * Main executable class for <pre>matchandtrade-cod</pre>
+ * by default properties are loaded from <pre>src/config/matchandtrade.properties</pre>
  */
 public class DocMakerExecutable {
 	
@@ -21,24 +19,14 @@ public class DocMakerExecutable {
 
 	public static void main(String[] arguments) throws Throwable {
 		PropertiesLoader.loadConfigurationProperties();
-		// TODO Better arguments handling
-		if (arguments.length == 0) {
-			arguments = new String[4];
-			arguments[0] = "-cf";
-			arguments[1] = "src/config/matchandtrade.properties";
-			arguments[2] = "--destination-folder";
-			arguments[3] = "target/doc-maker";
-		}
 		logger.info("Starting Match and Trade web server.");
-		String destinationFolder = ArgumentBuilder.obtainDestinationFolder(arguments);
-		String[] webArgumentsArray = ArgumentBuilder.buildWebServerArguments(arguments);
 		try {
-			startMatchAndTradeWebServer(webArgumentsArray);
+			startMatchAndTradeWebServer();
 		} catch (IOException e) {
 			logger.error("Not able to start Match And Trade web server. Exception message: {}", e.getMessage());
 		}
 		
-		DocContentMaker docContentMaker = new DocContentMaker(destinationFolder);
+		DocContentMaker docContentMaker = new DocContentMaker(PropertiesLoader.destinationFolder());
 		try {
 			logger.info("Making documentation.");
 			docContentMaker.makeContent();
@@ -55,9 +43,9 @@ public class DocMakerExecutable {
 		}
 	}
 
-	private static void startMatchAndTradeWebServer(String[] arguments) throws Throwable {
-		PropertiesProvider.buildAppProperties(arguments);
-		WebserviceApplication.main(arguments);
+	private static void startMatchAndTradeWebServer() throws Throwable {
+		String [] emptyArguments = {};
+		WebserviceApplication.main(emptyArguments);
 	}
 
 }

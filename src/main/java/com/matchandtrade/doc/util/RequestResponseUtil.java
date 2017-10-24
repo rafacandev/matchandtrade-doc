@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 
-import com.matchandtrade.doc.executable.PropertiesProvider;
+import com.matchandtrade.doc.config.PropertiesLoader;
 import com.matchandtrade.exception.DocMakerException;
 import com.matchandtrade.rest.Json;
 import com.matchandtrade.rest.JsonLinkSupport;
@@ -75,7 +75,7 @@ public class RequestResponseUtil {
 
 	public static RequestResponseHolder buildDeleteRequestResponse(String url, List<Header> headers, int httpStatus) {
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpDelete httpRequest = new HttpDelete(PropertiesProvider.getServerUrl() + url);
+		HttpDelete httpRequest = new HttpDelete(PropertiesLoader.serverUrl() + url);
 		for (Header h : headers) {
 			httpRequest.addHeader(h);
 		}
@@ -96,7 +96,7 @@ public class RequestResponseUtil {
 
 	public static RequestResponseHolder buildGetRequestResponse(String url, List<Header> headers, int httpStatus) {
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(PropertiesProvider.getServerUrl() + url);
+		HttpGet httpRequest = new HttpGet(PropertiesLoader.serverUrl() + url);
 		for (Header h : headers) {
 			httpRequest.addHeader(h);
 		}
@@ -128,11 +128,11 @@ public class RequestResponseUtil {
 	
 	public static RequestResponseHolder buildPutOrPostRequestResponse(String url, Json body, List<Header> headers, int httpStatus, MethodType methodType) {
 		HttpClient httpClient = HttpClients.createDefault();
-		HttpEntityEnclosingRequestBase httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + url);
+		HttpEntityEnclosingRequestBase httpRequest = new HttpPut(PropertiesLoader.serverUrl() + url);
 		if (methodType == MethodType.POST) {
-			httpRequest = new HttpPost(PropertiesProvider.getServerUrl() + url);
+			httpRequest = new HttpPost(PropertiesLoader.serverUrl() + url);
 		} else {
-			httpRequest = new HttpPut(PropertiesProvider.getServerUrl() + url);
+			httpRequest = new HttpPut(PropertiesLoader.serverUrl() + url);
 		}
 		for (Header h : headers) {
 			httpRequest.addHeader(h);
