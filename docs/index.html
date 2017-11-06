@@ -104,7 +104,7 @@ Here is the list of resources available thought the RESTful API.
 Status:   HTTP/1.1 200 
 Response: [{&quot;name&quot;:&quot;Board games in Montreal&quot;,&quot;tradeId&quot;:4,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;h ...</div><div id='httpTab_117' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
-Headers:  Authorization: 6376-4540-9916
+Headers:  Authorization: 4943-4813-6032
           Content-Type: application/json
 
 -----  Response  -----
@@ -114,7 +114,7 @@ Headers:  X-Pagination-Total-Count: 5
           Link: &lt;http://localhost:8081/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:38 GMT
 
 [ {
   &quot;name&quot; : &quot;Board games in Montreal&quot;,
@@ -132,7 +132,38 @@ Headers:  X-Pagination-Total-Count: 5
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/5&quot;
   } ]
-} ]</div><div id='curlTab_117' class='tabcontent code'>......
+} ]</div><div id='curlTab_117' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+-H &quot;Authorization: 4943-4813-6032&quot; \
+-H &quot;Content-Type: application/json&quot; \
+http://localhost:8081/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 5
+          Link: &lt;http://localhost:8081/rest/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+          Link: &lt;http://localhost:8081/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:38 GMT
+
+[ {
+  &quot;name&quot; : &quot;Board games in Montreal&quot;,
+  &quot;tradeId&quot; : 4,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/4&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;Board games in Calgary&quot;,
+  &quot;tradeId&quot; : 5,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/5&quot;
+  } ]
+} ]
 </div><script>openTabById('summaryTabLink_117', "summaryTab_117");</script>
 
 <h2>PUT vs PATCH</h2>

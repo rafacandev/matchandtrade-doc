@@ -68,23 +68,41 @@ GET http://localhost:8081/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 8109-463-5091
+Headers:  Authorization: 8326-4353-4730
           Content-Length: 0
-          Date: Sun, 22 Oct 2017 05:22:50 GMT
-</div><div id='curlTab_39' class='tabcontent code'>......
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+</div><div id='curlTab_39' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+http://localhost:8081/authenticate
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Authorization: 8326-4353-4730
+          Content-Length: 0
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
 </div><script>openTabById('summaryTabLink_39', "summaryTab_39");</script>
 
 <div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>GET http://localhost:8081/authenticate/sign-out
 Status:   HTTP/1.1 205 
 </div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/authenticate/sign-out
-Headers:  Authorization: 8109-463-5091
+Headers:  Authorization: 8326-4353-4730
 
 -----  Response  -----
 Status:   HTTP/1.1 205 
-Headers:  Set-Cookie: JSESSIONID=50759E6984BBB1753A01AF965108EF58; Path=/; HttpOnly
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
-</div><div id='curlTab_41' class='tabcontent code'>......
+Headers:  Set-Cookie: JSESSIONID=B0E752BF0B71BDA788AE4929BE6900F8; Path=/; HttpOnly
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+-H &quot;Authorization: 8326-4353-4730&quot; \
+http://localhost:8081/authenticate/sign-out
+
+-----  Response  -----
+Status:   HTTP/1.1 205 
+Headers:  Set-Cookie: JSESSIONID=B0E752BF0B71BDA788AE4929BE6900F8; Path=/; HttpOnly
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
 </div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
 </body>
 </html>

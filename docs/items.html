@@ -107,7 +107,7 @@ Request:  {  &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;}
 Status:   HTTP/1.1 201 
 Response: {&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;,&quot;itemId&quot;:6,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8081 ...</div><div id='httpTab_89' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trade-memberships/10/items
-Headers:  Authorization: 6006-4491-3365
+Headers:  Authorization: 8210-5086-5485
           Content-Type: application/json
 
 {
@@ -118,7 +118,7 @@ Headers:  Authorization: 6006-4491-3365
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
 
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
@@ -127,7 +127,27 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
   } ]
-}</div><div id='curlTab_89' class='tabcontent code'>......
+}</div><div id='curlTab_89' class='tabcontent code'>-----  Request  -----
+curl -v -X POST \
+-H &quot;Authorization: 8210-5086-5485&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &quot;{  \&quot;name\&quot; : \&quot;Pandemic Legacy: Season 1\&quot;}&quot; \
+http://localhost:8081/rest/v1/trade-memberships/10/items
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
+{
+  &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
+  &quot;itemId&quot; : 6,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
+  } ]
+}
 </div><script>openTabById('summaryTabLink_89', "summaryTab_89");</script>
 
 <div class='tab'><button id='summaryTabLink_91' class='tablinks' onclick='openTab(event, "summaryTab_91")'>Summary</button><button id='httpTabLink_91' class='tablinks' onclick='openTab(event, "httpTab_91")'>HTTP</button><button id='curlTabLink_91' class='tablinks' onclick='openTab(event, "curlTab_91")'>curl</button></div><div id='summaryTab_91' class='tabcontent code'>PUT http://localhost:8081/rest/v1/trade-memberships/10/items/6
@@ -135,7 +155,7 @@ Request:  {  &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;}
 Status:   HTTP/1.1 200 
 Response: {&quot;name&quot;:&quot;Pandemic Legacy: Season 1 After PUT&quot;,&quot;itemId&quot;:6,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://loca ...</div><div id='httpTab_91' class='tabcontent code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trade-memberships/10/items/6
-Headers:  Authorization: 6006-4491-3365
+Headers:  Authorization: 8210-5086-5485
           Content-Type: application/json
 
 {
@@ -146,7 +166,7 @@ Headers:  Authorization: 6006-4491-3365
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
 
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
@@ -155,21 +175,41 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
   } ]
-}</div><div id='curlTab_91' class='tabcontent code'>......
+}</div><div id='curlTab_91' class='tabcontent code'>-----  Request  -----
+curl -v -X PUT \
+-H &quot;Authorization: 8210-5086-5485&quot; \
+-H &quot;Content-Type: application/json&quot; \
+-d &quot;{  \&quot;name\&quot; : \&quot;Pandemic Legacy: Season 1 After PUT\&quot;}&quot; \
+http://localhost:8081/rest/v1/trade-memberships/10/items/6
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
+{
+  &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
+  &quot;itemId&quot; : 6,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
+  } ]
+}
 </div><script>openTabById('summaryTabLink_91', "summaryTab_91");</script>
 
 <div class='tab'><button id='summaryTabLink_93' class='tablinks' onclick='openTab(event, "summaryTab_93")'>Summary</button><button id='httpTabLink_93' class='tablinks' onclick='openTab(event, "httpTab_93")'>HTTP</button><button id='curlTabLink_93' class='tablinks' onclick='openTab(event, "curlTab_93")'>curl</button></div><div id='summaryTab_93' class='tabcontent code'>GET http://localhost:8081/rest/v1/trade-memberships/10/items/6
 Status:   HTTP/1.1 200 
 Response: {&quot;name&quot;:&quot;Pandemic Legacy: Season 1 After PUT&quot;,&quot;itemId&quot;:6,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://loca ...</div><div id='httpTab_93' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/10/items/6
-Headers:  Authorization: 6006-4491-3365
+Headers:  Authorization: 8210-5086-5485
           Content-Type: application/json
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
 
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
@@ -178,14 +218,33 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
   } ]
-}</div><div id='curlTab_93' class='tabcontent code'>......
+}</div><div id='curlTab_93' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+-H &quot;Authorization: 8210-5086-5485&quot; \
+-H &quot;Content-Type: application/json&quot; \
+http://localhost:8081/rest/v1/trade-memberships/10/items/6
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
+{
+  &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
+  &quot;itemId&quot; : 6,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
+  } ]
+}
 </div><script>openTabById('summaryTabLink_93', "summaryTab_93");</script>
 
 <div class='tab'><button id='summaryTabLink_97' class='tablinks' onclick='openTab(event, "summaryTab_97")'>Summary</button><button id='httpTabLink_97' class='tablinks' onclick='openTab(event, "httpTab_97")'>HTTP</button><button id='curlTabLink_97' class='tablinks' onclick='openTab(event, "curlTab_97")'>curl</button></div><div id='summaryTab_97' class='tabcontent code'>GET http://localhost:8081/rest/v1/trade-memberships/10/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
 Status:   HTTP/1.1 200 
 Response: [{&quot;name&quot;:&quot;Pandemic Legacy: Season 1 After PUT&quot;,&quot;itemId&quot;:6,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://loc ...</div><div id='httpTab_97' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/10/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
-Headers:  Authorization: 6006-4491-3365
+Headers:  Authorization: 8210-5086-5485
           Content-Type: application/json
 
 -----  Response  -----
@@ -193,7 +252,7 @@ Status:   HTTP/1.1 200
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:38 GMT
 
 [ {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
@@ -202,14 +261,34 @@ Headers:  X-Pagination-Total-Count: 1
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
   } ]
-} ]</div><div id='curlTab_97' class='tabcontent code'>......
+} ]</div><div id='curlTab_97' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+-H &quot;Authorization: 8210-5086-5485&quot; \
+-H &quot;Content-Type: application/json&quot; \
+http://localhost:8081/rest/v1/trade-memberships/10/items?name=Pandemic%20Legacy:%20Season%201%20After%20PUT
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 1
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:38 GMT
+
+[ {
+  &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
+  &quot;itemId&quot; : 6,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
+  } ]
+} ]
 </div><script>openTabById('summaryTabLink_97', "summaryTab_97");</script>
 
 <div class='tab'><button id='summaryTabLink_95' class='tablinks' onclick='openTab(event, "summaryTab_95")'>Summary</button><button id='httpTabLink_95' class='tablinks' onclick='openTab(event, "httpTab_95")'>HTTP</button><button id='curlTabLink_95' class='tablinks' onclick='openTab(event, "curlTab_95")'>curl</button></div><div id='summaryTab_95' class='tabcontent code'>GET http://localhost:8081/rest/v1/trade-memberships/10/items
 Status:   HTTP/1.1 200 
 Response: [{&quot;name&quot;:&quot;Pandemic Legacy: Season 1 After PUT&quot;,&quot;itemId&quot;:6,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://loc ...</div><div id='httpTab_95' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trade-memberships/10/items
-Headers:  Authorization: 6006-4491-3365
+Headers:  Authorization: 8210-5086-5485
           Content-Type: application/json
 
 -----  Response  -----
@@ -217,7 +296,7 @@ Status:   HTTP/1.1 200
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sun, 22 Oct 2017 05:25:05 GMT
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
 
 [ {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
@@ -226,7 +305,27 @@ Headers:  X-Pagination-Total-Count: 1
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
   } ]
-} ]</div><div id='curlTab_95' class='tabcontent code'>......
+} ]</div><div id='curlTab_95' class='tabcontent code'>-----  Request  -----
+curl -v GET \
+-H &quot;Authorization: 8210-5086-5485&quot; \
+-H &quot;Content-Type: application/json&quot; \
+http://localhost:8081/rest/v1/trade-memberships/10/items
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 1
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Mon, 06 Nov 2017 00:06:37 GMT
+
+[ {
+  &quot;name&quot; : &quot;Pandemic Legacy: Season 1 After PUT&quot;,
+  &quot;itemId&quot; : 6,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/6&quot;
+  } ]
+} ]
 </div><script>openTabById('summaryTabLink_95', "summaryTab_95");</script>
 </body>
 </html>
