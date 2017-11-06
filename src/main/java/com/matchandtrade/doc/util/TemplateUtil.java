@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpMessage;
 import org.apache.http.HttpResponse;
@@ -36,7 +37,10 @@ public class TemplateUtil {
 		summarySnippet = StringEscapeUtils.escapeHtml(summarySnippet);
 
 		String detailedSnippet = buildDetailedSnippet(httpRequest, httpResponse);
-		detailedSnippet = StringEscapeUtils.escapeHtml(detailedSnippet.toString());
+		detailedSnippet = StringEscapeUtils.escapeHtml(detailedSnippet);
+
+		String curlSnippet = buildCurlSnippet(httpRequest, httpResponse);
+		curlSnippet = StringEscapeUtils.escapeHtml(curlSnippet);
 		
 		int tabId = nextTabId();
 		
@@ -51,7 +55,7 @@ public class TemplateUtil {
 				+ "</div>"
 				+ "<div id='"+summaryTabId+"' class='tabcontent code'>" + summarySnippet + "</div>"
 				+ "<div id='"+httpTabId+"' class='tabcontent code'>" + detailedSnippet + "</div>"
-				+ "<div id='"+curlTabId+"' class='tabcontent code'>" + "......" + "\n</div>"
+				+ "<div id='"+curlTabId+"' class='tabcontent code'>" + curlSnippet + "\n</div>"
 				+ "<script>openTabById('summaryTabLink_"+tabId+"', \""+summaryTabId+"\");</script>";
 	}
 
@@ -75,6 +79,64 @@ public class TemplateUtil {
 				result.append("\n");
 			}
 			result.append("\n");			
+			result.append("-----  Response  -----\n");
+			// Response details
+			result.append("Status:   ");
+			result.append(httpResponse.getStatusLine());
+			result.append("\n");
+			// Response headers
+			result.append(buildHeadersString(httpResponse));
+			// Response body
+			if (httpResponse.getEntity() != null) {
+				String responseBody = "";
+				try {
+					responseBody = RestUtil.buildResponseBodyString(httpResponse);
+					responseBody = JsonUtil.prettyJson(responseBody);
+				} catch (Exception e) {
+					throw new DocMakerException(e);
+				}
+				if (responseBody != null && responseBody.length() > 0) {
+					result.append("\n");
+					result.append(responseBody);
+				}
+			}
+		} catch (Exception e) {
+			throw new DocMakerException(e);
+		}
+		return result.toString();
+	}
+
+	private static String buildCurlSnippet(HttpRequestBase httpRequest, HttpResponse httpResponse) {
+		StringBuilder result = new StringBuilder();
+		try {
+			boolean isPostOrPutRequestMethod = (httpRequest.getMethod().equalsIgnoreCase("POST") || httpRequest.getMethod().equalsIgnoreCase("PUT") ? true : false);
+			// Start snippet
+			result.append("-----  Request  -----\n");
+			result.append("curl -v");
+			if (isPostOrPutRequestMethod) {
+				result.append(" -X");
+			}
+			result.append(" " + httpRequest.getMethod() + " \\");
+			// Request headers
+			result.append(buildCurlHeadersString(httpRequest));
+			// Request body
+			if (isPostOrPutRequestMethod) {
+				result.append("-d ");
+				if (httpRequest instanceof HttpPost || httpRequest instanceof HttpPut) {
+					HttpEntityEnclosingRequestBase requestBase = (HttpEntityEnclosingRequestBase) httpRequest;
+					String requestBody = IOUtils.toString(requestBase.getEntity().getContent(), StandardCharsets.UTF_8);
+					requestBody = requestBody.replace("\n", "");
+					// Escaping as JavaScript looks very close to linux shell escaping. TODO Write a linux command line escaping.
+					requestBody = StringEscapeUtils.escapeJavaScript(requestBody);
+					result.append("\"" + requestBody + "\"");
+					result.append(" \\\n");
+				}
+			}
+			
+			// Request URL
+			result.append(httpRequest.getURI());
+			result.append("\n\n");
+			
 			result.append("-----  Response  -----\n");
 			// Response details
 			result.append("Status:   ");
@@ -151,6 +213,19 @@ public class TemplateUtil {
 				result.append(headers[i].getValue());
 			}
 			result.append("\n");
+		}
+		return result.toString();
+	}
+
+	private static String buildCurlHeadersString(HttpMessage httpRequest) {
+		StringBuilder result = new StringBuilder();
+		Header[] headers = httpRequest.getAllHeaders();
+		result.append("\n");
+		for (int i = 0; i < headers.length; i++) {
+			result.append("-H \"");
+			result.append(headers[i].getName() + ": ");
+			result.append(headers[i].getValue());
+			result.append("\" \\\n");
 		}
 		return result.toString();
 	}
