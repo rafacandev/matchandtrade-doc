@@ -1,25 +1,20 @@
 package com.matchandtrade.doc.maker;
 
-import java.util.List;
-import java.util.Map;
-
-import com.matchandtrade.doc.maker.rest.RestAuthenticationMaker;
-import com.matchandtrade.doc.maker.rest.RestItemMaker;
-import com.matchandtrade.doc.maker.rest.RestTradeMaker;
-import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
-import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
-import com.matchandtrade.doc.util.JsonUtil;
-import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RequestResponseUtil;
-import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
-import com.matchandtrade.rest.Json;
-import com.matchandtrade.rest.v1.json.AuthenticationJson;
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.github.rafasantos.restdocmaker.util.JsonUtil;
+import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
-import com.matchandtrade.rest.v1.json.UserJson;
 import com.matchandtrade.rest.v1.json.WantItemJson;
+
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 public class RestUseCaseMaker extends OutputMaker {
 	
@@ -51,160 +46,159 @@ public class RestUseCaseMaker extends OutputMaker {
 	public String buildDocContent() {
 		template = TemplateUtil.buildTemplate(getDocLocation());
 		
+		SnippetFactory snippetFactoryOlavo = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		Integer userIdOlavo = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
+
 		// OWNER_AUTHENTICATE_SNIPPET
-		RequestResponseHolder firstAuthenticate = RequestResponseUtil.buildAuthenticateRequestResponse();
-		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
-		String firstAuthenticateSnippet = TemplateUtil.buildSnippet(firstAuthenticate.getHttpRequest(), firstAuthenticate.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE_SNIPPET, firstAuthenticateSnippet);
+		Snippet authenticateSnippetOlavo = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
+		authenticateSnippetOlavo.getRequest().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE_SNIPPET, authenticateSnippetOlavo.asHtml());
 
 		// OWNER_AUTHENTICATIONS_SNIPPET
-		RequestResponseHolder firstAuthentication = RequestResponseUtil.buildGetRequestResponse(RestAuthenticationMaker.BASE_URL);
-		String firstAuthenticationsSnippet = TemplateUtil.buildSnippet(firstAuthentication.getHttpRequest(), firstAuthentication.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS_SNIPPET, firstAuthenticationsSnippet);
-		AuthenticationJson firstAuthenticationJson = JsonUtil.fromHttpResponse(firstAuthentication.getHttpResponse(), AuthenticationJson.class);
-
+		Snippet authenticationsSnippetOlavo = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
+		authenticationsSnippetOlavo.getRequest().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS_SNIPPET, authenticationsSnippetOlavo.asHtml());
+		
 		// OWNER_TRADES_POST_SNIPPET
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games in Ottawa");
-		tradeJson = handlePost(RestTradeMaker.BASE_URL + "/", tradeJson, OWNER_TRADES_POST_SNIPPET);
-		@SuppressWarnings("unchecked")
-		List<Map<Object,Object>> x = (List<Map<Object, Object>>) handleGet(
-				RestTradeMembershipMaker.BASE_URL + "?tradeId=" + tradeJson.getTradeId() + "&userId=" + firstAuthenticationJson.getUserId()
-				, OWNER_TRADE_MEMBERSHIP_SNIPPET
-				, List.class);
-		Integer ownerTradeMembershipId = (Integer) x.get(0).get("tradeMembershipId");
+		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
+		tradePostOwner.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_SNIPPET, tradePostOwner.asHtml());
+		tradeJson = JsonUtil.fromHttpResponse(tradePostOwner.getResponse(), TradeJson.class);
 		
+		//OWNER_TRADE_MEMBERSHIP_SNIPPET
+		RequestSpecification searchTradeMembershipOlavo = new RequestSpecBuilder()
+				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
+				.addParam("userId", userIdOlavo)
+				.addParam("tradeId", tradeJson.getTradeId())
+				.build();
+		Snippet searchTradeMembershipOlavoSnippet = SnippetFactory.makeSnippet(Method.GET, searchTradeMembershipOlavo, MatchAndTradeRestUtil.tradeMembershipsUrl()); 
+		searchTradeMembershipOlavoSnippet.getResponse().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADE_MEMBERSHIP_SNIPPET, searchTradeMembershipOlavoSnippet.asHtml());
+
 		// OWNER_ITEM_ONE_SNIPPET
-		ItemJson ownerItemOneJson = new ItemJson();
-		ownerItemOneJson.setName("Pandemic Legacy: Season 1");
-		ownerItemOneJson = handlePost(
-				RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL
-				, ownerItemOneJson
-				, OWNER_ITEM_ONE_SNIPPET);
-
+		Integer tradeMembershipIdOlavo = matchAndTradeApiFacadeOlavo.findTradeMembershipByUserIdAndTradeId(userIdOlavo, tradeJson.getTradeId()).getTradeMembershipId();
+		ItemJson pandemicOneJson = new ItemJson();
+		pandemicOneJson.setName("Pandemic Legacy: Season 1");
+		Snippet pandemicOneSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicOneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
+		pandemicOneSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_ONE_SNIPPET, pandemicOneSnippet.asHtml());
+		pandemicOneJson = JsonUtil.fromHttpResponse(pandemicOneSnippet.getResponse(), ItemJson.class);
+		
 		// OWNER_ITEM_TWO_SNIPPET
-		ItemJson ownerItemTwoJson = new ItemJson();
-		ownerItemTwoJson.setName("Pandemic Legacy: Season 2");
-		ownerItemTwoJson = handlePost(
-				RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL
-				, ownerItemTwoJson
-				, OWNER_ITEM_TWO_SNIPPET);
+		ItemJson pandemicTwoJson = new ItemJson();
+		pandemicTwoJson.setName("Pandemic Legacy: Season 2");
+		Snippet pandemicTwoSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicTwoJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
+		pandemicTwoSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_TWO_SNIPPET, pandemicTwoSnippet.asHtml());
+		pandemicTwoJson = JsonUtil.fromHttpResponse(pandemicTwoSnippet.getResponse(), ItemJson.class);
 		
-		// MEMBER_AUTHENTICATE_SNIPPET
-		RequestResponseHolder memberAuthenticate = RequestResponseUtil.buildAuthenticateRequestResponse();
-		RestUtil.setAuthenticationHeader(memberAuthenticate.getAuthorizationHeader());
-		String memberAuthenticateSnippet = TemplateUtil.buildSnippet(memberAuthenticate.getHttpRequest(), memberAuthenticate.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE_SNIPPET, memberAuthenticateSnippet);
+		// MEMBER SETUP
+		SnippetFactory snippetFactoryMaria = new SnippetFactory(MatchAndTradeRestUtil.nextAuthorizationHeader());
+		MatchAndTradeApiFacade matchAndTradeApiFacadeMaria = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		Integer userIdMaria = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
 
-		// MEMBER_AUTHENTICATIONS_SNIPPET		
-		RequestResponseHolder memberAuthentication = RequestResponseUtil.buildGetRequestResponse(RestAuthenticationMaker.BASE_URL);
-		String memberAuthenticationsSnippet = TemplateUtil.buildSnippet(memberAuthentication.getHttpRequest(), memberAuthentication.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS_SNIPPET, memberAuthenticationsSnippet);
-		UserJson memberUserJson = RestUtil.getAuthenticatedUser();
-		
-		// MEMBER_TRADES_MEMBERSHIP_SNIPPET	
-		TradeMembershipJson memberTradeMembershipJson = new TradeMembershipJson();
-		memberTradeMembershipJson.setTradeId(tradeJson.getTradeId());
-		memberTradeMembershipJson.setUserId(memberUserJson.getUserId());;
-		memberTradeMembershipJson = handlePost(RestTradeMembershipMaker.BASE_URL
-				, memberTradeMembershipJson
-				, MEMBER_TRADES_MEMBERSHIP_SNIPPET);
+		// MEMBER_AUTHENTICATE_SNIPPET
+		Snippet authenticateSnippetMaria = snippetFactoryMaria.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
+		authenticateSnippetMaria.getRequest().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE_SNIPPET, authenticateSnippetOlavo.asHtml());
+
+		// MEMBER_AUTHENTICATIONS_SNIPPET
+		Snippet authenticationsSnippetMaria = snippetFactoryMaria.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
+		authenticationsSnippetMaria.getRequest().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS_SNIPPET, authenticationsSnippetMaria.asHtml());
+
+		// MEMBER_TRADES_MEMBERSHIP_SNIPPET
+		TradeMembershipJson tradeMembershipJsonMaria = new TradeMembershipJson();
+		tradeMembershipJsonMaria.setTradeId(tradeJson.getTradeId());
+		tradeMembershipJsonMaria.setUserId(userIdMaria);
+		Snippet tradeMembershipSnippetMaria = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, tradeMembershipJsonMaria, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		tradeMembershipSnippetMaria.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_TRADES_MEMBERSHIP_SNIPPET, tradeMembershipSnippetMaria.asHtml());
 		
 		// MEMBER_ITEM_ONE
-		ItemJson memberItemOneJson = new ItemJson();
-		memberItemOneJson.setName("Stone Age");
-		memberItemOneJson = handlePost(
-				RestTradeMembershipMaker.BASE_URL + memberTradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL
-				, memberItemOneJson
-				, MEMBER_ITEM_ONE_SNIPPET);
+		Integer tradeMembershipIdMaria = matchAndTradeApiFacadeMaria.findTradeMembershipByUserIdAndTradeId(userIdMaria, tradeJson.getTradeId()).getTradeMembershipId();
+		ItemJson stoneAgeJson = new ItemJson();
+		stoneAgeJson.setName("Stone Age");
+		Snippet stoneAgeSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, stoneAgeJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		stoneAgeSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_ONE_SNIPPET, stoneAgeSnippet.asHtml());
+		stoneAgeJson = JsonUtil.fromHttpResponse(stoneAgeSnippet.getResponse(), ItemJson.class);
 
 		// MEMBER_ITEM_TWO
-		ItemJson memberItemTwoJson = new ItemJson();
-		memberItemTwoJson.setName("Carcassonne");
-		memberItemTwoJson = handlePost(
-				RestTradeMembershipMaker.BASE_URL + memberTradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL
-				, memberItemTwoJson
-				, MEMBER_ITEM_TWO_SNIPPET);
+		ItemJson carcassonneJson = new ItemJson();
+		carcassonneJson.setName("Carcassonne");
+		Snippet carcassonneSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, carcassonneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		carcassonneSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_TWO_SNIPPET, carcassonneSnippet.asHtml());
+		carcassonneJson = JsonUtil.fromHttpResponse(carcassonneSnippet.getResponse(), ItemJson.class);
 
-		// MEMBER_ITEM_TWO
-		ItemJson memberItemThreeJson = new ItemJson();
-		memberItemThreeJson.setName("No Thanks!");
-		memberItemThreeJson = handlePost(
-				RestTradeMembershipMaker.BASE_URL + memberTradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL
-				, memberItemThreeJson
-				, MEMBER_ITEM_THREE_SNIPPET);
-		
+		// MEMBER_ITEM_THREE
+		ItemJson noThanksJson = new ItemJson();
+		noThanksJson.setName("No Thanks!");
+		Snippet noThanksSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, noThanksJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		noThanksSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_THREE_SNIPPET, noThanksSnippet.asHtml());
+
 		// TRADE_MATCHING_ITEMS_SNIPPET
-		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
-		RequestResponseHolder tradeMatching = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeId, tradeJson);
-		String tradeMatchingSnippet = TemplateUtil.buildSnippet(tradeMatching.getHttpRequest(), tradeMatching.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradeMatchingSnippet);
+		Snippet tradePutOwner = snippetFactoryOlavo.makeSnippet(Method.PUT, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		tradePutOwner.getResponse().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradePutOwner.asHtml());
 		
 		// OWNER_WANT_ITEMS_ONE
-		WantItemJson ownerWantItem = new WantItemJson();
-		ownerWantItem.setPriority(0);
-		ownerWantItem.setItemId(memberItemOneJson.getItemId());
-		handlePost(
-				RestTradeMembershipMaker.BASE_URL + ownerTradeMembershipId + RestItemMaker.BASE_URL + "/" + ownerItemOneJson.getItemId() + RestWantItemMaker.BASE_URL,
-				ownerWantItem
-				, OWNER_WANT_ITEMS_ONE);
-		
+		WantItemJson wantsStoneAge = new WantItemJson();
+		wantsStoneAge.setPriority(0);
+		wantsStoneAge.setItemId(stoneAgeJson.getItemId());
+		Snippet wantsStoneAgeSnippet = snippetFactoryOlavo.makeSnippet(
+				Method.POST,
+				ContentType.JSON,
+				wantsStoneAge,
+				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdOlavo, pandemicOneJson.getItemId()));
+		wantsStoneAgeSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, OWNER_WANT_ITEMS_ONE, wantsStoneAgeSnippet.asHtml());
+
 		// MEMBER_WANT_ITEMS_ONE
-		RestUtil.setAuthenticationHeader(memberAuthenticate.getAuthorizationHeader());
-		WantItemJson memberWantItem = new WantItemJson();
-		memberWantItem.setPriority(0);
-		memberWantItem.setItemId(ownerItemOneJson.getItemId());
-		handlePost(
-				RestTradeMembershipMaker.BASE_URL + memberTradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + memberItemOneJson.getItemId() + RestWantItemMaker.BASE_URL
-				, memberWantItem
-				, MEMBER_WANT_ITEMS_ONE);
-		
+		WantItemJson wantsPandemicOne = new WantItemJson();
+		wantsPandemicOne.setPriority(1);
+		wantsPandemicOne.setItemId(pandemicOneJson.getItemId());
+		Snippet wantsPandemicOneSnippet = snippetFactoryMaria.makeSnippet(
+				Method.POST,
+				ContentType.JSON,
+				wantsPandemicOne,
+				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdMaria, stoneAgeJson.getItemId()));
+		wantsPandemicOneSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_WANT_ITEMS_ONE, wantsPandemicOneSnippet.asHtml());
+
 		// MEMBER_WANT_ITEMS_TWO
-		WantItemJson memberWantItem2 = new WantItemJson();
-		memberWantItem2.setPriority(1);
-		memberWantItem2.setItemId(ownerItemTwoJson.getItemId());
-		handlePost(
-				RestTradeMembershipMaker.BASE_URL + memberTradeMembershipJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + memberItemOneJson.getItemId() + RestWantItemMaker.BASE_URL
-				, memberWantItem2
-				, MEMBER_WANT_ITEMS_TWO);
-		
+		WantItemJson wantsPandemicTwo = new WantItemJson();
+		wantsPandemicTwo.setPriority(2);
+		wantsPandemicTwo.setItemId(pandemicTwoJson.getItemId());
+		Snippet wantsPandemicTwoSnippet = snippetFactoryMaria.makeSnippet(
+				Method.POST,
+				ContentType.JSON,
+				wantsPandemicTwo,
+				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdMaria, stoneAgeJson.getItemId()));
+		wantsPandemicTwoSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_WANT_ITEMS_TWO, wantsPandemicTwoSnippet.asHtml());
+
 		// TRADE_MATCHING_ITEMS_ENDED
-		RestUtil.setAuthenticationHeader(firstAuthenticate.getAuthorizationHeader());
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS_ENDED);
-		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
-		RequestResponseHolder tradeMatchingEnded = RequestResponseUtil.buildPutRequestResponse(RestTradeMaker.BASE_URL + "/" + tradeId, tradeJson);
-		String tradeMatchingEndedSnippet = TemplateUtil.buildSnippet(tradeMatchingEnded.getHttpRequest(), tradeMatchingEnded.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_ENDED, tradeMatchingEndedSnippet);
+		Snippet tradePutEndSnippet = snippetFactoryOlavo.makeSnippet(Method.PUT, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		tradePutEndSnippet.getResponse().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_ENDED, tradePutEndSnippet.asHtml());		
 		
 		// TRADE_RESULTS
-		handleGet(RestTradeMaker.BASE_URL + "/" + tradeId + "/results", TRADE_RESULTS);
+		Snippet tradeResultsSnippet = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.tradeResultsUrl(tradeId));
+		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultsSnippet.asHtml());
 		
 		return template;
 	}
 
-	@SuppressWarnings("unchecked")
-	private <T extends Json> T handlePost(String url, T requestBody, String placeHolder) {
-		RequestResponseHolder requestResponseHolder = RequestResponseUtil.buildPostRequestResponse(url, requestBody);
-		String snippet = TemplateUtil.buildSnippet(requestResponseHolder.getHttpRequest(), requestResponseHolder.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, placeHolder, snippet);
-		return (T) JsonUtil.fromHttpResponse(requestResponseHolder.getHttpResponse(), requestBody.getClass());
-	}
-
-	private <T> T handleGet(String url, String placeHolder, Class<T> clazz) {
-		return JsonUtil.fromString(handleGet(url, placeHolder), clazz);
-	}
-
-	private String handleGet(String url, String placeHolder) {
-		RequestResponseHolder requestResponseHolder = RequestResponseUtil.buildGetRequestResponse(url);
-		RestUtil.buildResponseBodyString(requestResponseHolder.getHttpResponse());
-		String snippet = TemplateUtil.buildSnippet(requestResponseHolder.getHttpRequest(), requestResponseHolder.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, placeHolder, snippet);
-		return RestUtil.buildResponseBodyString(requestResponseHolder.getHttpResponse());
-	}
-	
 	@Override
 	public String getDocLocation() {
 		return "use-cases.html";

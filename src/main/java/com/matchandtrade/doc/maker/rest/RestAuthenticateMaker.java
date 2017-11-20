@@ -1,16 +1,13 @@
 package com.matchandtrade.doc.maker.rest;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
-import org.apache.http.Header;
-import org.apache.http.HttpStatus;
-
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
-import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RequestResponseUtil;
-import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 
 public class RestAuthenticateMaker extends OutputMaker {
 
@@ -19,19 +16,21 @@ public class RestAuthenticateMaker extends OutputMaker {
 
 	@Override
 	public String buildDocContent() {
-		// AUTHENTICATE_SNIPPET
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-		RestUtil.setAuthenticationHeader(null);
-		RequestResponseHolder authenticateRequesResponse = RequestResponseUtil.buildAuthenticateRequestResponse();
-		String authenticateSnippet = TemplateUtil.buildSnippet(authenticateRequesResponse.getHttpRequest(), authenticateRequesResponse.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, authenticateSnippet);
+		SnippetFactory snippetFactory = new SnippetFactory();
 		
+		// AUTHENTICATE_SNIPPET
+		Snippet authenticateSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, authenticateSnippet.asHtml());
+		// Asserts that statusCode = 200 and header "Authorization" exists
+		authenticateSnippet.getResponse().then().statusCode(200).and().header("Authorization", notNullValue());
+
 		// SIGN_OUT_SNIPPET
-		List<Header> signOutHeaders = new ArrayList<>();
-		signOutHeaders.add(authenticateRequesResponse.getAuthorizationHeader());
-		RequestResponseHolder signOut = RequestResponseUtil.buildGetRequestResponse("/authenticate/sign-out", signOutHeaders, HttpStatus.SC_RESET_CONTENT);
-		String signOutSnippet = TemplateUtil.buildSnippet(signOut.getHttpRequest(), signOut.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_SNIPPET, signOutSnippet);
+		Snippet signOffSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.signOffUrl());
+		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_SNIPPET, signOffSnippet.asHtml());
+		// Asserts that statusCode = 205 and header "Authorization" does not exists
+		signOffSnippet.getResponse().then().statusCode(205).and().header("Authorization", nullValue());
+
 		return template;
 	}
 

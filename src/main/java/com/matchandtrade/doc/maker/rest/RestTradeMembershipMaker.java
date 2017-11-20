@@ -1,15 +1,22 @@
 package com.matchandtrade.doc.maker.rest;
 
-import org.apache.http.Header;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
-import com.matchandtrade.doc.util.JsonUtil;
-import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RequestResponseUtil;
-import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 
 public class RestTradeMembershipMaker extends OutputMaker {
@@ -24,73 +31,47 @@ public class RestTradeMembershipMaker extends OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
+		MatchAndTradeApiFacade matchAndTradeApiFacadePreviousAuthenticatedUser = new MatchAndTradeApiFacade();
+		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.nextAuthorizationHeader());
 
 		// TRADES_MEMBERSHIP_POST_SNIPPET
-		RequestResponseHolder post = buildPostJson("Board games in Vancouver", null);
-		TradeMembershipJson postJson = JsonUtil.fromHttpResponse(post.getHttpResponse(), TradeMembershipJson.class);
-		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet);
+		TradeJson tradeJson = matchAndTradeApiFacadePreviousAuthenticatedUser.createTrade("Board games in Vancouver");
+		TradeMembershipJson tradeMembershipJson = new TradeMembershipJson();
+		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
+		tradeMembershipJson.setUserId(MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		
+		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeMembershipJson, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		postSnippet.getResponse().then().statusCode(201).and().body("tradeMembershipId", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet.asHtml());
+		tradeMembershipJson = JsonUtil.fromHttpResponse(postSnippet.getResponse(), TradeMembershipJson.class);
+
 		// TRADES_MEMBERSHIP_GET_SNIPPET
-		TradeMembershipJson postResponseJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeMembershipJson.class);
-		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
-		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet);
+		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeMembershipsUrl(tradeMembershipJson.getTradeMembershipId()));
+		getSnippet.getResponse().then().statusCode(200).and().body("tradeMembershipId", equalTo(tradeMembershipJson.getTradeMembershipId()));
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_SNIPPET, getSnippet.asHtml());
 
 		// TRADES_MEMBERSHIP_GET_ALL_SNIPPET
-		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "?_pageNumber=1&_pageSize=3");
-		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet);
-
+		Snippet getAllSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeMembershipsUrl());
+		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_ALL_SNIPPET, getAllSnippet.asHtml());
+		
 		// TRADES_MEMBERSHIP_SEARCH_SNIPPET
-		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(
-			BASE_URL+ "?userId="
-			+ RestUtil.getAuthenticatedUser().getUserId()
-			+ "&tradeId="+postJson.getTradeId()+"&_pageNumber=1&_pageSize=3");
-		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet);
+		RequestSpecification searchRequest = new RequestSpecBuilder()
+				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
+				.addParam("userId", MatchAndTradeRestUtil.getLastAuthenticatedUserId())
+				.addParam("_pageNumber", "1")
+				.addParam("_pageSize", "1")
+				.build();
+		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradeMembershipsUrl()); 
+		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_SNIPPET, searchSnippet.asHtml());
 
 		// TRADES_MEMBERSHIP_DELETE_SNIPPET
-		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + postResponseJson.getTradeMembershipId());
-		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, delSnippet);
-		
-		return template;
-	}
-	
-	/**
-	 * Creates a new Trade with the given {@code tradeName} and calls @{code buildPostJson(TradeJson, Header}
-	 *
-	 * @param tradeName
-	 * @param newAuthenticationHeader
-	 * @return
-	 */
-	public static RequestResponseHolder buildPostJson(String tradeName, Header newAuthenticationHeader) {
-		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName(tradeName);
-		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse("/rest/v1/trades/", tradeJson);
-		TradeJson tradeJsonResponse = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
-		return buildPostJson(tradeJsonResponse, newAuthenticationHeader);
-	}
+		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.tradeMembershipsUrl(tradeMembershipJson.getTradeMembershipId()));
+		deleteSnippet.getResponse().then().statusCode(204);
+		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_SNIPPET, deleteSnippet.asHtml());
 
-	/**
-	 * Creates a new TradeMembership associated with the created Trade.
-	 * The created TradeMembership is a <i>member</i>. Since Trades creates a TradeMembership <i>owner</i> by default,
-	 * this method requires a <i>newAuthenticationHeader</i> to be used when creating the TradeMembership.
-	 * You can pass null as <i>newAuthenticationHeader</i> which is going result in a new authentication.
-	 *
-	 * @param tradeJson
-	 * @param newAuthenticationHeader
-	 * @return
-	 */
-	public static RequestResponseHolder buildPostJson(TradeJson tradeJson, Header newAuthenticationHeader) {
-		// Set authentication header
-		RestUtil.setAuthenticationHeader(newAuthenticationHeader);
-		// Create new TradeMembership, it is going to be member provided that newAuthenticationHeader is different from the current authentication header 
-		TradeMembershipJson tradeMembershipJson = new TradeMembershipJson();
-		tradeMembershipJson.setUserId(RestUtil.getAuthenticatedUser().getUserId());
-		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
-		return RequestResponseUtil.buildPostRequestResponse(BASE_URL, tradeMembershipJson);
+		return template;
 	}
 
 	@Override

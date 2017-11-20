@@ -16,6 +16,7 @@
 		<org.slf4j.version>1.7.25</org.slf4j.version>
 		<com.vladsch.flexmark-all.version>0.18.5</com.vladsch.flexmark-all.version>
 		<commons-lang.version>2.6</commons-lang.version>
+		<com.github.rafasantos.rest-doc-maker>1.0-SNAPSHOT</com.github.rafasantos.rest-doc-maker>
 	</properties>
 
 	<dependencies>
@@ -24,6 +25,13 @@
 			<groupId>com.matchandtrade</groupId>
 			<artifactId>matchandtrade-web-api</artifactId>
 			<version>${com.matchandtrade.matchandtrade-web-api.version}</version>
+		</dependency>
+		
+		<!-- REST Doc Maker -->
+		<dependency>
+			<groupId>com.github.rafasantos</groupId>
+			<artifactId>rest-doc-maker</artifactId>
+			<version>${com.github.rafasantos.rest-doc-maker}</version>
 		</dependency>
 
 		<!-- Apache HttpComponents -->

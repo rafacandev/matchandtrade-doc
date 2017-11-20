@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.matchandtrade.exception.DocMakerException;
+import com.matchandtrade.rest.v1.json.TradeJson;
+
+import io.restassured.response.Response;
 
 /**
  * Utility class for common JSON manipulations
@@ -22,11 +25,24 @@ public class JsonUtil {
 
 	// Utility classes, which are a collection of static members, are not meant to be instantiated.
 	private JsonUtil() { }
+
+	/**
+	 * Parse an JSON Object from a <code>Response</code>.
+	 * @param httpResponse
+	 * @return target json class
+	 */
+	public static TradeJson fromResponse(Response response, Class<TradeJson> type) {
+		try {
+			return fromString(response.body().asString(), type);
+		} catch (Exception e) {
+			throw new DocMakerException("Not able to parse from HttpResponse to Json object." + e);
+		}
+	}
 	
 	/**
-	 * Parse an JSON Object from a string.
-	 * @param o
-	 * @return JSON string
+	 * Parse an JSON Object from a <code>HttpResponse</code>.
+	 * @param httpResponse
+	 * @return target json class
 	 */
 	public static <T> T fromHttpResponse(HttpResponse httpResponse, Class<T> type ) {
 		try {

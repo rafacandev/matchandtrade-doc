@@ -1,15 +1,21 @@
 package com.matchandtrade.doc.maker.rest;
 
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
-import com.matchandtrade.doc.util.JsonUtil;
-import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RequestResponseUtil;
-import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.WantItemJson;
+
+import static org.hamcrest.Matchers.*;
+
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
 
 
 public class RestWantItemMaker extends OutputMaker {
@@ -23,49 +29,42 @@ public class RestWantItemMaker extends OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
-		// Create a trade membership
-		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName("Board games in Calgary");
-		RequestResponseHolder tradeRRH = RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL + "/", tradeJson);
-		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(tradeRRH.getHttpResponse()), TradeJson.class);
+		// Setup owner item
+		MatchAndTradeApiFacade matchAndTradeApiFacadeOwner = new MatchAndTradeApiFacade();
+		TradeJson tradeOwner = matchAndTradeApiFacadeOwner.createTrade("Owner");
+		TradeMembershipJson tradeMembershipOwner = matchAndTradeApiFacadeOwner.findTradeMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), tradeOwner.getTradeId());
+		ItemJson alphaJson = matchAndTradeApiFacadeOwner.createItem(tradeMembershipOwner, "Alpha");
+		SnippetFactory snippetFactoryOwner = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
-		// TradeMembership alpha
-		RequestResponseHolder tradeMembershipAlpha = RestTradeMembershipMaker.buildPostJson(tradeJson, null);
-		TradeMembershipJson tradeMembershipAlphaJson = JsonUtil.fromHttpResponse(tradeMembershipAlpha.getHttpResponse(), TradeMembershipJson.class);
-		// Create item alpha
-		ItemJson itemAlphaJson = new ItemJson();
-		itemAlphaJson.setName("Libertalia");
-		RequestResponseHolder itemAlphaRRH = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipMaker.BASE_URL + tradeMembershipAlphaJson.getTradeMembershipId() + RestItemMaker.BASE_URL, itemAlphaJson);
-		itemAlphaJson = JsonUtil.fromHttpResponse(itemAlphaRRH.getHttpResponse(), ItemJson.class);
-
-		// TradeMembership beta
-		RequestResponseHolder tradeMembershipBeta = RestTradeMembershipMaker.buildPostJson(tradeJson, null);
-		TradeMembershipJson tradeMembershipBetaJson = JsonUtil.fromHttpResponse(tradeMembershipBeta.getHttpResponse(), TradeMembershipJson.class);
-		// Create item beta
-		ItemJson itemBetaJson = new ItemJson();
-		itemBetaJson.setName("Libertalia");
-		RequestResponseHolder itemBetaRRH = RequestResponseUtil.buildPostRequestResponse(RestTradeMembershipMaker.BASE_URL + tradeMembershipBetaJson.getTradeMembershipId() + RestItemMaker.BASE_URL, itemBetaJson);
-		itemBetaJson = JsonUtil.fromHttpResponse(itemBetaRRH.getHttpResponse(), ItemJson.class);
+		// Setup member item
+		MatchAndTradeApiFacade matchAndTradeApiFacadeMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.nextAuthorizationHeader());
+		TradeMembershipJson tradeMembershipMember = matchAndTradeApiFacadeMember.subscribeToTrade(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), tradeOwner.getTradeId());
+		ItemJson argentinaJson = matchAndTradeApiFacadeMember.createItem(tradeMembershipMember, "Argentina");
 		
 		// WANT_ITEMS_POST_SNIPPET: alpha wants beta
-		String url = RestTradeMembershipMaker.BASE_URL + tradeMembershipAlphaJson.getTradeMembershipId() + RestItemMaker.BASE_URL + "/" + itemAlphaJson.getItemId() + BASE_URL;
-		WantItemJson wantItemJson = new WantItemJson();
-		wantItemJson.setPriority(1);
-		wantItemJson.setItemId(itemBetaJson.getItemId());
-		RequestResponseHolder wantItemRRH = RequestResponseUtil.buildPostRequestResponse(url, wantItemJson);
-		wantItemJson = JsonUtil.fromHttpResponse(wantItemRRH.getHttpResponse(), WantItemJson.class);
-		String wantItemSnippet = TemplateUtil.buildSnippet(wantItemRRH.getHttpRequest(), wantItemRRH.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_SNIPPET, wantItemSnippet);
+		WantItemJson wantsBetaPriorityOne = new WantItemJson();
+		wantsBetaPriorityOne.setItemId(argentinaJson.getItemId());
+		wantsBetaPriorityOne.setPriority(1);
+		Snippet postSnippet = snippetFactoryOwner.makeSnippet(
+				Method.POST,
+				ContentType.JSON,
+				wantsBetaPriorityOne,
+				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
+		postSnippet.getResponse().then().statusCode(201).and().body("wantItemId", notNullValue());
+		wantsBetaPriorityOne = JsonUtil.fromHttpResponse(postSnippet.getResponse(), WantItemJson.class);
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_SNIPPET, postSnippet.asHtml());
 		
 		// WANT_ITEMS_GET_SNIPPET
-		RequestResponseHolder wantItemGetRRH = RequestResponseUtil.buildGetRequestResponse(url + "/" + wantItemJson.getWantItemId());
-		String wantItemGetSnippet = TemplateUtil.buildSnippet(wantItemGetRRH.getHttpRequest(), wantItemGetRRH.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_SNIPPET, wantItemGetSnippet);
-
+		Snippet getSnippet = snippetFactoryOwner.makeSnippet(
+					MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId(), wantsBetaPriorityOne.getWantItemId())
+				);
+		getSnippet.getResponse().then().statusCode(200).and().body("wantItemId", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_SNIPPET, getSnippet.asHtml());
+		
 		// WANT_ITEMS_GET_ALL_SNIPPET
-		RequestResponseHolder wantItemGetAllRRH = RequestResponseUtil.buildGetRequestResponse(url + "?_pageNumber=1&_pageSize=3");
-		String wantItemGetAllSnippet = TemplateUtil.buildSnippet(wantItemGetAllRRH.getHttpRequest(), wantItemGetAllRRH.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_ALL_SNIPPET, wantItemGetAllSnippet);
+		Snippet getAllSnippet = snippetFactoryOwner.makeSnippet(MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
+		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_ALL_SNIPPET, getAllSnippet.asHtml());
 		
 		return template;
 	}

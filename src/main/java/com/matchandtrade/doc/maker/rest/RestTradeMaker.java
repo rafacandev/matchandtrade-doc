@@ -1,17 +1,27 @@
 package com.matchandtrade.doc.maker.rest;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.*;
+
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.JsonUtil;
-import com.matchandtrade.doc.util.RequestResponseHolder;
-import com.matchandtrade.doc.util.RestUtil;
-import com.matchandtrade.doc.util.RequestResponseUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
+
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 
 public class RestTradeMaker extends OutputMaker {
 	
+	//TODO remove
 	public static final String BASE_URL = "/rest/v1/trades";
 	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
@@ -23,45 +33,51 @@ public class RestTradeMaker extends OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-
+		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		
 		// TRADES_POST_SNIPPET
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games");
-		RequestResponseHolder post = RequestResponseUtil.buildPostRequestResponse(BASE_URL + "/", tradeJson);
-		String postSnippet = TemplateUtil.buildSnippet(post.getHttpRequest(), post.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet);
-		tradeJson = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
+		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
+		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
+		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet.asHtml());
+		tradeJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeJson.class);
 		
 		// TRADES_PUT_SNIPPET
-		tradeJson.setName("Board games in Toronto");
-		tradeJson.setState(State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
-		RequestResponseHolder put = RequestResponseUtil.buildPutRequestResponse(BASE_URL + "/" + tradeId, tradeJson);
-		String putSnippet = TemplateUtil.buildSnippet(put.getHttpRequest(), put.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet);
+		tradeJson.setName("Board games in Toronto");
+		tradeJson.setState(State.MATCHING_ITEMS);
+		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(tradeJson.getName()));
+		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet.asHtml());
 		
 		// TRADES_GET_SNIPPET
-		TradeJson postResponse = JsonUtil.fromString(RestUtil.buildResponseBodyString(post.getHttpResponse()), TradeJson.class);
-		RequestResponseHolder get = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "/" + postResponse.getTradeId());
-		String getSnippet = TemplateUtil.buildSnippet(get.getHttpRequest(), get.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet);
-
+		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradesUrl(tradeId));
+		getSnippet.getRequest().then().statusCode(200).and().body("tradeId", equalTo(tradeId));
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet.asHtml());
+		
 		// TRADES_SEARCH_SNIPPET
-		RequestResponseHolder search = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "?name=Board%20games%20in%20Toronto&_pageNumber=1&_pageSize=2");
-		String searchSnippet = TemplateUtil.buildSnippet(search.getHttpRequest(), search.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet);
+		RequestSpecification searchRequest = new RequestSpecBuilder()
+				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
+				.addParam("name", "Board games in Toronto")
+				.addParam("_pageNumber", "1")
+				.addParam("_pageSize", "1")
+				.build();
+		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradesUrl()); 
+		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", equalTo("1"));
+		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet.asHtml());
 
 		// TRADES_GET_ALL_SNIPPET
-		RequestResponseHolder getAll = RequestResponseUtil.buildGetRequestResponse(BASE_URL + "/");
-		String getAllSnippet = TemplateUtil.buildSnippet(getAll.getHttpRequest(), getAll.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getAllSnippet);
+		Snippet getAllSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradesUrl());
+		getAllSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", notNullValue());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getSnippet.asHtml());
 		
 		// TRADES_DELETE_SNIPPET
-		RequestResponseHolder del = RequestResponseUtil.buildDeleteRequestResponse(BASE_URL + "/" + postResponse.getTradeId());
-		String delSnippet = TemplateUtil.buildSnippet(del.getHttpRequest(), del.getHttpResponse());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, delSnippet);
-		
+		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		deleteSnippet.getResponse().then().statusCode(204);
+		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, deleteSnippet.asHtml());
+
 		return template;
 	}
 

@@ -73,9 +73,9 @@ public class DocContentMaker {
 				FileUtils.write(docFile, docContent, StandardCharsets.UTF_8);
 				report.append("Success.\n");
 			}
-		} catch (Exception e) {
+		} catch (Throwable t) {
 			report.append("Failed.\n");
-			throw new DocMakerException(e);
+			throw new DocMakerException(t);
 		} finally {
 			report.append("========================================");
 		}

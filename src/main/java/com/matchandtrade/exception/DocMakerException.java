@@ -5,14 +5,14 @@ public class DocMakerException extends RuntimeException {
 	private static final long serialVersionUID = -5955298202431584165L;
 	private String message;
 
-	public DocMakerException(Exception e) {
-		super(e);
-		this.message = e.getMessage();
+	public DocMakerException(Throwable t) {
+		super(t);
+		this.message = t.getMessage();
 		
 	}
 
-	public DocMakerException(Object objectThrowingException, Exception e) {
-		message = "Error on class: " + objectThrowingException.getClass().getSimpleName() + ". Exception message: " + e.getMessage();
+	public DocMakerException(Object objectThrowingException, Throwable t) {
+		message = "Error on class: " + objectThrowingException.getClass().getSimpleName() + ". Exception message: " + t.getMessage();
 	}
 	
 	public DocMakerException(String message) {
