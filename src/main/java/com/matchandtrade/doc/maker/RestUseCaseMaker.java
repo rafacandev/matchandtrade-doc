@@ -39,12 +39,9 @@ public class RestUseCaseMaker extends OutputMaker {
 	private static final String TRADE_MATCHING_ITEMS_ENDED = "TRADE_MATCHING_ITEMS_ENDED"; 
 	private static final String TRADE_RESULTS = "TRADE_RESULTS";
 	
-	private String template = "";
-	
-	
 	@Override
 	public String buildDocContent() {
-		template = TemplateUtil.buildTemplate(getDocLocation());
+		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
 		SnippetFactory snippetFactoryOlavo = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
@@ -133,7 +130,6 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet carcassonneSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, carcassonneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		carcassonneSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_TWO_SNIPPET, carcassonneSnippet.asHtml());
-		carcassonneJson = JsonUtil.fromHttpResponse(carcassonneSnippet.getResponse(), ItemJson.class);
 
 		// MEMBER_ITEM_THREE
 		ItemJson noThanksJson = new ItemJson();

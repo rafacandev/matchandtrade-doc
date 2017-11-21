@@ -7,8 +7,8 @@ import static org.hamcrest.Matchers.*;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
-import com.matchandtrade.doc.util.JsonUtil;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
@@ -21,9 +21,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class RestTradeMaker extends OutputMaker {
 	
-	//TODO remove
-	public static final String BASE_URL = "/rest/v1/trades";
-	public static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
+	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
 	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
 	private static final String TRADES_DELETE_SNIPPET = "TRADES_DELETE_SNIPPET";
@@ -41,7 +39,7 @@ public class RestTradeMaker extends OutputMaker {
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet.asHtml());
-		tradeJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeJson.class);
+		tradeJson = JsonUtil.fromHttpResponse(postSnippet.getResponse(), TradeJson.class);
 		
 		// TRADES_PUT_SNIPPET
 		Integer tradeId = tradeJson.getTradeId();

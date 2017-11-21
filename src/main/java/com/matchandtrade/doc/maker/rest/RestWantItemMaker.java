@@ -20,10 +20,9 @@ import io.restassured.http.Method;
 
 public class RestWantItemMaker extends OutputMaker {
 	
-	public static final String BASE_URL = "/want-items";
-	public static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";
-	public static final String WANT_ITEMS_GET_SNIPPET = "WANT_ITEMS_GET_SNIPPET";
-	public static final String WANT_ITEMS_GET_ALL_SNIPPET = "WANT_ITEMS_GET_ALL_SNIPPET";
+	private static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";
+	private static final String WANT_ITEMS_GET_SNIPPET = "WANT_ITEMS_GET_SNIPPET";
+	private static final String WANT_ITEMS_GET_ALL_SNIPPET = "WANT_ITEMS_GET_ALL_SNIPPET";
 	
 	@Override
 	public String buildDocContent() {

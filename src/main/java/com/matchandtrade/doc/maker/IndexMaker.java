@@ -1,6 +1,14 @@
 package com.matchandtrade.doc.maker;
 
-import com.matchandtrade.doc.util.TemplateUtil;
+import com.github.rafasantos.restdocmaker.template.Snippet;
+import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 public class IndexMaker extends OutputMaker {
 
@@ -9,19 +17,25 @@ public class IndexMaker extends OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-//		// REST_GUIDE_PAGINATION
-//		// Assuming that there are already other trades created by the other makers
-//		TradeJson tradeJson = new TradeJson();
-//		tradeJson.setName("Board games in Quebec");
-//		RequestResponseUtil.buildPostRequestResponse(RestTradeMaker.BASE_URL + "/", tradeJson);
-//		
-//		RequestResponseHolder paginationRRH = RequestResponseUtil.buildGetRequestResponse(RestTradeMaker.BASE_URL + "?_pageNumber=2&_pageSize=2");
-//		String paginationSnippet = TemplateUtil.buildSnippet(paginationRRH.getHttpRequest(), paginationRRH.getHttpResponse());
-//		// We want to make sure the pagination contains nextPage & previousPage
-//		AssertUtil.isTrue(paginationSnippet.contains("nextPage"));
-//		AssertUtil.isTrue(paginationSnippet.contains("previousPage"));
-//		
-//		return TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, paginationSnippet);
+
+		// REST_GUIDE_PAGINATION
+		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
+		matchAndTradeApiFacade.createTrade("Books in New York");
+		matchAndTradeApiFacade.createTrade("Books in Paris");
+		matchAndTradeApiFacade.createTrade("Books in Lima");
+		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		RequestSpecification requestSpecification = new RequestSpecBuilder()
+				.addParam("_pageNumber", 2)
+				.addParam("_pageSize", 2)
+				.build();
+		Snippet paginationSnippet = snippetFactory.makeSnippet(
+				Method.GET,
+				requestSpecification,
+				MatchAndTradeRestUtil.tradesUrl()
+		);
+
+		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, paginationSnippet.asHtml());
+
 		return template;
 	}
 

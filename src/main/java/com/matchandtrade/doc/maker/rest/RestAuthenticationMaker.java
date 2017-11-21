@@ -10,9 +10,7 @@ import static org.hamcrest.Matchers.*;
 
 public class RestAuthenticationMaker extends OutputMaker {
 	
-	public static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
-	// TODO: Remove
-	public static final String BASE_URL = "/rest/v1/authentications/";
+	private static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
 
 	@Override
 	public String buildDocContent() {

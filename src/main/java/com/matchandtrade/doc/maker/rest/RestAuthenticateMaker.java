@@ -11,8 +11,8 @@ import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 
 public class RestAuthenticateMaker extends OutputMaker {
 
-	public static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
-	public static final String SIGN_OUT_SNIPPET = "SIGN_OUT_SNIPPET";
+	private static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
+	private static final String SIGN_OUT_SNIPPET = "SIGN_OUT_SNIPPET";
 
 	@Override
 	public String buildDocContent() {

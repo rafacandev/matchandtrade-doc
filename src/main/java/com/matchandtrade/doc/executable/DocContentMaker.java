@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,6 @@ import com.matchandtrade.doc.maker.rest.RestTradeMaker;
 import com.matchandtrade.doc.maker.rest.RestTradeMembershipMaker;
 import com.matchandtrade.doc.maker.rest.RestUserMaker;
 import com.matchandtrade.doc.maker.rest.RestWantItemMaker;
-import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.exception.DocMakerException;
 
 public class DocContentMaker {

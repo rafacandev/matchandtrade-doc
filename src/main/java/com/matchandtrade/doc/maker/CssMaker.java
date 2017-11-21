@@ -1,6 +1,7 @@
 package com.matchandtrade.doc.maker;
 
-import com.matchandtrade.doc.util.TemplateUtil;
+
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 
 public class CssMaker extends OutputMaker {
 

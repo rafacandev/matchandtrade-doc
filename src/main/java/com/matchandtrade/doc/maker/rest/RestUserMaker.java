@@ -6,9 +6,9 @@ import static org.hamcrest.Matchers.hasKey;
 
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
+import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
-import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.http.ContentType;
@@ -17,8 +17,6 @@ import io.restassured.http.Method;
 
 public class RestUserMaker extends OutputMaker {
 	
-	// TODO: Remove
-	public static final String BASE_URL = "/rest/v1/users/";
 	private static final String USERS_GET_SNIPPET = "USERS_GET_SNIPPET";
 	private static final String USERS_PUT_SNIPPET = "USERS_PUT_SNIPPET";
 	

@@ -21,13 +21,11 @@ import io.restassured.specification.RequestSpecification;
 
 public class RestItemMaker extends OutputMaker {
 	
-	// TODO remove
-	public static final String BASE_URL = "/items";
-	public static final String ITEMS_POST_SNIPPET = "ITEMS_POST_SNIPPET";
-	public static final String ITEMS_PUT_SNIPPET = "ITEMS_PUT_SNIPPET";
-	public static final String ITEMS_GET_SNIPPET = "ITEMS_GET_SNIPPET";
-	public static final String ITEMS_SEARCH_SNIPPET = "ITEMS_SEARCH_SNIPPET";
-	public static final String ITEMS_GET_ALL_SNIPPET = "ITEMS_GET_ALL_SNIPPET";
+	private static final String ITEMS_POST_SNIPPET = "ITEMS_POST_SNIPPET";
+	private static final String ITEMS_PUT_SNIPPET = "ITEMS_PUT_SNIPPET";
+	private static final String ITEMS_GET_SNIPPET = "ITEMS_GET_SNIPPET";
+	private static final String ITEMS_SEARCH_SNIPPET = "ITEMS_SEARCH_SNIPPET";
+	private static final String ITEMS_GET_ALL_SNIPPET = "ITEMS_GET_ALL_SNIPPET";
 	
 	@Override
 	public String buildDocContent() {
