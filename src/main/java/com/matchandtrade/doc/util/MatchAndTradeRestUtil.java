@@ -6,13 +6,14 @@ import java.util.Map;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
+import com.matchandtrade.doc.config.PropertiesLoader;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.http.Header;
 
 public class MatchAndTradeRestUtil {
 	
-	private static String baseUrl = "http://localhost:8081";
+	private static String baseUrl = PropertiesLoader.serverUrl();
 	private static Header lastAuthorizationHeader;
 	private static final SnippetFactory snippetFactory = new SnippetFactory();
 	

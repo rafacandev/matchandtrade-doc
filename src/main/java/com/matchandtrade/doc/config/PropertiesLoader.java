@@ -1,11 +1,17 @@
 package com.matchandtrade.doc.config;
 
 import com.matchandtrade.config.AppConfigurationProperties;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class PropertiesLoader {
 	
 	public enum Key {
-		CONFIG_FILE(AppConfigurationProperties.Keys.CONFIG_FILE.getKey(), "src/config/matchandtrade.properties"),
+		CONFIG_FILE(AppConfigurationProperties.Keys.CONFIG_FILE.getKey(), "config/matchandtrade.properties"),
 		DESTINATION_FOLDER("matchandtrade.doc.destination.folder","target/doc-maker"),
 		STOP_WEBSERVER("matchandtrade.doc.stop.webserver","true");
 
@@ -44,6 +50,16 @@ public class PropertiesLoader {
 				System.setProperty(Key.values()[i].getKey(), Key.values()[i].getDefaultValue());
 			}
 		}
+	}
+
+	public static void loadConfigurationProperties(String configFilePath) throws IOException {
+		File configFile = new File(configFilePath);
+		InputStream configFileAsInputStream = FileUtils.openInputStream(configFile);
+		Properties configProperties = new Properties();
+		configProperties.load(configFileAsInputStream);
+		configProperties.entrySet().forEach( e ->
+				System.setProperty(e.getKey().toString(), e.getValue().toString())
+		);
 	}
 	
 	public static String serverUrl() {
