@@ -63,7 +63,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		tradePostOwner.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_SNIPPET, tradePostOwner.asHtml());
-		tradeJson = JsonUtil.fromHttpResponse(tradePostOwner.getResponse(), TradeJson.class);
+		tradeJson = JsonUtil.fromResponse(tradePostOwner.getResponse(), TradeJson.class);
 		
 		//OWNER_TRADE_MEMBERSHIP_SNIPPET
 		RequestSpecification searchTradeMembershipOlavo = new RequestSpecBuilder()
@@ -82,7 +82,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet pandemicOneSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicOneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicOneSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_ONE_SNIPPET, pandemicOneSnippet.asHtml());
-		pandemicOneJson = JsonUtil.fromHttpResponse(pandemicOneSnippet.getResponse(), ItemJson.class);
+		pandemicOneJson = JsonUtil.fromResponse(pandemicOneSnippet.getResponse(), ItemJson.class);
 		
 		// OWNER_ITEM_TWO_SNIPPET
 		ItemJson pandemicTwoJson = new ItemJson();
@@ -90,7 +90,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet pandemicTwoSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicTwoJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicTwoSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_TWO_SNIPPET, pandemicTwoSnippet.asHtml());
-		pandemicTwoJson = JsonUtil.fromHttpResponse(pandemicTwoSnippet.getResponse(), ItemJson.class);
+		pandemicTwoJson = JsonUtil.fromResponse(pandemicTwoSnippet.getResponse(), ItemJson.class);
 		
 		// MEMBER SETUP
 		SnippetFactory snippetFactoryMaria = new SnippetFactory(MatchAndTradeRestUtil.nextAuthorizationHeader());
@@ -122,7 +122,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet stoneAgeSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, stoneAgeJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		stoneAgeSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_ONE_SNIPPET, stoneAgeSnippet.asHtml());
-		stoneAgeJson = JsonUtil.fromHttpResponse(stoneAgeSnippet.getResponse(), ItemJson.class);
+		stoneAgeJson = JsonUtil.fromResponse(stoneAgeSnippet.getResponse(), ItemJson.class);
 
 		// MEMBER_ITEM_TWO
 		ItemJson carcassonneJson = new ItemJson();

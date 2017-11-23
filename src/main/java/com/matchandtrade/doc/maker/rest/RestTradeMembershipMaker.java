@@ -42,7 +42,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeMembershipJson, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("tradeMembershipId", notNullValue());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet.asHtml());
-		tradeMembershipJson = JsonUtil.fromHttpResponse(postSnippet.getResponse(), TradeMembershipJson.class);
+		tradeMembershipJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeMembershipJson.class);
 
 		// TRADES_MEMBERSHIP_GET_SNIPPET
 		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeMembershipsUrl(tradeMembershipJson.getTradeMembershipId()));

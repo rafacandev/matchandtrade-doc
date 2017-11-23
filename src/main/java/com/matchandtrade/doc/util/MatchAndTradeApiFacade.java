@@ -40,7 +40,7 @@ public class MatchAndTradeApiFacade {
 				.body(tradeJson)
 				.when()
 				.post(MatchAndTradeRestUtil.tradesUrl() + "/");
-		return JsonUtil.fromHttpResponse(response, TradeJson.class);
+		return JsonUtil.fromResponse(response, TradeJson.class);
 	}
 
 	public TradeMembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
@@ -54,7 +54,7 @@ public class MatchAndTradeApiFacade {
 				.body(requestBody)
 				.when()
 				.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
-		return JsonUtil.fromHttpResponse(response, TradeMembershipJson.class);
+		return JsonUtil.fromResponse(response, TradeMembershipJson.class);
 	}
 
 	public TradeMembershipJson findTradeMembershipByUserIdAndTradeId(Integer userId, Integer tradeId) {

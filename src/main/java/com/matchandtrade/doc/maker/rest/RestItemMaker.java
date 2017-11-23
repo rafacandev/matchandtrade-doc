@@ -43,7 +43,7 @@ public class RestItemMaker extends OutputMaker {
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId) + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("name", equalTo(itemJson.getName()));
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_POST_SNIPPET, postSnippet.asHtml());
-		itemJson = JsonUtil.fromHttpResponse(postSnippet.getResponse(), ItemJson.class);
+		itemJson = JsonUtil.fromResponse(postSnippet.getResponse(), ItemJson.class);
 		
 		// ITEMS_PUT_SNIPPET
 		Integer itemId = itemJson.getItemId();

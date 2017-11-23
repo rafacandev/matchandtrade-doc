@@ -39,7 +39,7 @@ public class RestTradeMaker extends OutputMaker {
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet.asHtml());
-		tradeJson = JsonUtil.fromHttpResponse(postSnippet.getResponse(), TradeJson.class);
+		tradeJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeJson.class);
 		
 		// TRADES_PUT_SNIPPET
 		Integer tradeId = tradeJson.getTradeId();

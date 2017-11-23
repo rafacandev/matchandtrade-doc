@@ -50,7 +50,7 @@ public class RestWantItemMaker extends OutputMaker {
 				wantsBetaPriorityOne,
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
 		postSnippet.getResponse().then().statusCode(201).and().body("wantItemId", notNullValue());
-		wantsBetaPriorityOne = JsonUtil.fromHttpResponse(postSnippet.getResponse(), WantItemJson.class);
+		wantsBetaPriorityOne = JsonUtil.fromResponse(postSnippet.getResponse(), WantItemJson.class);
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_SNIPPET, postSnippet.asHtml());
 		
 		// WANT_ITEMS_GET_SNIPPET
