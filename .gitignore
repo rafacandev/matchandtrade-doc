@@ -1,0 +1,14 @@
+# Intellij
+# ========
+.idea
+.idea_modules/
+*.iml
+
+# Eclipse
+# =======
+.project
+.classpath
+
+# Maven
+# =====
+target
