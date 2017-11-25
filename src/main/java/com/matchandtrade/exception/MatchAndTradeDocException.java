@@ -1,21 +1,21 @@
 package com.matchandtrade.exception;
 
-public class DocMakerException extends RuntimeException {
+public class MatchAndTradeDocException extends RuntimeException {
 
 	private static final long serialVersionUID = -5955298202431584165L;
 	private String message;
 
-	public DocMakerException(Throwable t) {
+	public MatchAndTradeDocException(Throwable t) {
 		super(t);
 		this.message = t.getMessage();
 		
 	}
 
-	public DocMakerException(Object objectThrowingException, Throwable t) {
+	public MatchAndTradeDocException(Object objectThrowingException, Throwable t) {
 		message = "Error on class: " + objectThrowingException.getClass().getSimpleName() + ". Exception message: " + t.getMessage();
 	}
 	
-	public DocMakerException(String message) {
+	public MatchAndTradeDocException(String message) {
 		this.message = message;
 	}
 

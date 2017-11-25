@@ -2,6 +2,7 @@ package com.matchandtrade.doc.maker;
 
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
@@ -13,13 +14,18 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
 
-public class IndexMaker extends OutputMaker {
+public class IndexRestDocMaker implements RestDocMaker {
 
 	public static final String REST_GUIDE_PAGINATION = "REST_GUIDE_PAGINATION";
-	
+
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
+	public String contentFilePath() {
+		return "index.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// REST_GUIDE_PAGINATION
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
@@ -41,11 +47,7 @@ public class IndexMaker extends OutputMaker {
 
 		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, paginationSnippet.asHtml());
 
-		return template;
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	@Override
-	public String getDocLocation() {
-		return "index.html";
-	}
 }

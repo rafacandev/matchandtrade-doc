@@ -1,5 +1,6 @@
 package com.matchandtrade.doc.maker;
 
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
@@ -16,7 +17,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
 
-public class RestUseCaseMaker extends OutputMaker {
+public class UseCaseRestDocMaker implements RestDocMaker {
 	
 	private static final String MEMBER_AUTHENTICATE_SNIPPET = "MEMBER_AUTHENTICATE_SNIPPET";
 	private static final String MEMBER_AUTHENTICATIONS_SNIPPET = "MEMBER_AUTHENTICATIONS_SNIPPET";
@@ -38,10 +39,15 @@ public class RestUseCaseMaker extends OutputMaker {
 	private static final String TRADE_MATCHING_ITEMS_SNIPPET = "TRADE_MATCHING_ITEMS_SNIPPET"; 
 	private static final String TRADE_MATCHING_ITEMS_ENDED = "TRADE_MATCHING_ITEMS_ENDED"; 
 	private static final String TRADE_RESULTS = "TRADE_RESULTS";
-	
+
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
+	public String contentFilePath() {
+		return "use-cases.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		
 		SnippetFactory snippetFactoryOlavo = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
@@ -191,11 +197,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Snippet tradeResultsSnippet = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.tradeResultsUrl(tradeId));
 		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultsSnippet.asHtml());
 		
-		return template;
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	@Override
-	public String getDocLocation() {
-		return "use-cases.html";
-	}
 }

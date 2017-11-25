@@ -1,10 +1,12 @@
 package com.matchandtrade.doc.maker.rest;
 
+import static org.hamcrest.Matchers.notNullValue;
+
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
-import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.ItemJson;
@@ -12,22 +14,26 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.WantItemJson;
 
-import static org.hamcrest.Matchers.*;
-
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 
 
-public class RestWantItemMaker extends OutputMaker {
+public class WantItemRestDocMaker implements RestDocMaker {
 	
 	private static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";
 	private static final String WANT_ITEMS_GET_SNIPPET = "WANT_ITEMS_GET_SNIPPET";
 	private static final String WANT_ITEMS_GET_ALL_SNIPPET = "WANT_ITEMS_GET_ALL_SNIPPET";
-	
+
+
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
-		
+	public String contentFilePath() {
+		return "want-items.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
+
 		// Setup owner item
 		MatchAndTradeApiFacade matchAndTradeApiFacadeOwner = new MatchAndTradeApiFacade();
 		TradeJson tradeOwner = matchAndTradeApiFacadeOwner.createTrade("Owner");
@@ -64,12 +70,7 @@ public class RestWantItemMaker extends OutputMaker {
 		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
 		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_ALL_SNIPPET, getAllSnippet.asHtml());
 		
-		return template;
-	}
-
-	@Override
-	public String getDocLocation() {
-		return "want-items.html";
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 }

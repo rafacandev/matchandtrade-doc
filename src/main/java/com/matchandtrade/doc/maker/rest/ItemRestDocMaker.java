@@ -3,11 +3,11 @@ package com.matchandtrade.doc.maker.rest;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
-import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.ItemJson;
@@ -19,17 +19,22 @@ import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
 
 
-public class RestItemMaker extends OutputMaker {
+public class ItemRestDocMaker implements RestDocMaker {
 	
 	private static final String ITEMS_POST_SNIPPET = "ITEMS_POST_SNIPPET";
 	private static final String ITEMS_PUT_SNIPPET = "ITEMS_PUT_SNIPPET";
 	private static final String ITEMS_GET_SNIPPET = "ITEMS_GET_SNIPPET";
 	private static final String ITEMS_SEARCH_SNIPPET = "ITEMS_SEARCH_SNIPPET";
 	private static final String ITEMS_GET_ALL_SNIPPET = "ITEMS_GET_ALL_SNIPPET";
-	
+
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
+	public String contentFilePath() {
+		return "items.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
 		
@@ -73,12 +78,7 @@ public class RestItemMaker extends OutputMaker {
 		searchSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", "1");
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_SEARCH_SNIPPET, searchSnippet.asHtml());
 		
-		return template;
-	}
-
-	@Override
-	public String getDocLocation() {
-		return "items.html";
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 }

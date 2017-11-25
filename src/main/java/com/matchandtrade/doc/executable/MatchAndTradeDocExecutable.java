@@ -13,9 +13,9 @@ import com.matchandtrade.doc.config.PropertiesLoader;
  * Main executable class for <pre>matchandtrade-cod</pre>
  * by default properties are loaded from <pre>src/config/matchandtrade.properties</pre>
  */
-public class DocMakerExecutable {
+public class MatchAndTradeDocExecutable {
 	
-	private static final Logger logger = LoggerFactory.getLogger(DocMakerExecutable.class);
+	private static final Logger logger = LoggerFactory.getLogger(MatchAndTradeDocExecutable.class);
 
 	public static void main(String[] arguments) throws Throwable {
 		logger.info("Loading environment variables and JVM properties as system properties.");
@@ -32,15 +32,13 @@ public class DocMakerExecutable {
 			logger.error("Not able to start Match And Trade web server. Exception message: {}", e.getMessage());
 		}
 		
-		DocContentMaker docContentMaker = new DocContentMaker(PropertiesLoader.destinationFolder());
+		MatchAndTradeContentBuilder docContentMaker = new MatchAndTradeContentBuilder(PropertiesLoader.destinationFolder());
 		try {
 			logger.info("Making documentation.");
-			docContentMaker.makeContent();
+			docContentMaker.buildContent();
 			logger.info("Document generation complete.");
-			logger.info(docContentMaker.getReport());		
 		} catch (Exception e) {
 			logger.error("Error when making the documentation. Exception message: {}", e.getMessage(), e);
-			logger.info(docContentMaker.getReport());
 			System.exit(-1);
 		} finally {
 			if (PropertiesLoader.stopWebService()) {

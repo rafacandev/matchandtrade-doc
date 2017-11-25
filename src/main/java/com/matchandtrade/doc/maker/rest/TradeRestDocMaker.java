@@ -4,11 +4,11 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
-import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
@@ -19,7 +19,7 @@ import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
 
 
-public class RestTradeMaker extends OutputMaker {
+public class TradeRestDocMaker implements RestDocMaker {
 	
 	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
 	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
@@ -29,8 +29,13 @@ public class RestTradeMaker extends OutputMaker {
 	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
 	
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
+	public String contentFilePath() {
+		return "trades.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
 		// TRADES_POST_SNIPPET
@@ -77,12 +82,7 @@ public class RestTradeMaker extends OutputMaker {
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, deleteSnippet.asHtml());
 
-		return template;
-	}
-
-	@Override
-	public String getDocLocation() {
-		return "trades.html";
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 }

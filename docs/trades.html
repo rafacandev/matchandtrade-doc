@@ -1,44 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Match and Trade - Documentation</title>
-
-<link rel='stylesheet' href='css/matchandtrade-doc-style.css'>
-
-<script>
-function openTab(evt, tabId) {
-    var i, tabcontent, tablinks;
-   	var tabIdEnding = tabId.substring(tabId.length-2);
-
-   	tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-    	if (tabcontent[i].id.endsWith(tabIdEnding)) {
-        	tabcontent[i].style.display = "none";
-    	}
-    }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-    	if (tablinks[i].id.endsWith(tabIdEnding)) {
-        	tablinks[i].className = tablinks[i].className.replace(" active", "");
-    	}
-    }
-	
-    document.getElementById(tabId).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-function openTabById(tabLinkId, tabId) {
-    document.getElementById(tabId).style.display = "block";
-    document.getElementById(tabId).className += " active";
-
-    document.getElementById(tabLinkId).className += " active";
-}
-
-</script>
-</head>
-<body>
+<html><head><title>REST Doc Maker</title></head>
+<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
 
 <h1>Trades</h1>
 <p>
@@ -141,14 +102,14 @@ function openTabById(tabLinkId, tabId) {
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_46' class='tablinks' onclick='openTab(event, "summaryTab_46")'>Summary</button><button id='httpTabLink_46' class='tablinks' onclick='openTab(event, "httpTab_46")'>HTTP</button><button id='curlTabLink_46' class='tablinks' onclick='openTab(event, "curlTab_46")'>curl</button></div><div id='summaryTab_46' class='tabcontent code'>POST http://localhost:8081/rest/v1/trades/
-Request:  {  &quot;name&quot; : &quot;Board games&quot;}
-Status:   HTTP/1.1 201 
-Response: {&quot;name&quot;:&quot;Board games&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:// ...</div><div id='httpTab_46' class='tabcontent code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_22' class='tablinks' onclick='openTab(event, "summaryTab_22")'>Summary</button><button id='httpTabLink_22' class='tablinks' onclick='openTab(event, "httpTab_22")'>HTTP</button><button id='curlTabLink_22' class='tablinks' onclick='openTab(event, "curlTab_22")'>curl</button></div><div id='summaryTab_22' class='tabcontent code'>Request:  POST http://localhost:8081/rest/v1/trades/
+{&quot;name&quot;:&quot;Board games&quot;}
+Response: HTTP/1.1 201 
+{&quot;name&quot;:&quot;Board games&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://...</div><div id='httpTab_22' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8081/rest/v1/trades/
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
-
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Board games&quot;
 }
@@ -157,8 +118,7 @@ Headers:  Authorization: 5616-3587-3282
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games&quot;,
   &quot;tradeId&quot; : 2,
@@ -167,19 +127,19 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-}</div><div id='curlTab_46' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_22' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
--d &quot;{  \&quot;name\&quot; : \&quot;Board games\&quot;}&quot; \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;name\&quot;:\&quot;Board games\&quot;}&quot; \
 http://localhost:8081/rest/v1/trades/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games&quot;,
   &quot;tradeId&quot; : 2,
@@ -189,16 +149,16 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_46', "summaryTab_46");</script>
+</div><script>openTabById('summaryTabLink_22', "summaryTab_22");</script>
 
-<div class='tab'><button id='summaryTabLink_48' class='tablinks' onclick='openTab(event, "summaryTab_48")'>Summary</button><button id='httpTabLink_48' class='tablinks' onclick='openTab(event, "httpTab_48")'>HTTP</button><button id='curlTabLink_48' class='tablinks' onclick='openTab(event, "curlTab_48")'>curl</button></div><div id='summaryTab_48' class='tabcontent code'>PUT http://localhost:8081/rest/v1/trades/2
-Request:  {  &quot;name&quot; : &quot;Board games in Toronto&quot;,  &quot;state&quot; : &quot;MATCHING_ITEMS&quot;}
-Status:   HTTP/1.1 200 
-Response: {&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot; ...</div><div id='httpTab_48' class='tabcontent code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_23' class='tablinks' onclick='openTab(event, "summaryTab_23")'>Summary</button><button id='httpTabLink_23' class='tablinks' onclick='openTab(event, "httpTab_23")'>HTTP</button><button id='curlTabLink_23' class='tablinks' onclick='openTab(event, "curlTab_23")'>curl</button></div><div id='summaryTab_23' class='tabcontent code'>Request:  PUT http://localhost:8081/rest/v1/trades/2
+{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
+Response: HTTP/1.1 200 
+{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_23' class='tabcontent code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/2
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
-
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;
@@ -208,8 +168,7 @@ Headers:  Authorization: 5616-3587-3282
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -218,19 +177,19 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-}</div><div id='curlTab_48' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_23' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
--d &quot;{  \&quot;name\&quot; : \&quot;Board games in Toronto\&quot;,  \&quot;state\&quot; : \&quot;MATCHING_ITEMS\&quot;}&quot; \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Toronto\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
 http://localhost:8081/rest/v1/trades/2
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -240,21 +199,22 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_48', "summaryTab_48");</script>
+</div><script>openTabById('summaryTabLink_23', "summaryTab_23");</script>
 
-<div class='tab'><button id='summaryTabLink_50' class='tablinks' onclick='openTab(event, "summaryTab_50")'>Summary</button><button id='httpTabLink_50' class='tablinks' onclick='openTab(event, "httpTab_50")'>HTTP</button><button id='curlTabLink_50' class='tablinks' onclick='openTab(event, "curlTab_50")'>curl</button></div><div id='summaryTab_50' class='tabcontent code'>GET http://localhost:8081/rest/v1/trades/2
-Status:   HTTP/1.1 200 
-Response: {&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot; ...</div><div id='httpTab_50' class='tabcontent code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_24' class='tablinks' onclick='openTab(event, "summaryTab_24")'>Summary</button><button id='httpTabLink_24' class='tablinks' onclick='openTab(event, "httpTab_24")'>HTTP</button><button id='curlTabLink_24' class='tablinks' onclick='openTab(event, "curlTab_24")'>curl</button></div><div id='summaryTab_24' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trades/2
+Response: HTTP/1.1 200 
+{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_24' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8081/rest/v1/trades/2
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -263,18 +223,18 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-}</div><div id='curlTab_50' class='tabcontent code'>-----  Request  -----
-curl -v GET \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
+}</div><div id='curlTab_24' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8081/rest/v1/trades/2
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -284,22 +244,22 @@ Headers:  Content-Type: application/json;charset=UTF-8
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_50', "summaryTab_50");</script>
+</div><script>openTabById('summaryTabLink_24', "summaryTab_24");</script>
 
-<div class='tab'><button id='summaryTabLink_52' class='tablinks' onclick='openTab(event, "summaryTab_52")'>Summary</button><button id='httpTabLink_52' class='tablinks' onclick='openTab(event, "httpTab_52")'>HTTP</button><button id='curlTabLink_52' class='tablinks' onclick='openTab(event, "curlTab_52")'>curl</button></div><div id='summaryTab_52' class='tabcontent code'>GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=2
-Status:   HTTP/1.1 200 
-Response: [{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href ...</div><div id='httpTab_52' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=2
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
+<div class='tab'><button id='summaryTabLink_25' class='tablinks' onclick='openTab(event, "summaryTab_25")'>Summary</button><button id='httpTabLink_25' class='tablinks' onclick='openTab(event, "httpTab_25")'>HTTP</button><button id='curlTabLink_25' class='tablinks' onclick='openTab(event, "curlTab_25")'>curl</button></div><div id='summaryTab_25' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
+Response: HTTP/1.1 200 
+[{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href...</div><div id='httpTab_25' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 [ {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -308,19 +268,18 @@ Headers:  X-Pagination-Total-Count: 1
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-} ]</div><div id='curlTab_52' class='tabcontent code'>-----  Request  -----
-curl -v GET \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
-http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=2
+} ]</div><div id='curlTab_25' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+http://localhost:8081/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
 [ {
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
@@ -330,31 +289,23 @@ Headers:  X-Pagination-Total-Count: 1
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_52', "summaryTab_52");</script>
+</div><script>openTabById('summaryTabLink_25', "summaryTab_25");</script>
 
-<div class='tab'><button id='summaryTabLink_54' class='tablinks' onclick='openTab(event, "summaryTab_54")'>Summary</button><button id='httpTabLink_54' class='tablinks' onclick='openTab(event, "httpTab_54")'>HTTP</button><button id='curlTabLink_54' class='tablinks' onclick='openTab(event, "curlTab_54")'>curl</button></div><div id='summaryTab_54' class='tabcontent code'>GET http://localhost:8081/rest/v1/trades/
-Status:   HTTP/1.1 200 
-Response: [{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;tradeId&quot;:1,&quot;state&quot;:&quot;MATCHING_ITEMS_ENDED&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;, ...</div><div id='httpTab_54' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trades/
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
+<div class='tab'><button id='summaryTabLink_26' class='tablinks' onclick='openTab(event, "summaryTab_26")'>Summary</button><button id='httpTabLink_26' class='tablinks' onclick='openTab(event, "httpTab_26")'>HTTP</button><button id='curlTabLink_26' class='tablinks' onclick='openTab(event, "curlTab_26")'>curl</button></div><div id='summaryTab_26' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trades/2
+Response: HTTP/1.1 200 
+{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_26' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8081/rest/v1/trades/2
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 2
-          Content-Type: application/json;charset=UTF-8
+Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
-[ {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
-  &quot;state&quot; : &quot;MATCHING_ITEMS_ENDED&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/1&quot;
-  } ]
-}, {
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
+{
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
@@ -362,28 +313,19 @@ Headers:  X-Pagination-Total-Count: 2
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-} ]</div><div id='curlTab_54' class='tabcontent code'>-----  Request  -----
-curl -v GET \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
-http://localhost:8081/rest/v1/trades/
+}</div><div id='curlTab_26' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+http://localhost:8081/rest/v1/trades/2
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 2
-          Content-Type: application/json;charset=UTF-8
+Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Mon, 06 Nov 2017 00:06:37 GMT
-
-[ {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
-  &quot;state&quot; : &quot;MATCHING_ITEMS_ENDED&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/1&quot;
-  } ]
-}, {
+          Date: Sat, 25 Nov 2017 21:40:00 GMT
+{
   &quot;name&quot; : &quot;Board games in Toronto&quot;,
   &quot;tradeId&quot; : 2,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
@@ -391,29 +333,32 @@ Headers:  X-Pagination-Total-Count: 2
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trades/2&quot;
   } ]
-} ]
-</div><script>openTabById('summaryTabLink_54', "summaryTab_54");</script>
+}
+</div><script>openTabById('summaryTabLink_26', "summaryTab_26");</script>
 
-<div class='tab'><button id='summaryTabLink_56' class='tablinks' onclick='openTab(event, "summaryTab_56")'>Summary</button><button id='httpTabLink_56' class='tablinks' onclick='openTab(event, "httpTab_56")'>HTTP</button><button id='curlTabLink_56' class='tablinks' onclick='openTab(event, "curlTab_56")'>curl</button></div><div id='summaryTab_56' class='tabcontent code'>DELETE http://localhost:8081/rest/v1/trades/2
-Status:   HTTP/1.1 204 
-</div><div id='httpTab_56' class='tabcontent code'>-----  Request  -----
+<div class='tab'><button id='summaryTabLink_27' class='tablinks' onclick='openTab(event, "summaryTab_27")'>Summary</button><button id='httpTabLink_27' class='tablinks' onclick='openTab(event, "httpTab_27")'>HTTP</button><button id='curlTabLink_27' class='tablinks' onclick='openTab(event, "curlTab_27")'>curl</button></div><div id='summaryTab_27' class='tabcontent code'>Request:  DELETE http://localhost:8081/rest/v1/trades/2
+Response: HTTP/1.1 204 
+</div><div id='httpTab_27' class='tabcontent code'>-----  Request  -----
 DELETE http://localhost:8081/rest/v1/trades/2
-Headers:  Authorization: 5616-3587-3282
-          Content-Type: application/json
+Headers:  Authorization: 9239-9765-4417
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Mon, 06 Nov 2017 00:06:37 GMT
-</div><div id='curlTab_56' class='tabcontent code'>-----  Request  -----
-curl -v DELETE \
--H &quot;Authorization: 5616-3587-3282&quot; \
--H &quot;Content-Type: application/json&quot; \
+Headers:  Date: Sat, 25 Nov 2017 21:40:00 GMT
+</div><div id='curlTab_27' class='tabcontent code'>-----  Request  -----
+curl -v -X DELETE \
+-H &quot;Authorization: 9239-9765-4417&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8081/rest/v1/trades/2
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Mon, 06 Nov 2017 00:06:37 GMT
+Headers:  Date: Sat, 25 Nov 2017 21:40:00 GMT
 
-</div><script>openTabById('summaryTabLink_56', "summaryTab_56");</script>
+</div><script>openTabById('summaryTabLink_27', "summaryTab_27");</script>
 </body>
 </html>

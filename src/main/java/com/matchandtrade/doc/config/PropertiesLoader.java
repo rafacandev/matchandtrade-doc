@@ -12,7 +12,7 @@ public class PropertiesLoader {
 	
 	public enum Key {
 		CONFIG_FILE(AppConfigurationProperties.Keys.CONFIG_FILE.getKey(), "config/matchandtrade.properties"),
-		DESTINATION_FOLDER("matchandtrade.doc.destination.folder","target/doc-maker"),
+		DESTINATION_FOLDER("matchandtrade.doc.destination.folder","target/rest-doc-maker"),
 		STOP_WEBSERVER("matchandtrade.doc.stop.webserver","true");
 
 		private final String defaultValue;

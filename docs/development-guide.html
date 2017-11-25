@@ -1,44 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Match and Trade - Documentation</title>
-
-<link rel='stylesheet' href='css/matchandtrade-doc-style.css'>
-
-<script>
-function openTab(evt, tabId) {
-    var i, tabcontent, tablinks;
-   	var tabIdEnding = tabId.substring(tabId.length-2);
-
-   	tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-    	if (tabcontent[i].id.endsWith(tabIdEnding)) {
-        	tabcontent[i].style.display = "none";
-    	}
-    }
-
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-    	if (tablinks[i].id.endsWith(tabIdEnding)) {
-        	tablinks[i].className = tablinks[i].className.replace(" active", "");
-    	}
-    }
-	
-    document.getElementById(tabId).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-function openTabById(tabLinkId, tabId) {
-    document.getElementById(tabId).style.display = "block";
-    document.getElementById(tabId).className += " active";
-
-    document.getElementById(tabLinkId).className += " active";
-}
-
-</script>
-</head>
-<body>
 <h1>Development Guide</h1>
 <p>This guide provides detailed information for those who want to develop and/or customize the application.</p>
 
@@ -115,5 +74,3 @@ java -jar /target/webservice-0.0.1-SNAPSHOT.jar -Dlogging.level.root=debug
 <p>Maven is also capable to generate a very useful site which describing the project dependency tree, license, plugins, and testing reports.</p>
 
 <p>To generate the maven site you need to issue the command `mvn site`. Open the file `target/site/index.xml` with your web-browser.</p>
-</body>
-</html>

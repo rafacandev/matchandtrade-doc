@@ -3,20 +3,25 @@ package com.matchandtrade.doc.maker.rest;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 
+import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
-import com.matchandtrade.doc.maker.OutputMaker;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 
-public class RestAuthenticateMaker extends OutputMaker {
+public class AuthenticateRestDocMaker implements RestDocMaker {
 
 	private static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
 	private static final String SIGN_OUT_SNIPPET = "SIGN_OUT_SNIPPET";
 
 	@Override
-	public String buildDocContent() {
-		String template = TemplateUtil.buildTemplate(getDocLocation());
+	public String contentFilePath() {
+		return "authenticate.html";
+	}
+
+	@Override
+	public String content() {
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory();
 		
 		// AUTHENTICATE_SNIPPET
@@ -31,11 +36,7 @@ public class RestAuthenticateMaker extends OutputMaker {
 		// Asserts that statusCode = 205 and header "Authorization" does not exists
 		signOffSnippet.getResponse().then().statusCode(205).and().header("Authorization", nullValue());
 
-		return template;
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	@Override
-	public String getDocLocation() {
-		return "authenticate.html";
-	}
 }
