@@ -43,7 +43,7 @@ public class RestUseCaseMaker extends OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		
-		SnippetFactory snippetFactoryOlavo = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SnippetFactory snippetFactoryOlavo = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		Integer userIdOlavo = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
 
@@ -60,7 +60,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		// OWNER_TRADES_POST_SNIPPET
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games in Ottawa");
-		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
+		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		tradePostOwner.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_SNIPPET, tradePostOwner.asHtml());
 		tradeJson = JsonUtil.fromResponse(tradePostOwner.getResponse(), TradeJson.class);
@@ -68,6 +68,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		//OWNER_TRADE_MEMBERSHIP_SNIPPET
 		RequestSpecification searchTradeMembershipOlavo = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
+				.setContentType(ContentType.JSON)
 				.addParam("userId", userIdOlavo)
 				.addParam("tradeId", tradeJson.getTradeId())
 				.build();
@@ -79,7 +80,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Integer tradeMembershipIdOlavo = matchAndTradeApiFacadeOlavo.findTradeMembershipByUserIdAndTradeId(userIdOlavo, tradeJson.getTradeId()).getTradeMembershipId();
 		ItemJson pandemicOneJson = new ItemJson();
 		pandemicOneJson.setName("Pandemic Legacy: Season 1");
-		Snippet pandemicOneSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicOneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
+		Snippet pandemicOneSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicOneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicOneSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_ONE_SNIPPET, pandemicOneSnippet.asHtml());
 		pandemicOneJson = JsonUtil.fromResponse(pandemicOneSnippet.getResponse(), ItemJson.class);
@@ -87,13 +88,13 @@ public class RestUseCaseMaker extends OutputMaker {
 		// OWNER_ITEM_TWO_SNIPPET
 		ItemJson pandemicTwoJson = new ItemJson();
 		pandemicTwoJson.setName("Pandemic Legacy: Season 2");
-		Snippet pandemicTwoSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, ContentType.JSON, pandemicTwoJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
+		Snippet pandemicTwoSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicTwoJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicTwoSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_TWO_SNIPPET, pandemicTwoSnippet.asHtml());
 		pandemicTwoJson = JsonUtil.fromResponse(pandemicTwoSnippet.getResponse(), ItemJson.class);
 		
 		// MEMBER SETUP
-		SnippetFactory snippetFactoryMaria = new SnippetFactory(MatchAndTradeRestUtil.nextAuthorizationHeader());
+		SnippetFactory snippetFactoryMaria = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.nextAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacadeMaria = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		Integer userIdMaria = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
 
@@ -111,7 +112,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		TradeMembershipJson tradeMembershipJsonMaria = new TradeMembershipJson();
 		tradeMembershipJsonMaria.setTradeId(tradeJson.getTradeId());
 		tradeMembershipJsonMaria.setUserId(userIdMaria);
-		Snippet tradeMembershipSnippetMaria = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, tradeMembershipJsonMaria, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		Snippet tradeMembershipSnippetMaria = snippetFactoryMaria.makeSnippet(Method.POST, tradeMembershipJsonMaria, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		tradeMembershipSnippetMaria.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_TRADES_MEMBERSHIP_SNIPPET, tradeMembershipSnippetMaria.asHtml());
 		
@@ -119,7 +120,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		Integer tradeMembershipIdMaria = matchAndTradeApiFacadeMaria.findTradeMembershipByUserIdAndTradeId(userIdMaria, tradeJson.getTradeId()).getTradeMembershipId();
 		ItemJson stoneAgeJson = new ItemJson();
 		stoneAgeJson.setName("Stone Age");
-		Snippet stoneAgeSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, stoneAgeJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		Snippet stoneAgeSnippet = snippetFactoryMaria.makeSnippet(Method.POST, stoneAgeJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		stoneAgeSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_ONE_SNIPPET, stoneAgeSnippet.asHtml());
 		stoneAgeJson = JsonUtil.fromResponse(stoneAgeSnippet.getResponse(), ItemJson.class);
@@ -127,14 +128,14 @@ public class RestUseCaseMaker extends OutputMaker {
 		// MEMBER_ITEM_TWO
 		ItemJson carcassonneJson = new ItemJson();
 		carcassonneJson.setName("Carcassonne");
-		Snippet carcassonneSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, carcassonneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		Snippet carcassonneSnippet = snippetFactoryMaria.makeSnippet(Method.POST, carcassonneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		carcassonneSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_TWO_SNIPPET, carcassonneSnippet.asHtml());
 
 		// MEMBER_ITEM_THREE
 		ItemJson noThanksJson = new ItemJson();
 		noThanksJson.setName("No Thanks!");
-		Snippet noThanksSnippet = snippetFactoryMaria.makeSnippet(Method.POST, ContentType.JSON, noThanksJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
+		Snippet noThanksSnippet = snippetFactoryMaria.makeSnippet(Method.POST, noThanksJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		noThanksSnippet.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_THREE_SNIPPET, noThanksSnippet.asHtml());
 
@@ -142,7 +143,7 @@ public class RestUseCaseMaker extends OutputMaker {
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
-		Snippet tradePutOwner = snippetFactoryOlavo.makeSnippet(Method.PUT, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		Snippet tradePutOwner = snippetFactoryOlavo.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		tradePutOwner.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradePutOwner.asHtml());
 		
@@ -152,7 +153,6 @@ public class RestUseCaseMaker extends OutputMaker {
 		wantsStoneAge.setItemId(stoneAgeJson.getItemId());
 		Snippet wantsStoneAgeSnippet = snippetFactoryOlavo.makeSnippet(
 				Method.POST,
-				ContentType.JSON,
 				wantsStoneAge,
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdOlavo, pandemicOneJson.getItemId()));
 		wantsStoneAgeSnippet.getResponse().then().statusCode(201);
@@ -164,7 +164,6 @@ public class RestUseCaseMaker extends OutputMaker {
 		wantsPandemicOne.setItemId(pandemicOneJson.getItemId());
 		Snippet wantsPandemicOneSnippet = snippetFactoryMaria.makeSnippet(
 				Method.POST,
-				ContentType.JSON,
 				wantsPandemicOne,
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdMaria, stoneAgeJson.getItemId()));
 		wantsPandemicOneSnippet.getResponse().then().statusCode(201);
@@ -176,7 +175,6 @@ public class RestUseCaseMaker extends OutputMaker {
 		wantsPandemicTwo.setItemId(pandemicTwoJson.getItemId());
 		Snippet wantsPandemicTwoSnippet = snippetFactoryMaria.makeSnippet(
 				Method.POST,
-				ContentType.JSON,
 				wantsPandemicTwo,
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipIdMaria, stoneAgeJson.getItemId()));
 		wantsPandemicTwoSnippet.getResponse().then().statusCode(201);
@@ -184,7 +182,7 @@ public class RestUseCaseMaker extends OutputMaker {
 
 		// TRADE_MATCHING_ITEMS_ENDED
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS_ENDED);
-		Snippet tradePutEndSnippet = snippetFactoryOlavo.makeSnippet(Method.PUT, ContentType.JSON, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
+		Snippet tradePutEndSnippet = snippetFactoryOlavo.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		tradePutEndSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_ENDED, tradePutEndSnippet.asHtml());		
 		

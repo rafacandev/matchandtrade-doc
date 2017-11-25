@@ -33,7 +33,7 @@ public class RestWantItemMaker extends OutputMaker {
 		TradeJson tradeOwner = matchAndTradeApiFacadeOwner.createTrade("Owner");
 		TradeMembershipJson tradeMembershipOwner = matchAndTradeApiFacadeOwner.findTradeMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), tradeOwner.getTradeId());
 		ItemJson alphaJson = matchAndTradeApiFacadeOwner.createItem(tradeMembershipOwner, "Alpha");
-		SnippetFactory snippetFactoryOwner = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SnippetFactory snippetFactoryOwner = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
 		// Setup member item
 		MatchAndTradeApiFacade matchAndTradeApiFacadeMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.nextAuthorizationHeader());
@@ -46,7 +46,6 @@ public class RestWantItemMaker extends OutputMaker {
 		wantsBetaPriorityOne.setPriority(1);
 		Snippet postSnippet = snippetFactoryOwner.makeSnippet(
 				Method.POST,
-				ContentType.JSON,
 				wantsBetaPriorityOne,
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
 		postSnippet.getResponse().then().statusCode(201).and().body("wantItemId", notNullValue());

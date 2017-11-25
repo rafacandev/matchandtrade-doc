@@ -23,13 +23,13 @@ public class RestUserMaker extends OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
 		// USERS_PUT_SNIPPET
 		UserJson userJson = new UserJson();
 		userJson.setEmail(MatchAndTradeRestUtil.getLastAuthenticatedUser().getEmail());
 		userJson.setName("Scott Summers");
-		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, ContentType.JSON, userJson, MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
+		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, userJson, MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(userJson.getName()));
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_SNIPPET, putSnippet.asHtml());
 

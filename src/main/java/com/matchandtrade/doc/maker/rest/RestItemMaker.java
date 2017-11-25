@@ -30,7 +30,7 @@ public class RestItemMaker extends OutputMaker {
 	@Override
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
-		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
 		
 		// Create a trade membership
@@ -40,7 +40,7 @@ public class RestItemMaker extends OutputMaker {
 		// ITEMS_POST_SNIPPET
 		ItemJson itemJson = new ItemJson();
 		itemJson.setName("Pandemic Legacy: Season 1");
-		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId) + "/");
+		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId) + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("name", equalTo(itemJson.getName()));
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_POST_SNIPPET, postSnippet.asHtml());
 		itemJson = JsonUtil.fromResponse(postSnippet.getResponse(), ItemJson.class);
@@ -49,7 +49,7 @@ public class RestItemMaker extends OutputMaker {
 		Integer itemId = itemJson.getItemId();
 		itemJson.setItemId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL
 		itemJson.setName(itemJson.getName() + " After PUT");
-		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, ContentType.JSON, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId, itemId));
+		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId, itemId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(itemJson.getName()));
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_PUT_SNIPPET, putSnippet.asHtml());
 

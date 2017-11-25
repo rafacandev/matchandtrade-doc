@@ -31,7 +31,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 	public String buildDocContent() {
 		String template = TemplateUtil.buildTemplate(getDocLocation());
 		MatchAndTradeApiFacade matchAndTradeApiFacadePreviousAuthenticatedUser = new MatchAndTradeApiFacade();
-		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.nextAuthorizationHeader());
+		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.nextAuthorizationHeader());
 
 		// TRADES_MEMBERSHIP_POST_SNIPPET
 		TradeJson tradeJson = matchAndTradeApiFacadePreviousAuthenticatedUser.createTrade("Board games in Vancouver");
@@ -39,7 +39,7 @@ public class RestTradeMembershipMaker extends OutputMaker {
 		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
 		tradeMembershipJson.setUserId(MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		
-		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, ContentType.JSON, tradeMembershipJson, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeMembershipJson, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("tradeMembershipId", notNullValue());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_SNIPPET, postSnippet.asHtml());
 		tradeMembershipJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeMembershipJson.class);

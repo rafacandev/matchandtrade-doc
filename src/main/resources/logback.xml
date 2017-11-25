@@ -13,7 +13,7 @@
 		</encoder>
 	</appender>
 		
-	<logger level="INFO" name="plainTextLogger" additivity="false">
+	<logger level="INFO" name="plainOutputLogger" additivity="false">
 		<appender-ref ref="PLAINOUTPUT" />
 	</logger>
 
@@ -22,9 +22,9 @@
 	</root>
 
 	<!-- TRACE: Log all Request/Response via RequesResponseUtil. -->
-    <logger name="com.matchandtrade.doc" level="INFO" />
+	<logger name="com.matchandtrade.doc" level="INFO" />
     
-    <!-- TRACE: Log all SQL DML statements as they are executed -->
+	<!-- TRACE: Log all SQL DML statements as they are executed -->
 	<logger level="INFO" name="org.hibernate.SQL"/>
 	<!-- TRACE: Log all JDBC parameters -->
 	<logger level="INFO" name="org.hibernate.type"/>
@@ -32,5 +32,8 @@
 	<logger level="INFO" name="org.hibernate.transaction"/>
 	<!-- TRACE: Log all second-level cache activity -->
 	<logger level="INFO" name="org.hibernate.cache"/>
+
+	<!-- TRACE: Log all Request/Response via SnippetFactory -->
+    <logger name="com.github.rafasantos.restdocmaker.template.SnippetFactory" level="INFO"/>
 	
 </configuration>
