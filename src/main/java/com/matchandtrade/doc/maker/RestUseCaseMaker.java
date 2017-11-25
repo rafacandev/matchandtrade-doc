@@ -142,7 +142,8 @@ public class RestUseCaseMaker extends OutputMaker {
 		// TRADE_MATCHING_ITEMS_SNIPPET
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
-		tradeJson.setTradeId(null); // We do not want tradeId displayed in the documentation
+		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
+		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
 		Snippet tradePutOwner = snippetFactoryOlavo.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		tradePutOwner.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradePutOwner.asHtml());

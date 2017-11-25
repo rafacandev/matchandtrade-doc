@@ -43,7 +43,8 @@ public class RestTradeMaker extends OutputMaker {
 		
 		// TRADES_PUT_SNIPPET
 		Integer tradeId = tradeJson.getTradeId();
-		tradeJson.setTradeId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL 
+		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
+		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setName("Board games in Toronto");
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));

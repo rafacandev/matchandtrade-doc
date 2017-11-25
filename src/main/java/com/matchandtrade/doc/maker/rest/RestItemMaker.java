@@ -47,7 +47,8 @@ public class RestItemMaker extends OutputMaker {
 		
 		// ITEMS_PUT_SNIPPET
 		Integer itemId = itemJson.getItemId();
-		itemJson.setItemId(null); // Set as null because we do not want the id to be displayed on the request body to emphasize that the id must be sent on the URL
+		itemJson.setItemId(null); // Set as null because we do not want to display in the documentation
+		itemJson.setLinks(null); // Set as null because we do not want to display in the documentation
 		itemJson.setName(itemJson.getName() + " After PUT");
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, itemJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipId, itemId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(itemJson.getName()));
