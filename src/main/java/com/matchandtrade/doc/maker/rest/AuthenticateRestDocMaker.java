@@ -11,8 +11,8 @@ import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 
 public class AuthenticateRestDocMaker implements RestDocMaker {
 
-	private static final String AUTHENTICATE_SNIPPET = "AUTHENTICATE_SNIPPET";
-	private static final String SIGN_OUT_SNIPPET = "SIGN_OUT_SNIPPET";
+	private static final String AUTHENTICATE_PLACEHOLDER = "AUTHENTICATE_PLACEHOLDER";
+	private static final String SIGN_OUT_PLACEHOLDER = "SIGN_OUT_PLACEHOLDER";
 
 	@Override
 	public String contentFilePath() {
@@ -24,15 +24,15 @@ public class AuthenticateRestDocMaker implements RestDocMaker {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory();
 		
-		// AUTHENTICATE_SNIPPET
+		// AUTHENTICATE_PLACEHOLDER
 		Snippet authenticateSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_SNIPPET, authenticateSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateSnippet.asHtml());
 		// Asserts that statusCode = 200 and header "Authorization" exists
 		authenticateSnippet.getResponse().then().statusCode(200).and().header("Authorization", notNullValue());
 
-		// SIGN_OUT_SNIPPET
+		// SIGN_OUT_PLACEHOLDER
 		Snippet signOffSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.signOffUrl());
-		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_SNIPPET, signOffSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffSnippet.asHtml());
 		// Asserts that statusCode = 205 and header "Authorization" does not exists
 		signOffSnippet.getResponse().then().statusCode(205).and().header("Authorization", nullValue());
 

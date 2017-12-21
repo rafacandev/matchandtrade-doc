@@ -20,9 +20,9 @@ import io.restassured.http.Method;
 
 public class WantItemRestDocMaker implements RestDocMaker {
 	
-	private static final String WANT_ITEMS_POST_SNIPPET = "WANT_ITEMS_POST_SNIPPET";
-	private static final String WANT_ITEMS_GET_SNIPPET = "WANT_ITEMS_GET_SNIPPET";
-	private static final String WANT_ITEMS_GET_ALL_SNIPPET = "WANT_ITEMS_GET_ALL_SNIPPET";
+	private static final String WANT_ITEMS_POST_PLACEHOLDER = "WANT_ITEMS_POST_PLACEHOLDER";
+	private static final String WANT_ITEMS_GET_PLACEHOLDER = "WANT_ITEMS_GET_PLACEHOLDER";
+	private static final String WANT_ITEMS_GET_ALL_PLACEHOLDER = "WANT_ITEMS_GET_ALL_PLACEHOLDER";
 
 
 	@Override
@@ -46,7 +46,7 @@ public class WantItemRestDocMaker implements RestDocMaker {
 		TradeMembershipJson tradeMembershipMember = matchAndTradeApiFacadeMember.subscribeToTrade(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), tradeOwner.getTradeId());
 		ItemJson argentinaJson = matchAndTradeApiFacadeMember.createItem(tradeMembershipMember, "Argentina");
 		
-		// WANT_ITEMS_POST_SNIPPET: alpha wants beta
+		// WANT_ITEMS_POST_PLACEHOLDER: alpha wants beta
 		WantItemJson wantsBetaPriorityOne = new WantItemJson();
 		wantsBetaPriorityOne.setItemId(argentinaJson.getItemId());
 		wantsBetaPriorityOne.setPriority(1);
@@ -56,19 +56,19 @@ public class WantItemRestDocMaker implements RestDocMaker {
 				MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
 		postSnippet.getResponse().then().statusCode(201).and().body("wantItemId", notNullValue());
 		wantsBetaPriorityOne = JsonUtil.fromResponse(postSnippet.getResponse(), WantItemJson.class);
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_SNIPPET, postSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_POST_PLACEHOLDER, postSnippet.asHtml());
 		
-		// WANT_ITEMS_GET_SNIPPET
+		// WANT_ITEMS_GET_PLACEHOLDER
 		Snippet getSnippet = snippetFactoryOwner.makeSnippet(
 					MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId(), wantsBetaPriorityOne.getWantItemId())
 				);
 		getSnippet.getResponse().then().statusCode(200).and().body("wantItemId", notNullValue());
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_SNIPPET, getSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_PLACEHOLDER, getSnippet.asHtml());
 		
-		// WANT_ITEMS_GET_ALL_SNIPPET
+		// WANT_ITEMS_GET_ALL_PLACEHOLDER
 		Snippet getAllSnippet = snippetFactoryOwner.makeSnippet(MatchAndTradeRestUtil.wantItemsUrl(tradeMembershipOwner.getTradeMembershipId(), alphaJson.getItemId()));
 		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
-		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_ALL_SNIPPET, getAllSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, WANT_ITEMS_GET_ALL_PLACEHOLDER, getAllSnippet.asHtml());
 		
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}

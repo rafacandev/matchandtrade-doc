@@ -17,8 +17,8 @@ import io.restassured.http.Method;
 
 public class UserRestDocMaker implements RestDocMaker {
 	
-	private static final String USERS_GET_SNIPPET = "USERS_GET_SNIPPET";
-	private static final String USERS_PUT_SNIPPET = "USERS_PUT_SNIPPET";
+	private static final String USERS_GET_PLACEHOLDER = "USERS_GET_PLACEHOLDER";
+	private static final String USERS_PUT_PLACEHOLDER = "USERS_PUT_PLACEHOLDER";
 	@Override
 	public String contentFilePath() {
 		return "users.html";
@@ -29,18 +29,18 @@ public class UserRestDocMaker implements RestDocMaker {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
-		// USERS_PUT_SNIPPET
+		// USERS_PUT_PLACEHOLDER
 		UserJson userJson = new UserJson();
 		userJson.setEmail(MatchAndTradeRestUtil.getLastAuthenticatedUser().getEmail());
 		userJson.setName("Scott Summers");
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, userJson, MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(userJson.getName()));
-		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_SNIPPET, putSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_PLACEHOLDER, putSnippet.asHtml());
 
-		// USERS_GET_SNIPPET
+		// USERS_GET_PLACEHOLDER
 		Snippet getSnippett = snippetFactory.makeSnippet(MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		getSnippett.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
-		template = TemplateUtil.replacePlaceholder(template, USERS_GET_SNIPPET, getSnippett.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, USERS_GET_PLACEHOLDER, getSnippett.asHtml());
 		
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}

@@ -19,24 +19,24 @@ import io.restassured.specification.RequestSpecification;
 
 public class UseCaseRestDocMaker implements RestDocMaker {
 	
-	private static final String MEMBER_AUTHENTICATE_SNIPPET = "MEMBER_AUTHENTICATE_SNIPPET";
-	private static final String MEMBER_AUTHENTICATIONS_SNIPPET = "MEMBER_AUTHENTICATIONS_SNIPPET";
-	private static final String MEMBER_TRADES_MEMBERSHIP_SNIPPET = "MEMBER_TRADES_MEMBERSHIP_SNIPPET";
-	private static final String MEMBER_ITEM_ONE_SNIPPET = "MEMBER_ITEM_ONE_SNIPPET";
-	private static final String MEMBER_ITEM_TWO_SNIPPET = "MEMBER_ITEM_TWO_SNIPPET";
-	private static final String MEMBER_ITEM_THREE_SNIPPET = "MEMBER_ITEM_THREE_SNIPPET";
+	private static final String MEMBER_AUTHENTICATE_PLACEHOLDER = "MEMBER_AUTHENTICATE_PLACEHOLDER";
+	private static final String MEMBER_AUTHENTICATIONS_PLACEHOLDER = "MEMBER_AUTHENTICATIONS_PLACEHOLDER";
+	private static final String MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER = "MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER";
+	private static final String MEMBER_ITEM_ONE_PLACEHOLDER = "MEMBER_ITEM_ONE_PLACEHOLDER";
+	private static final String MEMBER_ITEM_TWO_PLACEHOLDER = "MEMBER_ITEM_TWO_PLACEHOLDER";
+	private static final String MEMBER_ITEM_THREE_PLACEHOLDER = "MEMBER_ITEM_THREE_PLACEHOLDER";
 	private static final String MEMBER_WANT_ITEMS_ONE = "MEMBER_WANT_ITEMS_ONE";
 	private static final String MEMBER_WANT_ITEMS_TWO = "MEMBER_WANT_ITEMS_TWO";
 	
-	private static final String OWNER_AUTHENTICATE_SNIPPET = "OWNER_AUTHENTICATE_SNIPPET";
-	private static final String OWNER_AUTHENTICATIONS_SNIPPET = "OWNER_AUTHENTICATIONS_SNIPPET";
-	private static final String OWNER_ITEM_ONE_SNIPPET = "OWNER_ITEM_ONE_SNIPPET";
-	private static final String OWNER_ITEM_TWO_SNIPPET = "OWNER_ITEM_TWO_SNIPPET";
-	private static final String OWNER_TRADES_POST_SNIPPET = "OWNER_TRADES_POST_SNIPPET";
-	private static final String OWNER_TRADE_MEMBERSHIP_SNIPPET = "OWNER_TRADE_MEMBERSHIP_SNIPPET"; 
+	private static final String OWNER_AUTHENTICATE_PLACEHOLDER = "OWNER_AUTHENTICATE_PLACEHOLDER";
+	private static final String OWNER_AUTHENTICATIONS_PLACEHOLDER = "OWNER_AUTHENTICATIONS_PLACEHOLDER";
+	private static final String OWNER_ITEM_ONE_PLACEHOLDER = "OWNER_ITEM_ONE_PLACEHOLDER";
+	private static final String OWNER_ITEM_TWO_PLACEHOLDER = "OWNER_ITEM_TWO_PLACEHOLDER";
+	private static final String OWNER_TRADES_POST_PLACEHOLDER = "OWNER_TRADES_POST_PLACEHOLDER";
+	private static final String OWNER_TRADE_MEMBERSHIP_PLACEHOLDER = "OWNER_TRADE_MEMBERSHIP_PLACEHOLDER"; 
 	private static final String OWNER_WANT_ITEMS_ONE = "OWNER_WANT_ITEMS_ONE";
 	
-	private static final String TRADE_MATCHING_ITEMS_SNIPPET = "TRADE_MATCHING_ITEMS_SNIPPET"; 
+	private static final String TRADE_MATCHING_ITEMS_PLACEHOLDER = "TRADE_MATCHING_ITEMS_PLACEHOLDER"; 
 	private static final String TRADE_MATCHING_ITEMS_ENDED = "TRADE_MATCHING_ITEMS_ENDED"; 
 	private static final String TRADE_RESULTS = "TRADE_RESULTS";
 
@@ -53,25 +53,25 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		Integer userIdOlavo = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
 
-		// OWNER_AUTHENTICATE_SNIPPET
+		// OWNER_AUTHENTICATE_PLACEHOLDER
 		Snippet authenticateSnippetOlavo = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
 		authenticateSnippetOlavo.getRequest().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE_SNIPPET, authenticateSnippetOlavo.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE_PLACEHOLDER, authenticateSnippetOlavo.asHtml());
 
-		// OWNER_AUTHENTICATIONS_SNIPPET
+		// OWNER_AUTHENTICATIONS_PLACEHOLDER
 		Snippet authenticationsSnippetOlavo = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
 		authenticationsSnippetOlavo.getRequest().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS_SNIPPET, authenticationsSnippetOlavo.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS_PLACEHOLDER, authenticationsSnippetOlavo.asHtml());
 		
-		// OWNER_TRADES_POST_SNIPPET
+		// OWNER_TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games in Ottawa");
 		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		tradePostOwner.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_SNIPPET, tradePostOwner.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_PLACEHOLDER, tradePostOwner.asHtml());
 		tradeJson = JsonUtil.fromResponse(tradePostOwner.getResponse(), TradeJson.class);
 		
-		//OWNER_TRADE_MEMBERSHIP_SNIPPET
+		//OWNER_TRADE_MEMBERSHIP_PLACEHOLDER
 		RequestSpecification searchTradeMembershipOlavo = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.setContentType(ContentType.JSON)
@@ -80,23 +80,23 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 				.build();
 		Snippet searchTradeMembershipOlavoSnippet = SnippetFactory.makeSnippet(Method.GET, searchTradeMembershipOlavo, MatchAndTradeRestUtil.tradeMembershipsUrl()); 
 		searchTradeMembershipOlavoSnippet.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADE_MEMBERSHIP_SNIPPET, searchTradeMembershipOlavoSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADE_MEMBERSHIP_PLACEHOLDER, searchTradeMembershipOlavoSnippet.asHtml());
 
-		// OWNER_ITEM_ONE_SNIPPET
+		// OWNER_ITEM_ONE_PLACEHOLDER
 		Integer tradeMembershipIdOlavo = matchAndTradeApiFacadeOlavo.findTradeMembershipByUserIdAndTradeId(userIdOlavo, tradeJson.getTradeId()).getTradeMembershipId();
 		ItemJson pandemicOneJson = new ItemJson();
 		pandemicOneJson.setName("Pandemic Legacy: Season 1");
 		Snippet pandemicOneSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicOneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicOneSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_ONE_SNIPPET, pandemicOneSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_ONE_PLACEHOLDER, pandemicOneSnippet.asHtml());
 		pandemicOneJson = JsonUtil.fromResponse(pandemicOneSnippet.getResponse(), ItemJson.class);
 		
-		// OWNER_ITEM_TWO_SNIPPET
+		// OWNER_ITEM_TWO_PLACEHOLDER
 		ItemJson pandemicTwoJson = new ItemJson();
 		pandemicTwoJson.setName("Pandemic Legacy: Season 2");
 		Snippet pandemicTwoSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicTwoJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdOlavo) + "/");
 		pandemicTwoSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_TWO_SNIPPET, pandemicTwoSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, OWNER_ITEM_TWO_PLACEHOLDER, pandemicTwoSnippet.asHtml());
 		pandemicTwoJson = JsonUtil.fromResponse(pandemicTwoSnippet.getResponse(), ItemJson.class);
 		
 		// MEMBER SETUP
@@ -104,23 +104,23 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		MatchAndTradeApiFacade matchAndTradeApiFacadeMaria = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		Integer userIdMaria = MatchAndTradeRestUtil.getLastAuthenticatedUserId();
 
-		// MEMBER_AUTHENTICATE_SNIPPET
+		// MEMBER_AUTHENTICATE_PLACEHOLDER
 		Snippet authenticateSnippetMaria = snippetFactoryMaria.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
 		authenticateSnippetMaria.getRequest().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE_SNIPPET, authenticateSnippetOlavo.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE_PLACEHOLDER, authenticateSnippetOlavo.asHtml());
 
-		// MEMBER_AUTHENTICATIONS_SNIPPET
+		// MEMBER_AUTHENTICATIONS_PLACEHOLDER
 		Snippet authenticationsSnippetMaria = snippetFactoryMaria.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
 		authenticationsSnippetMaria.getRequest().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS_SNIPPET, authenticationsSnippetMaria.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS_PLACEHOLDER, authenticationsSnippetMaria.asHtml());
 
-		// MEMBER_TRADES_MEMBERSHIP_SNIPPET
+		// MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER
 		TradeMembershipJson tradeMembershipJsonMaria = new TradeMembershipJson();
 		tradeMembershipJsonMaria.setTradeId(tradeJson.getTradeId());
 		tradeMembershipJsonMaria.setUserId(userIdMaria);
 		Snippet tradeMembershipSnippetMaria = snippetFactoryMaria.makeSnippet(Method.POST, tradeMembershipJsonMaria, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		tradeMembershipSnippetMaria.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_TRADES_MEMBERSHIP_SNIPPET, tradeMembershipSnippetMaria.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER, tradeMembershipSnippetMaria.asHtml());
 		
 		// MEMBER_ITEM_ONE
 		Integer tradeMembershipIdMaria = matchAndTradeApiFacadeMaria.findTradeMembershipByUserIdAndTradeId(userIdMaria, tradeJson.getTradeId()).getTradeMembershipId();
@@ -128,7 +128,7 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		stoneAgeJson.setName("Stone Age");
 		Snippet stoneAgeSnippet = snippetFactoryMaria.makeSnippet(Method.POST, stoneAgeJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		stoneAgeSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_ONE_SNIPPET, stoneAgeSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_ONE_PLACEHOLDER, stoneAgeSnippet.asHtml());
 		stoneAgeJson = JsonUtil.fromResponse(stoneAgeSnippet.getResponse(), ItemJson.class);
 
 		// MEMBER_ITEM_TWO
@@ -136,23 +136,23 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		carcassonneJson.setName("Carcassonne");
 		Snippet carcassonneSnippet = snippetFactoryMaria.makeSnippet(Method.POST, carcassonneJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		carcassonneSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_TWO_SNIPPET, carcassonneSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_TWO_PLACEHOLDER, carcassonneSnippet.asHtml());
 
 		// MEMBER_ITEM_THREE
 		ItemJson noThanksJson = new ItemJson();
 		noThanksJson.setName("No Thanks!");
 		Snippet noThanksSnippet = snippetFactoryMaria.makeSnippet(Method.POST, noThanksJson, MatchAndTradeRestUtil.itemsUrl(tradeMembershipIdMaria) + "/");
 		noThanksSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_THREE_SNIPPET, noThanksSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ITEM_THREE_PLACEHOLDER, noThanksSnippet.asHtml());
 
-		// TRADE_MATCHING_ITEMS_SNIPPET
+		// TRADE_MATCHING_ITEMS_PLACEHOLDER
 		tradeJson.setState(TradeJson.State.MATCHING_ITEMS);
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
 		Snippet tradePutOwner = snippetFactoryOlavo.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		tradePutOwner.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_SNIPPET, tradePutOwner.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS_PLACEHOLDER, tradePutOwner.asHtml());
 		
 		// OWNER_WANT_ITEMS_ONE
 		WantItemJson wantsStoneAge = new WantItemJson();

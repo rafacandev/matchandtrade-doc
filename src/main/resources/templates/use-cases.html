@@ -11,61 +11,61 @@ and finally generate the <a href='trade-results.html'>TradeResults</a>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
 	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
-${OWNER_AUTHENTICATE_SNIPPET}
+${OWNER_AUTHENTICATE_PLACEHOLDER}
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
-${OWNER_AUTHENTICATIONS_SNIPPET}
+${OWNER_AUTHENTICATIONS_PLACEHOLDER}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
-${OWNER_TRADES_POST_SNIPPET}
+${OWNER_TRADES_POST_PLACEHOLDER}
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-${OWNER_TRADE_MEMBERSHIP_SNIPPET}
+${OWNER_TRADE_MEMBERSHIP_PLACEHOLDER}
 
 <p>
   	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${OWNER_ITEM_ONE_SNIPPET}
-${OWNER_ITEM_TWO_SNIPPET}
+${OWNER_ITEM_ONE_PLACEHOLDER}
+${OWNER_ITEM_TWO_PLACEHOLDER}
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
   	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
-${MEMBER_AUTHENTICATE_SNIPPET}
+${MEMBER_AUTHENTICATE_PLACEHOLDER}
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
-${MEMBER_AUTHENTICATIONS_SNIPPET}
+${MEMBER_AUTHENTICATIONS_PLACEHOLDER}
 
 <p>
 	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
 </p>
-${MEMBER_TRADES_MEMBERSHIP_SNIPPET}
+${MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER}
 
 <p>
   	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${MEMBER_ITEM_ONE_SNIPPET}
-${MEMBER_ITEM_TWO_SNIPPET}
-${MEMBER_ITEM_THREE_SNIPPET}
+${MEMBER_ITEM_ONE_PLACEHOLDER}
+${MEMBER_ITEM_TWO_PLACEHOLDER}
+${MEMBER_ITEM_THREE_PLACEHOLDER}
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
 	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
-${TRADE_MATCHING_ITEMS_SNIPPET}
+${TRADE_MATCHING_ITEMS_PLACEHOLDER}
 
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>

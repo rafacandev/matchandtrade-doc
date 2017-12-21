@@ -21,12 +21,12 @@ import io.restassured.specification.RequestSpecification;
 
 public class TradeRestDocMaker implements RestDocMaker {
 	
-	private static final String TRADES_POST_SNIPPET = "TRADES_POST_SNIPPET";
-	private static final String TRADES_PUT_SNIPPET = "TRADES_PUT_SNIPPET";	
-	private static final String TRADES_GET_SNIPPET = "TRADES_GET_SNIPPET";
-	private static final String TRADES_DELETE_SNIPPET = "TRADES_DELETE_SNIPPET";
-	private static final String TRADES_SEARCH_SNIPPET = "TRADES_SEARCH_SNIPPET";
-	private static final String TRADES_GET_ALL_SNIPPET = "TRADES_GET_ALL_SNIPPET";
+	private static final String TRADES_POST_PLACEHOLDER = "TRADES_POST_PLACEHOLDER";
+	private static final String TRADES_PUT_PLACEHOLDER = "TRADES_PUT_PLACEHOLDER";	
+	private static final String TRADES_GET_PLACEHOLDER = "TRADES_GET_PLACEHOLDER";
+	private static final String TRADES_DELETE_PLACEHOLDER = "TRADES_DELETE_PLACEHOLDER";
+	private static final String TRADES_SEARCH_PLACEHOLDER = "TRADES_SEARCH_PLACEHOLDER";
+	private static final String TRADES_GET_ALL_PLACEHOLDER = "TRADES_GET_ALL_PLACEHOLDER";
 	
 	@Override
 	public String contentFilePath() {
@@ -38,15 +38,15 @@ public class TradeRestDocMaker implements RestDocMaker {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
-		// TRADES_POST_SNIPPET
+		// TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName("Board games");
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
-		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_SNIPPET, postSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postSnippet.asHtml());
 		tradeJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeJson.class);
 		
-		// TRADES_PUT_SNIPPET
+		// TRADES_PUT_PLACEHOLDER
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
@@ -54,14 +54,14 @@ public class TradeRestDocMaker implements RestDocMaker {
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(tradeJson.getName()));
-		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_SNIPPET, putSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putSnippet.asHtml());
 		
-		// TRADES_GET_SNIPPET
+		// TRADES_GET_PLACEHOLDER
 		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradesUrl(tradeId));
 		getSnippet.getRequest().then().statusCode(200).and().body("tradeId", equalTo(tradeId));
-		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_SNIPPET, getSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_PLACEHOLDER, getSnippet.asHtml());
 		
-		// TRADES_SEARCH_SNIPPET
+		// TRADES_SEARCH_PLACEHOLDER
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.addParam("name", "Board games in Toronto")
@@ -70,17 +70,17 @@ public class TradeRestDocMaker implements RestDocMaker {
 				.build();
 		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradesUrl()); 
 		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", equalTo("1"));
-		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_SNIPPET, searchSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
 
-		// TRADES_GET_ALL_SNIPPET
+		// TRADES_GET_ALL_PLACEHOLDER
 		Snippet getAllSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradesUrl());
 		getAllSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", notNullValue());
-		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_SNIPPET, getSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_PLACEHOLDER, getSnippet.asHtml());
 		
-		// TRADES_DELETE_SNIPPET
+		// TRADES_DELETE_PLACEHOLDER
 		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		deleteSnippet.getResponse().then().statusCode(204);
-		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_SNIPPET, deleteSnippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}

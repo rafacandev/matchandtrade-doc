@@ -11,7 +11,7 @@ import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 
 public class AuthenticationRestDocMaker implements RestDocMaker {
 	
-	private static final String AUTHENTICATIONS_SNIPPET = "AUTHENTICATIONS_SNIPPET";
+	private static final String AUTHENTICATIONS_PLACEHOLDER = "AUTHENTICATIONS_PLACEHOLDER";
 
 	@Override
 	public String contentFilePath() {
@@ -23,11 +23,11 @@ public class AuthenticationRestDocMaker implements RestDocMaker {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 
-		// AUTHENTICATIONS_SNIPPET
+		// AUTHENTICATIONS_PLACEHOLDER
 		Snippet snippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
 		snippet.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
 
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_SNIPPET, snippet.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, snippet.asHtml());
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
