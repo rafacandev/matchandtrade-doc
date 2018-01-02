@@ -20,4 +20,7 @@
 	<!-- TRACE: Log all second-level cache activity -->
 	<logger level="INFO" name="org.hibernate.cache"/>
 
+	<!-- TRACE: Log all Request/Response via SnippetFactory -->
+    <logger name="com.github.rafasantos.restdocmaker.template.SnippetFactory" level="INFO" />
+
 </configuration>
