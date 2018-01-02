@@ -19,11 +19,12 @@ public class MatchAndTradeRestUtil {
 	
 	private enum Endpoint {
 		AUTHENTICATE("authenticate"),
-		SIGN_OFF(AUTHENTICATE.getPath() + "/sign-out"),
+		SIGN_OFF("sign-out"),
 		AUTHENTICATIONS("rest/v1/authentications"),
 		TRADES("rest/v1/trades"),
 		TRADE_RESULTS("results"),
 		ITEMS("items"),
+		INFO("info"),
 		WANT_ITEMS("want-items"),
 		TRADE_MEMBERSHIPS("rest/v1/trade-memberships"),
 		USERS("rest/v1/users");
@@ -34,10 +35,6 @@ public class MatchAndTradeRestUtil {
 			this.path = path;
 		}
 		
-		public String getPath() {
-			return path;
-		}
-		
 		public String asURL(String baseUrl) {
 			return baseUrl + "/" + path;
 		}
@@ -46,13 +43,17 @@ public class MatchAndTradeRestUtil {
 	public static String authenticateUrl() {
 		return Endpoint.AUTHENTICATE.asURL(baseUrl);
 	}
+
+	public static String authenticateInfoUrl() {
+		return Endpoint.AUTHENTICATE.asURL(baseUrl) + "/" + Endpoint.INFO.path;
+	}
 	
 	public static String authenticationsUrl() {
 		return Endpoint.AUTHENTICATIONS.asURL(baseUrl);
 	}
 
 	public static String signOffUrl() {
-		return Endpoint.SIGN_OFF.asURL(baseUrl);
+		return Endpoint.AUTHENTICATE.asURL(baseUrl) + "/" + Endpoint.SIGN_OFF.path;
 	}
 	public static String usersUrl() {
 		return Endpoint.USERS.asURL(baseUrl);

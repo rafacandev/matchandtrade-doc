@@ -31,14 +31,14 @@ public class MatchAndTradeContentBuilder {
 				.destinationFolderRootPath(destinationFolder)
 				.makers(new DevelopmentGuideRestDocMaker(),
 						new UseCaseRestDocMaker(),
-						new AuthenticateRestDocMaker(),
 						new AuthenticationRestDocMaker(),
 						new TradeRestDocMaker(),
 						new UserRestDocMaker(),
 						new TradeMembershipRestDocMaker(),
 						new ItemRestDocMaker(),
 						new WantItemRestDocMaker(),
-						new IndexRestDocMaker());
+						new IndexRestDocMaker(),
+						new AuthenticateRestDocMaker());
 			RestDocMakerGenerator generator = new RestDocMakerGenerator();
 			generator.generateDocumentation(config);
 		} catch (Exception e) {
