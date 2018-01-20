@@ -4,70 +4,109 @@
 <p>
 	<i>Endpoint</i> to authenticate on the system.
 	It redirects the client to an oAuth server (e.g.: Google oAuth) and returns with a header called <span class='incode'>Authorization</span>.
+	Additionally, it creates a <span class='incode'>Cookie: JSESSIONID</span> allowing requests to <span class='incode'>authenticate/info</span> which also returns the <span class='incode'>Authorization</span> header.
 </p>
 
 <p>
-The <span class='incode'>Authorization</span> header acts as a session token and needs to be included to any secured URL.
+The <span class='incode'>Authorization</span> header acts as a session token and needs to be included to any URL witch requires authorization.
 </p>
 
 <h3>Operations</h3>
 <ul>
 	<li><span class='incode'>GET authenticate</span></li>
+	<li><span class='incode'>GET authenticate/info</span></li>
 	<li><span class='incode'>GET authenticate/sign-out</span></li>
 </ul>
 
 <h3>Authorization</h3>
 <ul>
-	<li>Public</li>
+	<li>Public endpoints: <span class='incode'>authenticate</span> and <span class='incode'>authenticate/sing-out</span></li>
+	<li>Only requests containing <span class='incode'>Cookie: JSESSIONID</span> are authorized to access <span class='incode'>authenticate/info</span></li>
 </ul>
 
+
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_19' class='tablinks' onclick='openTab(event, "summaryTab_19")'>Summary</button><button id='httpTabLink_19' class='tablinks' onclick='openTab(event, "httpTab_19")'>HTTP</button><button id='curlTabLink_19' class='tablinks' onclick='openTab(event, "curlTab_19")'>curl</button></div><div id='summaryTab_19' class='tabcontent code'>Request:  GET http://localhost:8081/authenticate
+<div class='tab'><button id='summaryTabLink_42' class='tablinks' onclick='openTab(event, "summaryTab_42")'>Summary</button><button id='httpTabLink_42' class='tablinks' onclick='openTab(event, "httpTab_42")'>HTTP</button><button id='curlTabLink_42' class='tablinks' onclick='openTab(event, "curlTab_42")'>curl</button></div><div id='summaryTab_42' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
 Response: HTTP/1.1 200 
-</div><div id='httpTab_19' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/authenticate
+</div><div id='httpTab_42' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/authenticate
 Headers:  Accept: */*
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 1773-3376-7139
+Headers:  Authorization: 6598-2546-8000
+          Set-Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
-</div><div id='curlTab_19' class='tabcontent code'>-----  Request  -----
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
+</div><div id='curlTab_42' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
 -H &quot;Accept: */*&quot; \
-http://localhost:8081/authenticate
+http://localhost:8080/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 1773-3376-7139
+Headers:  Authorization: 6598-2546-8000
+          Set-Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 
-</div><script>openTabById('summaryTabLink_19', "summaryTab_19");</script>
+</div><script>openTabById('summaryTabLink_42', "summaryTab_42");</script>
 
-<div class='tab'><button id='summaryTabLink_20' class='tablinks' onclick='openTab(event, "summaryTab_20")'>Summary</button><button id='httpTabLink_20' class='tablinks' onclick='openTab(event, "httpTab_20")'>HTTP</button><button id='curlTabLink_20' class='tablinks' onclick='openTab(event, "curlTab_20")'>curl</button></div><div id='summaryTab_20' class='tabcontent code'>Request:  GET http://localhost:8081/authenticate/sign-out
+<div class='tab'><button id='summaryTabLink_43' class='tablinks' onclick='openTab(event, "summaryTab_43")'>Summary</button><button id='httpTabLink_43' class='tablinks' onclick='openTab(event, "httpTab_43")'>HTTP</button><button id='curlTabLink_43' class='tablinks' onclick='openTab(event, "curlTab_43")'>curl</button></div><div id='summaryTab_43' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate/info
+Response: HTTP/1.1 200 
+{  &quot;authenticationHeader&quot; : &quot;6598-2546-8000&quot;,  &quot;callbackUrl&quot; : null}</div><div id='httpTab_43' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/authenticate/info
+Headers:  Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly
+          Accept: */*
+
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Content-Length: 72
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
+{
+  &quot;authenticationHeader&quot; : &quot;6598-2546-8000&quot;,
+  &quot;callbackUrl&quot; : null
+}</div><div id='curlTab_43' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly&quot; \
+-H &quot;Accept: */*&quot; \
+http://localhost:8080/authenticate/info
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Content-Length: 72
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
+{
+  &quot;authenticationHeader&quot; : &quot;6598-2546-8000&quot;,
+  &quot;callbackUrl&quot; : null
+}
+</div><script>openTabById('summaryTabLink_43', "summaryTab_43");</script>
+
+<div class='tab'><button id='summaryTabLink_44' class='tablinks' onclick='openTab(event, "summaryTab_44")'>Summary</button><button id='httpTabLink_44' class='tablinks' onclick='openTab(event, "httpTab_44")'>HTTP</button><button id='curlTabLink_44' class='tablinks' onclick='openTab(event, "curlTab_44")'>curl</button></div><div id='summaryTab_44' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate/sign-out
 Response: HTTP/1.1 205 
-</div><div id='httpTab_20' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/authenticate/sign-out
-Headers:  Accept: */*
+</div><div id='httpTab_44' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/authenticate/sign-out
+Headers:  Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly
+          Accept: */*
 
 
 -----  Response  -----
 Status:   HTTP/1.1 205 
-Headers:  Set-Cookie: JSESSIONID=0653832E41AF4636EF6F37AB8240A72D; Path=/; HttpOnly
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
-</div><div id='curlTab_20' class='tabcontent code'>-----  Request  -----
+Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
+</div><div id='curlTab_44' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
+-H &quot;Cookie: JSESSIONID=CADD90F7A81643E7EC93C985449423BC; Path=/; HttpOnly&quot; \
 -H &quot;Accept: */*&quot; \
-http://localhost:8081/authenticate/sign-out
+http://localhost:8080/authenticate/sign-out
 
 -----  Response  -----
 Status:   HTTP/1.1 205 
-Headers:  Set-Cookie: JSESSIONID=0653832E41AF4636EF6F37AB8240A72D; Path=/; HttpOnly
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
 
-</div><script>openTabById('summaryTabLink_20', "summaryTab_20");</script>
+</div><script>openTabById('summaryTabLink_44', "summaryTab_44");</script>
 </body>
 </html>

@@ -77,12 +77,12 @@
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_40' class='tablinks' onclick='openTab(event, "summaryTab_40")'>Summary</button><button id='httpTabLink_40' class='tablinks' onclick='openTab(event, "httpTab_40")'>HTTP</button><button id='curlTabLink_40' class='tablinks' onclick='openTab(event, "curlTab_40")'>curl</button></div><div id='summaryTab_40' class='tabcontent code'>Request:  POST http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
+<div class='tab'><button id='summaryTabLink_38' class='tablinks' onclick='openTab(event, "summaryTab_38")'>Summary</button><button id='httpTabLink_38' class='tablinks' onclick='openTab(event, "httpTab_38")'>HTTP</button><button id='curlTabLink_38' class='tablinks' onclick='openTab(event, "curlTab_38")'>curl</button></div><div id='summaryTab_38' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
 {&quot;itemId&quot;:8,&quot;priority&quot;:1}
 Response: HTTP/1.1 201 
-{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8081/rest/v...</div><div id='httpTab_40' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
-Headers:  Authorization: 2803-8093-3723
+{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v...</div><div id='httpTab_38' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -94,50 +94,50 @@ Headers:  Authorization: 2803-8093-3723
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
-}</div><div id='curlTab_40' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_38' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;itemId\&quot;:8,\&quot;priority\&quot;:1}&quot; \
-http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
+http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_40', "summaryTab_40");</script>
+</div><script>openTabById('summaryTabLink_38', "summaryTab_38");</script>
 
-<div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/4
+<div class='tab'><button id='summaryTabLink_39' class='tablinks' onclick='openTab(event, "summaryTab_39")'>Summary</button><button id='httpTabLink_39' class='tablinks' onclick='openTab(event, "httpTab_39")'>HTTP</button><button id='curlTabLink_39' class='tablinks' onclick='openTab(event, "curlTab_39")'>curl</button></div><div id='summaryTab_39' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/4
 Response: HTTP/1.1 200 
-{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8081/rest/v...</div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/4
-Headers:  Authorization: 2803-8093-3723
+{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v...</div><div id='httpTab_39' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/4
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -146,49 +146,49 @@ Headers:  Authorization: 2803-8093-3723
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
-}</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_39' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/4
+http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/4
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
+</div><script>openTabById('summaryTabLink_39', "summaryTab_39");</script>
 
-<div class='tab'><button id='summaryTabLink_42' class='tablinks' onclick='openTab(event, "summaryTab_42")'>Summary</button><button id='httpTabLink_42' class='tablinks' onclick='openTab(event, "httpTab_42")'>HTTP</button><button id='curlTabLink_42' class='tablinks' onclick='openTab(event, "curlTab_42")'>curl</button></div><div id='summaryTab_42' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
+<div class='tab'><button id='summaryTabLink_40' class='tablinks' onclick='openTab(event, "summaryTab_40")'>Summary</button><button id='httpTabLink_40' class='tablinks' onclick='openTab(event, "httpTab_40")'>HTTP</button><button id='curlTabLink_40' class='tablinks' onclick='openTab(event, "curlTab_40")'>curl</button></div><div id='summaryTab_40' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
 Response: HTTP/1.1 200 
-[{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8081/rest/...</div><div id='httpTab_42' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
-Headers:  Authorization: 2803-8093-3723
+[{&quot;wantItemId&quot;:4,&quot;itemId&quot;:8,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/...</div><div id='httpTab_40' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -198,43 +198,43 @@ Status:   HTTP/1.1 200
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 [ {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
-} ]</div><div id='curlTab_42' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_40' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items
+http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:01 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 [ {
   &quot;wantItemId&quot; : 4,
   &quot;itemId&quot; : 8,
   &quot;priority&quot; : 1,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/7/want-items/8&quot;
   }, {
     &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/10/items/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/10/items/8&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_42', "summaryTab_42");</script>
+</div><script>openTabById('summaryTabLink_40', "summaryTab_40");</script>
 </body>
 </html>

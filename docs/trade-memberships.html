@@ -75,16 +75,16 @@
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_30' class='tablinks' onclick='openTab(event, "summaryTab_30")'>Summary</button><button id='httpTabLink_30' class='tablinks' onclick='openTab(event, "httpTab_30")'>HTTP</button><button id='curlTabLink_30' class='tablinks' onclick='openTab(event, "curlTab_30")'>curl</button></div><div id='summaryTab_30' class='tabcontent code'>Request:  POST http://localhost:8081/rest/v1/trade-memberships/
-{&quot;userId&quot;:6,&quot;tradeId&quot;:3}
+<div class='tab'><button id='summaryTabLink_28' class='tablinks' onclick='openTab(event, "summaryTab_28")'>Summary</button><button id='httpTabLink_28' class='tablinks' onclick='openTab(event, "httpTab_28")'>HTTP</button><button id='curlTabLink_28' class='tablinks' onclick='openTab(event, "curlTab_28")'>curl</button></div><div id='summaryTab_28' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/
+{&quot;userId&quot;:5,&quot;tradeId&quot;:3}
 Response: HTTP/1.1 201 
-{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:6,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_30' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8081/rest/v1/trade-memberships/
-Headers:  Authorization: 2803-8093-3723
+{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:5,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_28' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3
 }
 
@@ -92,46 +92,46 @@ Headers:  Authorization: 2803-8093-3723
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
-}</div><div id='curlTab_30' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_28' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;userId\&quot;:6,\&quot;tradeId\&quot;:3}&quot; \
-http://localhost:8081/rest/v1/trade-memberships/
+-d &quot;{\&quot;userId\&quot;:5,\&quot;tradeId\&quot;:3}&quot; \
+http://localhost:8080/rest/v1/trade-memberships/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_30', "summaryTab_30");</script>
+</div><script>openTabById('summaryTabLink_28', "summaryTab_28");</script>
 
-<div class='tab'><button id='summaryTabLink_31' class='tablinks' onclick='openTab(event, "summaryTab_31")'>Summary</button><button id='httpTabLink_31' class='tablinks' onclick='openTab(event, "httpTab_31")'>HTTP</button><button id='curlTabLink_31' class='tablinks' onclick='openTab(event, "curlTab_31")'>curl</button></div><div id='summaryTab_31' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trade-memberships/8
+<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships/8
 Response: HTTP/1.1 200 
-{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:6,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_31' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships/8
-Headers:  Authorization: 2803-8093-3723
+{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:5,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships/8
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -140,92 +140,92 @@ Headers:  Authorization: 2803-8093-3723
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
-}</div><div id='curlTab_31' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8081/rest/v1/trade-memberships/8
+http://localhost:8080/rest/v1/trade-memberships/8
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
 }
+</div><script>openTabById('summaryTabLink_29', "summaryTab_29");</script>
+
+<div class='tab'><button id='summaryTabLink_31' class='tablinks' onclick='openTab(event, "summaryTab_31")'>Summary</button><button id='httpTabLink_31' class='tablinks' onclick='openTab(event, "httpTab_31")'>HTTP</button><button id='curlTabLink_31' class='tablinks' onclick='openTab(event, "curlTab_31")'>curl</button></div><div id='summaryTab_31' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships?userId=5&amp;_pageNumber=1&amp;_pageSize=1
+Response: HTTP/1.1 200 
+[{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:5,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:...</div><div id='httpTab_31' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships?userId=5&amp;_pageNumber=1&amp;_pageSize=1
+Headers:  Authorization: 7388-4620-2223
+          Accept: */*
+
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 1
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
+[ {
+  &quot;tradeMembershipId&quot; : 8,
+  &quot;userId&quot; : 5,
+  &quot;tradeId&quot; : 3,
+  &quot;type&quot; : &quot;MEMBER&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
+  } ]
+} ]</div><div id='curlTab_31' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 7388-4620-2223&quot; \
+-H &quot;Accept: */*&quot; \
+http://localhost:8080/rest/v1/trade-memberships?userId=5&amp;_pageNumber=1&amp;_pageSize=1
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 1
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
+[ {
+  &quot;tradeMembershipId&quot; : 8,
+  &quot;userId&quot; : 5,
+  &quot;tradeId&quot; : 3,
+  &quot;type&quot; : &quot;MEMBER&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
+  } ]
+} ]
 </div><script>openTabById('summaryTabLink_31', "summaryTab_31");</script>
 
-<div class='tab'><button id='summaryTabLink_33' class='tablinks' onclick='openTab(event, "summaryTab_33")'>Summary</button><button id='httpTabLink_33' class='tablinks' onclick='openTab(event, "httpTab_33")'>HTTP</button><button id='curlTabLink_33' class='tablinks' onclick='openTab(event, "curlTab_33")'>curl</button></div><div id='summaryTab_33' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trade-memberships?userId=6&amp;_pageNumber=1&amp;_pageSize=1
+<div class='tab'><button id='summaryTabLink_30' class='tablinks' onclick='openTab(event, "summaryTab_30")'>Summary</button><button id='httpTabLink_30' class='tablinks' onclick='openTab(event, "httpTab_30")'>HTTP</button><button id='curlTabLink_30' class='tablinks' onclick='openTab(event, "curlTab_30")'>curl</button></div><div id='summaryTab_30' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships
 Response: HTTP/1.1 200 
-[{&quot;tradeMembershipId&quot;:8,&quot;userId&quot;:6,&quot;tradeId&quot;:3,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:...</div><div id='httpTab_33' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships?userId=6&amp;_pageNumber=1&amp;_pageSize=1
-Headers:  Authorization: 2803-8093-3723
-          Accept: */*
-
-
------  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
-[ {
-  &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
-  &quot;tradeId&quot; : 3,
-  &quot;type&quot; : &quot;MEMBER&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
-  } ]
-} ]</div><div id='curlTab_33' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 2803-8093-3723&quot; \
--H &quot;Accept: */*&quot; \
-http://localhost:8081/rest/v1/trade-memberships?userId=6&amp;_pageNumber=1&amp;_pageSize=1
-
------  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
-[ {
-  &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
-  &quot;tradeId&quot; : 3,
-  &quot;type&quot; : &quot;MEMBER&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
-  } ]
-} ]
-</div><script>openTabById('summaryTabLink_33', "summaryTab_33");</script>
-
-<div class='tab'><button id='summaryTabLink_32' class='tablinks' onclick='openTab(event, "summaryTab_32")'>Summary</button><button id='httpTabLink_32' class='tablinks' onclick='openTab(event, "httpTab_32")'>HTTP</button><button id='curlTabLink_32' class='tablinks' onclick='openTab(event, "curlTab_32")'>curl</button></div><div id='summaryTab_32' class='tabcontent code'>Request:  GET http://localhost:8081/rest/v1/trade-memberships
-Response: HTTP/1.1 200 
-[{&quot;tradeMembershipId&quot;:1,&quot;userId&quot;:1,&quot;tradeId&quot;:1,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_32' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8081/rest/v1/trade-memberships
-Headers:  Authorization: 2803-8093-3723
+[{&quot;tradeMembershipId&quot;:1,&quot;userId&quot;:1,&quot;tradeId&quot;:1,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_30' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -235,7 +235,7 @@ Status:   HTTP/1.1 200
 Headers:  X-Pagination-Total-Count: 6
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 [ {
   &quot;tradeMembershipId&quot; : 1,
   &quot;userId&quot; : 1,
@@ -243,7 +243,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 2,
@@ -252,7 +252,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 3,
@@ -260,7 +260,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 4,
@@ -268,7 +268,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/4&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 7,
@@ -277,30 +277,30 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/7&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
-} ]</div><div id='curlTab_32' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_30' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8081/rest/v1/trade-memberships
+http://localhost:8080/rest/v1/trade-memberships
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  X-Pagination-Total-Count: 6
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 25 Nov 2017 21:40:00 GMT
+          Date: Sat, 20 Jan 2018 19:24:52 GMT
 [ {
   &quot;tradeMembershipId&quot; : 1,
   &quot;userId&quot; : 1,
@@ -308,7 +308,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 2,
@@ -317,7 +317,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 3,
@@ -325,7 +325,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 4,
@@ -333,7 +333,7 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/4&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 7,
@@ -342,42 +342,42 @@ Headers:  X-Pagination-Total-Count: 6
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/7&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 8,
-  &quot;userId&quot; : 6,
+  &quot;userId&quot; : 5,
   &quot;tradeId&quot; : 3,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8081/rest/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/8&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_32', "summaryTab_32");</script>
+</div><script>openTabById('summaryTabLink_30', "summaryTab_30");</script>
 
-<div class='tab'><button id='summaryTabLink_34' class='tablinks' onclick='openTab(event, "summaryTab_34")'>Summary</button><button id='httpTabLink_34' class='tablinks' onclick='openTab(event, "httpTab_34")'>HTTP</button><button id='curlTabLink_34' class='tablinks' onclick='openTab(event, "curlTab_34")'>curl</button></div><div id='summaryTab_34' class='tabcontent code'>Request:  DELETE http://localhost:8081/rest/v1/trade-memberships/8
+<div class='tab'><button id='summaryTabLink_32' class='tablinks' onclick='openTab(event, "summaryTab_32")'>Summary</button><button id='httpTabLink_32' class='tablinks' onclick='openTab(event, "httpTab_32")'>HTTP</button><button id='curlTabLink_32' class='tablinks' onclick='openTab(event, "curlTab_32")'>curl</button></div><div id='summaryTab_32' class='tabcontent code'>Request:  DELETE http://localhost:8080/rest/v1/trade-memberships/8
 Response: HTTP/1.1 204 
-</div><div id='httpTab_34' class='tabcontent code'>-----  Request  -----
-DELETE http://localhost:8081/rest/v1/trade-memberships/8
-Headers:  Authorization: 2803-8093-3723
+</div><div id='httpTab_32' class='tabcontent code'>-----  Request  -----
+DELETE http://localhost:8080/rest/v1/trade-memberships/8
+Headers:  Authorization: 7388-4620-2223
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Sat, 25 Nov 2017 21:40:00 GMT
-</div><div id='curlTab_34' class='tabcontent code'>-----  Request  -----
+Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
+</div><div id='curlTab_32' class='tabcontent code'>-----  Request  -----
 curl -v -X DELETE \
--H &quot;Authorization: 2803-8093-3723&quot; \
+-H &quot;Authorization: 7388-4620-2223&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8081/rest/v1/trade-memberships/8
+http://localhost:8080/rest/v1/trade-memberships/8
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Sat, 25 Nov 2017 21:40:00 GMT
+Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
 
-</div><script>openTabById('summaryTabLink_34', "summaryTab_34");</script></body>
+</div><script>openTabById('summaryTabLink_32', "summaryTab_32");</script></body>
 </html>
