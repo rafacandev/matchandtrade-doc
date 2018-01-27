@@ -7,6 +7,17 @@
 		</encoder>
 	</appender>
 	
+	<appender name="PLAINOUTPUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger level="INFO" name="plainTextLogger" additivity="false">
+		<appender-ref ref="PLAINOUTPUT" />
+	</logger>
+	
+	
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
