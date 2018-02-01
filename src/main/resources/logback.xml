@@ -3,7 +3,7 @@
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line] - %msg%n</pattern>
+			<pattern>%-5level %logger{36} [%file:%line] - %msg%n</pattern>
 		</encoder>
 	</appender>
 	
@@ -17,21 +17,29 @@
 		<appender-ref ref="PLAINOUTPUT" />
 	</logger>
 	
-	
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 
-	<!-- TRACE: Log all SQL DML statements as they are executed -->
-	<logger level="INFO" name="org.hibernate.SQL"/>
-	<!-- TRACE: Log all JDBC parameters -->
-	<logger level="INFO" name="org.hibernate.type"/>
-	<!-- TRACE: Log transaction related activity -->
-	<logger level="INFO" name="org.hibernate.transaction"/>
-	<!-- TRACE: Log all second-level cache activity -->
-	<logger level="INFO" name="org.hibernate.cache"/>
+	<!-- Documentation generation summary -->
+	<logger name="com.matchandtrade.doc.executable.MatchAndTradeDocExecutable" level="INFO"/>
+	<logger name="com.github.rafasantos.restdocmaker.RestDocMakerGenerator" level="INFO"/>
+	
+	<!-- Lower the level of less useful loggers -->
+	<logger name="com.matchandtrade.authentication.AuthenticationOAuthNewUserMock" level="ERROR" />
+	<logger name="org.springframework.web.servlet.DispatcherServlet" level="ERROR" />
+	<logger name="org.apache.catalina.core.ContainerBase" level="ERROR" />
 
-	<!-- TRACE: Log all Request/Response via SnippetFactory -->
-    <logger name="com.github.rafasantos.restdocmaker.template.SnippetFactory" level="INFO" />
-
+	<!-- Log all SQL DML statements as they are executed -->
+	<logger level="INFO" name="org.hibernate.SQL" />
+	<!-- Log all JDBC parameters -->
+	<logger level="INFO" name="org.hibernate.type" />
+	<!-- Log transaction related activity -->
+	<logger level="INFO" name="org.hibernate.transaction" />
+	<!-- Log all second-level cache activity -->
+	<logger level="INFO" name="org.hibernate.cache" />
+	<!-- Log all Request/Response via SnippetFactory -->
+	<logger level="INFO" name="com.github.rafasantos.restdocmaker.template.SnippetFactory" />
+	
 </configuration>
+
