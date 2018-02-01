@@ -64,9 +64,9 @@ public class TradeRestDocMaker implements RestDocMaker {
 		// TRADES_SEARCH_PLACEHOLDER
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
-				.addParam("name", "Board games in Toronto")
-				.addParam("_pageNumber", "1")
-				.addParam("_pageSize", "1")
+				.addQueryParam("name", "Board games in Toronto")
+				.addQueryParam("_pageNumber", "1")
+				.addQueryParam("_pageSize", "1")
 				.build();
 		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradesUrl()); 
 		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", equalTo("1"));

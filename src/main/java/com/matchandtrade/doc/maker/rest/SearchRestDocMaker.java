@@ -15,8 +15,10 @@ import com.matchandtrade.rest.v1.json.UserJson;
 import com.matchandtrade.rest.v1.json.search.Recipe;
 import com.matchandtrade.rest.v1.json.search.SearchCriteriaJson;
 
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 
 public class SearchRestDocMaker implements RestDocMaker {
@@ -30,7 +32,6 @@ public class SearchRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		UserJson owner = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		
 		MatchAndTradeApiFacade apiAsOwner = new MatchAndTradeApiFacade();
@@ -45,13 +46,22 @@ public class SearchRestDocMaker implements RestDocMaker {
 		TradeMembershipJson memberMembership = apiAsMember.subscribeToTrade(member.getUserId(), trade.getTradeId());
 		apiAsMember.createItem(memberMembership, "Elysium");
 		apiAsMember.createItem(memberMembership, "The Voyages of Marco Polo");
+		apiAsMember.createItem(memberMembership, "Deus");
 
 		// SEARCH_POST_PLACEHOLDER
 		SearchCriteriaJson search = new SearchCriteriaJson();
 		search.setRecipe(Recipe.ITEMS);
 		search.addCriterion("trade.tradeId", trade.getTradeId());
-		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, search, MatchAndTradeRestUtil.searchUrl());
-		postSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", equalTo("4"));
+		RequestSpecification searchRequest = new RequestSpecBuilder()
+				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
+				.addQueryParam("_pageNumber", "2")
+				.addQueryParam("_pageSize", "2")
+				.setContentType(ContentType.JSON)
+				.setBody(search)
+				.build();
+
+		Snippet postSnippet = SnippetFactory.makeSnippet(Method.POST, searchRequest, MatchAndTradeRestUtil.searchUrl());
+		postSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", equalTo("5"));
 		
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, postSnippet.asHtml());
