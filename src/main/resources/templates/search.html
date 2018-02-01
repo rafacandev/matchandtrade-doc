@@ -1,0 +1,75 @@
+<h1>Search</h1>
+<p>
+	<i>Endpoint</i> to perform advanced searches.
+	Its usage differs according to the given <span class='incode'>search.recipe</span> property.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/search</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li><span class='incode'>"search.recipe": "ITEMS"</span>Only authenticated clients</li>
+</ul>
+
+<h3>Resource Common to all Searches</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>recipe</td>
+		<td>mandatory, enumeration (see <a href="#recipes">Recipes</a>)</td>
+		<td>The search recipe to be used. Each recipe may return different response bodies and support different request bodies</td>
+	</tr>
+	<tr>
+		<td>criteria</td>
+		<td>See <a href="criteria-resource">Criteria Resource</a></td>
+		<td>The search criteria for this search</td>
+	</tr>
+</table>
+
+<h3><a id="#criteria-resource">Criteria</a></h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>key</td>
+		<td>mandatory, string</td>
+		<td>Values differ according to the <span class='incode'>search.recipe</span></td>
+	</tr>
+	<tr>
+		<td>value</td>
+		<td>mandatory, number or string according to the current <span class='incode'>search.recipe</span></td>
+		<td>Possible values and types differ according to the <span class='incode'>search.recipe</span></td>
+	</tr>
+</table>
+
+<h3><a id="recipes">Recipes</a></h3>
+<table>
+	<tr>
+		<th>Recipe Name</th>
+		<th>Description</th>
+		<th>Criteria Specification</th>
+	</tr>
+	<tr>
+		<td>ITEMS</td>
+		<td>Returns an array of <a href='items.html'>Items</a> matching the given <span class='incode'>search.criteria</span></td>
+		<td>
+			<span class='incode'>"key": "trade.tradeId"</span> matching <a href='trades.html' class='incode'>trade.tradeId</a><br><br>
+			<span class='incode'>"value": n</span> numeric value matching <a href='trades.html' class='incode'>trade.tradeId</a>
+		</td>
+	</tr>
+</table>
+
+
+<h3>Examples</h3>
+
+${SEARCH_POST_PLACEHOLDER}

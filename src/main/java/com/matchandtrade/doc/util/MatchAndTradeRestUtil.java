@@ -22,6 +22,7 @@ public class MatchAndTradeRestUtil {
 		SIGN_OFF("sign-out"),
 		AUTHENTICATIONS("rest/v1/authentications"),
 		TRADES("rest/v1/trades"),
+		SEARCH("rest/v1/search"),
 		TRADE_RESULTS("results"),
 		ITEMS("items"),
 		INFO("info"),
@@ -54,6 +55,9 @@ public class MatchAndTradeRestUtil {
 
 	public static String signOffUrl() {
 		return Endpoint.AUTHENTICATE.asURL(baseUrl) + "/" + Endpoint.SIGN_OFF.path;
+	}
+	public static String searchUrl() {
+		return Endpoint.SEARCH.asURL(baseUrl);
 	}
 	public static String usersUrl() {
 		return Endpoint.USERS.asURL(baseUrl);

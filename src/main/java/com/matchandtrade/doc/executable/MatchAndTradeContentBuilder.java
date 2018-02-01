@@ -11,6 +11,7 @@ import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
 import com.matchandtrade.doc.maker.rest.ItemRestDocMaker;
+import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeMembershipRestDocMaker;
 import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
@@ -29,16 +30,19 @@ public class MatchAndTradeContentBuilder {
 		try {
 			RestDocMakerConfiguration config = new RestDocMakerConfiguration()
 				.destinationFolderRootPath(destinationFolder)
-				.makers(new DevelopmentGuideRestDocMaker(),
-						new UseCaseRestDocMaker(),
-						new AuthenticationRestDocMaker(),
-						new TradeRestDocMaker(),
-						new UserRestDocMaker(),
-						new TradeMembershipRestDocMaker(),
-						new ItemRestDocMaker(),
-						new WantItemRestDocMaker(),
-						new IndexRestDocMaker(),
-						new AuthenticateRestDocMaker());
+				.makers(
+					new DevelopmentGuideRestDocMaker(),
+					new UseCaseRestDocMaker(),
+					new AuthenticationRestDocMaker(),
+					new TradeRestDocMaker(),
+					new UserRestDocMaker(),
+					new TradeMembershipRestDocMaker(),
+					new ItemRestDocMaker(),
+					new WantItemRestDocMaker(),
+					new IndexRestDocMaker(),
+					new AuthenticateRestDocMaker(),
+					new SearchRestDocMaker()
+				);
 			RestDocMakerGenerator generator = new RestDocMakerGenerator();
 			generator.generateDocumentation(config);
 		} catch (Exception e) {
