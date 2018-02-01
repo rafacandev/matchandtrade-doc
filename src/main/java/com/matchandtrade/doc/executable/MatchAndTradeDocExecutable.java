@@ -28,18 +28,20 @@ public class MatchAndTradeDocExecutable {
 		logger.info("Starting Match and Trade web server.");
 		try {
 			startMatchAndTradeWebServer();
+			logger.info("Running Match And Trade Web API with base URL: {}", PropertiesLoader.serverUrl());
 		} catch (IOException e) {
 			logger.error("Not able to start Match And Trade web server. Exception message: {}", e.getMessage());
 		}
 		
 		MatchAndTradeContentBuilder docContentMaker = new MatchAndTradeContentBuilder(PropertiesLoader.destinationFolder());
+		int exitCode = 0;
 		try {
 			logger.info("Making documentation.");
 			docContentMaker.buildContent();
 			logger.info("Document generation complete.");
-		} catch (Exception e) {
+		} catch (Exception | Error e) {
 			logger.error("Error when making the documentation. Exception message: {}", e.getMessage(), e);
-			System.exit(-1);
+			exitCode = -1;
 		} finally {
 			if (PropertiesLoader.stopWebService()) {
 				logger.info("Documentation generated successfully. Stopping web server. " +
@@ -47,10 +49,9 @@ public class MatchAndTradeDocExecutable {
 						"Example: mvn -D{}=false",
 						PropertiesLoader.Key.STOP_WEBSERVER.getKey(),
 						PropertiesLoader.Key.STOP_WEBSERVER.getKey());
-				System.exit(0);
+				System.exit(exitCode);
 			}
 		}
-		logger.info("Running Match And Trade Web API with base URL: {}", PropertiesLoader.serverUrl());
 	}
 
 	private static void startMatchAndTradeWebServer() throws Throwable {
