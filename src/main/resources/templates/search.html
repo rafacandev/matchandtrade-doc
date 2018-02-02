@@ -1,7 +1,7 @@
 <h1>Search</h1>
 <p>
 	<i>Endpoint</i> to perform advanced searches.
-	Its usage differs according to the given <span class='incode'>search.recipe</span> property.
+	Its usage differs according to the given <span class='incode'>Search.recipe</span> property.
 </p>
 
 <h3>Operations</h3>
@@ -11,10 +11,10 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li><span class='incode'>"search.recipe": "ITEMS"</span>Only authenticated clients</li>
+	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only authenticated clients</li>
 </ul>
 
-<h3>Resource Common to all Searches</h3>
+<h3>Root Resource</h3>
 <table>
 	<tr>
 		<th>Property Name</th>
@@ -28,8 +28,28 @@
 	</tr>
 	<tr>
 		<td>criteria</td>
-		<td>See <a href="criteria-resource">Criteria Resource</a></td>
+		<td>See <a href="criteria-resource">Criteria</a></td>
 		<td>The search criteria for this search</td>
+	</tr>
+</table>
+
+<h3><a id="recipes">Recipes</a></h3>
+<table>
+	<tr>
+		<th>Recipe Name</th>
+		<th>Description</th>
+		<th>Criteria Specification</th>
+	</tr>
+	<tr>
+		<td>ITEMS</td>
+		<td>Returns an array of <a href='items.html'>Items</a> matching the given <span class='incode'>Search.criteria</span></td>
+		<td>
+			<span class='incode'>"key": "trade.tradeId"</span> references <a href='trades.html' class='incode'>Trade.tradeId</a><br>
+			<span class='incode'>"value": n</span> numeric value
+			<hr>
+			<span class='incode'>"key": "trade.tradeMembershipId"</span> references <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a><br>
+			<span class='incode'>"value": n</span> numeric value
+		</td>
 	</tr>
 </table>
 
@@ -47,29 +67,24 @@
 	</tr>
 	<tr>
 		<td>value</td>
-		<td>mandatory, number or string according to the current <span class='incode'>search.recipe</span></td>
-		<td>Possible values and types differ according to the <span class='incode'>search.recipe</span></td>
-	</tr>
-</table>
-
-<h3><a id="recipes">Recipes</a></h3>
-<table>
-	<tr>
-		<th>Recipe Name</th>
-		<th>Description</th>
-		<th>Criteria Specification</th>
+		<td>mandatory, number or string according to the <span class='incode'>Search.recipe</span></td>
+		<td>Possible values and types differ according to the <span class='incode'>Search.recipe</span></td>
 	</tr>
 	<tr>
-		<td>ITEMS</td>
-		<td>Returns an array of <a href='items.html'>Items</a> matching the given <span class='incode'>search.criteria</span></td>
-		<td>
-			<span class='incode'>"key": "trade.tradeId"</span> matching <a href='trades.html' class='incode'>trade.tradeId</a><br><br>
-			<span class='incode'>"value": n</span> numeric value matching <a href='trades.html' class='incode'>trade.tradeId</a>
-		</td>
+		<td>operator</td>
+		<td>optional, enumeration, default value: <span class='incode'>AND</span></td>
+		<td>Possible values are <span class='incode'>AND</span> and <span class='incode'>OR</span> </td>
+	</tr>
+	<tr>
+		<td>matcher</td>
+		<td>optional, enumeration, default value: <span class='incode'>EQUALS</span></td>
+		<td>Possible values are <span class='incode'>EQUALS</span>, <span class='incode'>NOT_EQUALS</span>, <span class='incode'>EQUALS_IGNORE_CASE</span>, <span class='incode'>LIKE_IGNORE_CASE</span></td>
 	</tr>
 </table>
-
 
 <h3>Examples</h3>
-
+<p>
+	Search for all <a href='items.html'>Items</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to ${TRADE_ID}
+	except for those belonging to <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a> equals to ${TRADE_MEMBERSHIP_ID}.
+</p>
 ${SEARCH_POST_PLACEHOLDER}

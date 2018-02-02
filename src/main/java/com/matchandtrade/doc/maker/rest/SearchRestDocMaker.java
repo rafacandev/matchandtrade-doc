@@ -12,6 +12,8 @@ import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
+import com.matchandtrade.rest.v1.json.search.Matcher;
+import com.matchandtrade.rest.v1.json.search.Operator;
 import com.matchandtrade.rest.v1.json.search.Recipe;
 import com.matchandtrade.rest.v1.json.search.SearchCriteriaJson;
 
@@ -48,10 +50,17 @@ public class SearchRestDocMaker implements RestDocMaker {
 		apiAsMember.createItem(memberMembership, "The Voyages of Marco Polo");
 		apiAsMember.createItem(memberMembership, "Deus");
 
+		MatchAndTradeRestUtil.nextAuthorizationHeader();
+		UserJson anotherMember = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		MatchAndTradeApiFacade apiAsAnotherMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		TradeMembershipJson anotherMemberMembership = apiAsAnotherMember.subscribeToTrade(anotherMember.getUserId(), trade.getTradeId());
+		apiAsAnotherMember.createItem(anotherMemberMembership, "DO NOT DISPLAY THIS ITEM");
+
 		// SEARCH_POST_PLACEHOLDER
 		SearchCriteriaJson search = new SearchCriteriaJson();
 		search.setRecipe(Recipe.ITEMS);
-		search.addCriterion("trade.tradeId", trade.getTradeId());
+		search.addCriterion("Trade.tradeId", trade.getTradeId());
+		search.addCriterion("TradeMembership.tradeMembershipId", anotherMemberMembership.getTradeMembershipId(), Operator.AND, Matcher.NOT_EQUALS);
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.addQueryParam("_pageNumber", "2")
@@ -64,7 +73,11 @@ public class SearchRestDocMaker implements RestDocMaker {
 		postSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", equalTo("5"));
 		
 		String template = TemplateUtil.buildTemplate(contentFilePath());
+		template = TemplateUtil.replacePlaceholder(template, "TRADE_ID", trade.getTradeId().toString());
+		template = TemplateUtil.replacePlaceholder(template, "TRADE_MEMBERSHIP_ID", anotherMemberMembership.getTradeMembershipId().toString());
+		
 		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, postSnippet.asHtml());
+		
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
