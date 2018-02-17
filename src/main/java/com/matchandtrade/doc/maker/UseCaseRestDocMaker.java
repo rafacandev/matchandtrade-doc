@@ -1,5 +1,7 @@
 package com.matchandtrade.doc.maker;
 
+import java.util.Date;
+
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -65,7 +67,8 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		
 		// OWNER_TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName("Board games in Ottawa");
+		String tradeName = "Board games in Ottawa - " + new Date();
+		tradeJson.setName(tradeName);
 		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		tradePostOwner.getResponse().then().statusCode(201);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST_PLACEHOLDER, tradePostOwner.asHtml());

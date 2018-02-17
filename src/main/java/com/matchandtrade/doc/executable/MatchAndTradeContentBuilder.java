@@ -12,10 +12,9 @@ import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
 import com.matchandtrade.doc.maker.rest.ItemRestDocMaker;
 import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
-import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeMembershipRestDocMaker;
+import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
 import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
-import com.matchandtrade.doc.maker.rest.WantItemRestDocMaker;
 
 public class MatchAndTradeContentBuilder {
 
@@ -38,7 +37,6 @@ public class MatchAndTradeContentBuilder {
 					new UserRestDocMaker(),
 					new TradeMembershipRestDocMaker(),
 					new ItemRestDocMaker(),
-					new WantItemRestDocMaker(),
 					new IndexRestDocMaker(),
 					new AuthenticateRestDocMaker(),
 					new SearchRestDocMaker()

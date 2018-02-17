@@ -3,6 +3,8 @@ package com.matchandtrade.doc.maker.rest;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+import java.util.Date;
+
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -39,7 +41,7 @@ public class ItemRestDocMaker implements RestDocMaker {
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
 		
 		// Create a trade membership
-		TradeJson tradeJson = matchAndTradeApiFacade.createTrade("Board games in Montreal");
+		TradeJson tradeJson = matchAndTradeApiFacade.createTrade("Board games in Montreal - " + new Date());
 		Integer tradeMembershipId = matchAndTradeApiFacade.findTradeMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), tradeJson.getTradeId()).getTradeMembershipId();
 		
 		// ITEMS_POST_PLACEHOLDER

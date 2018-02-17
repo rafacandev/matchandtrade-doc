@@ -2,6 +2,8 @@ package com.matchandtrade.doc.maker;
 
 import static org.hamcrest.Matchers.notNullValue;
 
+import java.util.Date;
+
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -29,9 +31,9 @@ public class IndexRestDocMaker implements RestDocMaker {
 
 		// REST_GUIDE_PAGINATION
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
-		matchAndTradeApiFacade.createTrade("Books in New York");
-		matchAndTradeApiFacade.createTrade("Books in Paris");
-		matchAndTradeApiFacade.createTrade("Books in Lima");
+		matchAndTradeApiFacade.createTrade("Books in New York - " + new Date());
+		matchAndTradeApiFacade.createTrade("Books in Paris - " + new Date());
+		matchAndTradeApiFacade.createTrade("Books in Lima - " + new Date());
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.setContentType(ContentType.JSON)

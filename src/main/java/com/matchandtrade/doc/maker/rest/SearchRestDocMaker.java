@@ -3,6 +3,8 @@ package com.matchandtrade.doc.maker.rest;
 
 import static org.hamcrest.Matchers.equalTo;
 
+import java.util.Date;
+
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -37,7 +39,7 @@ public class SearchRestDocMaker implements RestDocMaker {
 		UserJson owner = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		
 		MatchAndTradeApiFacade apiAsOwner = new MatchAndTradeApiFacade();
-		TradeJson trade = apiAsOwner.createTrade("Search Recipe ITEMS");
+		TradeJson trade = apiAsOwner.createTrade("Search Recipe ITEMS - " + new Date());
 		TradeMembershipJson tradeMembership = apiAsOwner.findTradeMembershipByUserIdAndTradeId(owner.getUserId(), trade.getTradeId());
 		apiAsOwner.createItem(tradeMembership, "Imperial Settlers");
 		apiAsOwner.createItem(tradeMembership, "Dead of Winter: A Crossroads Game");

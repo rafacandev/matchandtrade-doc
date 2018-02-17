@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.notNullValue;
 
+import java.util.Date;
+
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -40,7 +42,8 @@ public class TradeRestDocMaker implements RestDocMaker {
 		
 		// TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
-		tradeJson.setName("Board games");
+		String tradeName = "Board games - " + new Date();
+		tradeJson.setName(tradeName);
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postSnippet.asHtml());
@@ -50,7 +53,8 @@ public class TradeRestDocMaker implements RestDocMaker {
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
-		tradeJson.setName("Board games in Toronto");
+		tradeName = "Board games in Toronto - " + new Date(); 
+		tradeJson.setName(tradeName);
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(tradeJson.getName()));
@@ -64,7 +68,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		// TRADES_SEARCH_PLACEHOLDER
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
-				.addQueryParam("name", "Board games in Toronto")
+				.addQueryParam("name", tradeName)
 				.addQueryParam("_pageNumber", "1")
 				.addQueryParam("_pageSize", "1")
 				.build();

@@ -91,6 +91,10 @@
 						</goals>
 						<configuration>
 							<mainClass>com.matchandtrade.doc.executable.MatchAndTradeDocExecutable</mainClass>
+							<arguments>
+								<argument>-cf</argument>
+								<argument>${basedir}/config/matchandtrade.properties</argument>
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>
