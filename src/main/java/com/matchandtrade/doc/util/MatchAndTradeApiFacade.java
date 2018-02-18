@@ -8,8 +8,10 @@ import java.util.stream.Collectors;
 
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.rest.v1.json.ItemJson;
+import com.matchandtrade.rest.v1.json.OfferJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -21,13 +23,21 @@ import io.restassured.specification.RequestSpecification;
 public class MatchAndTradeApiFacade {
 	
 	private Map<String, String> defaultHeaders = new HashMap<>();
+	private UserJson user;
 	
 	public MatchAndTradeApiFacade() {
 		defaultHeaders = MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap();
+		user = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 	}
 	public MatchAndTradeApiFacade(Header... defaultHeaders) {
 		List<Header> headersList = Arrays.asList(defaultHeaders);
 		this.defaultHeaders = headersList.stream().collect(Collectors.toMap(Header::getName, Header::getValue));
+	}
+
+	public MatchAndTradeApiFacade(UserJson user, Header... defaultHeaders) {
+		List<Header> headersList = Arrays.asList(defaultHeaders);
+		this.defaultHeaders = headersList.stream().collect(Collectors.toMap(Header::getName, Header::getValue));
+		this.user = user;
 	}
 	
 	public TradeJson createTrade(String name) {
@@ -85,6 +95,49 @@ public class MatchAndTradeApiFacade {
 				.when()
 				.post(MatchAndTradeRestUtil.itemsUrl(tradeMembershipJson.getTradeMembershipId()) + "/");
 		return response.body().as(ItemJson.class);
+	}
+	
+	public UserJson getUser() {
+		return user;
+	}
+	
+	public UserJson saveUser(UserJson user) {
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(user)
+				.when()
+				.put(MatchAndTradeRestUtil.usersUrl(user.getUserId()));
+		return response.body().as(UserJson.class);
+	}
+	
+	public TradeMembershipJson subscribeToTrade(TradeJson trade) {
+		TradeMembershipJson requestBody = new TradeMembershipJson();
+		requestBody.setTradeId(trade.getTradeId());
+		requestBody.setUserId(user.getUserId());
+		Response response = RestAssured
+			.given()
+			.headers(defaultHeaders)
+			.contentType(ContentType.JSON)
+			.body(requestBody)
+			.when()
+			.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		return response.body().as(TradeMembershipJson.class);
+	}
+
+	public OfferJson createOffer(Integer offeredItemId, Integer wantedItemId) {
+		OfferJson requestBody = new OfferJson();
+		requestBody.setOfferedItemId(offeredItemId);
+		requestBody.setWantedItemId(wantedItemId);
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post(MatchAndTradeRestUtil.offerUrl() + "/");
+		return response.body().as(OfferJson.class);
 	}
 	
 }

@@ -11,68 +11,68 @@ and finally generate the <a href='trade-results.html'>TradeResults</a>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
 	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
-${OWNER_AUTHENTICATE_PLACEHOLDER}
+${OWNER_AUTHENTICATE}
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
-${OWNER_AUTHENTICATIONS_PLACEHOLDER}
+${OWNER_AUTHENTICATIONS}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
-${OWNER_TRADES_POST_PLACEHOLDER}
+${OWNER_TRADES_POST}
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-${OWNER_TRADE_MEMBERSHIP_PLACEHOLDER}
+${OWNER_TRADE_MEMBERSHIP}
 
 <p>
   	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${OWNER_ITEM_ONE_PLACEHOLDER}
-${OWNER_ITEM_TWO_PLACEHOLDER}
+${OWNER_ITEM_ONE}
+${OWNER_ITEM_TWO}
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
   	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
-${MEMBER_AUTHENTICATE_PLACEHOLDER}
+${MEMBER_AUTHENTICATE}
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
-${MEMBER_AUTHENTICATIONS_PLACEHOLDER}
+${MEMBER_AUTHENTICATIONS}
 
 <p>
 	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
 </p>
-${MEMBER_TRADES_MEMBERSHIP_PLACEHOLDER}
+${MEMBER_TRADES_MEMBERSHIP}
 
 <p>
   	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${MEMBER_ITEM_ONE_PLACEHOLDER}
-${MEMBER_ITEM_TWO_PLACEHOLDER}
-${MEMBER_ITEM_THREE_PLACEHOLDER}
+${MEMBER_ITEM_ONE}
+${MEMBER_ITEM_TWO}
+${MEMBER_ITEM_THREE}
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
 	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
-${TRADE_MATCHING_ITEMS_PLACEHOLDER}
+${TRADE_MATCHING_ITEMS}
 
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
 	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
 	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
-${OWNER_WANT_ITEMS_ONE}
+${OWNER_OFFER_ONE}
 
 <p>
 	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
@@ -80,13 +80,13 @@ ${OWNER_WANT_ITEMS_ONE}
 	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
 	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
-${MEMBER_WANT_ITEMS_ONE}
-${MEMBER_WANT_ITEMS_TWO}
+${MEMBER_OFFER_ONE}
+${MEMBER_OFFER_TWO}
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS_ENDED</span>.
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>GENERATE_TRADES</span>.
 </p>
-${TRADE_MATCHING_ITEMS_ENDED}
+${TRADE_GENERATE_TRADES}
 
 <p>
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>

@@ -1,45 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- See: http://logback.qos.ch/manual/configuration.html -->
 <configuration debug="false" scan="false" packagingData="false">
 
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%-5level %logger{36} [%file:%line] - %msg%n</pattern>
-		</encoder>
-	</appender>
+	<!-- Building on top of default CONSOLE and FILE appenders provided by spring boot. See: https://github.com/spring-projects/spring-boot/tree/master/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback -->    
+    <property 
+    	name="CONSOLE_LOG_PATTERN"
+    	value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}){cyan}%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 	
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
 	<appender name="PLAINOUTPUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%msg%n</pattern>
+			<pattern>%clr(%msg%n){yellow}</pattern>
 		</encoder>
 	</appender>
-	
+
 	<logger level="INFO" name="plainTextLogger" additivity="false">
 		<appender-ref ref="PLAINOUTPUT" />
 	</logger>
 	
-	<root level="INFO">
-		<appender-ref ref="STDOUT" />
+	<logger level="inherited" name="com.matchandtrade" />
+
+	<root level="${logging.level.root:-info}">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
 	</root>
 
-	<!-- Documentation generation summary -->
-	<logger name="com.matchandtrade.doc.executable.MatchAndTradeDocExecutable" level="INFO"/>
-	<logger name="com.github.rafasantos.restdocmaker.RestDocMakerGenerator" level="INFO"/>
-	
-	<!-- Lower the level of less useful loggers -->
-	<logger name="com.matchandtrade.authentication.AuthenticationOAuthNewUserMock" level="ERROR" />
-	<logger name="org.springframework.web.servlet.DispatcherServlet" level="ERROR" />
-	<logger name="org.apache.catalina.core.ContainerBase" level="ERROR" />
-
 	<!-- Log all SQL DML statements as they are executed -->
-	<logger level="INFO" name="org.hibernate.SQL" />
+	<logger level="INFO" name="org.hibernate.SQL"/>
 	<!-- Log all JDBC parameters -->
-	<logger level="INFO" name="org.hibernate.type" />
+	<logger level="INFO" name="org.hibernate.type"/>
 	<!-- Log transaction related activity -->
-	<logger level="INFO" name="org.hibernate.transaction" />
+	<logger level="INFO" name="org.hibernate.transaction"/>
 	<!-- Log all second-level cache activity -->
-	<logger level="INFO" name="org.hibernate.cache" />
+	<logger level="INFO" name="org.hibernate.cache"/>
+	
+	<!-- Match And Trade loggers -->
+    <logger leve="INFO" name="com.matchandtrade.rest.service.TradeResultService" />
+	
+	
+	<!-- Match And Trade Doc Maker Logs -->
+	<!-- ============================== -->
+	<!-- Documentation generation summary -->
+	<logger level="INFO" name="com.matchandtrade.doc.executable.MatchAndTradeDocExecutable" />
+	<logger level="INFO" name="com.github.rafasantos.restdocmaker.RestDocMakerGenerator" />
+	
 	<!-- Log all Request/Response via SnippetFactory -->
 	<logger level="INFO" name="com.github.rafasantos.restdocmaker.template.SnippetFactory" />
 	
 </configuration>
-

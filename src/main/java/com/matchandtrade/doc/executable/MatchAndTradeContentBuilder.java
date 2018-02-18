@@ -11,6 +11,7 @@ import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
 import com.matchandtrade.doc.maker.rest.ItemRestDocMaker;
+import com.matchandtrade.doc.maker.rest.OfferRestDocMaker;
 import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeMembershipRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
@@ -31,6 +32,7 @@ public class MatchAndTradeContentBuilder {
 				.destinationFolderRootPath(destinationFolder)
 				.makers(
 					new DevelopmentGuideRestDocMaker(),
+					new OfferRestDocMaker(),
 					new UseCaseRestDocMaker(),
 					new AuthenticationRestDocMaker(),
 					new TradeRestDocMaker(),

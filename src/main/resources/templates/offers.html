@@ -1,0 +1,74 @@
+<h1>Offer</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Offer</span>.
+	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='items.html'>Item</a>
+	for a wanted <a href='items.html'>Item</a>.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST /rest/v1/offers/</span></li>
+	<li><span class='incode'>GET /rest/v1/offers/{offerId}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/offers/{offerId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>Only authenticated clients</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>offerId</td>
+		<td>read-write, mandatory</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>offeredItemId</td>
+		<td>ready-only</td>
+		<td>Id associated with the offered <a href='items.html'>Item</a></td>
+	</tr>
+	<tr>
+		<td>wantedItemId</td>
+		<td>ready-only</td>
+		<td>Id associated with the wanted <a href='items.html'>Item</a></td>
+	</tr>
+</table>
+
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='rest-guide.html'>pagination</a></td>
+	</tr>
+</table>
+
+<h3>Rules</h3>
+<ul>
+	<li>Offer.offeredItemId and Offer.wantedItemId must differ.</li>
+	<li>Offer.offeredItemId and Offer.wantedItemId must belong existing Items.</li>
+	<li>Offer.offeredItemId must belong to the offering User.userId.</li>
+	<li>Offer.offeredItemId and Offer.wantedItemId must be associated to the same Trade.</li>
+</ul>
+
+<h3>Examples</h3>
+${OFFERS_POST}
+
+${OFFERS_GET}
+
+${OFFERS_DELETE}
