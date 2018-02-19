@@ -28,7 +28,7 @@ public class MatchAndTradeRestUtil {
 		INFO("info"),
 		WANT_ITEMS("want-items"),
 		TRADE_MEMBERSHIPS("rest/v1/trade-memberships"),
-		OFFERS("rest/v1/offers"),
+		OFFERS("offers"),
 		USERS("rest/v1/users");
 
 		private String path;
@@ -93,11 +93,11 @@ public class MatchAndTradeRestUtil {
 	public static String tradeResultsUrl(Integer tradeId) {
 		return Endpoint.TRADES.asURL(baseUrl) + "/" + tradeId + "/" + Endpoint.TRADE_RESULTS.path;
 	}
-	public static String offerUrl() {
-		return Endpoint.OFFERS.asURL(baseUrl);
+	public static String offerUrl(Integer tradeMembershipId) {
+		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.OFFERS.path;
 	}
-	public static String offerUrl(Integer itemId) {
-		return Endpoint.OFFERS.asURL(baseUrl) + "/" + itemId;
+	public static String offerUrl(Integer tradeMembershipId, Integer offerId) {
+		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.OFFERS.path + "/" + offerId;
 	}
 	
 

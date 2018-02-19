@@ -67,14 +67,14 @@ public class OfferRestDocMaker implements RestDocMaker {
 		OfferJson pandemicOneForStoneAge = new OfferJson();
 		pandemicOneForStoneAge.setOfferedItemId(pandemicOne.getItemId());
 		pandemicOneForStoneAge.setWantedItemId(stoneAge.getItemId());
-		Snippet pandemicOneForStoneAgeSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl() + "/");
+		Snippet pandemicOneForStoneAgeSnippet = snippetFactoryOlavo.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl(tradeMembershipIdOlavo) + "/");
 		pandemicOneForStoneAgeSnippet.getResponse().then().statusCode(201);
 		pandemicOneForStoneAge = pandemicOneForStoneAgeSnippet.getResponse().body().as(OfferJson.class);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, pandemicOneForStoneAgeSnippet.asHtml());
 
-		apiFacadeMaria.createOffer(stoneAge.getItemId(), pandemicOne.getItemId());
+		apiFacadeMaria.createOffer(tradeMembershipJsonMaria.getTradeMembershipId(), stoneAge.getItemId(), pandemicOne.getItemId());
 		
-		Snippet getSnippet = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.offerUrl(pandemicOneForStoneAge.getOfferId()));
+		Snippet getSnippet = snippetFactoryOlavo.makeSnippet(MatchAndTradeRestUtil.offerUrl(tradeMembershipIdOlavo, pandemicOneForStoneAge.getOfferId()));
 		getSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getSnippet.asHtml());
 

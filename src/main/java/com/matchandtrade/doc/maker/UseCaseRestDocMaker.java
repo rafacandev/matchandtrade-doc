@@ -167,13 +167,13 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ITEMS, tradePutOwner.asHtml());
 		
 		// Olavo offers Pandemic Legacy: Season 1 and wants Maria's Stone Age in exchange.
-		template = offer(snippetFactoryOlavo, pandemicOneJson, stoneAgeJson, template, OWNER_OFFER_ONE);
+		template = offer(snippetFactoryOlavo, tradeMembershipIdOlavo, pandemicOneJson, stoneAgeJson, template, OWNER_OFFER_ONE);
 		
 		// Maria offers Stone Age and wants Olavo's Pandemic Legacy: Season 1 in exchange.
-		template = offer(snippetFactoryMaria, stoneAgeJson, pandemicOneJson, template, MEMBER_OFFER_ONE);
+		template = offer(snippetFactoryMaria, tradeMembershipIdMaria, stoneAgeJson, pandemicOneJson, template, MEMBER_OFFER_ONE);
 		
 		// Maria offers Stone Age and wants Olavo's Pandemic Legacy: Season 2 in exchange.
-		template = offer(snippetFactoryMaria, stoneAgeJson, pandemicTwoJson, template, MEMBER_OFFER_TWO);
+		template = offer(snippetFactoryMaria, tradeMembershipIdMaria, stoneAgeJson, pandemicTwoJson, template, MEMBER_OFFER_TWO);
 		
 		// TRADE_GENERATE_TRADES
 		tradeJson.setState(TradeJson.State.GENERATE_RESULTS);
@@ -192,6 +192,7 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 
 	private String offer(
 			SnippetFactory snippetFactory,
+			Integer tradeMembershipId,
 			ItemJson offeredItem,
 			ItemJson wantedItem,
 			String template,
@@ -202,7 +203,7 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		Snippet snippet = snippetFactory.makeSnippet(
 				Method.POST,
 				offerJson,
-				MatchAndTradeRestUtil.offerUrl() + "/"
+				MatchAndTradeRestUtil.offerUrl(tradeMembershipId) + "/"
 				);
 		snippet.getResponse().then().statusCode(201);
 		return TemplateUtil.replacePlaceholder(template, templatePlaceHolder, snippet.asHtml());

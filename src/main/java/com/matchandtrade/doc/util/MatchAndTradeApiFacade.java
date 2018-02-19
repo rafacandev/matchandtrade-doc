@@ -126,7 +126,7 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(TradeMembershipJson.class);
 	}
 
-	public OfferJson createOffer(Integer offeredItemId, Integer wantedItemId) {
+	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredItemId, Integer wantedItemId) {
 		OfferJson requestBody = new OfferJson();
 		requestBody.setOfferedItemId(offeredItemId);
 		requestBody.setWantedItemId(wantedItemId);
@@ -136,7 +136,7 @@ public class MatchAndTradeApiFacade {
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post(MatchAndTradeRestUtil.offerUrl() + "/");
+				.post(MatchAndTradeRestUtil.offerUrl(tradeMembershipId) + "/");
 		return response.body().as(OfferJson.class);
 	}
 	
