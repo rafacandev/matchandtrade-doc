@@ -31,9 +31,9 @@ public class MatchAndTradeContentBuilder {
 			RestDocMakerConfiguration config = new RestDocMakerConfiguration()
 				.destinationFolderRootPath(destinationFolder)
 				.makers(
+					new UseCaseRestDocMaker(),
 					new DevelopmentGuideRestDocMaker(),
 					new OfferRestDocMaker(),
-					new UseCaseRestDocMaker(),
 					new AuthenticationRestDocMaker(),
 					new TradeRestDocMaker(),
 					new UserRestDocMaker(),

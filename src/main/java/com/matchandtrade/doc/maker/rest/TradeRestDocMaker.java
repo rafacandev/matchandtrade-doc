@@ -10,8 +10,8 @@ import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
-import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
 
@@ -42,18 +42,18 @@ public class TradeRestDocMaker implements RestDocMaker {
 		
 		// TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
-		String tradeName = "Board games - " + new Date();
+		String tradeName = "Board games location TBD - " + new Date().getTime();
 		tradeJson.setName(tradeName);
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postSnippet.asHtml());
-		tradeJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeJson.class);
+		tradeJson = postSnippet.getResponse().body().as(TradeJson.class);
 		
 		// TRADES_PUT_PLACEHOLDER
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
-		tradeName = "Board games in Toronto - " + new Date(); 
+		tradeName = "Board games in Toronto - " + new Date().getTime(); 
 		tradeJson.setName(tradeName);
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
@@ -68,12 +68,11 @@ public class TradeRestDocMaker implements RestDocMaker {
 		// TRADES_SEARCH_PLACEHOLDER
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
-				.addQueryParam("name", tradeName)
 				.addQueryParam("_pageNumber", "1")
-				.addQueryParam("_pageSize", "1")
+				.addQueryParam("_pageSize", "3")
 				.build();
 		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradesUrl()); 
-		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", equalTo("1"));
+		searchSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
 
 		// TRADES_GET_ALL_PLACEHOLDER
@@ -86,6 +85,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
+		template = PaginationTemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
