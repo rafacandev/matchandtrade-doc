@@ -15,10 +15,11 @@
 	<li><span class='incode'>DELETE rest/v1/trade-memberships/{tradeMembershipId}/items/{itemId}</span></li>
 </ul>
 
+
 <h3>Authorization</h3>
 <ul>
-	<li>Only authenticated clients</li>
-	<li>The URL parameter <span class='incode'>{tradeMembershipId}</span> must be associated to the client's <span class='incode'>userId</span></li>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li>The URL parameter <span class='incode'>{tradeMembershipId}</span> must be associated to the authenticated client's <span class='incode'>userId</span></li>
 </ul>
 
 <h3>Resource</h3>
@@ -41,24 +42,7 @@
 </table>
 
 <h3>Query Parameters</h3>
-<table>
-	<tr>
-		<th>Property Name</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>name</td>
-		<td>Resources matching <span class='incode'>Item.name</span></td>
-	</tr>
-	<tr>
-		<td>_pageSize</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
-	</tr>
-	<tr>
-		<td>_pageNumber</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
-	</tr>
-</table>
+${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 ${ITEMS_POST_PLACEHOLDER}

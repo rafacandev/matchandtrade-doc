@@ -85,7 +85,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
-		template = PaginationTemplateUtil.replacePaginationRows(template);
+		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

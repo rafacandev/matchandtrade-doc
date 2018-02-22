@@ -40,6 +40,33 @@ public class MatchAndTradeApiFacade {
 		this.user = user;
 	}
 	
+	public ItemJson createItem(TradeMembershipJson tradeMembershipJson, String itemName) {
+		ItemJson requestBody = new ItemJson();
+		requestBody.setName(itemName);
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post(MatchAndTradeRestUtil.itemsUrl(tradeMembershipJson.getTradeMembershipId()) + "/");
+		return response.body().as(ItemJson.class);
+	}
+
+	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredItemId, Integer wantedItemId) {
+		OfferJson requestBody = new OfferJson();
+		requestBody.setOfferedItemId(offeredItemId);
+		requestBody.setWantedItemId(wantedItemId);
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post(MatchAndTradeRestUtil.offerUrl(tradeMembershipId) + "/");
+		return response.body().as(OfferJson.class);
+	}
+
 	public TradeJson createTrade(String name) {
 		TradeJson tradeJson = new TradeJson();
 		tradeJson.setName(name);
@@ -51,20 +78,6 @@ public class MatchAndTradeApiFacade {
 				.when()
 				.post(MatchAndTradeRestUtil.tradesUrl() + "/");
 		return JsonUtil.fromResponse(response, TradeJson.class);
-	}
-
-	public TradeMembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
-		TradeMembershipJson requestBody = new TradeMembershipJson();
-		requestBody.setUserId(userId);
-		requestBody.setTradeId(tradeId);
-		Response response = RestAssured
-				.given()
-				.headers(defaultHeaders)
-				.contentType(ContentType.JSON)
-				.body(requestBody)
-				.when()
-				.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
-		return JsonUtil.fromResponse(response, TradeMembershipJson.class);
 	}
 
 	public TradeMembershipJson findTradeMembershipByUserIdAndTradeId(Integer userId, Integer tradeId) {
@@ -83,19 +96,6 @@ public class MatchAndTradeApiFacade {
 		String tradeMembershipAsString = JsonUtil.toJson(responseList.get(0));
 		return JsonUtil.fromString(tradeMembershipAsString, TradeMembershipJson.class);
 	}
-
-	public ItemJson createItem(TradeMembershipJson tradeMembershipJson, String itemName) {
-		ItemJson requestBody = new ItemJson();
-		requestBody.setName(itemName);
-		Response response = RestAssured
-				.given()
-				.headers(defaultHeaders)
-				.contentType(ContentType.JSON)
-				.body(requestBody)
-				.when()
-				.post(MatchAndTradeRestUtil.itemsUrl(tradeMembershipJson.getTradeMembershipId()) + "/");
-		return response.body().as(ItemJson.class);
-	}
 	
 	public UserJson getUser() {
 		return user;
@@ -112,6 +112,20 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(UserJson.class);
 	}
 	
+	public TradeMembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
+		TradeMembershipJson requestBody = new TradeMembershipJson();
+		requestBody.setUserId(userId);
+		requestBody.setTradeId(tradeId);
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		return JsonUtil.fromResponse(response, TradeMembershipJson.class);
+	}
+
 	public TradeMembershipJson subscribeToTrade(TradeJson trade) {
 		TradeMembershipJson requestBody = new TradeMembershipJson();
 		requestBody.setTradeId(trade.getTradeId());
@@ -125,19 +139,7 @@ public class MatchAndTradeApiFacade {
 			.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		return response.body().as(TradeMembershipJson.class);
 	}
-
-	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredItemId, Integer wantedItemId) {
-		OfferJson requestBody = new OfferJson();
-		requestBody.setOfferedItemId(offeredItemId);
-		requestBody.setWantedItemId(wantedItemId);
-		Response response = RestAssured
-				.given()
-				.headers(defaultHeaders)
-				.contentType(ContentType.JSON)
-				.body(requestBody)
-				.when()
-				.post(MatchAndTradeRestUtil.offerUrl(tradeMembershipId) + "/");
-		return response.body().as(OfferJson.class);
-	}
+	
+	
 	
 }
