@@ -12,6 +12,7 @@ import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 
@@ -77,6 +78,7 @@ public class TradeMembershipRestDocMaker implements RestDocMaker {
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
+		template = PaginationTemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
