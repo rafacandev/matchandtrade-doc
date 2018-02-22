@@ -38,23 +38,23 @@ public class TradeMembershipRestDocMaker implements RestDocMaker {
 	@Override
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
-		MatchAndTradeApiFacade matchAndTradeApiFacadePreviousAuthenticatedUser = new MatchAndTradeApiFacade();
+		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.nextAuthorizationHeader());
 
 		// TRADES_MEMBERSHIP_POST_PLACEHOLDER
-		TradeJson tradeJson = matchAndTradeApiFacadePreviousAuthenticatedUser.createTrade("Board games in Vancouver - " + new Date());
-		TradeMembershipJson tradeMembershipJson = new TradeMembershipJson();
-		tradeMembershipJson.setTradeId(tradeJson.getTradeId());
-		tradeMembershipJson.setUserId(MatchAndTradeRestUtil.getLastAuthenticatedUserId());
+		TradeJson tradeJson = apiFacade.createTrade("Board games in Vancouver - " + new Date().getTime());
+		TradeMembershipJson membership = new TradeMembershipJson();
+		membership.setTradeId(tradeJson.getTradeId());
+		membership.setUserId(MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		
-		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeMembershipJson, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
+		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, membership, MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("tradeMembershipId", notNullValue());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_POST_PLACEHOLDER, postSnippet.asHtml());
-		tradeMembershipJson = JsonUtil.fromResponse(postSnippet.getResponse(), TradeMembershipJson.class);
+		membership = JsonUtil.fromResponse(postSnippet.getResponse(), TradeMembershipJson.class);
 
 		// TRADES_MEMBERSHIP_GET_PLACEHOLDER
-		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeMembershipsUrl(tradeMembershipJson.getTradeMembershipId()));
-		getSnippet.getResponse().then().statusCode(200).and().body("tradeMembershipId", equalTo(tradeMembershipJson.getTradeMembershipId()));
+		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeMembershipsUrl(membership.getTradeMembershipId()));
+		getSnippet.getResponse().then().statusCode(200).and().body("tradeMembershipId", equalTo(membership.getTradeMembershipId()));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_GET_PLACEHOLDER, getSnippet.asHtml());
 
 		// TRADES_MEMBERSHIP_GET_ALL_PLACEHOLDER
@@ -67,14 +67,14 @@ public class TradeMembershipRestDocMaker implements RestDocMaker {
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.addParam("userId", MatchAndTradeRestUtil.getLastAuthenticatedUserId())
 				.addParam("_pageNumber", "1")
-				.addParam("_pageSize", "1")
+				.addParam("_pageSize", "3")
 				.build();
 		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.tradeMembershipsUrl()); 
 		searchSnippet.getResponse().then().statusCode(200).and().headers("X-Pagination-Total-Count", notNullValue());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
 
 		// TRADES_MEMBERSHIP_DELETE_PLACEHOLDER
-		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.tradeMembershipsUrl(tradeMembershipJson.getTradeMembershipId()));
+		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.tradeMembershipsUrl(membership.getTradeMembershipId()));
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, TRADES_MEMBERSHIP_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
