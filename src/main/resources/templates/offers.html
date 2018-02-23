@@ -7,9 +7,9 @@
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST /rest/v1/offers/</span></li>
-	<li><span class='incode'>GET /rest/v1/offers/{offerId}</span></li>
-	<li><span class='incode'>DELETE /rest/v1/offers/{offerId}</span></li>
+	<li><span class='incode'>POST /rest/v1/trade-memberships/{tradeMembershipId}/offers/</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -37,7 +37,7 @@
 	<tr>
 		<td>wantedItemId</td>
 		<td>ready-only</td>
-		<td>Id associated with the wanted <a href='items.html'>Item</a></td>
+		<td>Id associated with the wanted <a href='items.html'>Item</a> in exchange for the <span class="incode">Offer.offeredItemId</span></td>
 	</tr>
 </table>
 

@@ -24,7 +24,7 @@ public class OfferRestDocMaker implements RestDocMaker {
 	
 	private static final String OFFERS_POST = "OFFERS_POST";
 	private static final String OFFERS_GET = "OFFERS_GET";
-	private static final String OFFERS_GET_ALL = "OFFERS_GET_ALL";
+	private static final String OFFERS_DELETE = "OFFERS_DELETE";
 
 
 	@Override
@@ -78,10 +78,13 @@ public class OfferRestDocMaker implements RestDocMaker {
 		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		getSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getSnippet.asHtml());
+
+		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
+		deleteSnippet.getResponse().then().statusCode(204);
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteSnippet.asHtml());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 }
-		
