@@ -140,6 +140,4 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(TradeMembershipJson.class);
 	}
 	
-	
-	
 }

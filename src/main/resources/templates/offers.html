@@ -14,7 +14,7 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li>Only authenticated clients</li>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
 </ul>
 
 <h3>Resource</h3>
@@ -41,29 +41,24 @@
 	</tr>
 </table>
 
-
 <h3>Query Parameters</h3>
-<table>
-	<tr>
-		<th>Property Name</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>_pageSize</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
-	</tr>
-	<tr>
-		<td>_pageNumber</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
-	</tr>
-</table>
+${PAGINATION_TABLE}
 
 <h3>Rules</h3>
 <ul>
-	<li>Offer.offeredItemId and Offer.wantedItemId must differ.</li>
-	<li>Offer.offeredItemId and Offer.wantedItemId must belong existing Items.</li>
-	<li>Offer.offeredItemId must belong to the offering User.userId.</li>
-	<li>Offer.offeredItemId and Offer.wantedItemId must be associated to the same Trade.</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must differ.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must belong existing Items.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> must belong to the offering <span class="incode">User.userId</span>
+		when performing a <span class="incode">POST</span> or <span class="incode">DELETE</span> operations.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must be associated to the same Trade.
+	</li>
 </ul>
 
 <h3>Examples</h3>
