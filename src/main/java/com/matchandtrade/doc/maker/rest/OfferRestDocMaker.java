@@ -24,6 +24,7 @@ public class OfferRestDocMaker implements RestDocMaker {
 	
 	private static final String OFFERS_POST = "OFFERS_POST";
 	private static final String OFFERS_GET = "OFFERS_GET";
+	private static final String OFFERS_GET_ALL = "OFFERS_GET_ALL";
 	private static final String OFFERS_DELETE = "OFFERS_DELETE";
 
 
@@ -78,6 +79,15 @@ public class OfferRestDocMaker implements RestDocMaker {
 		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		getSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getSnippet.asHtml());
+
+		ItemJson firstDummy = mariaApiFacade.createItem(mariaMembership, "First ummy item so it displays in the GET ALL");
+		ItemJson secondDummy = mariaApiFacade.createItem(mariaMembership, "Second dummy item so it displays in the GET ALL");
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), firstDummy.getItemId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), secondDummy.getItemId());
+		
+		Snippet getAllSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()));
+		getAllSnippet.getResponse().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET_ALL, getAllSnippet.asHtml());
 
 		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		deleteSnippet.getResponse().then().statusCode(204);
