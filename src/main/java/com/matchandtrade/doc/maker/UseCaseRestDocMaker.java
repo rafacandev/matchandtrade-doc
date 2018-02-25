@@ -72,7 +72,7 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		
 		// OWNER_TRADES_POST
 		TradeJson tradeJson = new TradeJson();
-		String tradeName = "Board games in Ottawa - " + new Date();
+		String tradeName = "Board games in Ottawa - " + new Date().getTime() + this.hashCode();
 		tradeJson.setName(tradeName);
 		Snippet tradePostOwner = snippetFactoryOlavo.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		tradePostOwner.getResponse().then().statusCode(201);

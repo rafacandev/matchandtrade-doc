@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import com.github.rafasantos.restdocmaker.RestDocMakerConfiguration;
 import com.github.rafasantos.restdocmaker.RestDocMakerGenerator;
-import com.matchandtrade.doc.maker.DevelopmentGuideRestDocMaker;
 import com.matchandtrade.doc.maker.IndexRestDocMaker;
 import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
@@ -31,17 +30,16 @@ public class MatchAndTradeContentBuilder {
 			RestDocMakerConfiguration config = new RestDocMakerConfiguration()
 				.destinationFolderRootPath(destinationFolder)
 				.makers(
-					new UseCaseRestDocMaker(),
-					new DevelopmentGuideRestDocMaker(),
-					new OfferRestDocMaker(),
-					new AuthenticationRestDocMaker(),
-					new TradeRestDocMaker(),
-					new UserRestDocMaker(),
-					new TradeMembershipRestDocMaker(),
-					new ItemRestDocMaker(),
 					new IndexRestDocMaker(),
 					new AuthenticateRestDocMaker(),
-					new SearchRestDocMaker()
+					new AuthenticationRestDocMaker(),
+					new UserRestDocMaker(),
+					new TradeRestDocMaker(),
+					new TradeMembershipRestDocMaker(),
+					new ItemRestDocMaker(),
+					new OfferRestDocMaker(),
+					new SearchRestDocMaker(),
+					new UseCaseRestDocMaker()
 				);
 			RestDocMakerGenerator generator = new RestDocMakerGenerator();
 			generator.generateDocumentation(config);

@@ -42,7 +42,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		
 		// TRADES_POST_PLACEHOLDER
 		TradeJson tradeJson = new TradeJson();
-		String tradeName = "Board games location TBD - " + new Date().getTime();
+		String tradeName = "Board games location TBD - " + new Date().getTime() + this.hashCode();
 		tradeJson.setName(tradeName);
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, tradeJson, MatchAndTradeRestUtil.tradesUrl() + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("", hasKey("tradeId"));
@@ -53,7 +53,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		Integer tradeId = tradeJson.getTradeId();
 		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
 		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
-		tradeName = "Board games in Toronto - " + new Date().getTime(); 
+		tradeName = "Board games in Toronto - " + new Date().getTime() + this.hashCode(); 
 		tradeJson.setName(tradeName);
 		tradeJson.setState(State.MATCHING_ITEMS);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
