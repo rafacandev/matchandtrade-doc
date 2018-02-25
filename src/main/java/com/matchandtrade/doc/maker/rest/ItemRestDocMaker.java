@@ -40,7 +40,7 @@ public class ItemRestDocMaker implements RestDocMaker {
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
 		// Create a trade membership
-		TradeJson trade = apiFacade.createTrade("Board games in Montreal - " + new Date().getTime());
+		TradeJson trade = apiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
 		Integer membershipId = apiFacade.findTradeMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId()).getTradeMembershipId();
 		
 		// ITEMS_POST_PLACEHOLDER

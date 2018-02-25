@@ -39,7 +39,7 @@ public class SearchRestDocMaker implements RestDocMaker {
 		UserJson owner = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		
 		MatchAndTradeApiFacade apiAsOwner = new MatchAndTradeApiFacade();
-		TradeJson trade = apiAsOwner.createTrade("Search Recipe ITEMS - " + new Date());
+		TradeJson trade = apiAsOwner.createTrade("Search Recipe ITEMS - " + new Date().getTime() + hashCode());
 		TradeMembershipJson tradeMembership = apiAsOwner.findTradeMembershipByUserIdAndTradeId(owner.getUserId(), trade.getTradeId());
 		apiAsOwner.createItem(tradeMembership, "Imperial Settlers");
 		apiAsOwner.createItem(tradeMembership, "Dead of Winter: A Crossroads Game");

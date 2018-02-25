@@ -31,9 +31,9 @@ public class IndexRestDocMaker implements RestDocMaker {
 
 		// REST_GUIDE_PAGINATION
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
-		matchAndTradeApiFacade.createTrade("Books in New York - " + new Date());
-		matchAndTradeApiFacade.createTrade("Books in Paris - " + new Date());
-		matchAndTradeApiFacade.createTrade("Books in Lima - " + new Date());
+		matchAndTradeApiFacade.createTrade("Books in New York - " + new Date().getTime() + hashCode());
+		matchAndTradeApiFacade.createTrade("Books in Paris - " + new Date().getTime() + hashCode());
+		matchAndTradeApiFacade.createTrade("Books in Lima - " + new Date().getTime() + hashCode());
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.setContentType(ContentType.JSON)

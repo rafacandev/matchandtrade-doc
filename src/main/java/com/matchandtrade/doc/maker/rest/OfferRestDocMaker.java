@@ -43,7 +43,7 @@ public class OfferRestDocMaker implements RestDocMaker {
 		UserJson olavo = olavoApiFacade.getUser();
 		olavo.setName("Olavo");
 		olavoApiFacade.saveUser(olavo);
-		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + new Date().getTime());
+		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + new Date().getTime() + hashCode());
 		
 		// ITEM: Pandemic Legacy: Season 1
 		TradeMembershipJson olavoMembership = olavoApiFacade.findTradeMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
