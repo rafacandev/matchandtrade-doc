@@ -14,6 +14,7 @@ import com.matchandtrade.doc.maker.rest.OfferRestDocMaker;
 import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeMembershipRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
+import com.matchandtrade.doc.maker.rest.TradeResultRestDocMaker;
 import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
 
 public class MatchAndTradeContentBuilder {
@@ -38,6 +39,7 @@ public class MatchAndTradeContentBuilder {
 					new TradeMembershipRestDocMaker(),
 					new ItemRestDocMaker(),
 					new OfferRestDocMaker(),
+					new TradeResultRestDocMaker(),
 					new SearchRestDocMaker(),
 					new UseCaseRestDocMaker()
 				);

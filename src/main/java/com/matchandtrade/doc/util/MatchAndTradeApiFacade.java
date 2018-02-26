@@ -111,6 +111,17 @@ public class MatchAndTradeApiFacade {
 				.put(MatchAndTradeRestUtil.usersUrl(user.getUserId()));
 		return response.body().as(UserJson.class);
 	}
+
+	public TradeJson saveTrade(TradeJson trade) {
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(trade)
+				.when()
+				.put(MatchAndTradeRestUtil.tradesUrl(trade.getTradeId()));
+		return response.body().as(TradeJson.class);
+	}
 	
 	public TradeMembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
 		TradeMembershipJson requestBody = new TradeMembershipJson();
@@ -139,5 +150,4 @@ public class MatchAndTradeApiFacade {
 			.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		return response.body().as(TradeMembershipJson.class);
 	}
-	
 }

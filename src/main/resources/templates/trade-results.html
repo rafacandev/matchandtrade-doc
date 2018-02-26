@@ -1,0 +1,44 @@
+<h1>TradeResult</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>TradeResults</span>.
+	<span class='incode'>TradeResults</span> is a report which describes how <a href="items.html">Items</a> should be traded
+	according to the <a href="offers.html">Offers</a> in place.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>GET rest/v1/trades/{tradeId}/results</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li>The URL parameter <span class='incode'>{tradeId}</span> must be associated to the authenticated client's <span class='incode'>userId</span></li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>itemId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>Name of this <span class='incode'>Item</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+${PAGINATION_TABLE}
+
+<h3>Examples</h3>
+For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
+<i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
+${RESULTS_GET}
