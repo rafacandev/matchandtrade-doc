@@ -7,11 +7,11 @@ public class PaginationTemplateUtil {
 	private static final String PAGINATION_ROW_PLACEHOLDER = "" +
 			"	<tr>\n" + 
 			"		<td>_pageNumber</td>\n" + 
-			"		<td>See <a href='index.html'>pagination</a></td>\n" + 
+			"		<td>See <a href='index.html#pagination'>pagination</a></td>\n" + 
 			"	</tr>\n" + 
 			"	<tr>\n" + 
 			"		<td>_pageSize</td>\n" + 
-			"		<td>See <a href='index.html'>pagination</a></td>\n" + 
+			"		<td>See <a href='index.html#pagination'>pagination</a></td>\n" + 
 			"	</tr>\n" + 
 			"";
 	private static final String PAGINATION_TABLE_PLACEHOLDER = "" +

@@ -11,6 +11,7 @@ import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
@@ -79,7 +80,8 @@ public class SearchRestDocMaker implements RestDocMaker {
 		template = TemplateUtil.replacePlaceholder(template, "TRADE_MEMBERSHIP_ID", anotherMemberMembership.getTradeMembershipId().toString());
 		
 		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, postSnippet.asHtml());
-		
+
+		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

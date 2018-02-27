@@ -11,7 +11,7 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only authenticated clients</li>
+	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only clients with a valid <span class='incode'>Authorization</span> header</li>
 </ul>
 
 <h3>Root Resource</h3>
@@ -28,7 +28,7 @@
 	</tr>
 	<tr>
 		<td>criteria</td>
-		<td>See <a href="criteria-resource">Criteria</a></td>
+		<td>See <a href="#criteria-resource">Criteria</a></td>
 		<td>The search criteria for this search</td>
 	</tr>
 </table>
@@ -53,7 +53,7 @@
 	</tr>
 </table>
 
-<h3><a id="#criteria-resource">Criteria</a></h3>
+<h3><a id="criteria-resource">Criteria</a></h3>
 <table>
 	<tr>
 		<th>Property Name</th>
@@ -81,6 +81,9 @@
 		<td>Possible values are <span class='incode'>EQUALS</span>, <span class='incode'>NOT_EQUALS</span>, <span class='incode'>EQUALS_IGNORE_CASE</span>, <span class='incode'>LIKE_IGNORE_CASE</span></td>
 	</tr>
 </table>
+
+<h3>Query Parameters</h3>
+${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 <p>
