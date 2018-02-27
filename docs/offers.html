@@ -1,0 +1,241 @@
+<html><head><title>REST Doc Maker</title></head>
+<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<h1>Offer</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Offer</span>.
+	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='items.html'>Item</a>
+	for a wanted <a href='items.html'>Item</a>.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST /rest/v1/trade-memberships/{tradeMembershipId}/offers/</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers?{queryParameters}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>offerId</td>
+		<td>read-write, mandatory</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>offeredItemId</td>
+		<td>ready-only</td>
+		<td>Id associated with the offered <a href='items.html'>Item</a></td>
+	</tr>
+	<tr>
+		<td>wantedItemId</td>
+		<td>ready-only</td>
+		<td>Id associated with the wanted <a href='items.html'>Item</a> in exchange for the <span class="incode">Offer.offeredItemId</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='index.html'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='index.html'>pagination</a></td>
+	</tr>
+</table>
+
+
+<h3>Rules</h3>
+<ul>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must differ.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must belong existing Items.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> must belong to the offering <span class="incode">User.userId</span>
+		when performing a <span class="incode">POST</span> or <span class="incode">DELETE</span> operations.
+	</li>
+	<li>
+		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must be associated to the same Trade.
+	</li>
+</ul>
+
+<h3>Examples</h3>
+<div class='tab'><button id='summaryTabLink_24' class='tablinks' onclick='openTab(event, "summaryTab_24")'>Summary</button><button id='httpTabLink_24' class='tablinks' onclick='openTab(event, "httpTab_24")'>HTTP</button><button id='curlTabLink_24' class='tablinks' onclick='openTab(event, "curlTab_24")'>curl</button></div><div id='summaryTab_24' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/127/offers/
+{&quot;offeredItemId&quot;:120,&quot;wantedItemId&quot;:121}
+Response: HTTP/1.1 201 
+{&quot;offerId&quot;:82,&quot;offeredItemId&quot;:120,&quot;wantedItemId&quot;:121}</div><div id='httpTab_24' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/127/offers/
+Headers:  Authorization: 6991-9967-9804
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+{
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
+{
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}</div><div id='curlTab_24' class='tabcontent code'>-----  Request  -----
+curl -v -X POST \
+-H &quot;Authorization: 6991-9967-9804&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;offeredItemId\&quot;:120,\&quot;wantedItemId\&quot;:121}&quot; \
+http://localhost:8080/rest/v1/trade-memberships/127/offers/
+
+-----  Response  -----
+Status:   HTTP/1.1 201 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
+{
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}
+</div><script>openTabById('summaryTabLink_24', "summaryTab_24");</script>
+
+<div class='tab'><button id='summaryTabLink_25' class='tablinks' onclick='openTab(event, "summaryTab_25")'>Summary</button><button id='httpTabLink_25' class='tablinks' onclick='openTab(event, "httpTab_25")'>HTTP</button><button id='curlTabLink_25' class='tablinks' onclick='openTab(event, "curlTab_25")'>curl</button></div><div id='summaryTab_25' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+Response: HTTP/1.1 200 
+{&quot;offerId&quot;:82,&quot;offeredItemId&quot;:120,&quot;wantedItemId&quot;:121}</div><div id='httpTab_25' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+Headers:  Authorization: 6991-9967-9804
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
+{
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}</div><div id='curlTab_25' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 6991-9967-9804&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
+{
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}
+</div><script>openTabById('summaryTabLink_25', "summaryTab_25");</script>
+
+<div class='tab'><button id='summaryTabLink_26' class='tablinks' onclick='openTab(event, "summaryTab_26")'>Summary</button><button id='httpTabLink_26' class='tablinks' onclick='openTab(event, "httpTab_26")'>HTTP</button><button id='curlTabLink_26' class='tablinks' onclick='openTab(event, "curlTab_26")'>curl</button></div><div id='summaryTab_26' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships/127/offers
+Response: HTTP/1.1 200 
+[{&quot;offerId&quot;:82,&quot;offeredItemId&quot;:120,&quot;wantedItemId&quot;:121},{&quot;offerId&quot;:84,&quot;offeredItemId&quot;:120,&quot;wantedItem...</div><div id='httpTab_26' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships/127/offers
+Headers:  Authorization: 6991-9967-9804
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 3
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:13 GMT
+[ {
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}, {
+  &quot;offerId&quot; : 84,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 122
+}, {
+  &quot;offerId&quot; : 85,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 123
+} ]</div><div id='curlTab_26' class='tabcontent code'>-----  Request  -----
+curl -v -X GET \
+-H &quot;Authorization: 6991-9967-9804&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+http://localhost:8080/rest/v1/trade-memberships/127/offers
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 3
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:13 GMT
+[ {
+  &quot;offerId&quot; : 82,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 121
+}, {
+  &quot;offerId&quot; : 84,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 122
+}, {
+  &quot;offerId&quot; : 85,
+  &quot;offeredItemId&quot; : 120,
+  &quot;wantedItemId&quot; : 123
+} ]
+</div><script>openTabById('summaryTabLink_26', "summaryTab_26");</script>
+
+<div class='tab'><button id='summaryTabLink_27' class='tablinks' onclick='openTab(event, "summaryTab_27")'>Summary</button><button id='httpTabLink_27' class='tablinks' onclick='openTab(event, "httpTab_27")'>HTTP</button><button id='curlTabLink_27' class='tablinks' onclick='openTab(event, "curlTab_27")'>curl</button></div><div id='summaryTab_27' class='tabcontent code'>Request:  DELETE http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+Response: HTTP/1.1 204 
+</div><div id='httpTab_27' class='tabcontent code'>-----  Request  -----
+DELETE http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+Headers:  Authorization: 6991-9967-9804
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+
+
+-----  Response  -----
+Status:   HTTP/1.1 204 
+Headers:  Date: Tue, 27 Feb 2018 02:16:13 GMT
+</div><div id='curlTab_27' class='tabcontent code'>-----  Request  -----
+curl -v -X DELETE \
+-H &quot;Authorization: 6991-9967-9804&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+http://localhost:8080/rest/v1/trade-memberships/127/offers/82
+
+-----  Response  -----
+Status:   HTTP/1.1 204 
+Headers:  Date: Tue, 27 Feb 2018 02:16:13 GMT
+
+</div><script>openTabById('summaryTabLink_27', "summaryTab_27");</script>
+</body>
+</html>

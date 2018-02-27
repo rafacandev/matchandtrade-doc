@@ -13,46 +13,46 @@ and finally generate the <a href='trade-results.html'>TradeResults</a>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
 	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
-<div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
+<div class='tab'><button id='summaryTabLink_30' class='tablinks' onclick='openTab(event, "summaryTab_30")'>Summary</button><button id='httpTabLink_30' class='tablinks' onclick='openTab(event, "httpTab_30")'>HTTP</button><button id='curlTabLink_30' class='tablinks' onclick='openTab(event, "curlTab_30")'>curl</button></div><div id='summaryTab_30' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
 Response: HTTP/1.1 200 
-</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
+</div><div id='httpTab_30' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/authenticate
-Headers:  Authorization: 8161-1750-659
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 2949-2738-6315
-          Set-Cookie: JSESSIONID=4682EADCCC65E25F8C120DAA8E08B043; Path=/; HttpOnly
+Headers:  Authorization: 1892-2117-5225
+          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
-</div><div id='curlTab_1' class='tabcontent code'>-----  Request  -----
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+</div><div id='curlTab_30' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8080/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 2949-2738-6315
-          Set-Cookie: JSESSIONID=4682EADCCC65E25F8C120DAA8E08B043; Path=/; HttpOnly
+Headers:  Authorization: 1892-2117-5225
+          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 
-</div><script>openTabById('summaryTabLink_1', "summaryTab_1");</script>
+</div><script>openTabById('summaryTabLink_30', "summaryTab_30");</script>
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
-<div class='tab'><button id='summaryTabLink_2' class='tablinks' onclick='openTab(event, "summaryTab_2")'>Summary</button><button id='httpTabLink_2' class='tablinks' onclick='openTab(event, "httpTab_2")'>HTTP</button><button id='curlTabLink_2' class='tablinks' onclick='openTab(event, "curlTab_2")'>curl</button></div><div id='summaryTab_2' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
+<div class='tab'><button id='summaryTabLink_31' class='tablinks' onclick='openTab(event, "summaryTab_31")'>Summary</button><button id='httpTabLink_31' class='tablinks' onclick='openTab(event, "httpTab_31")'>HTTP</button><button id='curlTabLink_31' class='tablinks' onclick='openTab(event, "curlTab_31")'>curl</button></div><div id='summaryTab_31' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
 Response: HTTP/1.1 200 
-{&quot;userId&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_2' class='tabcontent code'>-----  Request  -----
+{&quot;userId&quot;:118,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_31' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/rest/v1/authentications/
-Headers:  Authorization: 8161-1750-659
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -61,16 +61,16 @@ Headers:  Authorization: 8161-1750-659
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;userId&quot; : 1,
+  &quot;userId&quot; : 118,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
   } ]
-}</div><div id='curlTab_2' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_31' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8080/rest/v1/authentications/
@@ -79,78 +79,78 @@ http://localhost:8080/rest/v1/authentications/
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;userId&quot; : 1,
+  &quot;userId&quot; : 118,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_2', "summaryTab_2");</script>
+</div><script>openTabById('summaryTabLink_31', "summaryTab_31");</script>
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_3' class='tablinks' onclick='openTab(event, "summaryTab_3")'>Summary</button><button id='httpTabLink_3' class='tablinks' onclick='openTab(event, "httpTab_3")'>HTTP</button><button id='curlTabLink_3' class='tablinks' onclick='openTab(event, "curlTab_3")'>curl</button></div><div id='summaryTab_3' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trades/
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;}
+<div class='tab'><button id='summaryTabLink_32' class='tablinks' onclick='openTab(event, "summaryTab_32")'>Summary</button><button id='httpTabLink_32' class='tablinks' onclick='openTab(event, "httpTab_32")'>HTTP</button><button id='curlTabLink_32' class='tablinks' onclick='openTab(event, "curlTab_32")'>curl</button></div><div id='summaryTab_32' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trades/
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;tradeId&quot;:1,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href...</div><div id='httpTab_3' class='tabcontent code'>-----  Request  -----
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_32' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8080/rest/v1/trades/
-Headers:  Authorization: 8161-1750-659
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
-}</div><div id='curlTab_3' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_32' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa\&quot;}&quot; \
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;}&quot; \
 http://localhost:8080/rest/v1/trades/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_3', "summaryTab_3");</script>
+</div><script>openTabById('summaryTabLink_32', "summaryTab_32");</script>
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-<div class='tab'><button id='summaryTabLink_4' class='tablinks' onclick='openTab(event, "summaryTab_4")'>Summary</button><button id='httpTabLink_4' class='tablinks' onclick='openTab(event, "httpTab_4")'>HTTP</button><button id='curlTabLink_4' class='tablinks' onclick='openTab(event, "curlTab_4")'>curl</button></div><div id='summaryTab_4' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships?userId=1&amp;tradeId=1
+<div class='tab'><button id='summaryTabLink_33' class='tablinks' onclick='openTab(event, "summaryTab_33")'>Summary</button><button id='httpTabLink_33' class='tablinks' onclick='openTab(event, "httpTab_33")'>HTTP</button><button id='curlTabLink_33' class='tablinks' onclick='openTab(event, "curlTab_33")'>curl</button></div><div id='summaryTab_33' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships?userId=118&amp;tradeId=84
 Response: HTTP/1.1 200 
-[{&quot;tradeMembershipId&quot;:1,&quot;userId&quot;:1,&quot;tradeId&quot;:1,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_4' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trade-memberships?userId=1&amp;tradeId=1
-Headers:  Authorization: 8161-1750-659
+[{&quot;tradeMembershipId&quot;:137,&quot;userId&quot;:118,&quot;tradeId&quot;:84,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;user&quot;,&quot;href&quot;:&quot;h...</div><div id='httpTab_33' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trade-memberships?userId=118&amp;tradeId=84
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -160,50 +160,62 @@ Status:   HTTP/1.1 200
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 [ {
-  &quot;tradeMembershipId&quot; : 1,
-  &quot;userId&quot; : 1,
-  &quot;tradeId&quot; : 1,
+  &quot;tradeMembershipId&quot; : 137,
+  &quot;userId&quot; : 118,
+  &quot;tradeId&quot; : 84,
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/118&quot;
+  }, {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137&quot;
   } ]
-} ]</div><div id='curlTab_4' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_33' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trade-memberships?userId=1&amp;tradeId=1
+http://localhost:8080/rest/v1/trade-memberships?userId=118\&amp;tradeId=84
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  X-Pagination-Total-Count: 1
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 [ {
-  &quot;tradeMembershipId&quot; : 1,
-  &quot;userId&quot; : 1,
-  &quot;tradeId&quot; : 1,
+  &quot;tradeMembershipId&quot; : 137,
+  &quot;userId&quot; : 118,
+  &quot;tradeId&quot; : 84,
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/118&quot;
+  }, {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_4', "summaryTab_4");</script>
+</div><script>openTabById('summaryTabLink_33', "summaryTab_33");</script>
 
 <p>
   	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_5' class='tablinks' onclick='openTab(event, "summaryTab_5")'>Summary</button><button id='httpTabLink_5' class='tablinks' onclick='openTab(event, "httpTab_5")'>HTTP</button><button id='curlTabLink_5' class='tablinks' onclick='openTab(event, "curlTab_5")'>curl</button></div><div id='summaryTab_5' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/1/items/
+<div class='tab'><button id='summaryTabLink_34' class='tablinks' onclick='openTab(event, "summaryTab_34")'>Summary</button><button id='httpTabLink_34' class='tablinks' onclick='openTab(event, "httpTab_34")'>HTTP</button><button id='curlTabLink_34' class='tablinks' onclick='openTab(event, "curlTab_34")'>curl</button></div><div id='summaryTab_34' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/items/
 {&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;,&quot;itemId&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080...</div><div id='httpTab_5' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/1/items/
-Headers:  Authorization: 8161-1750-659
+{&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;,&quot;itemId&quot;:136,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:80...</div><div id='httpTab_34' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/137/items/
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -214,42 +226,42 @@ Headers:  Authorization: 8161-1750-659
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
-  &quot;itemId&quot; : 1,
+  &quot;itemId&quot; : 136,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/136&quot;
   } ]
-}</div><div id='curlTab_5' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_34' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Pandemic Legacy: Season 1\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/1/items/
+http://localhost:8080/rest/v1/trade-memberships/137/items/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
-  &quot;itemId&quot; : 1,
+  &quot;itemId&quot; : 136,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/136&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_5', "summaryTab_5");</script>
-<div class='tab'><button id='summaryTabLink_6' class='tablinks' onclick='openTab(event, "summaryTab_6")'>Summary</button><button id='httpTabLink_6' class='tablinks' onclick='openTab(event, "httpTab_6")'>HTTP</button><button id='curlTabLink_6' class='tablinks' onclick='openTab(event, "curlTab_6")'>curl</button></div><div id='summaryTab_6' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/1/items/
+</div><script>openTabById('summaryTabLink_34', "summaryTab_34");</script>
+<div class='tab'><button id='summaryTabLink_35' class='tablinks' onclick='openTab(event, "summaryTab_35")'>Summary</button><button id='httpTabLink_35' class='tablinks' onclick='openTab(event, "httpTab_35")'>HTTP</button><button id='curlTabLink_35' class='tablinks' onclick='openTab(event, "curlTab_35")'>curl</button></div><div id='summaryTab_35' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/items/
 {&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;,&quot;itemId&quot;:2,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080...</div><div id='httpTab_6' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/1/items/
-Headers:  Authorization: 8161-1750-659
+{&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;,&quot;itemId&quot;:137,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:80...</div><div id='httpTab_35' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/137/items/
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -260,81 +272,81 @@ Headers:  Authorization: 8161-1750-659
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 2&quot;,
-  &quot;itemId&quot; : 2,
+  &quot;itemId&quot; : 137,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/137&quot;
   } ]
-}</div><div id='curlTab_6' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_35' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Pandemic Legacy: Season 2\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/1/items/
+http://localhost:8080/rest/v1/trade-memberships/137/items/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 2&quot;,
-  &quot;itemId&quot; : 2,
+  &quot;itemId&quot; : 137,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/137&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_6', "summaryTab_6");</script>
+</div><script>openTabById('summaryTabLink_35', "summaryTab_35");</script>
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
   	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
-<div class='tab'><button id='summaryTabLink_7' class='tablinks' onclick='openTab(event, "summaryTab_7")'>Summary</button><button id='httpTabLink_7' class='tablinks' onclick='openTab(event, "httpTab_7")'>HTTP</button><button id='curlTabLink_7' class='tablinks' onclick='openTab(event, "curlTab_7")'>curl</button></div><div id='summaryTab_7' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
+<div class='tab'><button id='summaryTabLink_36' class='tablinks' onclick='openTab(event, "summaryTab_36")'>Summary</button><button id='httpTabLink_36' class='tablinks' onclick='openTab(event, "httpTab_36")'>HTTP</button><button id='curlTabLink_36' class='tablinks' onclick='openTab(event, "curlTab_36")'>curl</button></div><div id='summaryTab_36' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
 Response: HTTP/1.1 200 
-</div><div id='httpTab_7' class='tabcontent code'>-----  Request  -----
+</div><div id='httpTab_36' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/authenticate
-Headers:  Authorization: 8161-1750-659
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 2949-2738-6315
-          Set-Cookie: JSESSIONID=4682EADCCC65E25F8C120DAA8E08B043; Path=/; HttpOnly
+Headers:  Authorization: 1892-2117-5225
+          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
-</div><div id='curlTab_7' class='tabcontent code'>-----  Request  -----
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+</div><div id='curlTab_36' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8080/authenticate
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  Authorization: 2949-2738-6315
-          Set-Cookie: JSESSIONID=4682EADCCC65E25F8C120DAA8E08B043; Path=/; HttpOnly
+Headers:  Authorization: 1892-2117-5225
+          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
           Content-Length: 0
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 
-</div><script>openTabById('summaryTabLink_7', "summaryTab_7");</script>
+</div><script>openTabById('summaryTabLink_36', "summaryTab_36");</script>
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
-<div class='tab'><button id='summaryTabLink_8' class='tablinks' onclick='openTab(event, "summaryTab_8")'>Summary</button><button id='httpTabLink_8' class='tablinks' onclick='openTab(event, "httpTab_8")'>HTTP</button><button id='curlTabLink_8' class='tablinks' onclick='openTab(event, "curlTab_8")'>curl</button></div><div id='summaryTab_8' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
+<div class='tab'><button id='summaryTabLink_37' class='tablinks' onclick='openTab(event, "summaryTab_37")'>Summary</button><button id='httpTabLink_37' class='tablinks' onclick='openTab(event, "httpTab_37")'>HTTP</button><button id='curlTabLink_37' class='tablinks' onclick='openTab(event, "curlTab_37")'>curl</button></div><div id='summaryTab_37' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
 Response: HTTP/1.1 200 
-{&quot;userId&quot;:3,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_8' class='tabcontent code'>-----  Request  -----
+{&quot;userId&quot;:120,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_37' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/rest/v1/authentications/
-Headers:  Authorization: 1967-3913-942
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -343,16 +355,16 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;userId&quot; : 3,
+  &quot;userId&quot; : 120,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
   } ]
-}</div><div id='curlTab_8' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_37' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 http://localhost:8080/rest/v1/authentications/
@@ -361,80 +373,92 @@ http://localhost:8080/rest/v1/authentications/
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;userId&quot; : 3,
+  &quot;userId&quot; : 120,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_8', "summaryTab_8");</script>
+</div><script>openTabById('summaryTabLink_37', "summaryTab_37");</script>
 
 <p>
 	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
 </p>
-<div class='tab'><button id='summaryTabLink_9' class='tablinks' onclick='openTab(event, "summaryTab_9")'>Summary</button><button id='httpTabLink_9' class='tablinks' onclick='openTab(event, "httpTab_9")'>HTTP</button><button id='curlTabLink_9' class='tablinks' onclick='openTab(event, "curlTab_9")'>curl</button></div><div id='summaryTab_9' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/
-{&quot;userId&quot;:3,&quot;tradeId&quot;:1}
+<div class='tab'><button id='summaryTabLink_38' class='tablinks' onclick='openTab(event, "summaryTab_38")'>Summary</button><button id='httpTabLink_38' class='tablinks' onclick='openTab(event, "httpTab_38")'>HTTP</button><button id='curlTabLink_38' class='tablinks' onclick='openTab(event, "curlTab_38")'>curl</button></div><div id='summaryTab_38' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/
+{&quot;userId&quot;:120,&quot;tradeId&quot;:84}
 Response: HTTP/1.1 201 
-{&quot;tradeMembershipId&quot;:2,&quot;userId&quot;:3,&quot;tradeId&quot;:1,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_9' class='tabcontent code'>-----  Request  -----
+{&quot;tradeMembershipId&quot;:138,&quot;userId&quot;:120,&quot;tradeId&quot;:84,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;trade&quot;,&quot;href&quot;:&quot;...</div><div id='httpTab_38' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8080/rest/v1/trade-memberships/
-Headers:  Authorization: 1967-3913-942
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;userId&quot; : 3,
-  &quot;tradeId&quot; : 1
+  &quot;userId&quot; : 120,
+  &quot;tradeId&quot; : 84
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;tradeMembershipId&quot; : 2,
-  &quot;userId&quot; : 3,
-  &quot;tradeId&quot; : 1,
+  &quot;tradeMembershipId&quot; : 138,
+  &quot;userId&quot; : 120,
+  &quot;tradeId&quot; : 84,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+  }, {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/120&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138&quot;
   } ]
-}</div><div id='curlTab_9' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_38' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;userId\&quot;:3,\&quot;tradeId\&quot;:1}&quot; \
+-d &quot;{\&quot;userId\&quot;:120,\&quot;tradeId\&quot;:84}&quot; \
 http://localhost:8080/rest/v1/trade-memberships/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;tradeMembershipId&quot; : 2,
-  &quot;userId&quot; : 3,
-  &quot;tradeId&quot; : 1,
+  &quot;tradeMembershipId&quot; : 138,
+  &quot;userId&quot; : 120,
+  &quot;tradeId&quot; : 84,
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+  }, {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/120&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_9', "summaryTab_9");</script>
+</div><script>openTabById('summaryTabLink_38', "summaryTab_38");</script>
 
 <p>
   	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_10' class='tablinks' onclick='openTab(event, "summaryTab_10")'>Summary</button><button id='httpTabLink_10' class='tablinks' onclick='openTab(event, "httpTab_10")'>HTTP</button><button id='curlTabLink_10' class='tablinks' onclick='openTab(event, "curlTab_10")'>curl</button></div><div id='summaryTab_10' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/2/items/
+<div class='tab'><button id='summaryTabLink_39' class='tablinks' onclick='openTab(event, "summaryTab_39")'>Summary</button><button id='httpTabLink_39' class='tablinks' onclick='openTab(event, "httpTab_39")'>HTTP</button><button id='curlTabLink_39' class='tablinks' onclick='openTab(event, "curlTab_39")'>curl</button></div><div id='summaryTab_39' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
 {&quot;name&quot;:&quot;Stone Age&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Stone Age&quot;,&quot;itemId&quot;:3,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade-m...</div><div id='httpTab_10' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/2/items/
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;Stone Age&quot;,&quot;itemId&quot;:138,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade...</div><div id='httpTab_39' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -445,42 +469,42 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Stone Age&quot;,
-  &quot;itemId&quot; : 3,
+  &quot;itemId&quot; : 138,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/138&quot;
   } ]
-}</div><div id='curlTab_10' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_39' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Stone Age\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/2/items/
+http://localhost:8080/rest/v1/trade-memberships/138/items/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Stone Age&quot;,
-  &quot;itemId&quot; : 3,
+  &quot;itemId&quot; : 138,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/138&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_10', "summaryTab_10");</script>
-<div class='tab'><button id='summaryTabLink_11' class='tablinks' onclick='openTab(event, "summaryTab_11")'>Summary</button><button id='httpTabLink_11' class='tablinks' onclick='openTab(event, "httpTab_11")'>HTTP</button><button id='curlTabLink_11' class='tablinks' onclick='openTab(event, "curlTab_11")'>curl</button></div><div id='summaryTab_11' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/2/items/
+</div><script>openTabById('summaryTabLink_39', "summaryTab_39");</script>
+<div class='tab'><button id='summaryTabLink_40' class='tablinks' onclick='openTab(event, "summaryTab_40")'>Summary</button><button id='httpTabLink_40' class='tablinks' onclick='openTab(event, "httpTab_40")'>HTTP</button><button id='curlTabLink_40' class='tablinks' onclick='openTab(event, "curlTab_40")'>curl</button></div><div id='summaryTab_40' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
 {&quot;name&quot;:&quot;Carcassonne&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Carcassonne&quot;,&quot;itemId&quot;:4,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade...</div><div id='httpTab_11' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/2/items/
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;Carcassonne&quot;,&quot;itemId&quot;:139,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/tra...</div><div id='httpTab_40' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -491,42 +515,42 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Carcassonne&quot;,
-  &quot;itemId&quot; : 4,
+  &quot;itemId&quot; : 139,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/139&quot;
   } ]
-}</div><div id='curlTab_11' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_40' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Carcassonne\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/2/items/
+http://localhost:8080/rest/v1/trade-memberships/138/items/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;Carcassonne&quot;,
-  &quot;itemId&quot; : 4,
+  &quot;itemId&quot; : 139,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/139&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_11', "summaryTab_11");</script>
-<div class='tab'><button id='summaryTabLink_12' class='tablinks' onclick='openTab(event, "summaryTab_12")'>Summary</button><button id='httpTabLink_12' class='tablinks' onclick='openTab(event, "httpTab_12")'>HTTP</button><button id='curlTabLink_12' class='tablinks' onclick='openTab(event, "curlTab_12")'>curl</button></div><div id='summaryTab_12' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/2/items/
+</div><script>openTabById('summaryTabLink_40', "summaryTab_40");</script>
+<div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
 {&quot;name&quot;:&quot;No Thanks!&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;No Thanks!&quot;,&quot;itemId&quot;:5,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade-...</div><div id='httpTab_12' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/2/items/
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;No Thanks!&quot;,&quot;itemId&quot;:140,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trad...</div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
@@ -537,51 +561,51 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;No Thanks!&quot;,
-  &quot;itemId&quot; : 5,
+  &quot;itemId&quot; : 140,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/140&quot;
   } ]
-}</div><div id='curlTab_12' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;No Thanks!\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/2/items/
+http://localhost:8080/rest/v1/trade-memberships/138/items/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
   &quot;name&quot; : &quot;No Thanks!&quot;,
-  &quot;itemId&quot; : 5,
+  &quot;itemId&quot; : 140,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/140&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_12', "summaryTab_12");</script>
+</div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
 	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
-<div class='tab'><button id='summaryTabLink_13' class='tablinks' onclick='openTab(event, "summaryTab_13")'>Summary</button><button id='httpTabLink_13' class='tablinks' onclick='openTab(event, "httpTab_13")'>HTTP</button><button id='curlTabLink_13' class='tablinks' onclick='openTab(event, "curlTab_13")'>curl</button></div><div id='summaryTab_13' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/1
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
+<div class='tab'><button id='summaryTabLink_42' class='tablinks' onclick='openTab(event, "summaryTab_42")'>Summary</button><button id='httpTabLink_42' class='tablinks' onclick='openTab(event, "httpTab_42")'>HTTP</button><button id='curlTabLink_42' class='tablinks' onclick='openTab(event, "curlTab_42")'>curl</button></div><div id='summaryTab_42' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/84
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;tradeId&quot;:1,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:...</div><div id='httpTab_13' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/rest/v1/trades/1
-Headers:  Authorization: 8161-1750-659
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_lin...</div><div id='httpTab_42' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/rest/v1/trades/84
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;
 }
 
@@ -589,99 +613,85 @@ Headers:  Authorization: 8161-1750-659
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
-}</div><div id='curlTab_13' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_42' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/1
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
+http://localhost:8080/rest/v1/trades/84
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_13', "summaryTab_13");</script>
+</div><script>openTabById('summaryTabLink_42', "summaryTab_42");</script>
 
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
 	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
 	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
-<div class='tab'><button id='summaryTabLink_14' class='tablinks' onclick='openTab(event, "summaryTab_14")'>Summary</button><button id='httpTabLink_14' class='tablinks' onclick='openTab(event, "httpTab_14")'>HTTP</button><button id='curlTabLink_14' class='tablinks' onclick='openTab(event, "curlTab_14")'>curl</button></div><div id='summaryTab_14' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/1/items/1/want-items
-{&quot;itemId&quot;:3,&quot;priority&quot;:0}
+<div class='tab'><button id='summaryTabLink_43' class='tablinks' onclick='openTab(event, "summaryTab_43")'>Summary</button><button id='httpTabLink_43' class='tablinks' onclick='openTab(event, "httpTab_43")'>HTTP</button><button id='curlTabLink_43' class='tablinks' onclick='openTab(event, "curlTab_43")'>curl</button></div><div id='summaryTab_43' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/offers/
+{&quot;offeredItemId&quot;:136,&quot;wantedItemId&quot;:138}
 Response: HTTP/1.1 201 
-{&quot;wantItemId&quot;:1,&quot;itemId&quot;:3,&quot;priority&quot;:0,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v...</div><div id='httpTab_14' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/1/items/1/want-items
-Headers:  Authorization: 8161-1750-659
+{&quot;offerId&quot;:96,&quot;offeredItemId&quot;:136,&quot;wantedItemId&quot;:138}</div><div id='httpTab_43' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/137/offers/
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;itemId&quot; : 3,
-  &quot;priority&quot; : 0
+  &quot;offeredItemId&quot; : 136,
+  &quot;wantedItemId&quot; : 138
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 1,
-  &quot;itemId&quot; : 3,
-  &quot;priority&quot; : 0,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/1/want-items/3&quot;
-  }, {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/3&quot;
-  } ]
-}</div><div id='curlTab_14' class='tabcontent code'>-----  Request  -----
+  &quot;offerId&quot; : 96,
+  &quot;offeredItemId&quot; : 136,
+  &quot;wantedItemId&quot; : 138
+}</div><div id='curlTab_43' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;itemId\&quot;:3,\&quot;priority\&quot;:0}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/1/items/1/want-items
+-d &quot;{\&quot;offeredItemId\&quot;:136,\&quot;wantedItemId\&quot;:138}&quot; \
+http://localhost:8080/rest/v1/trade-memberships/137/offers/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 1,
-  &quot;itemId&quot; : 3,
-  &quot;priority&quot; : 0,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/1/want-items/3&quot;
-  }, {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/1/items/3&quot;
-  } ]
+  &quot;offerId&quot; : 96,
+  &quot;offeredItemId&quot; : 136,
+  &quot;wantedItemId&quot; : 138
 }
-</div><script>openTabById('summaryTabLink_14', "summaryTab_14");</script>
+</div><script>openTabById('summaryTabLink_43', "summaryTab_43");</script>
 
 <p>
 	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
@@ -689,169 +699,141 @@ Headers:  Content-Type: application/json;charset=UTF-8
 	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
 	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
-<div class='tab'><button id='summaryTabLink_15' class='tablinks' onclick='openTab(event, "summaryTab_15")'>Summary</button><button id='httpTabLink_15' class='tablinks' onclick='openTab(event, "httpTab_15")'>HTTP</button><button id='curlTabLink_15' class='tablinks' onclick='openTab(event, "curlTab_15")'>curl</button></div><div id='summaryTab_15' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
-{&quot;itemId&quot;:1,&quot;priority&quot;:1}
+<div class='tab'><button id='summaryTabLink_44' class='tablinks' onclick='openTab(event, "summaryTab_44")'>Summary</button><button id='httpTabLink_44' class='tablinks' onclick='openTab(event, "httpTab_44")'>HTTP</button><button id='curlTabLink_44' class='tablinks' onclick='openTab(event, "curlTab_44")'>curl</button></div><div id='summaryTab_44' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
+{&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:136}
 Response: HTTP/1.1 201 
-{&quot;wantItemId&quot;:2,&quot;itemId&quot;:1,&quot;priority&quot;:1,&quot;_links&quot;:[{&quot;rel&quot;:&quot;item&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v...</div><div id='httpTab_15' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
-Headers:  Authorization: 1967-3913-942
+{&quot;offerId&quot;:97,&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:136}</div><div id='httpTab_44' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;itemId&quot; : 1,
-  &quot;priority&quot; : 1
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 136
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 2,
-  &quot;itemId&quot; : 1,
-  &quot;priority&quot; : 1,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/1&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items/1&quot;
-  } ]
-}</div><div id='curlTab_15' class='tabcontent code'>-----  Request  -----
+  &quot;offerId&quot; : 97,
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 136
+}</div><div id='curlTab_44' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;itemId\&quot;:1,\&quot;priority\&quot;:1}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
+-d &quot;{\&quot;offeredItemId\&quot;:138,\&quot;wantedItemId\&quot;:136}&quot; \
+http://localhost:8080/rest/v1/trade-memberships/138/offers/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 2,
-  &quot;itemId&quot; : 1,
-  &quot;priority&quot; : 1,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/1&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items/1&quot;
-  } ]
+  &quot;offerId&quot; : 97,
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 136
 }
-</div><script>openTabById('summaryTabLink_15', "summaryTab_15");</script>
-<div class='tab'><button id='summaryTabLink_16' class='tablinks' onclick='openTab(event, "summaryTab_16")'>Summary</button><button id='httpTabLink_16' class='tablinks' onclick='openTab(event, "httpTab_16")'>HTTP</button><button id='curlTabLink_16' class='tablinks' onclick='openTab(event, "curlTab_16")'>curl</button></div><div id='summaryTab_16' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
-{&quot;itemId&quot;:2,&quot;priority&quot;:2}
+</div><script>openTabById('summaryTabLink_44', "summaryTab_44");</script>
+<div class='tab'><button id='summaryTabLink_45' class='tablinks' onclick='openTab(event, "summaryTab_45")'>Summary</button><button id='httpTabLink_45' class='tablinks' onclick='openTab(event, "httpTab_45")'>HTTP</button><button id='curlTabLink_45' class='tablinks' onclick='openTab(event, "curlTab_45")'>curl</button></div><div id='summaryTab_45' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
+{&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:137}
 Response: HTTP/1.1 201 
-{&quot;wantItemId&quot;:2,&quot;itemId&quot;:2,&quot;priority&quot;:2,&quot;_links&quot;:[{&quot;rel&quot;:&quot;item&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v...</div><div id='httpTab_16' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
-Headers:  Authorization: 1967-3913-942
+{&quot;offerId&quot;:98,&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:137}</div><div id='httpTab_45' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
+Headers:  Authorization: 8721-8552-2994
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;itemId&quot; : 2,
-  &quot;priority&quot; : 2
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 137
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 2,
-  &quot;itemId&quot; : 2,
-  &quot;priority&quot; : 2,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/2&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items/2&quot;
-  } ]
-}</div><div id='curlTab_16' class='tabcontent code'>-----  Request  -----
+  &quot;offerId&quot; : 98,
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 137
+}</div><div id='curlTab_45' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 8721-8552-2994&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;itemId\&quot;:2,\&quot;priority\&quot;:2}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items
+-d &quot;{\&quot;offeredItemId\&quot;:138,\&quot;wantedItemId\&quot;:137}&quot; \
+http://localhost:8080/rest/v1/trade-memberships/138/offers/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;wantItemId&quot; : 2,
-  &quot;itemId&quot; : 2,
-  &quot;priority&quot; : 2,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;item&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/2&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/2/items/3/want-items/2&quot;
-  } ]
+  &quot;offerId&quot; : 98,
+  &quot;offeredItemId&quot; : 138,
+  &quot;wantedItemId&quot; : 137
 }
-</div><script>openTabById('summaryTabLink_16', "summaryTab_16");</script>
+</div><script>openTabById('summaryTabLink_45', "summaryTab_45");</script>
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS_ENDED</span>.
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>GENERATE_TRADES</span>.
 </p>
-<div class='tab'><button id='summaryTabLink_17' class='tablinks' onclick='openTab(event, "summaryTab_17")'>Summary</button><button id='httpTabLink_17' class='tablinks' onclick='openTab(event, "httpTab_17")'>HTTP</button><button id='curlTabLink_17' class='tablinks' onclick='openTab(event, "curlTab_17")'>curl</button></div><div id='summaryTab_17' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/1
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS_ENDED&quot;}
+<div class='tab'><button id='summaryTabLink_46' class='tablinks' onclick='openTab(event, "summaryTab_46")'>Summary</button><button id='httpTabLink_46' class='tablinks' onclick='openTab(event, "httpTab_46")'>HTTP</button><button id='curlTabLink_46' class='tablinks' onclick='openTab(event, "curlTab_46")'>curl</button></div><div id='summaryTab_46' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/84
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Ottawa&quot;,&quot;tradeId&quot;:1,&quot;state&quot;:&quot;MATCHING_ITEMS_ENDED&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;...</div><div id='httpTab_17' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/rest/v1/trades/1
-Headers:  Authorization: 8161-1750-659
+{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;,&quot;_l...</div><div id='httpTab_46' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/rest/v1/trades/84
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;state&quot; : &quot;MATCHING_ITEMS_ENDED&quot;
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;state&quot; : &quot;GENERATE_RESULTS&quot;
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
-  &quot;state&quot; : &quot;MATCHING_ITEMS_ENDED&quot;,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
+  &quot;state&quot; : &quot;GENERATE_RESULTS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
-}</div><div id='curlTab_17' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_46' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS_ENDED\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/1
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;,\&quot;state\&quot;:\&quot;GENERATE_RESULTS\&quot;}&quot; \
+http://localhost:8080/rest/v1/trades/84
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa&quot;,
-  &quot;tradeId&quot; : 1,
-  &quot;state&quot; : &quot;MATCHING_ITEMS_ENDED&quot;,
+  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;tradeId&quot; : 84,
+  &quot;state&quot; : &quot;GENERATE_RESULTS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_17', "summaryTab_17");</script>
+</div><script>openTabById('summaryTabLink_46', "summaryTab_46");</script>
 
 <p>
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
@@ -863,52 +845,60 @@ Headers:  Content-Type: application/json;charset=UTF-8
 
 	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
 </p>
-<div class='tab'><button id='summaryTabLink_18' class='tablinks' onclick='openTab(event, "summaryTab_18")'>Summary</button><button id='httpTabLink_18' class='tablinks' onclick='openTab(event, "httpTab_18")'>HTTP</button><button id='curlTabLink_18' class='tablinks' onclick='openTab(event, "curlTab_18")'>curl</button></div><div id='summaryTab_18' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/1/results
+<div class='tab'><button id='summaryTabLink_47' class='tablinks' onclick='openTab(event, "summaryTab_47")'>Summary</button><button id='httpTabLink_47' class='tablinks' onclick='openTab(event, "httpTab_47")'>HTTP</button><button id='curlTabLink_47' class='tablinks' onclick='openTab(event, "curlTab_47")'>curl</button></div><div id='summaryTab_47' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/84/results
 Response: HTTP/1.1 200 
-offering_user_id,offering_user_name,offering_item_id,offering_item_name,receiving_user_id,receiving_...</div><div id='httpTab_18' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades/1/results
-Headers:  Authorization: 8161-1750-659
+user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receivi...</div><div id='httpTab_47' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trades/84/results
+Headers:  Authorization: 2891-5563-9069
           Accept: */*
-          Content-Type: application/json; charset=UTF-8
+          Content-Type: text/plain; charset=ISO-8859-1
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 602
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
-offering_user_id,offering_user_name,offering_item_id,offering_item_name,receiving_user_id,receiving_user_name,receiving_item_id,receiving_item_name
-1,1516476291784AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1,3,1516476292385AuthenticationOAuthNewUserMock,3,Stone Age
-3,1516476292385AuthenticationOAuthNewUserMock,3,Stone Age,1,1516476291784AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1
+          Content-Length: 826
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
+118,Olavo,136,Pandemic Legacy: Season 1,:RECEIVES:,120,Maria,138,Stone Age,:SENDS:,120,Maria
+120,Maria,138,Stone Age,:RECEIVES:,118,Olavo,136,Pandemic Legacy: Season 1,:SENDS:,118,Olavo
 
-# #############################
-# Summary of Trade [1 : Board games in Ottawa]
+# --------------------------------
+# Summary of Trade [84 : Board games in Ottawa - 1519697774891784019977]
 # Total of items: 5
 # Total of traded items: 2
 # Total of items not traded: 3
-# #############################
-</div><div id='curlTab_18' class='tabcontent code'>-----  Request  -----
+# --------------------------------
+# 
+# Below is an example to help you understand the results:
+# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
+# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
+</div><div id='curlTab_47' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 8161-1750-659&quot; \
+-H &quot;Authorization: 2891-5563-9069&quot; \
 -H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades/1/results
+-H &quot;Content-Type: text/plain; charset=ISO-8859-1&quot; \
+http://localhost:8080/rest/v1/trades/84/results
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 602
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
-offering_user_id,offering_user_name,offering_item_id,offering_item_name,receiving_user_id,receiving_user_name,receiving_item_id,receiving_item_name
-1,1516476291784AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1,3,1516476292385AuthenticationOAuthNewUserMock,3,Stone Age
-3,1516476292385AuthenticationOAuthNewUserMock,3,Stone Age,1,1516476291784AuthenticationOAuthNewUserMock,1,Pandemic Legacy: Season 1
+          Content-Length: 826
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
+118,Olavo,136,Pandemic Legacy: Season 1,:RECEIVES:,120,Maria,138,Stone Age,:SENDS:,120,Maria
+120,Maria,138,Stone Age,:RECEIVES:,118,Olavo,136,Pandemic Legacy: Season 1,:SENDS:,118,Olavo
 
-# #############################
-# Summary of Trade [1 : Board games in Ottawa]
+# --------------------------------
+# Summary of Trade [84 : Board games in Ottawa - 1519697774891784019977]
 # Total of items: 5
 # Total of traded items: 2
 # Total of items not traded: 3
-# #############################
+# --------------------------------
+# 
+# Below is an example to help you understand the results:
+# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
+# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
 
-</div><script>openTabById('summaryTabLink_18', "summaryTab_18");</script></body>
+</div><script>openTabById('summaryTabLink_47', "summaryTab_47");</script></body>
 </html>

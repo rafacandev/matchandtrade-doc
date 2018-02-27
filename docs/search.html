@@ -1,0 +1,170 @@
+<html><head><title>REST Doc Maker</title></head>
+<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<h1>Search</h1>
+<p>
+	<i>Endpoint</i> to perform advanced searches.
+	Its usage differs according to the given <span class='incode'>Search.recipe</span> property.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/search</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only authenticated clients</li>
+</ul>
+
+<h3>Root Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>recipe</td>
+		<td>mandatory, enumeration (see <a href="#recipes">Recipes</a>)</td>
+		<td>The search recipe to be used. Each recipe may return different response bodies and support different request bodies</td>
+	</tr>
+	<tr>
+		<td>criteria</td>
+		<td>See <a href="criteria-resource">Criteria</a></td>
+		<td>The search criteria for this search</td>
+	</tr>
+</table>
+
+<h3><a id="recipes">Recipes</a></h3>
+<table>
+	<tr>
+		<th>Recipe Name</th>
+		<th>Description</th>
+		<th>Criteria Specification</th>
+	</tr>
+	<tr>
+		<td>ITEMS</td>
+		<td>Returns an array of <a href='items.html'>Items</a> matching the given <span class='incode'>Search.criteria</span></td>
+		<td>
+			<span class='incode'>"key": "trade.tradeId"</span> references <a href='trades.html' class='incode'>Trade.tradeId</a><br>
+			<span class='incode'>"value": n</span> numeric value
+			<hr>
+			<span class='incode'>"key": "trade.tradeMembershipId"</span> references <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a><br>
+			<span class='incode'>"value": n</span> numeric value
+		</td>
+	</tr>
+</table>
+
+<h3><a id="#criteria-resource">Criteria</a></h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>key</td>
+		<td>mandatory, string</td>
+		<td>Values differ according to the <span class='incode'>search.recipe</span></td>
+	</tr>
+	<tr>
+		<td>value</td>
+		<td>mandatory, number or string according to the <span class='incode'>Search.recipe</span></td>
+		<td>Possible values and types differ according to the <span class='incode'>Search.recipe</span></td>
+	</tr>
+	<tr>
+		<td>operator</td>
+		<td>optional, enumeration, default value: <span class='incode'>AND</span></td>
+		<td>Possible values are <span class='incode'>AND</span> and <span class='incode'>OR</span> </td>
+	</tr>
+	<tr>
+		<td>matcher</td>
+		<td>optional, enumeration, default value: <span class='incode'>EQUALS</span></td>
+		<td>Possible values are <span class='incode'>EQUALS</span>, <span class='incode'>NOT_EQUALS</span>, <span class='incode'>EQUALS_IGNORE_CASE</span>, <span class='incode'>LIKE_IGNORE_CASE</span></td>
+	</tr>
+</table>
+
+<h3>Examples</h3>
+<p>
+	Search for all <a href='items.html'>Items</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to 83
+	except for those belonging to <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a> equals to 136.
+</p>
+<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/search?_pageNumber=2&amp;_pageSize=2
+{&quot;recipe&quot;:&quot;ITEMS&quot;,&quot;criteria&quot;:[{&quot;key&quot;:&quot;Trade.tradeId&quot;,&quot;value&quot;:83,&quot;operator&quot;:&quot;AND&quot;,&quot;matcher&quot;:&quot;EQUALS&quot;}...
+Response: HTTP/1.1 200 
+[{&quot;name&quot;:&quot;Elysium&quot;,&quot;itemId&quot;:132,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade-...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/rest/v1/search?_pageNumber=2&amp;_pageSize=2
+Headers:  Authorization: 2891-5563-9069
+          Accept: */*
+          Content-Type: application/json; charset=UTF-8
+{
+  &quot;recipe&quot; : &quot;ITEMS&quot;,
+  &quot;criteria&quot; : [ {
+    &quot;key&quot; : &quot;Trade.tradeId&quot;,
+    &quot;value&quot; : 83,
+    &quot;operator&quot; : &quot;AND&quot;,
+    &quot;matcher&quot; : &quot;EQUALS&quot;
+  }, {
+    &quot;key&quot; : &quot;TradeMembership.tradeMembershipId&quot;,
+    &quot;value&quot; : 136,
+    &quot;operator&quot; : &quot;AND&quot;,
+    &quot;matcher&quot; : &quot;NOT_EQUALS&quot;
+  } ]
+}
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 5
+          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+[ {
+  &quot;name&quot; : &quot;Elysium&quot;,
+  &quot;itemId&quot; : 132,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/132&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;The Voyages of Marco Polo&quot;,
+  &quot;itemId&quot; : 133,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/133&quot;
+  } ]
+} ]</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
+curl -v -X POST \
+-H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;recipe\&quot;:\&quot;ITEMS\&quot;,\&quot;criteria\&quot;:[{\&quot;key\&quot;:\&quot;Trade.tradeId\&quot;,\&quot;value\&quot;:83,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;EQUALS\&quot;},{\&quot;key\&quot;:\&quot;TradeMembership.tradeMembershipId\&quot;,\&quot;value\&quot;:136,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;NOT_EQUALS\&quot;}]}&quot; \
+http://localhost:8080/rest/v1/search?_pageNumber=2\&amp;_pageSize=2
+
+-----  Response  -----
+Status:   HTTP/1.1 200 
+Headers:  X-Pagination-Total-Count: 5
+          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+          Content-Type: application/json;charset=UTF-8
+          Transfer-Encoding: chunked
+          Date: Tue, 27 Feb 2018 02:16:14 GMT
+[ {
+  &quot;name&quot; : &quot;Elysium&quot;,
+  &quot;itemId&quot; : 132,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/132&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;The Voyages of Marco Polo&quot;,
+  &quot;itemId&quot; : 133,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/133&quot;
+  } ]
+} ]
+</div><script>openTabById('summaryTabLink_29', "summaryTab_29");</script>
+</body>
+</html>

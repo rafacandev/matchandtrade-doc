@@ -12,21 +12,26 @@ Match and Trade is a web application where many people trade several items at on
 	<li>Members exchange items according to the generated list</li>
 </ul>
 
-<h1>RESTful Documentation</h1>
+<h1>Development Guide</h1>
+See <a href='https://github.com/rafasantos/matchandtrade-web-api'>matchandtrade-web-api</a> for development and customization. 
 
-<p>Match And Trade provides a powerful RESTful API which other applications may interact with.</p>
+<h1>REST API Documentation</h1>
+
+<p>Match And Trade provides a powerful REST API which other applications may interact with.</p>
 
 <h2>Resources</h2>
-Here is the list of resources available thought the RESTful API.
+Here is the list of all endpoints available through the REST API.
 
 <ul>
-	<li><a href='authenticate.html'>authenticate</a></li>
-	<li><a href='authentications.html'>authentications</a></li>
-	<li><a href='trades.html'>trades</a></li>
-	<li><a href='users.html'>users</a></li>
-	<li><a href='trade-memberships.html'>trade-memberships</a></li>
-	<li><a href='items.html'>trade-memberships/{tradeMembershipId}/items</a></li>
-	<li><a href='want-items.html'>trade-memberships/{tradeMembershipId}/items/{itemId}/want-items</a></li>
+	<li><code><a href='authenticate.html'>authenticate</a></code></li>
+	<li><code><a href='authentications.html'>authentications</a></code></li>
+	<li><code><a href='offers.html'>offers</a></code></li>
+	<li><code><a href='search.html'>search</a></code></li>
+	<li><code><a href='trades.html'>trades</a></code></li>
+	<li><code><a href='trade-results.html'>trades/{tradeId}/trades-results</a></code></li>
+	<li><code><a href='trade-memberships.html'>trade-memberships</a></code></li>
+	<li><code><a href='items.html'>trade-memberships/{tradeMembershipId}/items</a></code></li>
+	<li><code><a href='users.html'>users</a></code></li>
 </ul>
 
 <h2>Use Cases</h2>
@@ -44,7 +49,7 @@ Here is the list of resources available thought the RESTful API.
 
 <h2>HATEOAS</h2>
 <p>
-	The importance of HATEOAS cannot be emphasized enough. This application uses the <a href='https://spring.io/understanding/HATEOAS'>Spring HATEOAS</a> approach to handle hypermedia
+	The importance of HATEOAS cannot be emphasized enough. This application uses the <a href='https://spring.io/understanding/HATEOAS'>Spring HATEOAS</a> approach to handle hypermedia.
 </p>
 
 <h2>Expanding</h2>
@@ -61,72 +66,72 @@ Here is the list of resources available thought the RESTful API.
 </p>
 
 <p>Example:<p>
-<div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
+<div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Board games in Montreal&quot;,&quot;tradeId&quot;:4,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;h...</div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
+[{&quot;name&quot;:&quot;incredible change - 78957&quot;,&quot;tradeId&quot;:3,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
-Headers:  Authorization: 3249-812-5389
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 7
+Headers:  X-Pagination-Total-Count: 64
           Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
           Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:52 GMT
+          Date: Tue, 27 Feb 2018 02:16:11 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Montreal&quot;,
+  &quot;name&quot; : &quot;incredible change - 78957&quot;,
+  &quot;tradeId&quot; : 3,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;grandiose right - 62705&quot;,
   &quot;tradeId&quot; : 4,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/4&quot;
   } ]
-}, {
-  &quot;name&quot; : &quot;Owner&quot;,
-  &quot;tradeId&quot; : 5,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/5&quot;
-  } ]
-} ]</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_1' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 3249-812-5389&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
+http://localhost:8080/rest/v1/trades?_pageNumber=2\&amp;_pageSize=2
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 7
+Headers:  X-Pagination-Total-Count: 64
           Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
           Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:52 GMT
+          Date: Tue, 27 Feb 2018 02:16:11 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Montreal&quot;,
+  &quot;name&quot; : &quot;incredible change - 78957&quot;,
+  &quot;tradeId&quot; : 3,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;grandiose right - 62705&quot;,
   &quot;tradeId&quot; : 4,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/4&quot;
   } ]
-}, {
-  &quot;name&quot; : &quot;Owner&quot;,
-  &quot;tradeId&quot; : 5,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/5&quot;
-  } ]
 } ]
-</div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
+</div><script>openTabById('summaryTabLink_1', "summaryTab_1");</script>
 
 <h2>PUT vs PATCH</h2>
 <p><span class='incode'>PUT</span> requests are favored over <span class='incode'>PATH</span> requests. While <span class='incode'>PATH</span> may offer smaller payloads, it also introduces development complexity for little benefit.</p>
@@ -158,10 +163,5 @@ Status:   HTTP/1.1 200
 
 <h2>Many To Many Relationships</h2>
 <p>Relationships are treated as resources similarly to what is described on this <a href='https://rafaelsantosbra.wordpress.com/2016/10/18/many-to-many-relationships-for-rest-api-with-a-relationship-attribute/'>blog post</a>.</p>
-
-<h2>Development Guide</h2>
-Checkout our <a href='development-guide.html'>Development Guide</a> if you want to contribute or customize the application.
-
-<h2>Deployment Guide</h2>
-Follow the <a href='deployment-guide.html'>Deployment Guide</a> if you want to host your own instance of the application.</body>
+</body>
 </html>

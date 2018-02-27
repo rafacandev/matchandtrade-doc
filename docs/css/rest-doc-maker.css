@@ -1,7 +1,19 @@
+/* ==================
+   ELEMENTS
+   ================== */
 body {
 	margin-left: 10px;
 	margin-right: 10px;
 	line-height: 1.5;
+	font-family: Impact, Charcoal, sans-serif;	
+}
+
+ul {
+	margin: 0.5em 2em 0.5em 0em;
+}
+
+h3 {
+	margin: 1em 0em 0.5em 0em;
 }
 
 table, td, th {
@@ -13,6 +25,10 @@ th {
 	background-color: #CFFED7;
 }
 
+
+/* ==================
+   CLASSES
+   ================== */
 .code {
 	background-color: #EAF6EC;
 	font-family: monospace;
@@ -26,12 +42,14 @@ th {
 	background-color: #EAF6EC;
 	font-family: monospace;
 	white-space: pre;
-	font-size: small;
+	font-size: medium;
 	padding: 3px;
 }
 
-body {font-family: "Lato", sans-serif;}
 
+/* ==================
+   TABS
+   ================== */
 /* Style the tab */
 div.tab {
     overflow: hidden;

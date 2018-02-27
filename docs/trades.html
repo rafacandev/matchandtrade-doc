@@ -1,6 +1,5 @@
 <html><head><title>REST Doc Maker</title></head>
 <link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
-
 <h1>Trades</h1>
 <p>
 	<i>Resource</i> for <span class='incode'>Trades</span>. <span class='incode'>Trades</span> are the the central components of the system.
@@ -22,7 +21,9 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li>Only authenticated clients</li>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li><span class='incode'>GET rest/v1/trades?{queryParameters}</span> can be performed by any client</li>
+	<li><span class='incode'>GET rest/v1/trades/</span> can be performed by any client</li>	
 </ul>
 
 <h3>Resource</h3>
@@ -44,7 +45,7 @@
 	</tr>
 	<tr>
 		<td>tradeId</td>
-		<td>ready-only</td>
+		<td>ready-only, auto-generated</td>
 		<td>Id associated with this resource</td>
 	</tr>
 </table>
@@ -61,11 +62,19 @@
 	</tr>
 	<tr>
 		<td>MATCHING_ITEMS</td>
-		<td><a href='users.html'>Users</a> can match <a href='items.html'>items</a> in the trade. Other <a href='users.html'>users</a> cannot join the trade nor submit <a href='items.html'>items</a></td>
+		<td><a href='users.html'>Users</a> can match <a href='items.html'>Items</a> in the trade. Other <a href='users.html'>users</a> cannot join the trade nor submit <a href='items.html'>items</a></td>
 	</tr>
 	<tr>
-		<td>GENERATING_TRADES</td>
-		<td>The system is generating the <span class='incode'>Trade</span> results</td>
+		<td>ITEMS_MATCHED</td>
+		<td><a href='items.html'>Items</a> are matched and results (TODO: add link to trade-results.html) can be generated.</td>
+	</tr>
+	<tr>
+		<td>GENERATE_RESULTS</td>
+		<td>Request the system to generate results (TODO: add link to trade-results.html) for the matched <a href='items.html'>Items</a>.</td>
+	</tr>
+	<tr>
+		<td>RESULTS_GENERATED</td>
+		<td>Results (TODO: add link to trade-results.html) are a available.</td>
 	</tr>
 	<tr>
 		<td>CLOSED</td>
@@ -80,87 +89,84 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>name</td>
-		<td>Resources matching <span class='incode'>Trade.name</span></td>
+		<td>_pageNumber</td>
+		<td>See <a href='index.html'>pagination</a></td>
 	</tr>
 	<tr>
 		<td>_pageSize</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
-	</tr>
-	<tr>
-		<td>_pageNumber</td>
-		<td>See <a href='rest-guide.html'>pagination</a></td>
+		<td>See <a href='index.html'>pagination</a></td>
 	</tr>
 </table>
+
 
 <h3>Rules</h3>
 <ul>
 	<li>When a new <span class='incode'>Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class='incode'>Authorization</span> header becomes the <span class='incode'>Trade</span> <i>organizer</i>.
-	Hence the system creates a <a href='trade-memberships.html'>TradeMembership.type=OWNER</a></li>
+	Hence the system creates a <span class='incode'><a href='trade-memberships.html'>TradeMembership.type=OWNER</a></span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a <span class='incode'>Trade</span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a <span class='incode'>Trade</span></li>
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_20' class='tablinks' onclick='openTab(event, "summaryTab_20")'>Summary</button><button id='httpTabLink_20' class='tablinks' onclick='openTab(event, "httpTab_20")'>HTTP</button><button id='curlTabLink_20' class='tablinks' onclick='openTab(event, "curlTab_20")'>curl</button></div><div id='summaryTab_20' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trades/
-{&quot;name&quot;:&quot;Board games&quot;}
+<div class='tab'><button id='summaryTabLink_8' class='tablinks' onclick='openTab(event, "summaryTab_8")'>Summary</button><button id='httpTabLink_8' class='tablinks' onclick='openTab(event, "httpTab_8")'>HTTP</button><button id='curlTabLink_8' class='tablinks' onclick='openTab(event, "curlTab_8")'>curl</button></div><div id='summaryTab_8' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trades/
+{&quot;name&quot;:&quot;Board games location TBD - 1519697772734711686026&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Board games&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://...</div><div id='httpTab_20' class='tabcontent code'>-----  Request  -----
+{&quot;name&quot;:&quot;Board games location TBD - 1519697772734711686026&quot;,&quot;tradeId&quot;:78,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,...</div><div id='httpTab_8' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8080/rest/v1/trades/
-Headers:  Authorization: 1967-3913-942
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games&quot;
+  &quot;name&quot; : &quot;Board games location TBD - 1519697772734711686026&quot;
 }
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games location TBD - 1519697772734711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
-}</div><div id='curlTab_20' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_8' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games\&quot;}&quot; \
+-d &quot;{\&quot;name\&quot;:\&quot;Board games location TBD - 1519697772734711686026\&quot;}&quot; \
 http://localhost:8080/rest/v1/trades/
 
 -----  Response  -----
 Status:   HTTP/1.1 201 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games location TBD - 1519697772734711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_20', "summaryTab_20");</script>
+</div><script>openTabById('summaryTabLink_8', "summaryTab_8");</script>
 
-<div class='tab'><button id='summaryTabLink_21' class='tablinks' onclick='openTab(event, "summaryTab_21")'>Summary</button><button id='httpTabLink_21' class='tablinks' onclick='openTab(event, "httpTab_21")'>HTTP</button><button id='curlTabLink_21' class='tablinks' onclick='openTab(event, "curlTab_21")'>curl</button></div><div id='summaryTab_21' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/2
-{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
+<div class='tab'><button id='summaryTabLink_9' class='tablinks' onclick='openTab(event, "summaryTab_9")'>Summary</button><button id='httpTabLink_9' class='tablinks' onclick='openTab(event, "httpTab_9")'>HTTP</button><button id='curlTabLink_9' class='tablinks' onclick='openTab(event, "curlTab_9")'>curl</button></div><div id='summaryTab_9' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/78
+{&quot;name&quot;:&quot;Board games in Toronto - 1519697772776711686026&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_21' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/rest/v1/trades/2
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;Board games in Toronto - 1519697772776711686026&quot;,&quot;tradeId&quot;:78,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_9' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/rest/v1/trades/78
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;
 }
 
@@ -168,44 +174,44 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
-}</div><div id='curlTab_21' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_9' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Toronto\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/2
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Toronto - 1519697772776711686026\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
+http://localhost:8080/rest/v1/trades/78
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_21', "summaryTab_21");</script>
+</div><script>openTabById('summaryTabLink_9', "summaryTab_9");</script>
 
-<div class='tab'><button id='summaryTabLink_22' class='tablinks' onclick='openTab(event, "summaryTab_22")'>Summary</button><button id='httpTabLink_22' class='tablinks' onclick='openTab(event, "httpTab_22")'>HTTP</button><button id='curlTabLink_22' class='tablinks' onclick='openTab(event, "curlTab_22")'>curl</button></div><div id='summaryTab_22' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/2
+<div class='tab'><button id='summaryTabLink_10' class='tablinks' onclick='openTab(event, "summaryTab_10")'>Summary</button><button id='httpTabLink_10' class='tablinks' onclick='openTab(event, "httpTab_10")'>HTTP</button><button id='curlTabLink_10' class='tablinks' onclick='openTab(event, "curlTab_10")'>curl</button></div><div id='summaryTab_10' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/78
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_22' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades/2
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;Board games in Toronto - 1519697772776711686026&quot;,&quot;tradeId&quot;:78,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_10' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trades/78
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -214,88 +220,122 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
-}</div><div id='curlTab_22' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_10' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades/2
+http://localhost:8080/rest/v1/trades/78
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_22', "summaryTab_22");</script>
+</div><script>openTabById('summaryTabLink_10', "summaryTab_10");</script>
 
-<div class='tab'><button id='summaryTabLink_23' class='tablinks' onclick='openTab(event, "summaryTab_23")'>Summary</button><button id='httpTabLink_23' class='tablinks' onclick='openTab(event, "httpTab_23")'>HTTP</button><button id='curlTabLink_23' class='tablinks' onclick='openTab(event, "curlTab_23")'>curl</button></div><div id='summaryTab_23' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
+<div class='tab'><button id='summaryTabLink_11' class='tablinks' onclick='openTab(event, "summaryTab_11")'>Summary</button><button id='httpTabLink_11' class='tablinks' onclick='openTab(event, "httpTab_11")'>HTTP</button><button id='curlTabLink_11' class='tablinks' onclick='openTab(event, "curlTab_11")'>curl</button></div><div id='summaryTab_11' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades?_pageNumber=1&amp;_pageSize=3
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href...</div><div id='httpTab_23' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
-Headers:  Authorization: 1967-3913-942
+[{&quot;name&quot;:&quot;messy community - 29506&quot;,&quot;tradeId&quot;:1,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;h...</div><div id='httpTab_11' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trades?_pageNumber=1&amp;_pageSize=3
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
 
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
+Headers:  X-Pagination-Total-Count: 65
+          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=3&amp;_pageNumber=2&gt;; rel=&quot;nextPage&quot;
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:52 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
+  &quot;name&quot; : &quot;messy community - 29506&quot;,
+  &quot;tradeId&quot; : 1,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;magnificent state - 54500&quot;,
   &quot;tradeId&quot; : 2,
-  &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
   } ]
-} ]</div><div id='curlTab_23' class='tabcontent code'>-----  Request  -----
+}, {
+  &quot;name&quot; : &quot;incredible change - 78957&quot;,
+  &quot;tradeId&quot; : 3,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
+  } ]
+} ]</div><div id='curlTab_11' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
-http://localhost:8080/rest/v1/trades?name=Board%20games%20in%20Toronto&amp;_pageNumber=1&amp;_pageSize=1
+http://localhost:8080/rest/v1/trades?_pageNumber=1\&amp;_pageSize=3
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
+Headers:  X-Pagination-Total-Count: 65
+          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=3&amp;_pageNumber=2&gt;; rel=&quot;nextPage&quot;
           Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:52 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
+  &quot;name&quot; : &quot;messy community - 29506&quot;,
+  &quot;tradeId&quot; : 1,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/1&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;magnificent state - 54500&quot;,
   &quot;tradeId&quot; : 2,
-  &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
     &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+  } ]
+}, {
+  &quot;name&quot; : &quot;incredible change - 78957&quot;,
+  &quot;tradeId&quot; : 3,
+  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_23', "summaryTab_23");</script>
+</div><script>openTabById('summaryTabLink_11', "summaryTab_11");</script>
 
-<div class='tab'><button id='summaryTabLink_24' class='tablinks' onclick='openTab(event, "summaryTab_24")'>Summary</button><button id='httpTabLink_24' class='tablinks' onclick='openTab(event, "httpTab_24")'>HTTP</button><button id='curlTabLink_24' class='tablinks' onclick='openTab(event, "curlTab_24")'>curl</button></div><div id='summaryTab_24' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/2
+<div class='tab'><button id='summaryTabLink_12' class='tablinks' onclick='openTab(event, "summaryTab_12")'>Summary</button><button id='httpTabLink_12' class='tablinks' onclick='openTab(event, "httpTab_12")'>HTTP</button><button id='curlTabLink_12' class='tablinks' onclick='openTab(event, "curlTab_12")'>curl</button></div><div id='summaryTab_12' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/78
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto&quot;,&quot;tradeId&quot;:2,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;...</div><div id='httpTab_24' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades/2
-Headers:  Authorization: 1967-3913-942
+{&quot;name&quot;:&quot;Board games in Toronto - 1519697772776711686026&quot;,&quot;tradeId&quot;:78,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_12' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/rest/v1/trades/78
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
@@ -304,61 +344,61 @@ Headers:  Authorization: 1967-3913-942
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
-}</div><div id='curlTab_24' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_12' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades/2
+http://localhost:8080/rest/v1/trades/78
 
 -----  Response  -----
 Status:   HTTP/1.1 200 
 Headers:  Content-Type: application/json;charset=UTF-8
           Transfer-Encoding: chunked
-          Date: Sat, 20 Jan 2018 19:24:51 GMT
+          Date: Tue, 27 Feb 2018 02:16:12 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto&quot;,
-  &quot;tradeId&quot; : 2,
+  &quot;name&quot; : &quot;Board games in Toronto - 1519697772776711686026&quot;,
+  &quot;tradeId&quot; : 78,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/78&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_24', "summaryTab_24");</script>
+</div><script>openTabById('summaryTabLink_12', "summaryTab_12");</script>
 
-<div class='tab'><button id='summaryTabLink_25' class='tablinks' onclick='openTab(event, "summaryTab_25")'>Summary</button><button id='httpTabLink_25' class='tablinks' onclick='openTab(event, "httpTab_25")'>HTTP</button><button id='curlTabLink_25' class='tablinks' onclick='openTab(event, "curlTab_25")'>curl</button></div><div id='summaryTab_25' class='tabcontent code'>Request:  DELETE http://localhost:8080/rest/v1/trades/2
+<div class='tab'><button id='summaryTabLink_13' class='tablinks' onclick='openTab(event, "summaryTab_13")'>Summary</button><button id='httpTabLink_13' class='tablinks' onclick='openTab(event, "httpTab_13")'>HTTP</button><button id='curlTabLink_13' class='tablinks' onclick='openTab(event, "curlTab_13")'>curl</button></div><div id='summaryTab_13' class='tabcontent code'>Request:  DELETE http://localhost:8080/rest/v1/trades/78
 Response: HTTP/1.1 204 
-</div><div id='httpTab_25' class='tabcontent code'>-----  Request  -----
-DELETE http://localhost:8080/rest/v1/trades/2
-Headers:  Authorization: 1967-3913-942
+</div><div id='httpTab_13' class='tabcontent code'>-----  Request  -----
+DELETE http://localhost:8080/rest/v1/trades/78
+Headers:  Authorization: 2180-8238-6917
           Accept: */*
           Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
-</div><div id='curlTab_25' class='tabcontent code'>-----  Request  -----
+Headers:  Date: Tue, 27 Feb 2018 02:16:12 GMT
+</div><div id='curlTab_13' class='tabcontent code'>-----  Request  -----
 curl -v -X DELETE \
--H &quot;Authorization: 1967-3913-942&quot; \
+-H &quot;Authorization: 2180-8238-6917&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades/2
+http://localhost:8080/rest/v1/trades/78
 
 -----  Response  -----
 Status:   HTTP/1.1 204 
-Headers:  Date: Sat, 20 Jan 2018 19:24:52 GMT
+Headers:  Date: Tue, 27 Feb 2018 02:16:12 GMT
 
-</div><script>openTabById('summaryTabLink_25', "summaryTab_25");</script>
+</div><script>openTabById('summaryTabLink_13', "summaryTab_13");</script>
 </body>
 </html>
