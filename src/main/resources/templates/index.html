@@ -17,7 +17,7 @@ See <a href='https://github.com/rafasantos/matchandtrade-web-api'>matchandtrade-
 
 <p>Match And Trade provides a powerful REST API which other applications may interact with.</p>
 
-<h2>Resources</h2>
+<h2>Endpoints</h2>
 Here is the list of all endpoints available through the REST API.
 
 <ul>
@@ -32,17 +32,19 @@ Here is the list of all endpoints available through the REST API.
 	<li><code><a href='users.html'>users</a></code></li>
 </ul>
 
+<h4>Endpoints vs Resources</h4>
+<p>
+	Generally speaking, <i>resources</i> have consistent format and behavior whereas <i>endpoints</i> may vary in format and behavior.
+	<i>Resource</i> URLs are specialized <i>endpoints</i> which provides standard operations over a resource. Example: <i>resources</i> support HATEOAS, pagination and query parameters relevant to the given resource.
+	<i>Endpoint</i> URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: <a href="authenticate.html">authenticate</a>).
+</p>
+<p>
+	 See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
+</p>
+
 <h2>Use Cases</h2>
 <p>
 	Check out the <a href='use-cases.html'>Use Cases</a> page for typical usage with examples.
-</p>
-
-<h2>Endpoints vs Resources</h2>
-<p>
-	Generally speaking, <i>resources</i> have consistent format and behavior whereas <i>endpoints</i> may vary in format and behavior.
-	<i>Resource</i> URLs are a specialized <i>endpoints</i> which provides standard operations over a resource. Example: <i>resources</i> support HATEOAS, pagination and query parameters are relevant to the given resource.
-	
-	<i>Endpoint</i> URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: <a href="authenticate.html">authenticate</a>). See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
 </p>
 
 <h2>HATEOAS</h2>
