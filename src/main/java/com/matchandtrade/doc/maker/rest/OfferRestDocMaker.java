@@ -15,16 +15,18 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.http.Method;
+import io.restassured.specification.RequestSpecification;
 
 
 public class OfferRestDocMaker implements RestDocMaker {
 	
 	private static final String OFFERS_POST = "OFFERS_POST";
 	private static final String OFFERS_GET = "OFFERS_GET";
-	private static final String OFFERS_GET_ALL = "OFFERS_GET_ALL";
+	private static final String OFFERS_SEARCH = "OFFERS_SEARCH";
 	private static final String OFFERS_DELETE = "OFFERS_DELETE";
 
 
@@ -85,15 +87,22 @@ public class OfferRestDocMaker implements RestDocMaker {
 		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), firstDummy.getItemId());
 		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), secondDummy.getItemId());
 		
-		Snippet getAllSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()));
-		getAllSnippet.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET_ALL, getAllSnippet.asHtml());
+		RequestSpecification searchRequest = new RequestSpecBuilder()
+				.addRequestSpecification(olavoSnippetFactory.getDefaultRequestSpecification())
+				.addQueryParam("_pageNumber", "1")
+				.addQueryParam("_pageSize", "3")
+				.addQueryParam("offeredItemId", pandemicOne.getItemId())
+				.addQueryParam("wantedItemId", stoneAge.getItemId())
+				.build();
+		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()));
+		searchSnippet.getResponse().then().statusCode(200);
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchSnippet.asHtml());
 
 		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteSnippet.asHtml());
 		
-		template = PaginationTemplateUtil.replacePaginationTable(template);
+		template = PaginationTemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
