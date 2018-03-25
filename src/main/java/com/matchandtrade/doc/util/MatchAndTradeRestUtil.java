@@ -18,18 +18,18 @@ public class MatchAndTradeRestUtil {
 	private static final SnippetFactory snippetFactory = new SnippetFactory();
 	
 	private enum Endpoint {
-		AUTHENTICATE("authenticate"),
-		SIGN_OFF("sign-out"),
-		AUTHENTICATIONS("rest/v1/authentications"),
-		TRADES("rest/v1/trades"),
-		SEARCH("rest/v1/search"),
+		AUTHENTICATE("matchandtrade-web-api/v1/authenticate"),
+		SIGN_OFF("matchandtrade-web-api/v1/sign-out"),
+		AUTHENTICATIONS("matchandtrade-web-api/v1/authentications"),
+		TRADES("matchandtrade-web-api/v1/trades"),
+		SEARCH("matchandtrade-web-api/v1/search"),
 		TRADE_RESULTS("results"),
 		ITEMS("items"),
 		INFO("info"),
 		WANT_ITEMS("want-items"),
-		TRADE_MEMBERSHIPS("rest/v1/trade-memberships"),
+		TRADE_MEMBERSHIPS("matchandtrade-web-api/v1/trade-memberships"),
 		OFFERS("offers"),
-		USERS("rest/v1/users");
+		USERS("matchandtrade-web-api/v1/users");
 
 		private String path;
 		
