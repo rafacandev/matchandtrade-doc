@@ -83,9 +83,9 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		olavoApiFacade.saveTrade(trade);
 		
 		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeResultsUrl(trade.getTradeId()));
-		assertTrue(getSnippet.getResponse().body().asString().contains("Total of items: 6"));
-		assertTrue(getSnippet.getResponse().body().asString().contains("Total of traded items: 5"));
-		assertTrue(getSnippet.getResponse().body().asString().contains("Total of items not traded: 1"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfItems\":6"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfTradedItems\":5"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfNotTradedItems\":1,"));
 		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET, getSnippet.asHtml());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
