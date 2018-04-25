@@ -93,7 +93,7 @@
 							<mainClass>com.matchandtrade.doc.executable.MatchAndTradeDocExecutable</mainClass>
 							<arguments>
 								<argument>-cf</argument>
-								<argument>${basedir}/config/matchandtrade.properties</argument>
+								<argument>${basedir}/config/matchandtrade-doc.properties</argument>
 							</arguments>
 						</configuration>
 					</execution>
