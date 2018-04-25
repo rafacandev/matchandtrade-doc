@@ -26,19 +26,6 @@
 		<appender-ref ref="FILE" />
 	</root>
 
-	<!-- Log all SQL DML statements as they are executed -->
-	<logger level="INFO" name="org.hibernate.SQL"/>
-	<!-- Log all JDBC parameters -->
-	<logger level="INFO" name="org.hibernate.type"/>
-	<!-- Log transaction related activity -->
-	<logger level="INFO" name="org.hibernate.transaction"/>
-	<!-- Log all second-level cache activity -->
-	<logger level="INFO" name="org.hibernate.cache"/>
-	
-	<!-- Match And Trade loggers -->
-    <logger leve="INFO" name="com.matchandtrade.rest.service.TradeResultService" />
-	
-	
 	<!-- Match And Trade Doc Maker Logs -->
 	<!-- ============================== -->
 	<!-- Documentation generation summary -->
