@@ -44,6 +44,13 @@
 <h3>Query Parameters</h3>
 ${PAGINATION_TABLE}
 
+<h3>Rules</h3>
+<ul>
+	<li><a href="items.html">Items</a> can only be deleted by their owners.</li>
+	<li><span class="incode">Item.name</span> must be unique (case insensitive) within a <a href="trade-memberships.html">TradeMembership</a>.</li>
+</ul>
+
+
 <h3>Examples</h3>
 ${ITEMS_POST_PLACEHOLDER}
 
@@ -54,3 +61,5 @@ ${ITEMS_GET_PLACEHOLDER}
 ${ITEMS_SEARCH_PLACEHOLDER}
 
 ${ITEMS_GET_ALL_PLACEHOLDER}
+
+${ITEMS_DELETE_PLACEHOLDER}

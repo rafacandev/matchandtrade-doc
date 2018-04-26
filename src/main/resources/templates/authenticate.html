@@ -2,7 +2,7 @@
 <p>
 	<i>Endpoint</i> to authenticate on the system.
 	It redirects the client to an oAuth server (e.g.: Google oAuth) and returns with a header called <span class='incode'>Authorization</span>.
-	Additionally, it creates a <span class='incode'>Cookie: JSESSIONID</span> allowing requests to <span class='incode'>authenticate/info</span> which also returns the <span class='incode'>Authorization</span> header.
+	Additionally, it creates a <span class='incode'>Cookie: MTSESSION</span> allowing requests to <span class='incode'>authenticate/info</span> which also returns the <span class='incode'>Authorization</span> header.
 </p>
 
 <p>
@@ -19,7 +19,7 @@ The <span class='incode'>Authorization</span> header acts as a session token and
 <h3>Authorization</h3>
 <ul>
 	<li>Public endpoints: <span class='incode'>authenticate</span> and <span class='incode'>authenticate/sing-out</span></li>
-	<li>Only requests containing <span class='incode'>Cookie: JSESSIONID</span> are authorized to access <span class='incode'>authenticate/info</span></li>
+	<li>Only requests containing <span class='incode'>Cookie: MTSESSION</span> are authorized to access <span class='incode'>authenticate/info</span></li>
 </ul>
 
 

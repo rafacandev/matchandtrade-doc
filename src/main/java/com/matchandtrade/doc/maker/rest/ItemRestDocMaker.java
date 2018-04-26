@@ -27,6 +27,7 @@ public class ItemRestDocMaker implements RestDocMaker {
 	private static final String ITEMS_GET_PLACEHOLDER = "ITEMS_GET_PLACEHOLDER";
 	private static final String ITEMS_SEARCH_PLACEHOLDER = "ITEMS_SEARCH_PLACEHOLDER";
 	private static final String ITEMS_GET_ALL_PLACEHOLDER = "ITEMS_GET_ALL_PLACEHOLDER";
+	private static final String ITEMS_DELETE_PLACEHOLDER = "ITEMS_DELETE_PLACEHOLDER";
 
 	@Override
 	public String contentFilePath() {
@@ -75,6 +76,11 @@ public class ItemRestDocMaker implements RestDocMaker {
 		searchSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", "1");
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
 		
+		// ITEMS_DELETE_PLACEHOLDER
+		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.itemsUrl(membershipId, itemId));
+		deleteSnippet.getResponse().then().statusCode(204);
+		template = TemplateUtil.replacePlaceholder(template, ITEMS_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
+
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
