@@ -47,6 +47,7 @@ public class ItemRestDocMaker implements RestDocMaker {
 		// ITEMS_POST_PLACEHOLDER
 		ItemJson item = new ItemJson();
 		item.setName("Pandemic Legacy: Season 1");
+		item.setDescription("In mint condition");
 		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, item, MatchAndTradeRestUtil.itemsUrl(membershipId) + "/");
 		postSnippet.getResponse().then().statusCode(201).and().body("name", equalTo(item.getName()));
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_POST_PLACEHOLDER, postSnippet.asHtml());
