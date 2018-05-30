@@ -13,7 +13,7 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only authenticated clients</li>
+	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only clients with a valid <span class='incode'>Authorization</span> header</li>
 </ul>
 
 <h3>Root Resource</h3>
@@ -30,7 +30,7 @@
 	</tr>
 	<tr>
 		<td>criteria</td>
-		<td>See <a href="criteria-resource">Criteria</a></td>
+		<td>See <a href="#criteria-resource">Criteria</a></td>
 		<td>The search criteria for this search</td>
 	</tr>
 </table>
@@ -55,7 +55,7 @@
 	</tr>
 </table>
 
-<h3><a id="#criteria-resource">Criteria</a></h3>
+<h3><a id="criteria-resource">Criteria</a></h3>
 <table>
 	<tr>
 		<th>Property Name</th>
@@ -84,87 +84,116 @@
 	</tr>
 </table>
 
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
+	</tr>
+</table>
+
+
 <h3>Examples</h3>
 <p>
-	Search for all <a href='items.html'>Items</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to 83
-	except for those belonging to <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a> equals to 136.
+	Search for all <a href='items.html'>Items</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to 13
+	except for those belonging to <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a> equals to 28.
 </p>
-<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/search?_pageNumber=2&amp;_pageSize=2
-{&quot;recipe&quot;:&quot;ITEMS&quot;,&quot;criteria&quot;:[{&quot;key&quot;:&quot;Trade.tradeId&quot;,&quot;value&quot;:83,&quot;operator&quot;:&quot;AND&quot;,&quot;matcher&quot;:&quot;EQUALS&quot;}...
+<div class='tab'><button id='summaryTabLink_30' class='tablinks' onclick='openTab(event, "summaryTab_30")'>Summary</button><button id='httpTabLink_30' class='tablinks' onclick='openTab(event, "httpTab_30")'>HTTP</button><button id='curlTabLink_30' class='tablinks' onclick='openTab(event, "curlTab_30")'>curl</button></div><div id='summaryTab_30' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/search?_pageNumber=2&amp;_pageSize=2
+{&quot;recipe&quot;:&quot;ITEMS&quot;,&quot;criteria&quot;:[{&quot;key&quot;:&quot;Trade.tradeId&quot;,&quot;value&quot;:13,&quot;operator&quot;:&quot;AND&quot;,&quot;matcher&quot;:&quot;EQUALS&quot;}...
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Elysium&quot;,&quot;itemId&quot;:132,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade-...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/search?_pageNumber=2&amp;_pageSize=2
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+[{&quot;itemId&quot;:26,&quot;name&quot;:&quot;Elysium&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-w...</div><div id='httpTab_30' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/search?_pageNumber=2&amp;_pageSize=2
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;recipe&quot; : &quot;ITEMS&quot;,
   &quot;criteria&quot; : [ {
     &quot;key&quot; : &quot;Trade.tradeId&quot;,
-    &quot;value&quot; : 83,
+    &quot;value&quot; : 13,
     &quot;operator&quot; : &quot;AND&quot;,
     &quot;matcher&quot; : &quot;EQUALS&quot;
   }, {
     &quot;key&quot; : &quot;TradeMembership.tradeMembershipId&quot;,
-    &quot;value&quot; : 136,
+    &quot;value&quot; : 28,
     &quot;operator&quot; : &quot;AND&quot;,
     &quot;matcher&quot; : &quot;NOT_EQUALS&quot;
   } ]
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 5
-          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 5
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
 [ {
+  &quot;itemId&quot; : 26,
   &quot;name&quot; : &quot;Elysium&quot;,
-  &quot;itemId&quot; : 132,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/132&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/26&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/26/files&quot;
   } ]
 }, {
+  &quot;itemId&quot; : 27,
   &quot;name&quot; : &quot;The Voyages of Marco Polo&quot;,
-  &quot;itemId&quot; : 133,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/27/files&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/133&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/27&quot;
   } ]
-} ]</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_30' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;recipe\&quot;:\&quot;ITEMS\&quot;,\&quot;criteria\&quot;:[{\&quot;key\&quot;:\&quot;Trade.tradeId\&quot;,\&quot;value\&quot;:83,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;EQUALS\&quot;},{\&quot;key\&quot;:\&quot;TradeMembership.tradeMembershipId\&quot;,\&quot;value\&quot;:136,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;NOT_EQUALS\&quot;}]}&quot; \
-http://localhost:8080/rest/v1/search?_pageNumber=2\&amp;_pageSize=2
+-d &quot;{\&quot;recipe\&quot;:\&quot;ITEMS\&quot;,\&quot;criteria\&quot;:[{\&quot;key\&quot;:\&quot;Trade.tradeId\&quot;,\&quot;value\&quot;:13,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;EQUALS\&quot;},{\&quot;key\&quot;:\&quot;TradeMembership.tradeMembershipId\&quot;,\&quot;value\&quot;:28,\&quot;operator\&quot;:\&quot;AND\&quot;,\&quot;matcher\&quot;:\&quot;NOT_EQUALS\&quot;}]}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/search?_pageNumber=2\&amp;_pageSize=2
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 5
-          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-          Link: &lt;http://localhost:8080/rest/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 5
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/search?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/search?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
 [ {
+  &quot;itemId&quot; : 26,
   &quot;name&quot; : &quot;Elysium&quot;,
-  &quot;itemId&quot; : 132,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/132&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/26&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/26/files&quot;
   } ]
 }, {
+  &quot;itemId&quot; : 27,
   &quot;name&quot; : &quot;The Voyages of Marco Polo&quot;,
-  &quot;itemId&quot; : 133,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/27/files&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/135/items/133&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/27/items/27&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_29', "summaryTab_29");</script>
+</div><script>openTabById('summaryTabLink_30', "summaryTab_30");</script>
 </body>
 </html>

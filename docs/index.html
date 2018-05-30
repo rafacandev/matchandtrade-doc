@@ -19,32 +19,36 @@ See <a href='https://github.com/rafasantos/matchandtrade-web-api'>matchandtrade-
 
 <p>Match And Trade provides a powerful REST API which other applications may interact with.</p>
 
-<h2>Resources</h2>
+<h2>Endpoints</h2>
 Here is the list of all endpoints available through the REST API.
 
 <ul>
 	<li><code><a href='authenticate.html'>authenticate</a></code></li>
 	<li><code><a href='authentications.html'>authentications</a></code></li>
-	<li><code><a href='offers.html'>offers</a></code></li>
+	<li><code><a href='files.html'>files</a></code></li>
 	<li><code><a href='search.html'>search</a></code></li>
 	<li><code><a href='trades.html'>trades</a></code></li>
 	<li><code><a href='trade-results.html'>trades/{tradeId}/trades-results</a></code></li>
 	<li><code><a href='trade-memberships.html'>trade-memberships</a></code></li>
+	<li><code><a href='offers.html'>trade-memberships/{tradeMembershipId}/offers</a></code></li>
 	<li><code><a href='items.html'>trade-memberships/{tradeMembershipId}/items</a></code></li>
+	<li><code><a href='item-files.html'>trade-memberships/{tradeMembershipId}/items/{itemId}/files</a></code></li>
 	<li><code><a href='users.html'>users</a></code></li>
 </ul>
+
+<h4>Endpoints vs Resources</h4>
+<p>
+	Generally speaking, <i>resources</i> have consistent format and behavior whereas <i>endpoints</i> may vary in format and behavior.
+	<i>Resource</i> URLs are specialized <i>endpoints</i> which provides standard operations over a resource. Example: <i>resources</i> support HATEOAS, pagination and query parameters relevant to the given resource.
+	<i>Endpoint</i> URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: <a href="authenticate.html">authenticate</a>).
+</p>
+<p>
+	 See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
+</p>
 
 <h2>Use Cases</h2>
 <p>
 	Check out the <a href='use-cases.html'>Use Cases</a> page for typical usage with examples.
-</p>
-
-<h2>Endpoints vs Resources</h2>
-<p>
-	Generally speaking, <i>resources</i> have consistent format and behavior whereas <i>endpoints</i> may vary in format and behavior.
-	<i>Resource</i> URLs are a specialized <i>endpoints</i> which provides standard operations over a resource. Example: <i>resources</i> support HATEOAS, pagination and query parameters are relevant to the given resource.
-	
-	<i>Endpoint</i> URLs may not follow all constraints of resource URLs. Some may also perform actions (e.g.: <a href="authenticate.html">authenticate</a>). See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
 </p>
 
 <h2>HATEOAS</h2>
@@ -57,7 +61,7 @@ Here is the list of all endpoints available through the REST API.
 	Expanding resources (see <a href='https://developer.atlassian.com/confdev/confluence-server-rest-api/expansions-in-the-rest-api'>Atlassian API</a> for an example) is discouraged while multiple asynchronous calls are favored.
 </p>
 
-<h2>Pagination</h2>
+<h2><a id="pagination">Pagination</a></h2>
 <p>
 	REST clients should rely on the pagination information which is included in responses with multiple results. The pagination follows the <a href='https://www.w3.org/wiki/LinkHeader'>LinkHeader</a> specification along with <a href='http://www.rfc-editor.org/rfc/rfc5988.txt'>RFC5988</a>. It works similarly to <a href='https://developer.github.com/guides/traversing-with-pagination'>GitHub's pagination</a>.
 </p>
@@ -66,69 +70,70 @@ Here is the list of all endpoints available through the REST API.
 </p>
 
 <p>Example:<p>
-<div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
+<div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2&amp;_pageSize=2
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;incredible change - 78957&quot;,&quot;tradeId&quot;:3,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades?_pageNumber=2&amp;_pageSize=2
-Headers:  Authorization: 2180-8238-6917
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+[{&quot;name&quot;:&quot;Books in New York - 15277228806721173526652&quot;,&quot;tradeId&quot;:5,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_link...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2&amp;_pageSize=2
+Headers:       Authorization: 3904-3589-9538
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 64
-          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:11 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 7
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:00 GMT
 [ {
-  &quot;name&quot; : &quot;incredible change - 78957&quot;,
-  &quot;tradeId&quot; : 3,
+  &quot;name&quot; : &quot;Books in New York - 15277228806721173526652&quot;,
+  &quot;tradeId&quot; : 5,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/5&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;grandiose right - 62705&quot;,
+  &quot;name&quot; : &quot;Items with images - 1527721846975257596544&quot;,
   &quot;tradeId&quot; : 4,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
   } ]
 } ]</div><div id='curlTab_1' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2180-8238-6917&quot; \
+-H &quot;Authorization: 3904-3589-9538&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades?_pageNumber=2\&amp;_pageSize=2
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2\&amp;_pageSize=2
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 64
-          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-          Link: &lt;http://localhost:8080/rest/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:11 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 7
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:00 GMT
 [ {
-  &quot;name&quot; : &quot;incredible change - 78957&quot;,
-  &quot;tradeId&quot; : 3,
+  &quot;name&quot; : &quot;Books in New York - 15277228806721173526652&quot;,
+  &quot;tradeId&quot; : 5,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/5&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;grandiose right - 62705&quot;,
+  &quot;name&quot; : &quot;Items with images - 1527721846975257596544&quot;,
   &quot;tradeId&quot; : 4,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_1', "summaryTab_1");</script>

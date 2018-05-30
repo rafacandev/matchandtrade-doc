@@ -13,685 +13,720 @@ and finally generate the <a href='trade-results.html'>TradeResults</a>
 	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
 	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
 </p>
-<div class='tab'><button id='summaryTabLink_30' class='tablinks' onclick='openTab(event, "summaryTab_30")'>Summary</button><button id='httpTabLink_30' class='tablinks' onclick='openTab(event, "httpTab_30")'>HTTP</button><button id='curlTabLink_30' class='tablinks' onclick='openTab(event, "curlTab_30")'>curl</button></div><div id='summaryTab_30' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
-Response: HTTP/1.1 200 
-</div><div id='httpTab_30' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/authenticate
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+<div class='tab'><button id='summaryTabLink_31' class='tablinks' onclick='openTab(event, "summaryTab_31")'>Summary</button><button id='httpTabLink_31' class='tablinks' onclick='openTab(event, "httpTab_31")'>HTTP</button><button id='curlTabLink_31' class='tablinks' onclick='openTab(event, "curlTab_31")'>curl</button></div><div id='summaryTab_31' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+Response: HTTP/1.1 302 
+</div><div id='httpTab_31' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Authorization: 1892-2117-5225
-          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
-          Content-Length: 0
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-</div><div id='curlTab_30' class='tabcontent code'>-----  Request  -----
+Status:        HTTP/1.1 302 
+Headers:       Authorization: 3754-4207-6666
+               Set-Cookie: MTSESSION=42563DFFABF0D44717863AD7AB9DCA34; Path=/; HttpOnly
+               Content-Length: 0
+               Date: Wed, 30 May 2018 23:28:03 GMT
+</div><div id='curlTab_31' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/authenticate
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/authenticate
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Authorization: 1892-2117-5225
-          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
-          Content-Length: 0
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 302 
+Headers:       Authorization: 3754-4207-6666
+               Set-Cookie: MTSESSION=42563DFFABF0D44717863AD7AB9DCA34; Path=/; HttpOnly
+               Content-Length: 0
+               Date: Wed, 30 May 2018 23:28:03 GMT
 
-</div><script>openTabById('summaryTabLink_30', "summaryTab_30");</script>
+</div><script>openTabById('summaryTabLink_31', "summaryTab_31");</script>
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
 </p>
-<div class='tab'><button id='summaryTabLink_31' class='tablinks' onclick='openTab(event, "summaryTab_31")'>Summary</button><button id='httpTabLink_31' class='tablinks' onclick='openTab(event, "httpTab_31")'>HTTP</button><button id='curlTabLink_31' class='tablinks' onclick='openTab(event, "curlTab_31")'>curl</button></div><div id='summaryTab_31' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
+<div class='tab'><button id='summaryTabLink_32' class='tablinks' onclick='openTab(event, "summaryTab_32")'>Summary</button><button id='httpTabLink_32' class='tablinks' onclick='openTab(event, "httpTab_32")'>HTTP</button><button id='curlTabLink_32' class='tablinks' onclick='openTab(event, "curlTab_32")'>curl</button></div><div id='summaryTab_32' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
 Response: HTTP/1.1 200 
-{&quot;userId&quot;:118,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_31' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/authentications/
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;userId&quot;:17,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-web-api/v1/authenti...</div><div id='httpTab_32' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
 {
-  &quot;userId&quot; : 118,
+  &quot;userId&quot; : 17,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
-}</div><div id='curlTab_31' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_32' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/authentications/
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/authentications/
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
 {
-  &quot;userId&quot; : 118,
+  &quot;userId&quot; : 17,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_31', "summaryTab_31");</script>
+</div><script>openTabById('summaryTabLink_32', "summaryTab_32");</script>
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_32' class='tablinks' onclick='openTab(event, "summaryTab_32")'>Summary</button><button id='httpTabLink_32' class='tablinks' onclick='openTab(event, "httpTab_32")'>HTTP</button><button id='curlTabLink_32' class='tablinks' onclick='openTab(event, "curlTab_32")'>curl</button></div><div id='summaryTab_32' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trades/
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;}
+<div class='tab'><button id='summaryTabLink_33' class='tablinks' onclick='openTab(event, "summaryTab_33")'>Summary</button><button id='httpTabLink_33' class='tablinks' onclick='openTab(event, "httpTab_33")'>HTTP</button><button id='curlTabLink_33' class='tablinks' onclick='openTab(event, "curlTab_33")'>curl</button></div><div id='summaryTab_33' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trades/
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_32' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trades/
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;tradeId&quot;:14,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_...</div><div id='httpTab_33' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trades/
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
-}</div><div id='curlTab_32' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_33' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 15277228849651268119570\&quot;}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_32', "summaryTab_32");</script>
+</div><script>openTabById('summaryTabLink_33', "summaryTab_33");</script>
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-<div class='tab'><button id='summaryTabLink_33' class='tablinks' onclick='openTab(event, "summaryTab_33")'>Summary</button><button id='httpTabLink_33' class='tablinks' onclick='openTab(event, "httpTab_33")'>HTTP</button><button id='curlTabLink_33' class='tablinks' onclick='openTab(event, "curlTab_33")'>curl</button></div><div id='summaryTab_33' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trade-memberships?userId=118&amp;tradeId=84
+<div class='tab'><button id='summaryTabLink_34' class='tablinks' onclick='openTab(event, "summaryTab_34")'>Summary</button><button id='httpTabLink_34' class='tablinks' onclick='openTab(event, "httpTab_34")'>HTTP</button><button id='curlTabLink_34' class='tablinks' onclick='openTab(event, "curlTab_34")'>curl</button></div><div id='summaryTab_34' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=17&amp;tradeId=14
 Response: HTTP/1.1 200 
-[{&quot;tradeMembershipId&quot;:137,&quot;userId&quot;:118,&quot;tradeId&quot;:84,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;user&quot;,&quot;href&quot;:&quot;h...</div><div id='httpTab_33' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trade-memberships?userId=118&amp;tradeId=84
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+[{&quot;tradeMembershipId&quot;:29,&quot;userId&quot;:17,&quot;tradeId&quot;:14,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;htt...</div><div id='httpTab_34' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=17&amp;tradeId=14
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 1
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 [ {
-  &quot;tradeMembershipId&quot; : 137,
-  &quot;userId&quot; : 118,
-  &quot;tradeId&quot; : 84,
+  &quot;tradeMembershipId&quot; : 29,
+  &quot;userId&quot; : 17,
+  &quot;tradeId&quot; : 14,
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29&quot;
+  }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/118&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/17&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
-} ]</div><div id='curlTab_33' class='tabcontent code'>-----  Request  -----
+} ]</div><div id='curlTab_34' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trade-memberships?userId=118\&amp;tradeId=84
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=17\&amp;tradeId=14
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  X-Pagination-Total-Count: 1
-          Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       X-Pagination-Total-Count: 1
+               Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 [ {
-  &quot;tradeMembershipId&quot; : 137,
-  &quot;userId&quot; : 118,
-  &quot;tradeId&quot; : 84,
+  &quot;tradeMembershipId&quot; : 29,
+  &quot;userId&quot; : 17,
+  &quot;tradeId&quot; : 14,
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29&quot;
+  }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/118&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/17&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
 } ]
-</div><script>openTabById('summaryTabLink_33', "summaryTab_33");</script>
+</div><script>openTabById('summaryTabLink_34', "summaryTab_34");</script>
 
 <p>
   	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_34' class='tablinks' onclick='openTab(event, "summaryTab_34")'>Summary</button><button id='httpTabLink_34' class='tablinks' onclick='openTab(event, "httpTab_34")'>HTTP</button><button id='curlTabLink_34' class='tablinks' onclick='openTab(event, "curlTab_34")'>curl</button></div><div id='summaryTab_34' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/items/
+<div class='tab'><button id='summaryTabLink_35' class='tablinks' onclick='openTab(event, "summaryTab_35")'>Summary</button><button id='httpTabLink_35' class='tablinks' onclick='openTab(event, "httpTab_35")'>HTTP</button><button id='curlTabLink_35' class='tablinks' onclick='openTab(event, "curlTab_35")'>curl</button></div><div id='summaryTab_35' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
 {&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;,&quot;itemId&quot;:136,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:80...</div><div id='httpTab_34' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/137/items/
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;itemId&quot;:30,&quot;name&quot;:&quot;Pandemic Legacy: Season 1&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:808...</div><div id='httpTab_35' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 30,
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
-  &quot;itemId&quot; : 136,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/136&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/30&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/30/files&quot;
   } ]
-}</div><div id='curlTab_34' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_35' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Pandemic Legacy: Season 1\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/137/items/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 30,
   &quot;name&quot; : &quot;Pandemic Legacy: Season 1&quot;,
-  &quot;itemId&quot; : 136,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/136&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/30&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/30/files&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_34', "summaryTab_34");</script>
-<div class='tab'><button id='summaryTabLink_35' class='tablinks' onclick='openTab(event, "summaryTab_35")'>Summary</button><button id='httpTabLink_35' class='tablinks' onclick='openTab(event, "httpTab_35")'>HTTP</button><button id='curlTabLink_35' class='tablinks' onclick='openTab(event, "curlTab_35")'>curl</button></div><div id='summaryTab_35' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/items/
+</div><script>openTabById('summaryTabLink_35', "summaryTab_35");</script>
+<div class='tab'><button id='summaryTabLink_36' class='tablinks' onclick='openTab(event, "summaryTab_36")'>Summary</button><button id='httpTabLink_36' class='tablinks' onclick='openTab(event, "httpTab_36")'>HTTP</button><button id='curlTabLink_36' class='tablinks' onclick='openTab(event, "curlTab_36")'>curl</button></div><div id='summaryTab_36' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
 {&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;,&quot;itemId&quot;:137,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:80...</div><div id='httpTab_35' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/137/items/
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;itemId&quot;:31,&quot;name&quot;:&quot;Pandemic Legacy: Season 2&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:808...</div><div id='httpTab_36' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Pandemic Legacy: Season 2&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 31,
   &quot;name&quot; : &quot;Pandemic Legacy: Season 2&quot;,
-  &quot;itemId&quot; : 137,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/137&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/31&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/31/files&quot;
   } ]
-}</div><div id='curlTab_35' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_36' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Pandemic Legacy: Season 2\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/137/items/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 31,
   &quot;name&quot; : &quot;Pandemic Legacy: Season 2&quot;,
-  &quot;itemId&quot; : 137,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/137/items/137&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/31&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/items/31/files&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_35', "summaryTab_35");</script>
+</div><script>openTabById('summaryTabLink_36', "summaryTab_36");</script>
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
   	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
-<div class='tab'><button id='summaryTabLink_36' class='tablinks' onclick='openTab(event, "summaryTab_36")'>Summary</button><button id='httpTabLink_36' class='tablinks' onclick='openTab(event, "httpTab_36")'>HTTP</button><button id='curlTabLink_36' class='tablinks' onclick='openTab(event, "curlTab_36")'>curl</button></div><div id='summaryTab_36' class='tabcontent code'>Request:  GET http://localhost:8080/authenticate
-Response: HTTP/1.1 200 
-</div><div id='httpTab_36' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/authenticate
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+<div class='tab'><button id='summaryTabLink_37' class='tablinks' onclick='openTab(event, "summaryTab_37")'>Summary</button><button id='httpTabLink_37' class='tablinks' onclick='openTab(event, "httpTab_37")'>HTTP</button><button id='curlTabLink_37' class='tablinks' onclick='openTab(event, "curlTab_37")'>curl</button></div><div id='summaryTab_37' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+Response: HTTP/1.1 302 
+</div><div id='httpTab_37' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Authorization: 1892-2117-5225
-          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
-          Content-Length: 0
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-</div><div id='curlTab_36' class='tabcontent code'>-----  Request  -----
+Status:        HTTP/1.1 302 
+Headers:       Authorization: 3754-4207-6666
+               Set-Cookie: MTSESSION=42563DFFABF0D44717863AD7AB9DCA34; Path=/; HttpOnly
+               Content-Length: 0
+               Date: Wed, 30 May 2018 23:28:03 GMT
+</div><div id='curlTab_37' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/authenticate
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/authenticate
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Authorization: 1892-2117-5225
-          Set-Cookie: JSESSIONID=B4D2D3391FB6B4DCEE3BBB95F3D9FEE9; Path=/; HttpOnly
-          Content-Length: 0
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 302 
+Headers:       Authorization: 3754-4207-6666
+               Set-Cookie: MTSESSION=42563DFFABF0D44717863AD7AB9DCA34; Path=/; HttpOnly
+               Content-Length: 0
+               Date: Wed, 30 May 2018 23:28:03 GMT
 
-</div><script>openTabById('summaryTabLink_36', "summaryTab_36");</script>
+</div><script>openTabById('summaryTabLink_37', "summaryTab_37");</script>
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
 	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
-<div class='tab'><button id='summaryTabLink_37' class='tablinks' onclick='openTab(event, "summaryTab_37")'>Summary</button><button id='httpTabLink_37' class='tablinks' onclick='openTab(event, "httpTab_37")'>HTTP</button><button id='curlTabLink_37' class='tablinks' onclick='openTab(event, "curlTab_37")'>curl</button></div><div id='summaryTab_37' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
+<div class='tab'><button id='summaryTabLink_38' class='tablinks' onclick='openTab(event, "summaryTab_38")'>Summary</button><button id='httpTabLink_38' class='tablinks' onclick='openTab(event, "httpTab_38")'>HTTP</button><button id='curlTabLink_38' class='tablinks' onclick='openTab(event, "curlTab_38")'>curl</button></div><div id='summaryTab_38' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
 Response: HTTP/1.1 200 
-{&quot;userId&quot;:120,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_37' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/authentications/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;userId&quot;:19,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-web-api/v1/authenti...</div><div id='httpTab_38' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;userId&quot; : 120,
+  &quot;userId&quot; : 19,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
-  } ]
-}</div><div id='curlTab_37' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 8721-8552-2994&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/authentications/
-
------  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-{
-  &quot;userId&quot; : 120,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
-  } ]
-}
-</div><script>openTabById('summaryTabLink_37', "summaryTab_37");</script>
-
-<p>
-	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
-</p>
-<div class='tab'><button id='summaryTabLink_38' class='tablinks' onclick='openTab(event, "summaryTab_38")'>Summary</button><button id='httpTabLink_38' class='tablinks' onclick='openTab(event, "httpTab_38")'>HTTP</button><button id='curlTabLink_38' class='tablinks' onclick='openTab(event, "curlTab_38")'>curl</button></div><div id='summaryTab_38' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/
-{&quot;userId&quot;:120,&quot;tradeId&quot;:84}
-Response: HTTP/1.1 201 
-{&quot;tradeMembershipId&quot;:138,&quot;userId&quot;:120,&quot;tradeId&quot;:84,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;trade&quot;,&quot;href&quot;:&quot;...</div><div id='httpTab_38' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
-{
-  &quot;userId&quot; : 120,
-  &quot;tradeId&quot; : 84
-}
-
------  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-{
-  &quot;tradeMembershipId&quot; : 138,
-  &quot;userId&quot; : 120,
-  &quot;tradeId&quot; : 84,
-  &quot;type&quot; : &quot;MEMBER&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
-  }, {
-    &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/120&quot;
-  }, {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
 }</div><div id='curlTab_38' class='tabcontent code'>-----  Request  -----
-curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
+curl -v -X GET \
+-H &quot;Authorization: 9754-8356-266&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;userId\&quot;:120,\&quot;tradeId\&quot;:84}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/authentications/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;tradeMembershipId&quot; : 138,
-  &quot;userId&quot; : 120,
-  &quot;tradeId&quot; : 84,
-  &quot;type&quot; : &quot;MEMBER&quot;,
+  &quot;userId&quot; : 19,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
-  }, {
-    &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/users/120&quot;
-  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_38', "summaryTab_38");</script>
 
 <p>
+	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='trade-memberships.html'>TradeMemberhip</a> endpoint.
+</p>
+<div class='tab'><button id='summaryTabLink_39' class='tablinks' onclick='openTab(event, "summaryTab_39")'>Summary</button><button id='httpTabLink_39' class='tablinks' onclick='openTab(event, "httpTab_39")'>HTTP</button><button id='curlTabLink_39' class='tablinks' onclick='openTab(event, "curlTab_39")'>curl</button></div><div id='summaryTab_39' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+{&quot;userId&quot;:19,&quot;tradeId&quot;:14}
+Response: HTTP/1.1 201 
+{&quot;tradeMembershipId&quot;:30,&quot;userId&quot;:19,&quot;tradeId&quot;:14,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;htt...</div><div id='httpTab_39' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
+{
+  &quot;userId&quot; : 19,
+  &quot;tradeId&quot; : 14
+}
+
+-----  Response  -----
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;tradeMembershipId&quot; : 30,
+  &quot;userId&quot; : 19,
+  &quot;tradeId&quot; : 14,
+  &quot;type&quot; : &quot;MEMBER&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30&quot;
+  }, {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/19&quot;
+  }, {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
+  } ]
+}</div><div id='curlTab_39' class='tabcontent code'>-----  Request  -----
+curl -v -X POST \
+-H &quot;Authorization: 9754-8356-266&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;userId\&quot;:19,\&quot;tradeId\&quot;:14}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+
+-----  Response  -----
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;tradeMembershipId&quot; : 30,
+  &quot;userId&quot; : 19,
+  &quot;tradeId&quot; : 14,
+  &quot;type&quot; : &quot;MEMBER&quot;,
+  &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30&quot;
+  }, {
+    &quot;rel&quot; : &quot;user&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/19&quot;
+  }, {
+    &quot;rel&quot; : &quot;trade&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
+  } ]
+}
+</div><script>openTabById('summaryTabLink_39', "summaryTab_39");</script>
+
+<p>
   	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-<div class='tab'><button id='summaryTabLink_39' class='tablinks' onclick='openTab(event, "summaryTab_39")'>Summary</button><button id='httpTabLink_39' class='tablinks' onclick='openTab(event, "httpTab_39")'>HTTP</button><button id='curlTabLink_39' class='tablinks' onclick='openTab(event, "curlTab_39")'>curl</button></div><div id='summaryTab_39' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+<div class='tab'><button id='summaryTabLink_40' class='tablinks' onclick='openTab(event, "summaryTab_40")'>Summary</button><button id='httpTabLink_40' class='tablinks' onclick='openTab(event, "httpTab_40")'>HTTP</button><button id='curlTabLink_40' class='tablinks' onclick='openTab(event, "curlTab_40")'>curl</button></div><div id='summaryTab_40' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 {&quot;name&quot;:&quot;Stone Age&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Stone Age&quot;,&quot;itemId&quot;:138,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trade...</div><div id='httpTab_39' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/138/items/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;itemId&quot;:32,&quot;name&quot;:&quot;Stone Age&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-...</div><div id='httpTab_40' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Stone Age&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 32,
   &quot;name&quot; : &quot;Stone Age&quot;,
-  &quot;itemId&quot; : 138,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/138&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/32&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/32/files&quot;
   } ]
-}</div><div id='curlTab_39' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_40' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
+-H &quot;Authorization: 9754-8356-266&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Stone Age\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/138/items/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 32,
   &quot;name&quot; : &quot;Stone Age&quot;,
-  &quot;itemId&quot; : 138,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/138&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/32&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/32/files&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_39', "summaryTab_39");</script>
-<div class='tab'><button id='summaryTabLink_40' class='tablinks' onclick='openTab(event, "summaryTab_40")'>Summary</button><button id='httpTabLink_40' class='tablinks' onclick='openTab(event, "httpTab_40")'>HTTP</button><button id='curlTabLink_40' class='tablinks' onclick='openTab(event, "curlTab_40")'>curl</button></div><div id='summaryTab_40' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+</div><script>openTabById('summaryTabLink_40', "summaryTab_40");</script>
+<div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 {&quot;name&quot;:&quot;Carcassonne&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Carcassonne&quot;,&quot;itemId&quot;:139,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/tra...</div><div id='httpTab_40' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/138/items/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;itemId&quot;:33,&quot;name&quot;:&quot;Carcassonne&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrad...</div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;Carcassonne&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 33,
   &quot;name&quot; : &quot;Carcassonne&quot;,
-  &quot;itemId&quot; : 139,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/139&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/33&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/33/files&quot;
   } ]
-}</div><div id='curlTab_40' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
+-H &quot;Authorization: 9754-8356-266&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;Carcassonne\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/138/items/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 33,
   &quot;name&quot; : &quot;Carcassonne&quot;,
-  &quot;itemId&quot; : 139,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/139&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/33&quot;
+  }, {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/33/files&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_40', "summaryTab_40");</script>
-<div class='tab'><button id='summaryTabLink_41' class='tablinks' onclick='openTab(event, "summaryTab_41")'>Summary</button><button id='httpTabLink_41' class='tablinks' onclick='openTab(event, "httpTab_41")'>HTTP</button><button id='curlTabLink_41' class='tablinks' onclick='openTab(event, "curlTab_41")'>curl</button></div><div id='summaryTab_41' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/items/
+</div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
+<div class='tab'><button id='summaryTabLink_42' class='tablinks' onclick='openTab(event, "summaryTab_42")'>Summary</button><button id='httpTabLink_42' class='tablinks' onclick='openTab(event, "httpTab_42")'>HTTP</button><button id='curlTabLink_42' class='tablinks' onclick='openTab(event, "curlTab_42")'>curl</button></div><div id='summaryTab_42' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 {&quot;name&quot;:&quot;No Thanks!&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;No Thanks!&quot;,&quot;itemId&quot;:140,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/trad...</div><div id='httpTab_41' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/138/items/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;itemId&quot;:34,&quot;name&quot;:&quot;No Thanks!&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;files&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrad...</div><div id='httpTab_42' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
   &quot;name&quot; : &quot;No Thanks!&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 34,
   &quot;name&quot; : &quot;No Thanks!&quot;,
-  &quot;itemId&quot; : 140,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/34/files&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/140&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/34&quot;
   } ]
-}</div><div id='curlTab_41' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_42' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
+-H &quot;Authorization: 9754-8356-266&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;name\&quot;:\&quot;No Thanks!\&quot;}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/138/items/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
+  &quot;itemId&quot; : 34,
   &quot;name&quot; : &quot;No Thanks!&quot;,
-  &quot;itemId&quot; : 140,
   &quot;_links&quot; : [ {
+    &quot;rel&quot; : &quot;files&quot;,
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/34/files&quot;
+  }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trade-memberships/138/items/140&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/items/34&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_41', "summaryTab_41");</script>
+</div><script>openTabById('summaryTabLink_42', "summaryTab_42");</script>
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
 	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
-<div class='tab'><button id='summaryTabLink_42' class='tablinks' onclick='openTab(event, "summaryTab_42")'>Summary</button><button id='httpTabLink_42' class='tablinks' onclick='openTab(event, "httpTab_42")'>HTTP</button><button id='curlTabLink_42' class='tablinks' onclick='openTab(event, "curlTab_42")'>curl</button></div><div id='summaryTab_42' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/84
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
+<div class='tab'><button id='summaryTabLink_43' class='tablinks' onclick='openTab(event, "summaryTab_43")'>Summary</button><button id='httpTabLink_43' class='tablinks' onclick='openTab(event, "httpTab_43")'>HTTP</button><button id='curlTabLink_43' class='tablinks' onclick='openTab(event, "curlTab_43")'>curl</button></div><div id='summaryTab_43' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-web-api/v1/trades/14
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_lin...</div><div id='httpTab_42' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/rest/v1/trades/84
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;tradeId&quot;:14,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_43' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/matchandtrade-web-api/v1/trades/14
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
-}</div><div id='curlTab_42' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_43' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/84
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 15277228849651268119570\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/14
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_42', "summaryTab_42");</script>
+</div><script>openTabById('summaryTabLink_43', "summaryTab_43");</script>
 
 <p>
 	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
 	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
 	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
-<div class='tab'><button id='summaryTabLink_43' class='tablinks' onclick='openTab(event, "summaryTab_43")'>Summary</button><button id='httpTabLink_43' class='tablinks' onclick='openTab(event, "httpTab_43")'>HTTP</button><button id='curlTabLink_43' class='tablinks' onclick='openTab(event, "curlTab_43")'>curl</button></div><div id='summaryTab_43' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/137/offers/
-{&quot;offeredItemId&quot;:136,&quot;wantedItemId&quot;:138}
+<div class='tab'><button id='summaryTabLink_44' class='tablinks' onclick='openTab(event, "summaryTab_44")'>Summary</button><button id='httpTabLink_44' class='tablinks' onclick='openTab(event, "httpTab_44")'>HTTP</button><button id='curlTabLink_44' class='tablinks' onclick='openTab(event, "curlTab_44")'>curl</button></div><div id='summaryTab_44' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/offers/
+{&quot;offeredItemId&quot;:30,&quot;wantedItemId&quot;:32}
 Response: HTTP/1.1 201 
-{&quot;offerId&quot;:96,&quot;offeredItemId&quot;:136,&quot;wantedItemId&quot;:138}</div><div id='httpTab_43' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/137/offers/
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;offerId&quot;:21,&quot;offeredItemId&quot;:30,&quot;wantedItemId&quot;:32}</div><div id='httpTab_44' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/offers/
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
-  &quot;offeredItemId&quot; : 136,
-  &quot;wantedItemId&quot; : 138
+  &quot;offeredItemId&quot; : 30,
+  &quot;wantedItemId&quot; : 32
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;offerId&quot; : 96,
-  &quot;offeredItemId&quot; : 136,
-  &quot;wantedItemId&quot; : 138
-}</div><div id='curlTab_43' class='tabcontent code'>-----  Request  -----
+  &quot;offerId&quot; : 21,
+  &quot;offeredItemId&quot; : 30,
+  &quot;wantedItemId&quot; : 32
+}</div><div id='curlTab_44' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;offeredItemId\&quot;:136,\&quot;wantedItemId\&quot;:138}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/137/offers/
+-d &quot;{\&quot;offeredItemId\&quot;:30,\&quot;wantedItemId\&quot;:32}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/29/offers/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;offerId&quot; : 96,
-  &quot;offeredItemId&quot; : 136,
-  &quot;wantedItemId&quot; : 138
+  &quot;offerId&quot; : 21,
+  &quot;offeredItemId&quot; : 30,
+  &quot;wantedItemId&quot; : 32
 }
-</div><script>openTabById('summaryTabLink_43', "summaryTab_43");</script>
+</div><script>openTabById('summaryTabLink_44', "summaryTab_44");</script>
 
 <p>
 	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
@@ -699,141 +734,141 @@ Headers:  Content-Type: application/json;charset=UTF-8
 	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
 	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
-<div class='tab'><button id='summaryTabLink_44' class='tablinks' onclick='openTab(event, "summaryTab_44")'>Summary</button><button id='httpTabLink_44' class='tablinks' onclick='openTab(event, "httpTab_44")'>HTTP</button><button id='curlTabLink_44' class='tablinks' onclick='openTab(event, "curlTab_44")'>curl</button></div><div id='summaryTab_44' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
-{&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:136}
+<div class='tab'><button id='summaryTabLink_45' class='tablinks' onclick='openTab(event, "summaryTab_45")'>Summary</button><button id='httpTabLink_45' class='tablinks' onclick='openTab(event, "httpTab_45")'>HTTP</button><button id='curlTabLink_45' class='tablinks' onclick='openTab(event, "curlTab_45")'>curl</button></div><div id='summaryTab_45' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
+{&quot;offeredItemId&quot;:32,&quot;wantedItemId&quot;:30}
 Response: HTTP/1.1 201 
-{&quot;offerId&quot;:97,&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:136}</div><div id='httpTab_44' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;offerId&quot;:22,&quot;offeredItemId&quot;:32,&quot;wantedItemId&quot;:30}</div><div id='httpTab_45' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 136
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 30
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;offerId&quot; : 97,
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 136
-}</div><div id='curlTab_44' class='tabcontent code'>-----  Request  -----
-curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;offeredItemId\&quot;:138,\&quot;wantedItemId\&quot;:136}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/138/offers/
-
------  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-{
-  &quot;offerId&quot; : 97,
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 136
-}
-</div><script>openTabById('summaryTabLink_44', "summaryTab_44");</script>
-<div class='tab'><button id='summaryTabLink_45' class='tablinks' onclick='openTab(event, "summaryTab_45")'>Summary</button><button id='httpTabLink_45' class='tablinks' onclick='openTab(event, "httpTab_45")'>HTTP</button><button id='curlTabLink_45' class='tablinks' onclick='openTab(event, "curlTab_45")'>curl</button></div><div id='summaryTab_45' class='tabcontent code'>Request:  POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
-{&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:137}
-Response: HTTP/1.1 201 
-{&quot;offerId&quot;:98,&quot;offeredItemId&quot;:138,&quot;wantedItemId&quot;:137}</div><div id='httpTab_45' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/rest/v1/trade-memberships/138/offers/
-Headers:  Authorization: 8721-8552-2994
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
-{
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 137
-}
-
------  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-{
-  &quot;offerId&quot; : 98,
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 137
+  &quot;offerId&quot; : 22,
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 30
 }</div><div id='curlTab_45' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 8721-8552-2994&quot; \
+-H &quot;Authorization: 9754-8356-266&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;offeredItemId\&quot;:138,\&quot;wantedItemId\&quot;:137}&quot; \
-http://localhost:8080/rest/v1/trade-memberships/138/offers/
+-d &quot;{\&quot;offeredItemId\&quot;:32,\&quot;wantedItemId\&quot;:30}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
 
 -----  Response  -----
-Status:   HTTP/1.1 201 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;offerId&quot; : 98,
-  &quot;offeredItemId&quot; : 138,
-  &quot;wantedItemId&quot; : 137
+  &quot;offerId&quot; : 22,
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 30
 }
 </div><script>openTabById('summaryTabLink_45', "summaryTab_45");</script>
+<div class='tab'><button id='summaryTabLink_46' class='tablinks' onclick='openTab(event, "summaryTab_46")'>Summary</button><button id='httpTabLink_46' class='tablinks' onclick='openTab(event, "httpTab_46")'>HTTP</button><button id='curlTabLink_46' class='tablinks' onclick='openTab(event, "curlTab_46")'>curl</button></div><div id='summaryTab_46' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
+{&quot;offeredItemId&quot;:32,&quot;wantedItemId&quot;:31}
+Response: HTTP/1.1 201 
+{&quot;offerId&quot;:23,&quot;offeredItemId&quot;:32,&quot;wantedItemId&quot;:31}</div><div id='httpTab_46' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
+Headers:       Authorization: 9754-8356-266
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
+{
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 31
+}
+
+-----  Response  -----
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;offerId&quot; : 23,
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 31
+}</div><div id='curlTab_46' class='tabcontent code'>-----  Request  -----
+curl -v -X POST \
+-H &quot;Authorization: 9754-8356-266&quot; \
+-H &quot;Accept: */*&quot; \
+-H &quot;Content-Type: application/json; charset=UTF-8&quot; \
+-d &quot;{\&quot;offeredItemId\&quot;:32,\&quot;wantedItemId\&quot;:31}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/30/offers/
+
+-----  Response  -----
+Status:        HTTP/1.1 201 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;offerId&quot; : 23,
+  &quot;offeredItemId&quot; : 32,
+  &quot;wantedItemId&quot; : 31
+}
+</div><script>openTabById('summaryTabLink_46', "summaryTab_46");</script>
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>GENERATE_TRADES</span>.
 </p>
-<div class='tab'><button id='summaryTabLink_46' class='tablinks' onclick='openTab(event, "summaryTab_46")'>Summary</button><button id='httpTabLink_46' class='tablinks' onclick='openTab(event, "httpTab_46")'>HTTP</button><button id='curlTabLink_46' class='tablinks' onclick='openTab(event, "curlTab_46")'>curl</button></div><div id='summaryTab_46' class='tabcontent code'>Request:  PUT http://localhost:8080/rest/v1/trades/84
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;}
+<div class='tab'><button id='summaryTabLink_47' class='tablinks' onclick='openTab(event, "summaryTab_47")'>Summary</button><button id='httpTabLink_47' class='tablinks' onclick='openTab(event, "httpTab_47")'>HTTP</button><button id='curlTabLink_47' class='tablinks' onclick='openTab(event, "curlTab_47")'>curl</button></div><div id='summaryTab_47' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-web-api/v1/trades/14
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Ottawa - 1519697774891784019977&quot;,&quot;tradeId&quot;:84,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;,&quot;_l...</div><div id='httpTab_46' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/rest/v1/trades/84
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;name&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;tradeId&quot;:14,&quot;state&quot;:&quot;GENERATE_RESULTS&quot;,&quot;_...</div><div id='httpTab_47' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/matchandtrade-web-api/v1/trades/14
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
   &quot;state&quot; : &quot;GENERATE_RESULTS&quot;
 }
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;GENERATE_RESULTS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
-}</div><div id='curlTab_46' class='tabcontent code'>-----  Request  -----
+}</div><div id='curlTab_47' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 1519697774891784019977\&quot;,\&quot;state\&quot;:\&quot;GENERATE_RESULTS\&quot;}&quot; \
-http://localhost:8080/rest/v1/trades/84
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Ottawa - 15277228849651268119570\&quot;,\&quot;state\&quot;:\&quot;GENERATE_RESULTS\&quot;}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/14
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
 {
-  &quot;name&quot; : &quot;Board games in Ottawa - 1519697774891784019977&quot;,
-  &quot;tradeId&quot; : 84,
+  &quot;name&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;tradeId&quot; : 14,
   &quot;state&quot; : &quot;GENERATE_RESULTS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/trades/84&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/14&quot;
   } ]
 }
-</div><script>openTabById('summaryTabLink_46', "summaryTab_46");</script>
+</div><script>openTabById('summaryTabLink_47', "summaryTab_47");</script>
 
 <p>
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
@@ -845,60 +880,91 @@ Headers:  Content-Type: application/json;charset=UTF-8
 
 	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
 </p>
-<div class='tab'><button id='summaryTabLink_47' class='tablinks' onclick='openTab(event, "summaryTab_47")'>Summary</button><button id='httpTabLink_47' class='tablinks' onclick='openTab(event, "httpTab_47")'>HTTP</button><button id='curlTabLink_47' class='tablinks' onclick='openTab(event, "curlTab_47")'>curl</button></div><div id='summaryTab_47' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/84/results
+<div class='tab'><button id='summaryTabLink_48' class='tablinks' onclick='openTab(event, "summaryTab_48")'>Summary</button><button id='httpTabLink_48' class='tablinks' onclick='openTab(event, "httpTab_48")'>HTTP</button><button id='curlTabLink_48' class='tablinks' onclick='openTab(event, "curlTab_48")'>curl</button></div><div id='summaryTab_48' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/14/results
 Response: HTTP/1.1 200 
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receivi...</div><div id='httpTab_47' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades/84/results
-Headers:  Authorization: 2891-5563-9069
-          Accept: */*
-          Content-Type: text/plain; charset=ISO-8859-1
+{&quot;tradeId&quot;:14,&quot;tradeName&quot;:&quot;Board games in Ottawa - 15277228849651268119570&quot;,&quot;totalOfItems&quot;:5,&quot;totalO...</div><div id='httpTab_48' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades/14/results
+Headers:       Authorization: 4786-400-1484
+               Accept: */*
+               Content-Type: text/plain; charset=ISO-8859-1
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 826
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
-118,Olavo,136,Pandemic Legacy: Season 1,:RECEIVES:,120,Maria,138,Stone Age,:SENDS:,120,Maria
-120,Maria,138,Stone Age,:RECEIVES:,118,Olavo,136,Pandemic Legacy: Season 1,:SENDS:,118,Olavo
-
-# --------------------------------
-# Summary of Trade [84 : Board games in Ottawa - 1519697774891784019977]
-# Total of items: 5
-# Total of traded items: 2
-# Total of items not traded: 3
-# --------------------------------
-# 
-# Below is an example to help you understand the results:
-# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
-# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
-</div><div id='curlTab_47' class='tabcontent code'>-----  Request  -----
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;tradeId&quot; : 14,
+  &quot;tradeName&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;totalOfItems&quot; : 5,
+  &quot;totalOfTradedItems&quot; : 2,
+  &quot;totalOfNotTradedItems&quot; : 3,
+  &quot;tradedItems&quot; : [ {
+    &quot;userId&quot; : 17,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 30,
+    &quot;itemName&quot; : &quot;Pandemic Legacy: Season 1&quot;,
+    &quot;receivingUserId&quot; : 19,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 32,
+    &quot;receivingItemName&quot; : &quot;Stone Age&quot;,
+    &quot;sendingUserId&quot; : 19,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  }, {
+    &quot;userId&quot; : 19,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 32,
+    &quot;itemName&quot; : &quot;Stone Age&quot;,
+    &quot;receivingUserId&quot; : 17,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 30,
+    &quot;receivingItemName&quot; : &quot;Pandemic Legacy: Season 1&quot;,
+    &quot;sendingUserId&quot; : 17,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  } ]
+}</div><div id='curlTab_48' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2891-5563-9069&quot; \
+-H &quot;Authorization: 4786-400-1484&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: text/plain; charset=ISO-8859-1&quot; \
-http://localhost:8080/rest/v1/trades/84/results
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/14/results
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 826
-          Date: Tue, 27 Feb 2018 02:16:14 GMT
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
-118,Olavo,136,Pandemic Legacy: Season 1,:RECEIVES:,120,Maria,138,Stone Age,:SENDS:,120,Maria
-120,Maria,138,Stone Age,:RECEIVES:,118,Olavo,136,Pandemic Legacy: Season 1,:SENDS:,118,Olavo
-
-# --------------------------------
-# Summary of Trade [84 : Board games in Ottawa - 1519697774891784019977]
-# Total of items: 5
-# Total of traded items: 2
-# Total of items not traded: 3
-# --------------------------------
-# 
-# Below is an example to help you understand the results:
-# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
-# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
-
-</div><script>openTabById('summaryTabLink_47', "summaryTab_47");</script></body>
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:04 GMT
+{
+  &quot;tradeId&quot; : 14,
+  &quot;tradeName&quot; : &quot;Board games in Ottawa - 15277228849651268119570&quot;,
+  &quot;totalOfItems&quot; : 5,
+  &quot;totalOfTradedItems&quot; : 2,
+  &quot;totalOfNotTradedItems&quot; : 3,
+  &quot;tradedItems&quot; : [ {
+    &quot;userId&quot; : 17,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 30,
+    &quot;itemName&quot; : &quot;Pandemic Legacy: Season 1&quot;,
+    &quot;receivingUserId&quot; : 19,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 32,
+    &quot;receivingItemName&quot; : &quot;Stone Age&quot;,
+    &quot;sendingUserId&quot; : 19,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  }, {
+    &quot;userId&quot; : 19,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 32,
+    &quot;itemName&quot; : &quot;Stone Age&quot;,
+    &quot;receivingUserId&quot; : 17,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 30,
+    &quot;receivingItemName&quot; : &quot;Pandemic Legacy: Season 1&quot;,
+    &quot;sendingUserId&quot; : 17,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  } ]
+}
+</div><script>openTabById('summaryTabLink_48', "summaryTab_48");</script></body>
 </html>

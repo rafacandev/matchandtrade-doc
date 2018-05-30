@@ -45,11 +45,11 @@
 	</tr>
 	<tr>
 		<td>_pageNumber</td>
-		<td>See <a href='index.html'>pagination</a></td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
 	</tr>
 	<tr>
 		<td>_pageSize</td>
-		<td>See <a href='index.html'>pagination</a></td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
 	</tr>
 </table>
 
@@ -57,67 +57,158 @@
 <h3>Examples</h3>
 For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
 <i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
-<div class='tab'><button id='summaryTabLink_28' class='tablinks' onclick='openTab(event, "summaryTab_28")'>Summary</button><button id='httpTabLink_28' class='tablinks' onclick='openTab(event, "httpTab_28")'>HTTP</button><button id='curlTabLink_28' class='tablinks' onclick='openTab(event, "curlTab_28")'>curl</button></div><div id='summaryTab_28' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/trades/82/results
+<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
 Response: HTTP/1.1 200 
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receivi...</div><div id='httpTab_28' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/trades/82/results
-Headers:  Authorization: 4247-8797-5482
-          Accept: */*
-          Content-Type: application/json; charset=UTF-8
+{&quot;tradeId&quot;:12,&quot;tradeName&quot;:&quot;Board games in Montreal - 1527722883620796987074&quot;,&quot;totalOfItems&quot;:6,&quot;total...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
+Headers:       Authorization: 1305-5345-9927
+               Accept: */*
+               Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 1030
-          Date: Tue, 27 Feb 2018 02:16:13 GMT
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
-114,Olavo,124,Apples to Apples,:RECEIVES:,115,Maria,128,Caylus,:SENDS:,116,Xavier
-114,Olavo,125,Bora Bora,:RECEIVES:,115,Maria,127,Blokus,:SENDS:,115,Maria
-115,Maria,127,Blokus,:RECEIVES:,114,Olavo,125,Bora Bora,:SENDS:,114,Olavo
-115,Maria,128,Caylus,:RECEIVES:,116,Xavier,129,Agricola,:SENDS:,114,Olavo
-116,Xavier,129,Agricola,:RECEIVES:,114,Olavo,124,Apples to Apples,:SENDS:,115,Maria
-
-# --------------------------------
-# Summary of Trade [82 : Board games in Montreal - 1519697773861757920592]
-# Total of items: 6
-# Total of traded items: 5
-# Total of items not traded: 1
-# --------------------------------
-# 
-# Below is an example to help you understand the results:
-# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
-# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
-</div><div id='curlTab_28' class='tabcontent code'>-----  Request  -----
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
+{
+  &quot;tradeId&quot; : 12,
+  &quot;tradeName&quot; : &quot;Board games in Montreal - 1527722883620796987074&quot;,
+  &quot;totalOfItems&quot; : 6,
+  &quot;totalOfTradedItems&quot; : 5,
+  &quot;totalOfNotTradedItems&quot; : 1,
+  &quot;tradedItems&quot; : [ {
+    &quot;userId&quot; : 13,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 18,
+    &quot;itemName&quot; : &quot;Apples to Apples&quot;,
+    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 22,
+    &quot;receivingItemName&quot; : &quot;Caylus&quot;,
+    &quot;sendingUserId&quot; : 15,
+    &quot;sendingUserName&quot; : &quot;Xavier&quot;
+  }, {
+    &quot;userId&quot; : 13,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 19,
+    &quot;itemName&quot; : &quot;Bora Bora&quot;,
+    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 21,
+    &quot;receivingItemName&quot; : &quot;Blokus&quot;,
+    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  }, {
+    &quot;userId&quot; : 14,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 21,
+    &quot;itemName&quot; : &quot;Blokus&quot;,
+    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 19,
+    &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
+    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  }, {
+    &quot;userId&quot; : 14,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 22,
+    &quot;itemName&quot; : &quot;Caylus&quot;,
+    &quot;receivingUserId&quot; : 15,
+    &quot;receivingUserName&quot; : &quot;Xavier&quot;,
+    &quot;receivingItemId&quot; : 23,
+    &quot;receivingItemName&quot; : &quot;Agricola&quot;,
+    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  }, {
+    &quot;userId&quot; : 15,
+    &quot;userName&quot; : &quot;Xavier&quot;,
+    &quot;itemId&quot; : 23,
+    &quot;itemName&quot; : &quot;Agricola&quot;,
+    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 18,
+    &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
+    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  } ]
+}</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 4247-8797-5482&quot; \
+-H &quot;Authorization: 1305-5345-9927&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
-http://localhost:8080/rest/v1/trades/82/results
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: text/csv;charset=UTF-8
-          Content-Length: 1030
-          Date: Tue, 27 Feb 2018 02:16:13 GMT
-user_id,user_name,item_id,item_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_item_id,receiving_item_name,sends_to,sending_to_user_id,sending_to_user_name
-114,Olavo,124,Apples to Apples,:RECEIVES:,115,Maria,128,Caylus,:SENDS:,116,Xavier
-114,Olavo,125,Bora Bora,:RECEIVES:,115,Maria,127,Blokus,:SENDS:,115,Maria
-115,Maria,127,Blokus,:RECEIVES:,114,Olavo,125,Bora Bora,:SENDS:,114,Olavo
-115,Maria,128,Caylus,:RECEIVES:,116,Xavier,129,Agricola,:SENDS:,114,Olavo
-116,Xavier,129,Agricola,:RECEIVES:,114,Olavo,124,Apples to Apples,:SENDS:,115,Maria
-
-# --------------------------------
-# Summary of Trade [82 : Board games in Montreal - 1519697773861757920592]
-# Total of items: 6
-# Total of traded items: 5
-# Total of items not traded: 1
-# --------------------------------
-# 
-# Below is an example to help you understand the results:
-# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
-# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
-
-</div><script>openTabById('summaryTabLink_28', "summaryTab_28");</script>
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:03 GMT
+{
+  &quot;tradeId&quot; : 12,
+  &quot;tradeName&quot; : &quot;Board games in Montreal - 1527722883620796987074&quot;,
+  &quot;totalOfItems&quot; : 6,
+  &quot;totalOfTradedItems&quot; : 5,
+  &quot;totalOfNotTradedItems&quot; : 1,
+  &quot;tradedItems&quot; : [ {
+    &quot;userId&quot; : 13,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 18,
+    &quot;itemName&quot; : &quot;Apples to Apples&quot;,
+    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 22,
+    &quot;receivingItemName&quot; : &quot;Caylus&quot;,
+    &quot;sendingUserId&quot; : 15,
+    &quot;sendingUserName&quot; : &quot;Xavier&quot;
+  }, {
+    &quot;userId&quot; : 13,
+    &quot;userName&quot; : &quot;Olavo&quot;,
+    &quot;itemId&quot; : 19,
+    &quot;itemName&quot; : &quot;Bora Bora&quot;,
+    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserName&quot; : &quot;Maria&quot;,
+    &quot;receivingItemId&quot; : 21,
+    &quot;receivingItemName&quot; : &quot;Blokus&quot;,
+    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  }, {
+    &quot;userId&quot; : 14,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 21,
+    &quot;itemName&quot; : &quot;Blokus&quot;,
+    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 19,
+    &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
+    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  }, {
+    &quot;userId&quot; : 14,
+    &quot;userName&quot; : &quot;Maria&quot;,
+    &quot;itemId&quot; : 22,
+    &quot;itemName&quot; : &quot;Caylus&quot;,
+    &quot;receivingUserId&quot; : 15,
+    &quot;receivingUserName&quot; : &quot;Xavier&quot;,
+    &quot;receivingItemId&quot; : 23,
+    &quot;receivingItemName&quot; : &quot;Agricola&quot;,
+    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserName&quot; : &quot;Olavo&quot;
+  }, {
+    &quot;userId&quot; : 15,
+    &quot;userName&quot; : &quot;Xavier&quot;,
+    &quot;itemId&quot; : 23,
+    &quot;itemName&quot; : &quot;Agricola&quot;,
+    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
+    &quot;receivingItemId&quot; : 18,
+    &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
+    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserName&quot; : &quot;Maria&quot;
+  } ]
+}
+</div><script>openTabById('summaryTabLink_29', "summaryTab_29");</script>
 </body>
 </html>

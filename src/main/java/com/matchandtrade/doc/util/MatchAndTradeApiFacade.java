@@ -1,5 +1,6 @@
 package com.matchandtrade.doc.util;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
+import com.matchandtrade.doc.maker.rest.FileRestDocMaker;
+import com.matchandtrade.rest.v1.json.FileJson;
 import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.OfferJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
@@ -14,10 +17,12 @@ import com.matchandtrade.rest.v1.json.TradeMembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
+import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
 
 public class MatchAndTradeApiFacade {
@@ -149,5 +154,18 @@ public class MatchAndTradeApiFacade {
 			.when()
 			.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
 		return response.body().as(TradeMembershipJson.class);
+	}
+	
+	public FileJson createFile(String fileName) {
+		String filePath = FileRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
+		File file = new File(filePath);
+		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
+		Response response = RestAssured
+				.given()
+				.headers(defaultHeaders)
+				.multiPart(fileSpec)
+				.when()
+				.post(MatchAndTradeRestUtil.filesUrl());
+		return response.body().as(FileJson.class);
 	}
 }

@@ -31,41 +31,42 @@
 </table>
 
 <h3>Example</h3>
-<div class='tab'><button id='summaryTabLink_5' class='tablinks' onclick='openTab(event, "summaryTab_5")'>Summary</button><button id='httpTabLink_5' class='tablinks' onclick='openTab(event, "httpTab_5")'>HTTP</button><button id='curlTabLink_5' class='tablinks' onclick='openTab(event, "curlTab_5")'>curl</button></div><div id='summaryTab_5' class='tabcontent code'>Request:  GET http://localhost:8080/rest/v1/authentications/
+<div class='tab'><button id='summaryTabLink_5' class='tablinks' onclick='openTab(event, "summaryTab_5")'>Summary</button><button id='httpTabLink_5' class='tablinks' onclick='openTab(event, "httpTab_5")'>HTTP</button><button id='curlTabLink_5' class='tablinks' onclick='openTab(event, "curlTab_5")'>curl</button></div><div id='summaryTab_5' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
 Response: HTTP/1.1 200 
-{&quot;userId&quot;:110,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/rest/v1/authentications/&quot;}]}</div><div id='httpTab_5' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/rest/v1/authentications/
-Headers:  Authorization: 2180-8238-6917
-          Accept: */*
+{&quot;userId&quot;:9,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-web-api/v1/authentic...</div><div id='httpTab_5' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/authentications/
+Headers:       Authorization: 3904-3589-9538
+               Accept: */*
 
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:11 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:00 GMT
 {
-  &quot;userId&quot; : 110,
+  &quot;userId&quot; : 9,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
 }</div><div id='curlTab_5' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 2180-8238-6917&quot; \
+-H &quot;Authorization: 3904-3589-9538&quot; \
 -H &quot;Accept: */*&quot; \
-http://localhost:8080/rest/v1/authentications/
+-d &quot;&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/authentications/
 
 -----  Response  -----
-Status:   HTTP/1.1 200 
-Headers:  Content-Type: application/json;charset=UTF-8
-          Transfer-Encoding: chunked
-          Date: Tue, 27 Feb 2018 02:16:11 GMT
+Status:        HTTP/1.1 200 
+Headers:       Content-Type: application/json;charset=UTF-8
+               Transfer-Encoding: chunked
+               Date: Wed, 30 May 2018 23:28:00 GMT
 {
-  &quot;userId&quot; : 110,
+  &quot;userId&quot; : 9,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/rest/v1/authentications/&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/authentications/&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_5', "summaryTab_5");</script>
