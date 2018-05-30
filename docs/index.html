@@ -72,40 +72,40 @@ Here is the list of all endpoints available through the REST API.
 <p>Example:<p>
 <div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2&amp;_pageSize=2
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Books in New York - 15277228806721173526652&quot;,&quot;tradeId&quot;:5,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_link...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
+[{&quot;name&quot;:&quot;Books in New York - 15277234640191438519374&quot;,&quot;tradeId&quot;:49,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_lin...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2&amp;_pageSize=2
-Headers:       Authorization: 3904-3589-9538
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 7
+Headers:       X-Pagination-Total-Count: 47
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 [ {
-  &quot;name&quot; : &quot;Books in New York - 15277228806721173526652&quot;,
-  &quot;tradeId&quot; : 5,
+  &quot;name&quot; : &quot;Books in New York - 15277234640191438519374&quot;,
+  &quot;tradeId&quot; : 49,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/49&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Items with images - 1527721846975257596544&quot;,
-  &quot;tradeId&quot; : 4,
+  &quot;name&quot; : &quot;Items with images - 1527723252717647280631&quot;,
+  &quot;tradeId&quot; : 48,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/48&quot;
   } ]
 } ]</div><div id='curlTab_1' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
@@ -113,27 +113,27 @@ http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=2\&amp;_pageSi
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 7
+Headers:       X-Pagination-Total-Count: 47
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 [ {
-  &quot;name&quot; : &quot;Books in New York - 15277228806721173526652&quot;,
-  &quot;tradeId&quot; : 5,
+  &quot;name&quot; : &quot;Books in New York - 15277234640191438519374&quot;,
+  &quot;tradeId&quot; : 49,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/49&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Items with images - 1527721846975257596544&quot;,
-  &quot;tradeId&quot; : 4,
+  &quot;name&quot; : &quot;Items with images - 1527723252717647280631&quot;,
+  &quot;tradeId&quot; : 48,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/48&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_1', "summaryTab_1");</script>

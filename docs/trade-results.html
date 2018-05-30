@@ -57,11 +57,11 @@
 <h3>Examples</h3>
 For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
 <i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
-<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
+<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
 Response: HTTP/1.1 200 
-{&quot;tradeId&quot;:12,&quot;tradeName&quot;:&quot;Board games in Montreal - 1527722883620796987074&quot;,&quot;totalOfItems&quot;:6,&quot;total...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
-Headers:       Authorization: 1305-5345-9927
+{&quot;tradeId&quot;:56,&quot;tradeName&quot;:&quot;Board games in Montreal - 15277234662511607955941&quot;,&quot;totalOfItems&quot;:6,&quot;tota...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
+Headers:       Authorization: 2055-339-3782
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
@@ -70,142 +70,142 @@ Headers:       Authorization: 1305-5345-9927
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:03 GMT
+               Date: Wed, 30 May 2018 23:37:46 GMT
 {
-  &quot;tradeId&quot; : 12,
-  &quot;tradeName&quot; : &quot;Board games in Montreal - 1527722883620796987074&quot;,
+  &quot;tradeId&quot; : 56,
+  &quot;tradeName&quot; : &quot;Board games in Montreal - 15277234662511607955941&quot;,
   &quot;totalOfItems&quot; : 6,
   &quot;totalOfTradedItems&quot; : 5,
   &quot;totalOfNotTradedItems&quot; : 1,
   &quot;tradedItems&quot; : [ {
-    &quot;userId&quot; : 13,
+    &quot;userId&quot; : 61,
     &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 18,
+    &quot;itemId&quot; : 110,
     &quot;itemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserId&quot; : 62,
     &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 22,
+    &quot;receivingItemId&quot; : 114,
     &quot;receivingItemName&quot; : &quot;Caylus&quot;,
-    &quot;sendingUserId&quot; : 15,
+    &quot;sendingUserId&quot; : 63,
     &quot;sendingUserName&quot; : &quot;Xavier&quot;
   }, {
-    &quot;userId&quot; : 13,
+    &quot;userId&quot; : 61,
     &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 19,
+    &quot;itemId&quot; : 111,
     &quot;itemName&quot; : &quot;Bora Bora&quot;,
-    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserId&quot; : 62,
     &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 21,
+    &quot;receivingItemId&quot; : 113,
     &quot;receivingItemName&quot; : &quot;Blokus&quot;,
-    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserId&quot; : 62,
     &quot;sendingUserName&quot; : &quot;Maria&quot;
   }, {
-    &quot;userId&quot; : 14,
+    &quot;userId&quot; : 62,
     &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 21,
+    &quot;itemId&quot; : 113,
     &quot;itemName&quot; : &quot;Blokus&quot;,
-    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserId&quot; : 61,
     &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 19,
+    &quot;receivingItemId&quot; : 111,
     &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
-    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserId&quot; : 61,
     &quot;sendingUserName&quot; : &quot;Olavo&quot;
   }, {
-    &quot;userId&quot; : 14,
+    &quot;userId&quot; : 62,
     &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 22,
+    &quot;itemId&quot; : 114,
     &quot;itemName&quot; : &quot;Caylus&quot;,
-    &quot;receivingUserId&quot; : 15,
+    &quot;receivingUserId&quot; : 63,
     &quot;receivingUserName&quot; : &quot;Xavier&quot;,
-    &quot;receivingItemId&quot; : 23,
+    &quot;receivingItemId&quot; : 115,
     &quot;receivingItemName&quot; : &quot;Agricola&quot;,
-    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserId&quot; : 61,
     &quot;sendingUserName&quot; : &quot;Olavo&quot;
   }, {
-    &quot;userId&quot; : 15,
+    &quot;userId&quot; : 63,
     &quot;userName&quot; : &quot;Xavier&quot;,
-    &quot;itemId&quot; : 23,
+    &quot;itemId&quot; : 115,
     &quot;itemName&quot; : &quot;Agricola&quot;,
-    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserId&quot; : 61,
     &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 18,
+    &quot;receivingItemId&quot; : 110,
     &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserId&quot; : 62,
     &quot;sendingUserName&quot; : &quot;Maria&quot;
   } ]
 }</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 1305-5345-9927&quot; \
+-H &quot;Authorization: 2055-339-3782&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/12/results
+http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:03 GMT
+               Date: Wed, 30 May 2018 23:37:46 GMT
 {
-  &quot;tradeId&quot; : 12,
-  &quot;tradeName&quot; : &quot;Board games in Montreal - 1527722883620796987074&quot;,
+  &quot;tradeId&quot; : 56,
+  &quot;tradeName&quot; : &quot;Board games in Montreal - 15277234662511607955941&quot;,
   &quot;totalOfItems&quot; : 6,
   &quot;totalOfTradedItems&quot; : 5,
   &quot;totalOfNotTradedItems&quot; : 1,
   &quot;tradedItems&quot; : [ {
-    &quot;userId&quot; : 13,
+    &quot;userId&quot; : 61,
     &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 18,
+    &quot;itemId&quot; : 110,
     &quot;itemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserId&quot; : 62,
     &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 22,
+    &quot;receivingItemId&quot; : 114,
     &quot;receivingItemName&quot; : &quot;Caylus&quot;,
-    &quot;sendingUserId&quot; : 15,
+    &quot;sendingUserId&quot; : 63,
     &quot;sendingUserName&quot; : &quot;Xavier&quot;
   }, {
-    &quot;userId&quot; : 13,
+    &quot;userId&quot; : 61,
     &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 19,
+    &quot;itemId&quot; : 111,
     &quot;itemName&quot; : &quot;Bora Bora&quot;,
-    &quot;receivingUserId&quot; : 14,
+    &quot;receivingUserId&quot; : 62,
     &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 21,
+    &quot;receivingItemId&quot; : 113,
     &quot;receivingItemName&quot; : &quot;Blokus&quot;,
-    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserId&quot; : 62,
     &quot;sendingUserName&quot; : &quot;Maria&quot;
   }, {
-    &quot;userId&quot; : 14,
+    &quot;userId&quot; : 62,
     &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 21,
+    &quot;itemId&quot; : 113,
     &quot;itemName&quot; : &quot;Blokus&quot;,
-    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserId&quot; : 61,
     &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 19,
+    &quot;receivingItemId&quot; : 111,
     &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
-    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserId&quot; : 61,
     &quot;sendingUserName&quot; : &quot;Olavo&quot;
   }, {
-    &quot;userId&quot; : 14,
+    &quot;userId&quot; : 62,
     &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 22,
+    &quot;itemId&quot; : 114,
     &quot;itemName&quot; : &quot;Caylus&quot;,
-    &quot;receivingUserId&quot; : 15,
+    &quot;receivingUserId&quot; : 63,
     &quot;receivingUserName&quot; : &quot;Xavier&quot;,
-    &quot;receivingItemId&quot; : 23,
+    &quot;receivingItemId&quot; : 115,
     &quot;receivingItemName&quot; : &quot;Agricola&quot;,
-    &quot;sendingUserId&quot; : 13,
+    &quot;sendingUserId&quot; : 61,
     &quot;sendingUserName&quot; : &quot;Olavo&quot;
   }, {
-    &quot;userId&quot; : 15,
+    &quot;userId&quot; : 63,
     &quot;userName&quot; : &quot;Xavier&quot;,
-    &quot;itemId&quot; : 23,
+    &quot;itemId&quot; : 115,
     &quot;itemName&quot; : &quot;Agricola&quot;,
-    &quot;receivingUserId&quot; : 13,
+    &quot;receivingUserId&quot; : 61,
     &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 18,
+    &quot;receivingItemId&quot; : 110,
     &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;sendingUserId&quot; : 14,
+    &quot;sendingUserId&quot; : 62,
     &quot;sendingUserName&quot; : &quot;Maria&quot;
   } ]
 }

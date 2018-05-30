@@ -74,34 +74,34 @@
 <h3>Examples</h3>
 <div class='tab'><button id='summaryTabLink_49' class='tablinks' onclick='openTab(event, "summaryTab_49")'>Summary</button><button id='httpTabLink_49' class='tablinks' onclick='openTab(event, "httpTab_49")'>HTTP</button><button id='curlTabLink_49' class='tablinks' onclick='openTab(event, "curlTab_49")'>curl</button></div><div id='summaryTab_49' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/files/
 Response: HTTP/1.1 201 
-{&quot;fileId&quot;:5,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;original&quot;,&quot;href&quot;:&quot;/mat...</div><div id='httpTab_49' class='tabcontent code'>-----  Request  -----
+{&quot;fileId&quot;:13,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;thumbnail&quot;,&quot;href&quot;:&quot;/m...</div><div id='httpTab_49' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8080/matchandtrade-web-api/v1/files/
-Headers:       Authorization: 9754-8356-266
+Headers:       Authorization: 7403-6465-1464
                Accept: */*
-               Content-Type: multipart/form-data; boundary=&quot;-gxNLkIGXD3xiwNn1N8IBYKA_eBdLW1uqDTcD2m&quot;
+               Content-Type: multipart/form-data; boundary=&quot;bU-PBFbz2tNhzrNVBrtUTOElQKIqjqu71qDuaGW&quot;
 
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 {
-  &quot;fileId&quot; : 5,
+  &quot;fileId&quot; : 13,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/547d1168-0db1-4432-98d7-aa334785a434.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0b16d9b5-2707-4cc8-a8e6-cf312fce1856.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
   } ]
 }</div><div id='curlTab_49' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 9754-8356-266&quot; \
+-H &quot;Authorization: 7403-6465-1464&quot; \
 -H &quot;Accept: */*&quot; \
--H &quot;Content-Type: multipart/form-data; boundary=&quot;-gxNLkIGXD3xiwNn1N8IBYKA_eBdLW1uqDTcD2m&quot;&quot; \
+-H &quot;Content-Type: multipart/form-data; boundary=&quot;bU-PBFbz2tNhzrNVBrtUTOElQKIqjqu71qDuaGW&quot;&quot; \
 -d &quot;&quot; \
 http://localhost:8080/matchandtrade-web-api/v1/files/
 
@@ -109,17 +109,17 @@ http://localhost:8080/matchandtrade-web-api/v1/files/
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 {
-  &quot;fileId&quot; : 5,
+  &quot;fileId&quot; : 13,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/547d1168-0db1-4432-98d7-aa334785a434.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0b16d9b5-2707-4cc8-a8e6-cf312fce1856.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_49', "summaryTab_49");</script>

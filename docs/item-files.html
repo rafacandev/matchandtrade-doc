@@ -38,11 +38,11 @@ See <a href="files.html">File</a> documentation.
 
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_50' class='tablinks' onclick='openTab(event, "summaryTab_50")'>Summary</button><button id='httpTabLink_50' class='tablinks' onclick='openTab(event, "httpTab_50")'>HTTP</button><button id='curlTabLink_50' class='tablinks' onclick='openTab(event, "curlTab_50")'>curl</button></div><div id='summaryTab_50' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/6
+<div class='tab'><button id='summaryTabLink_50' class='tablinks' onclick='openTab(event, "summaryTab_50")'>Summary</button><button id='httpTabLink_50' class='tablinks' onclick='openTab(event, "httpTab_50")'>HTTP</button><button id='curlTabLink_50' class='tablinks' onclick='openTab(event, "curlTab_50")'>curl</button></div><div id='summaryTab_50' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/14
 Response: HTTP/1.1 201 
-{&quot;fileId&quot;:6,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;original&quot;,&quot;href&quot;:&quot;/mat...</div><div id='httpTab_50' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/6
-Headers:       Authorization: 9754-8356-266
+{&quot;fileId&quot;:14,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;thumbnail&quot;,&quot;href&quot;:&quot;/m...</div><div id='httpTab_50' class='tabcontent code'>-----  Request  -----
+POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/14
+Headers:       Authorization: 7403-6465-1464
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
@@ -51,50 +51,50 @@ Headers:       Authorization: 9754-8356-266
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 {
-  &quot;fileId&quot; : 6,
+  &quot;fileId&quot; : 14,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/3244e277-254e-48b4-a8e1-c3d3e4c4720f.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/e473e776-02c2-4c80-a219-b152e0aa233f.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/b11763e2-e4a3-41ba-85fa-6155b86f6c72.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/09667c93-ed80-4fa7-a07a-6942d8c316ab.file&quot;
   } ]
 }</div><div id='curlTab_50' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 9754-8356-266&quot; \
+-H &quot;Authorization: 7403-6465-1464&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/6
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/14
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 {
-  &quot;fileId&quot; : 6,
+  &quot;fileId&quot; : 14,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/3244e277-254e-48b4-a8e1-c3d3e4c4720f.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/e473e776-02c2-4c80-a219-b152e0aa233f.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/b11763e2-e4a3-41ba-85fa-6155b86f6c72.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/09667c93-ed80-4fa7-a07a-6942d8c316ab.file&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_50', "summaryTab_50");</script>
 
-<div class='tab'><button id='summaryTabLink_51' class='tablinks' onclick='openTab(event, "summaryTab_51")'>Summary</button><button id='httpTabLink_51' class='tablinks' onclick='openTab(event, "httpTab_51")'>HTTP</button><button id='curlTabLink_51' class='tablinks' onclick='openTab(event, "curlTab_51")'>curl</button></div><div id='summaryTab_51' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/
+<div class='tab'><button id='summaryTabLink_51' class='tablinks' onclick='openTab(event, "summaryTab_51")'>Summary</button><button id='httpTabLink_51' class='tablinks' onclick='openTab(event, "httpTab_51")'>HTTP</button><button id='curlTabLink_51' class='tablinks' onclick='openTab(event, "curlTab_51")'>curl</button></div><div id='summaryTab_51' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/
 Response: HTTP/1.1 200 
-[{&quot;fileId&quot;:6,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;original&quot;,&quot;href&quot;:&quot;/ma...</div><div id='httpTab_51' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/
-Headers:       Authorization: 9754-8356-266
+[{&quot;fileId&quot;:14,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;thumbnail&quot;,&quot;href&quot;:&quot;/...</div><div id='httpTab_51' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/
+Headers:       Authorization: 7403-6465-1464
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
@@ -104,42 +104,42 @@ Status:        HTTP/1.1 200
 Headers:       X-Pagination-Total-Count: 1
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 [ {
-  &quot;fileId&quot; : 6,
+  &quot;fileId&quot; : 14,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/3244e277-254e-48b4-a8e1-c3d3e4c4720f.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/e473e776-02c2-4c80-a219-b152e0aa233f.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/b11763e2-e4a3-41ba-85fa-6155b86f6c72.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/09667c93-ed80-4fa7-a07a-6942d8c316ab.file&quot;
   } ]
 } ]</div><div id='curlTab_51' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 9754-8356-266&quot; \
+-H &quot;Authorization: 7403-6465-1464&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/33/items/35/files/
+http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/125/items/127/files/
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       X-Pagination-Total-Count: 1
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:04 GMT
+               Date: Wed, 30 May 2018 23:37:47 GMT
 [ {
-  &quot;fileId&quot; : 6,
+  &quot;fileId&quot; : 14,
   &quot;name&quot; : &quot;my-image.png&quot;,
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/3244e277-254e-48b4-a8e1-c3d3e4c4720f.file&quot;
-  }, {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/e473e776-02c2-4c80-a219-b152e0aa233f.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/b11763e2-e4a3-41ba-85fa-6155b86f6c72.file&quot;
+  }, {
+    &quot;rel&quot; : &quot;original&quot;,
+    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/09667c93-ed80-4fa7-a07a-6942d8c316ab.file&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_51', "summaryTab_51");</script>

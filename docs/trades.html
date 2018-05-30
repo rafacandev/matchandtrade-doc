@@ -109,64 +109,64 @@
 
 <h3>Examples</h3>
 <div class='tab'><button id='summaryTabLink_8' class='tablinks' onclick='openTab(event, "summaryTab_8")'>Summary</button><button id='httpTabLink_8' class='tablinks' onclick='openTab(event, "httpTab_8")'>HTTP</button><button id='curlTabLink_8' class='tablinks' onclick='openTab(event, "curlTab_8")'>curl</button></div><div id='summaryTab_8' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trades/
-{&quot;name&quot;:&quot;Board games location TBD - 15277228815761915950360&quot;}
+{&quot;name&quot;:&quot;Board games location TBD - 15277234646881005430095&quot;}
 Response: HTTP/1.1 201 
-{&quot;name&quot;:&quot;Board games location TBD - 15277228815761915950360&quot;,&quot;tradeId&quot;:8,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,...</div><div id='httpTab_8' class='tabcontent code'>-----  Request  -----
+{&quot;name&quot;:&quot;Board games location TBD - 15277234646881005430095&quot;,&quot;tradeId&quot;:52,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;...</div><div id='httpTab_8' class='tabcontent code'>-----  Request  -----
 POST http://localhost:8080/matchandtrade-web-api/v1/trades/
-Headers:       Authorization: 3904-3589-9538
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games location TBD - 15277228815761915950360&quot;
+  &quot;name&quot; : &quot;Board games location TBD - 15277234646881005430095&quot;
 }
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games location TBD - 15277228815761915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games location TBD - 15277234646881005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }</div><div id='curlTab_8' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games location TBD - 15277228815761915950360\&quot;}&quot; \
+-d &quot;{\&quot;name\&quot;:\&quot;Board games location TBD - 15277234646881005430095\&quot;}&quot; \
 http://localhost:8080/matchandtrade-web-api/v1/trades/
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games location TBD - 15277228815761915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games location TBD - 15277234646881005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_8', "summaryTab_8");</script>
 
-<div class='tab'><button id='summaryTabLink_9' class='tablinks' onclick='openTab(event, "summaryTab_9")'>Summary</button><button id='httpTabLink_9' class='tablinks' onclick='openTab(event, "httpTab_9")'>HTTP</button><button id='curlTabLink_9' class='tablinks' onclick='openTab(event, "curlTab_9")'>curl</button></div><div id='summaryTab_9' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-web-api/v1/trades/8
-{&quot;name&quot;:&quot;Board games in Toronto - 15277228816461915950360&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
+<div class='tab'><button id='summaryTabLink_9' class='tablinks' onclick='openTab(event, "summaryTab_9")'>Summary</button><button id='httpTabLink_9' class='tablinks' onclick='openTab(event, "httpTab_9")'>HTTP</button><button id='curlTabLink_9' class='tablinks' onclick='openTab(event, "curlTab_9")'>curl</button></div><div id='summaryTab_9' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-web-api/v1/trades/52
+{&quot;name&quot;:&quot;Board games in Toronto - 15277234647591005430095&quot;,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;}
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto - 15277228816461915950360&quot;,&quot;tradeId&quot;:8,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_9' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/matchandtrade-web-api/v1/trades/8
-Headers:       Authorization: 3904-3589-9538
+{&quot;name&quot;:&quot;Board games in Toronto - 15277234647591005430095&quot;,&quot;tradeId&quot;:52,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_9' class='tabcontent code'>-----  Request  -----
+PUT http://localhost:8080/matchandtrade-web-api/v1/trades/52
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;
 }
 
@@ -174,44 +174,44 @@ Headers:       Authorization: 3904-3589-9538
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }</div><div id='curlTab_9' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;name\&quot;:\&quot;Board games in Toronto - 15277228816461915950360\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/8
+-d &quot;{\&quot;name\&quot;:\&quot;Board games in Toronto - 15277234647591005430095\&quot;,\&quot;state\&quot;:\&quot;MATCHING_ITEMS\&quot;}&quot; \
+http://localhost:8080/matchandtrade-web-api/v1/trades/52
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_9', "summaryTab_9");</script>
 
-<div class='tab'><button id='summaryTabLink_10' class='tablinks' onclick='openTab(event, "summaryTab_10")'>Summary</button><button id='httpTabLink_10' class='tablinks' onclick='openTab(event, "httpTab_10")'>HTTP</button><button id='curlTabLink_10' class='tablinks' onclick='openTab(event, "curlTab_10")'>curl</button></div><div id='summaryTab_10' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/8
+<div class='tab'><button id='summaryTabLink_10' class='tablinks' onclick='openTab(event, "summaryTab_10")'>Summary</button><button id='httpTabLink_10' class='tablinks' onclick='openTab(event, "httpTab_10")'>HTTP</button><button id='curlTabLink_10' class='tablinks' onclick='openTab(event, "curlTab_10")'>curl</button></div><div id='summaryTab_10' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/52
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto - 15277228816461915950360&quot;,&quot;tradeId&quot;:8,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_10' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trades/8
-Headers:       Authorization: 3904-3589-9538
+{&quot;name&quot;:&quot;Board games in Toronto - 15277234647591005430095&quot;,&quot;tradeId&quot;:52,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_10' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades/52
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
@@ -220,124 +220,124 @@ Headers:       Authorization: 3904-3589-9538
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }</div><div id='curlTab_10' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/8
+http://localhost:8080/matchandtrade-web-api/v1/trades/52
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_10', "summaryTab_10");</script>
 
 <div class='tab'><button id='summaryTabLink_11' class='tablinks' onclick='openTab(event, "summaryTab_11")'>Summary</button><button id='httpTabLink_11' class='tablinks' onclick='openTab(event, "httpTab_11")'>HTTP</button><button id='curlTabLink_11' class='tablinks' onclick='openTab(event, "curlTab_11")'>curl</button></div><div id='summaryTab_11' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=1&amp;_pageSize=3
 Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Board games in Toronto - 15277228816461915950360&quot;,&quot;tradeId&quot;:8,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_11' class='tabcontent code'>-----  Request  -----
+[{&quot;name&quot;:&quot;Board games in Toronto - 15277234647591005430095&quot;,&quot;tradeId&quot;:52,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_...</div><div id='httpTab_11' class='tabcontent code'>-----  Request  -----
 GET http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=1&amp;_pageSize=3
-Headers:       Authorization: 3904-3589-9538
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
 
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 8
+Headers:       X-Pagination-Total-Count: 48
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=3&amp;_pageNumber=2&gt;; rel=&quot;nextPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Books in Lima - 15277228809391173526652&quot;,
-  &quot;tradeId&quot; : 7,
+  &quot;name&quot; : &quot;Books in Lima - 15277234642211438519374&quot;,
+  &quot;tradeId&quot; : 51,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/51&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Books in Paris - 15277228808891173526652&quot;,
-  &quot;tradeId&quot; : 6,
+  &quot;name&quot; : &quot;Books in Paris - 15277234641901438519374&quot;,
+  &quot;tradeId&quot; : 50,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/6&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/50&quot;
   } ]
 } ]</div><div id='curlTab_11' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -d &quot;&quot; \
 http://localhost:8080/matchandtrade-web-api/v1/trades?_pageNumber=1\&amp;_pageSize=3
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 8
+Headers:       X-Pagination-Total-Count: 48
                Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trades?_pageSize=3&amp;_pageNumber=2&gt;; rel=&quot;nextPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 [ {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Books in Lima - 15277228809391173526652&quot;,
-  &quot;tradeId&quot; : 7,
+  &quot;name&quot; : &quot;Books in Lima - 15277234642211438519374&quot;,
+  &quot;tradeId&quot; : 51,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/51&quot;
   } ]
 }, {
-  &quot;name&quot; : &quot;Books in Paris - 15277228808891173526652&quot;,
-  &quot;tradeId&quot; : 6,
+  &quot;name&quot; : &quot;Books in Paris - 15277234641901438519374&quot;,
+  &quot;tradeId&quot; : 50,
   &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/6&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/50&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_11', "summaryTab_11");</script>
 
-<div class='tab'><button id='summaryTabLink_12' class='tablinks' onclick='openTab(event, "summaryTab_12")'>Summary</button><button id='httpTabLink_12' class='tablinks' onclick='openTab(event, "httpTab_12")'>HTTP</button><button id='curlTabLink_12' class='tablinks' onclick='openTab(event, "curlTab_12")'>curl</button></div><div id='summaryTab_12' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/8
+<div class='tab'><button id='summaryTabLink_12' class='tablinks' onclick='openTab(event, "summaryTab_12")'>Summary</button><button id='httpTabLink_12' class='tablinks' onclick='openTab(event, "httpTab_12")'>HTTP</button><button id='curlTabLink_12' class='tablinks' onclick='openTab(event, "curlTab_12")'>curl</button></div><div id='summaryTab_12' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/52
 Response: HTTP/1.1 200 
-{&quot;name&quot;:&quot;Board games in Toronto - 15277228816461915950360&quot;,&quot;tradeId&quot;:8,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_li...</div><div id='httpTab_12' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trades/8
-Headers:       Authorization: 3904-3589-9538
+{&quot;name&quot;:&quot;Board games in Toronto - 15277234647591005430095&quot;,&quot;tradeId&quot;:52,&quot;state&quot;:&quot;MATCHING_ITEMS&quot;,&quot;_l...</div><div id='httpTab_12' class='tabcontent code'>-----  Request  -----
+GET http://localhost:8080/matchandtrade-web-api/v1/trades/52
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
@@ -346,62 +346,62 @@ Headers:       Authorization: 3904-3589-9538
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }</div><div id='curlTab_12' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/8
+http://localhost:8080/matchandtrade-web-api/v1/trades/52
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:28:00 GMT
+               Date: Wed, 30 May 2018 23:37:44 GMT
 {
-  &quot;name&quot; : &quot;Board games in Toronto - 15277228816461915950360&quot;,
-  &quot;tradeId&quot; : 8,
+  &quot;name&quot; : &quot;Board games in Toronto - 15277234647591005430095&quot;,
+  &quot;tradeId&quot; : 52,
   &quot;state&quot; : &quot;MATCHING_ITEMS&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/52&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_12', "summaryTab_12");</script>
 
-<div class='tab'><button id='summaryTabLink_13' class='tablinks' onclick='openTab(event, "summaryTab_13")'>Summary</button><button id='httpTabLink_13' class='tablinks' onclick='openTab(event, "httpTab_13")'>HTTP</button><button id='curlTabLink_13' class='tablinks' onclick='openTab(event, "curlTab_13")'>curl</button></div><div id='summaryTab_13' class='tabcontent code'>Request:  DELETE http://localhost:8080/matchandtrade-web-api/v1/trades/8
+<div class='tab'><button id='summaryTabLink_13' class='tablinks' onclick='openTab(event, "summaryTab_13")'>Summary</button><button id='httpTabLink_13' class='tablinks' onclick='openTab(event, "httpTab_13")'>HTTP</button><button id='curlTabLink_13' class='tablinks' onclick='openTab(event, "curlTab_13")'>curl</button></div><div id='summaryTab_13' class='tabcontent code'>Request:  DELETE http://localhost:8080/matchandtrade-web-api/v1/trades/52
 Response: HTTP/1.1 204 
 </div><div id='httpTab_13' class='tabcontent code'>-----  Request  -----
-DELETE http://localhost:8080/matchandtrade-web-api/v1/trades/8
-Headers:       Authorization: 3904-3589-9538
+DELETE http://localhost:8080/matchandtrade-web-api/v1/trades/52
+Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
 
 
 -----  Response  -----
 Status:        HTTP/1.1 204 
-Headers:       Date: Wed, 30 May 2018 23:28:01 GMT
+Headers:       Date: Wed, 30 May 2018 23:37:44 GMT
 </div><div id='curlTab_13' class='tabcontent code'>-----  Request  -----
 curl -v -X DELETE \
--H &quot;Authorization: 3904-3589-9538&quot; \
+-H &quot;Authorization: 6572-9684-8741&quot; \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/8
+http://localhost:8080/matchandtrade-web-api/v1/trades/52
 
 -----  Response  -----
 Status:        HTTP/1.1 204 
-Headers:       Date: Wed, 30 May 2018 23:28:01 GMT
+Headers:       Date: Wed, 30 May 2018 23:37:44 GMT
 
 </div><script>openTabById('summaryTabLink_13', "summaryTab_13");</script>
 </body>
