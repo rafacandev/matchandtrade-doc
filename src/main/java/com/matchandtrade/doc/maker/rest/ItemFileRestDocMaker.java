@@ -21,6 +21,7 @@ public class ItemFileRestDocMaker implements RestDocMaker {
 	
 	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
 	private static final String GET_ALL_PLACEHOLDER = "GET_ALL_PLACEHOLDER";
+	private static final String DELETE_PLACEHOLDER = "DELETE_PLACEHOLDER";
 
 	@Override
 	public String contentFilePath() {
@@ -46,6 +47,11 @@ public class ItemFileRestDocMaker implements RestDocMaker {
 		Snippet getAllFilesOfItem = snippetFactory.makeSnippet(MatchAndTradeRestUtil.filesUrl(membership.getTradeMembershipId(), item.getItemId()));
 		getAllFilesOfItem.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllFilesOfItem.asHtml());
+		
+		Snippet deleteFileFromItem = snippetFactory
+				.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.filesUrl(membership.getTradeMembershipId(), item.getItemId(), file.getFileId()));
+		deleteFileFromItem.getResponse().then().statusCode(204);
+		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteFileFromItem.asHtml());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
