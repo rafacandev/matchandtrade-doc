@@ -1,5 +1,16 @@
 <html>
 
-<body onload=window.location='dummy-1.html'>
+<head>
+
+<script language=javascript>
+function redirect(){
+	console.log(window.location.href, window.location.href.replace("dummy-0", "dummy-1"));
+	var url = window.location.href.replace("dummy-0", "dummy-1");
+	window.location = url;
+}
+</script>
+</head>
+
+<body onload="redirect()">
 
 </html>
