@@ -17,27 +17,27 @@ import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
 
 
-public class FileRestDocMaker implements RestDocMaker {
+public class AttachmentRestDocMaker implements RestDocMaker {
 	
 	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
 	@Override
 	public String contentFilePath() {
-		return "files.html";
+		return "attachments.html";
 	}
 
 	@Override
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
-		String filePath = FileRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
+		String filePath = AttachmentRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
 		File file = new File(filePath);
 		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
-		RequestSpecification fileRequest = new RequestSpecBuilder()
+		RequestSpecification attachmentRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.addMultiPart(fileSpec)
 				.build();
-		Snippet fileSnippet = SnippetFactory.makeSnippet(Method.POST, fileRequest, MatchAndTradeRestUtil.filesUrl());
-		fileSnippet.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, fileSnippet.asHtml());
+		Snippet attachmentSnippet = SnippetFactory.makeSnippet(Method.POST, attachmentRequest, MatchAndTradeRestUtil.filesUrl());
+		attachmentSnippet.getResponse().then().statusCode(201);
+		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, attachmentSnippet.asHtml());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);

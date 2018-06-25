@@ -9,8 +9,8 @@ import com.matchandtrade.doc.maker.IndexRestDocMaker;
 import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
-import com.matchandtrade.doc.maker.rest.FileRestDocMaker;
-import com.matchandtrade.doc.maker.rest.ItemFileRestDocMaker;
+import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
+import com.matchandtrade.doc.maker.rest.ItemAttachmentRestDocMaker;
 import com.matchandtrade.doc.maker.rest.ItemRestDocMaker;
 import com.matchandtrade.doc.maker.rest.OfferRestDocMaker;
 import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
@@ -44,8 +44,8 @@ public class MatchAndTradeContentBuilder {
 					new TradeResultRestDocMaker(),
 					new SearchRestDocMaker(),
 					new UseCaseRestDocMaker(),
-					new FileRestDocMaker(),
-					new ItemFileRestDocMaker()
+					new AttachmentRestDocMaker(),
+					new ItemAttachmentRestDocMaker()
 				);
 			RestDocMakerGenerator generator = new RestDocMakerGenerator();
 			generator.generateDocumentation(config);
