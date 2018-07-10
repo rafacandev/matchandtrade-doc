@@ -22,11 +22,11 @@ public class MatchAndTradeRestUtil {
 		SIGN_OFF("matchandtrade-web-api/v1/sign-out"),
 		AUTHENTICATIONS("matchandtrade-web-api/v1/authentications"),
 		TRADES("matchandtrade-web-api/v1/trades"),
-		FILES("matchandtrade-web-api/v1/files"),
+		ATTACHMENTS("matchandtrade-web-api/v1/attachments"),
 		SEARCH("matchandtrade-web-api/v1/search"),
 		TRADE_RESULTS("results"),
 		ITEMS("items"),
-		ITEM_FILES("files"),
+		ITEM_ATTACHMENTS("attachments"),
 		INFO("info"),
 		WANT_ITEMS("want-items"),
 		TRADE_MEMBERSHIPS("matchandtrade-web-api/v1/trade-memberships"),
@@ -71,14 +71,14 @@ public class MatchAndTradeRestUtil {
 	public static String tradesUrl() {
 		return Endpoint.TRADES.asURL(baseUrl);
 	}
-	public static String filesUrl() {
-		return Endpoint.FILES.asURL(baseUrl) + "/";
+	public static String attachmentsUrl() {
+		return Endpoint.ATTACHMENTS.asURL(baseUrl) + "/";
 	}
-	public static String filesUrl(Integer tradeMembershipId, Integer itemId, Integer fileId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_FILES.path + "/" + fileId;
+	public static String attachmentsUrl(Integer tradeMembershipId, Integer itemId, Integer attachmentId) {
+		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_ATTACHMENTS.path + "/" + attachmentId;
 	}
-	public static String filesUrl(Integer tradeMembershipId, Integer itemId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_FILES.path + "/";
+	public static String attachmentsUrl(Integer tradeMembershipId, Integer itemId) {
+		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_ATTACHMENTS.path + "/";
 	}
 	public static String tradesUrl(Integer tradeId) {
 		return Endpoint.TRADES.asURL(baseUrl) + "/" + tradeId;

@@ -69,14 +69,14 @@ public class OfferRestDocMaker implements RestDocMaker {
 		
 		// Make offers
 		OfferJson pandemicOneForStoneAge = new OfferJson();
-		pandemicOneForStoneAge.setOfferedItemId(pandemicOne.getItemId());
-		pandemicOneForStoneAge.setWantedItemId(stoneAge.getItemId());
+		pandemicOneForStoneAge.setOfferedArticleId(pandemicOne.getArticleId());
+		pandemicOneForStoneAge.setWantedArticleId(stoneAge.getArticleId());
 		Snippet pandemicOneForStoneAgeSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()) + "/");
 		pandemicOneForStoneAgeSnippet.getResponse().then().statusCode(201);
 		pandemicOneForStoneAge = pandemicOneForStoneAgeSnippet.getResponse().body().as(OfferJson.class);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, pandemicOneForStoneAgeSnippet.asHtml());
 
-		mariaApiFacade.createOffer(mariaMembership.getTradeMembershipId(), stoneAge.getItemId(), pandemicOne.getItemId());
+		mariaApiFacade.createOffer(mariaMembership.getTradeMembershipId(), stoneAge.getArticleId(), pandemicOne.getArticleId());
 		
 		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		getSnippet.getResponse().then().statusCode(200);
@@ -84,15 +84,15 @@ public class OfferRestDocMaker implements RestDocMaker {
 
 		ItemJson firstDummy = mariaApiFacade.createItem(mariaMembership, "First ummy item so it displays in the GET ALL");
 		ItemJson secondDummy = mariaApiFacade.createItem(mariaMembership, "Second dummy item so it displays in the GET ALL");
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), firstDummy.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getItemId(), secondDummy.getItemId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getArticleId(), firstDummy.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getArticleId(), secondDummy.getArticleId());
 		
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addRequestSpecification(olavoSnippetFactory.getDefaultRequestSpecification())
 				.addQueryParam("_pageNumber", "1")
 				.addQueryParam("_pageSize", "3")
-				.addQueryParam("offeredItemId", pandemicOne.getItemId())
-				.addQueryParam("wantedItemId", stoneAge.getItemId())
+				.addQueryParam("offeredItemId", pandemicOne.getArticleId())
+				.addQueryParam("wantedItemId", stoneAge.getArticleId())
 				.build();
 		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()));
 		searchSnippet.getResponse().then().statusCode(200);

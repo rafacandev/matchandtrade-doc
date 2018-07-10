@@ -1,0 +1,59 @@
+<h1>Attachments</h1>
+<p>
+<p>
+	<i>Resource</i> for <span class='incode'>Attachments</span>.
+	<span class='incode'>Attachments</span> uploaded to the system.
+	Example, <a href='items.html'>item</a> pictures are uploaded via this resource and then associated to the <a href='items.html'>item</a> via <a href='item-attachmetns.html'>Item Attachments</a>.
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/attachments</span></li>
+</ul>
+
+<h3>Authorization</h3>
+<ul>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+</ul>	
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>contentType</td>
+		<td>read-only, 150 max length</td>
+		<td>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">Content Type</a> of this <span class='incode'>Attachment</span>, this value extracted when the attachment is uploaded to the system</td>
+	</tr>
+	<tr>
+		<td>attachmentId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>	
+	<tr>
+		<td>_links</td>
+		<td>read-only</td>
+		<td>
+			<p>Links for versions of the <span class='incode'>Attachment</span> (aka essence file).</p>
+			<ul>
+				<li><code>original</code>: the uploaded file in its original form</li>
+				<li><code>thumbnail</code>: thumbnail generated from the <code>original</code> file</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-only</td>
+		<td>The name of the <span class='incode'>Attachment</span>, this value extracted when the attachment is uploaded to the system</td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+${PAGINATION_TABLE}
+
+
+<h3>Examples</h3>
+${POST_PLACEHOLDER}

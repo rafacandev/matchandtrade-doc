@@ -66,18 +66,18 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		trade.setState(TradeJson.State.MATCHING_ITEMS);
 		olavoApiFacade.saveTrade(trade);
 
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getItemId(), andromedra.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getItemId(), beta.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getItemId(), caylus.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getItemId(), andromedra.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getItemId(), blokus.getItemId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getItemId(), caylus.getItemId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), andromedra.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), beta.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), caylus.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), andromedra.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), blokus.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), caylus.getArticleId());
 		
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), andromedra.getItemId(), applesToApples.getItemId());
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), blokus.getItemId(), beta.getItemId());
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), caylus.getItemId(), agricola.getItemId());
+		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), andromedra.getArticleId(), applesToApples.getArticleId());
+		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), blokus.getArticleId(), beta.getArticleId());
+		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), caylus.getArticleId(), agricola.getArticleId());
 		
-		xavierApiFacade.createOffer(xavierMembership.getTradeMembershipId(), agricola.getItemId(), applesToApples.getItemId());
+		xavierApiFacade.createOffer(xavierMembership.getTradeMembershipId(), agricola.getArticleId(), applesToApples.getArticleId());
 
 		trade.setState(TradeJson.State.GENERATE_RESULTS);
 		olavoApiFacade.saveTrade(trade);

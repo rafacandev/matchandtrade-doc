@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
-import com.matchandtrade.doc.maker.rest.FileRestDocMaker;
-import com.matchandtrade.rest.v1.json.FileJson;
+import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
+import com.matchandtrade.rest.v1.json.AttachmentJson;
 import com.matchandtrade.rest.v1.json.ItemJson;
 import com.matchandtrade.rest.v1.json.OfferJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
@@ -58,10 +58,10 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(ItemJson.class);
 	}
 
-	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredItemId, Integer wantedItemId) {
+	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredArticleId, Integer wantedArticleId) {
 		OfferJson requestBody = new OfferJson();
-		requestBody.setOfferedItemId(offeredItemId);
-		requestBody.setWantedItemId(wantedItemId);
+		requestBody.setOfferedArticleId(offeredArticleId);
+		requestBody.setWantedArticleId(wantedArticleId);
 		Response response = RestAssured
 				.given()
 				.headers(defaultHeaders)
@@ -156,8 +156,8 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(TradeMembershipJson.class);
 	}
 	
-	public FileJson createFile(String fileName) {
-		String filePath = FileRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
+	public AttachmentJson createAttachment(String fileName) {
+		String filePath = AttachmentRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
 		File file = new File(filePath);
 		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
 		Response response = RestAssured
@@ -165,7 +165,7 @@ public class MatchAndTradeApiFacade {
 				.headers(defaultHeaders)
 				.multiPart(fileSpec)
 				.when()
-				.post(MatchAndTradeRestUtil.filesUrl());
-		return response.body().as(FileJson.class);
+				.post(MatchAndTradeRestUtil.attachmentsUrl());
+		return response.body().as(AttachmentJson.class);
 	}
 }

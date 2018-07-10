@@ -54,16 +54,16 @@ public class ItemRestDocMaker implements RestDocMaker {
 		item = JsonUtil.fromResponse(postSnippet.getResponse(), ItemJson.class);
 		
 		// ITEMS_PUT_PLACEHOLDER
-		Integer itemId = item.getItemId();
-		item.setItemId(null); // Set as null because we do not want to display in the documentation
+		Integer articleId = item.getArticleId();
+		item.setArticleId(null); // Set as null because we do not want to display in the documentation
 		item.setLinks(null); // Set as null because we do not want to display in the documentation
 		item.setName(item.getName() + " After PUT");
-		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, item, MatchAndTradeRestUtil.itemsUrl(membershipId, itemId));
+		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, item, MatchAndTradeRestUtil.itemsUrl(membershipId, articleId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(item.getName()));
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_PUT_PLACEHOLDER, putSnippet.asHtml());
 
 		// ITEMS_GET_PLACEHOLDER
-		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.itemsUrl(membershipId, itemId));
+		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.itemsUrl(membershipId, articleId));
 		getSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_GET_PLACEHOLDER, getSnippet.asHtml());
 		
@@ -78,7 +78,7 @@ public class ItemRestDocMaker implements RestDocMaker {
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
 		
 		// ITEMS_DELETE_PLACEHOLDER
-		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.itemsUrl(membershipId, itemId));
+		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.itemsUrl(membershipId, articleId));
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, ITEMS_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 

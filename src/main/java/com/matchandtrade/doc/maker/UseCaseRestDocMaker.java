@@ -198,8 +198,8 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 			String template,
 			String templatePlaceHolder) {
 		OfferJson offerJson = new OfferJson();
-		offerJson.setOfferedItemId(offeredItem.getItemId());
-		offerJson.setWantedItemId(wantedItem.getItemId());
+		offerJson.setOfferedArticleId(offeredItem.getArticleId());
+		offerJson.setWantedArticleId(wantedItem.getArticleId());
 		Snippet snippet = snippetFactory.makeSnippet(
 				Method.POST,
 				offerJson,
