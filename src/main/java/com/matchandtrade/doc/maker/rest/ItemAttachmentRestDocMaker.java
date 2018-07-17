@@ -1,4 +1,3 @@
-
 package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restdocmaker.RestDocMaker;
