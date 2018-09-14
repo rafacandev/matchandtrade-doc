@@ -13,7 +13,7 @@ import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 import com.matchandtrade.rest.v1.json.search.Matcher;
 import com.matchandtrade.rest.v1.json.search.Operator;
@@ -40,30 +40,30 @@ public class SearchRestDocMaker implements RestDocMaker {
 		UserJson owner = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		
 		MatchAndTradeApiFacade apiAsOwner = new MatchAndTradeApiFacade();
-		TradeJson trade = apiAsOwner.createTrade("Search Recipe ITEMS - " + new Date().getTime() + hashCode());
-		TradeMembershipJson tradeMembership = apiAsOwner.findTradeMembershipByUserIdAndTradeId(owner.getUserId(), trade.getTradeId());
-		apiAsOwner.createItem(tradeMembership, "Imperial Settlers");
-		apiAsOwner.createItem(tradeMembership, "Dead of Winter: A Crossroads Game");
+		TradeJson trade = apiAsOwner.createTrade("Search Recipe ARTICLES - " + new Date().getTime() + hashCode());
+		MembershipJson membership = apiAsOwner.findMembershipByUserIdAndTradeId(owner.getUserId(), trade.getTradeId());
+		apiAsOwner.createArticle(membership, "Imperial Settlers");
+		apiAsOwner.createArticle(membership, "Dead of Winter: A Crossroads Game");
 		
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
 		UserJson member = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		MatchAndTradeApiFacade apiAsMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		TradeMembershipJson memberMembership = apiAsMember.subscribeToTrade(member.getUserId(), trade.getTradeId());
-		apiAsMember.createItem(memberMembership, "Elysium");
-		apiAsMember.createItem(memberMembership, "The Voyages of Marco Polo");
-		apiAsMember.createItem(memberMembership, "Deus");
+		MembershipJson memberMembership = apiAsMember.subscribeToTrade(member.getUserId(), trade.getTradeId());
+		apiAsMember.createArticle(memberMembership, "Elysium");
+		apiAsMember.createArticle(memberMembership, "The Voyages of Marco Polo");
+		apiAsMember.createArticle(memberMembership, "Deus");
 
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
 		UserJson anotherMember = MatchAndTradeRestUtil.getLastAuthenticatedUser();
 		MatchAndTradeApiFacade apiAsAnotherMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		TradeMembershipJson anotherMemberMembership = apiAsAnotherMember.subscribeToTrade(anotherMember.getUserId(), trade.getTradeId());
-		apiAsAnotherMember.createItem(anotherMemberMembership, "DO NOT DISPLAY THIS ITEM");
+		MembershipJson anotherMemberMembership = apiAsAnotherMember.subscribeToTrade(anotherMember.getUserId(), trade.getTradeId());
+		apiAsAnotherMember.createArticle(anotherMemberMembership, "DO NOT DISPLAY THIS ARTICLE");
 
 		// SEARCH_POST_PLACEHOLDER
 		SearchCriteriaJson search = new SearchCriteriaJson();
-		search.setRecipe(Recipe.ITEMS);
+		search.setRecipe(Recipe.ARTICLES);
 		search.addCriterion("Trade.tradeId", trade.getTradeId());
-		search.addCriterion("TradeMembership.tradeMembershipId", anotherMemberMembership.getTradeMembershipId(), Operator.AND, Matcher.NOT_EQUALS);
+		search.addCriterion("Membership.membershipId", anotherMemberMembership.getMembershipId(), Operator.AND, Matcher.NOT_EQUALS);
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.addQueryParam("_pageNumber", "2")
@@ -77,7 +77,7 @@ public class SearchRestDocMaker implements RestDocMaker {
 		
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		template = TemplateUtil.replacePlaceholder(template, "TRADE_ID", trade.getTradeId().toString());
-		template = TemplateUtil.replacePlaceholder(template, "TRADE_MEMBERSHIP_ID", anotherMemberMembership.getTradeMembershipId().toString());
+		template = TemplateUtil.replacePlaceholder(template, "MEMBERSHIP_ID", anotherMemberMembership.getMembershipId().toString());
 		
 		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, postSnippet.asHtml());
 

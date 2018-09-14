@@ -25,11 +25,11 @@ public class MatchAndTradeRestUtil {
 		ATTACHMENTS("matchandtrade-web-api/v1/attachments"),
 		SEARCH("matchandtrade-web-api/v1/search"),
 		TRADE_RESULTS("results"),
-		ITEMS("items"),
-		ITEM_ATTACHMENTS("attachments"),
+		ARTICLES("articles"),
+		ARTICLE_ATTACHMENTS("attachments"),
 		INFO("info"),
-		WANT_ITEMS("want-items"),
-		TRADE_MEMBERSHIPS("matchandtrade-web-api/v1/trade-memberships"),
+		WANT_ARTICLES("want-articles"),
+		MEMBERSHIPS("matchandtrade-web-api/v1/memberships"),
 		OFFERS("offers"),
 		USERS("matchandtrade-web-api/v1/users");
 
@@ -74,41 +74,41 @@ public class MatchAndTradeRestUtil {
 	public static String attachmentsUrl() {
 		return Endpoint.ATTACHMENTS.asURL(baseUrl) + "/";
 	}
-	public static String attachmentsUrl(Integer tradeMembershipId, Integer itemId, Integer attachmentId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_ATTACHMENTS.path + "/" + attachmentId;
+	public static String attachmentsUrl(Integer membershipId, Integer articleId, Integer attachmentId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.ARTICLE_ATTACHMENTS.path + "/" + attachmentId;
 	}
-	public static String attachmentsUrl(Integer tradeMembershipId, Integer itemId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.ITEM_ATTACHMENTS.path + "/";
+	public static String attachmentsUrl(Integer membershipId, Integer articleId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.ARTICLE_ATTACHMENTS.path + "/";
 	}
 	public static String tradesUrl(Integer tradeId) {
 		return Endpoint.TRADES.asURL(baseUrl) + "/" + tradeId;
 	}
-	public static String wantItemsUrl(Integer tradeMembershipId, Integer itemId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.WANT_ITEMS.path;
+	public static String wantArticlesUrl(Integer membershipId, Integer articleId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.WANT_ARTICLES.path;
 	}
-	public static String wantItemsUrl(Integer tradeMembershipId, Integer itemId, Integer wantItemId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId + "/" + Endpoint.WANT_ITEMS.path + "/" + wantItemId;
+	public static String wantArticlesUrl(Integer membershipId, Integer articleId, Integer wantArticleId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.WANT_ARTICLES.path + "/" + wantArticleId;
 	}
-	public static String itemsUrl(Integer tradeMembershipId, Integer itemId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path + "/" + itemId;
+	public static String articlesUrl(Integer membershipId, Integer articleId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId;
 	}
-	public static String itemsUrl(Integer tradeMembershipId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.ITEMS.path;
+	public static String articlesUrl(Integer membershipId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path;
 	}
-	public static String tradeMembershipsUrl() {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl);
+	public static String membershipsUrl() {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl);
 	}
-	public static String tradeMembershipsUrl(Integer tradeMembershipId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId;
+	public static String membershipsUrl(Integer membershipId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId;
 	}
 	public static String tradeResultsUrl(Integer tradeId) {
 		return Endpoint.TRADES.asURL(baseUrl) + "/" + tradeId + "/" + Endpoint.TRADE_RESULTS.path;
 	}
-	public static String offerUrl(Integer tradeMembershipId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.OFFERS.path;
+	public static String offerUrl(Integer membershipId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.OFFERS.path;
 	}
-	public static String offerUrl(Integer tradeMembershipId, Integer offerId) {
-		return Endpoint.TRADE_MEMBERSHIPS.asURL(baseUrl) + "/" + tradeMembershipId + "/" + Endpoint.OFFERS.path + "/" + offerId;
+	public static String offerUrl(Integer membershipId, Integer offerId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.OFFERS.path + "/" + offerId;
 	}
 	
 

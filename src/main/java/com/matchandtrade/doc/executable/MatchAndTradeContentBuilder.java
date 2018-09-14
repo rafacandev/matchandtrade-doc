@@ -10,11 +10,11 @@ import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
 import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
-import com.matchandtrade.doc.maker.rest.ItemAttachmentRestDocMaker;
-import com.matchandtrade.doc.maker.rest.ItemRestDocMaker;
+import com.matchandtrade.doc.maker.rest.ArticleAttachmentRestDocMaker;
+import com.matchandtrade.doc.maker.rest.ArticleRestDocMaker;
 import com.matchandtrade.doc.maker.rest.OfferRestDocMaker;
 import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
-import com.matchandtrade.doc.maker.rest.TradeMembershipRestDocMaker;
+import com.matchandtrade.doc.maker.rest.MembershipRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeResultRestDocMaker;
 import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
@@ -38,14 +38,14 @@ public class MatchAndTradeContentBuilder {
 					new AuthenticationRestDocMaker(),
 					new UserRestDocMaker(),
 					new TradeRestDocMaker(),
-					new TradeMembershipRestDocMaker(),
-					new ItemRestDocMaker(),
+					new MembershipRestDocMaker(),
+					new ArticleRestDocMaker(),
 					new OfferRestDocMaker(),
 					new TradeResultRestDocMaker(),
 					new SearchRestDocMaker(),
 					new UseCaseRestDocMaker(),
 					new AttachmentRestDocMaker(),
-					new ItemAttachmentRestDocMaker()
+					new ArticleAttachmentRestDocMaker()
 				);
 			RestDocMakerGenerator generator = new RestDocMakerGenerator();
 			generator.generateDocumentation(config);

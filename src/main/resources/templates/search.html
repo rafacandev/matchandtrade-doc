@@ -11,7 +11,7 @@
 
 <h3>Authorization</h3>
 <ul>
-	<li><span class='incode'>"Search.recipe": "ITEMS"</span> Only clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li><span class='incode'>"Search.recipe": "ARTICLES"</span> Only clients with a valid <span class='incode'>Authorization</span> header</li>
 </ul>
 
 <h3>Root Resource</h3>
@@ -41,13 +41,13 @@
 		<th>Criteria Specification</th>
 	</tr>
 	<tr>
-		<td>ITEMS</td>
-		<td>Returns an array of <a href='items.html'>Items</a> matching the given <span class='incode'>Search.criteria</span></td>
+		<td>ARTICLES</td>
+		<td>Returns an array of <a href='articles.html'>Articles</a> matching the given <span class='incode'>Search.criteria</span></td>
 		<td>
 			<span class='incode'>"key": "trade.tradeId"</span> references <a href='trades.html' class='incode'>Trade.tradeId</a><br>
 			<span class='incode'>"value": n</span> numeric value
 			<hr>
-			<span class='incode'>"key": "trade.tradeMembershipId"</span> references <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a><br>
+			<span class='incode'>"key": "trade.membershipId"</span> references <a href='trade-memberships.html' class='incode'>Membership.membershipId</a><br>
 			<span class='incode'>"value": n</span> numeric value
 		</td>
 	</tr>
@@ -87,7 +87,7 @@ ${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 <p>
-	Search for all <a href='items.html'>Items</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to ${TRADE_ID}
-	except for those belonging to <a href='trade-memberships.html' class='incode'>TradeMembership.tradeMembershipId</a> equals to ${TRADE_MEMBERSHIP_ID}.
+	Search for all <a href='articles.html'>Articles</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId</a> equals to ${TRADE_ID}
+	except for those belonging to <a href='trade-memberships.html' class='incode'>Membership.membershipId</a> equals to ${MEMBERSHIP_ID}.
 </p>
 ${SEARCH_POST_PLACEHOLDER}

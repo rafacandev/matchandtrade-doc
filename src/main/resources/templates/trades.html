@@ -3,7 +3,7 @@
 	<i>Resource</i> for <span class='incode'>Trades</span>. <span class='incode'>Trades</span> are the the central components of the system.
 	The <a href='users.html'>User</a> who creates a <span class='incode'>Trade</span> becomes the <i>organizer</i>
 	while other <a href='users.html'>Users</a> can subscribe to the <span class='incode'>Trade</span> and become <i>members</i>.
-	<i>Members</i> submit their <a href='items.html'>Items</a> through a <a href='trade-memberships.html'>TradeMembership</a>.
+	<i>Members</i> submit their <a href='articles.html'>Articles</a> through a <a href='trade-memberships.html'>Membership</a>.
 	Later the <i>organizer</i> closes the <span class='incode'>Trade</span> and the system generates the results of the <span class='incode'>Trade</span>.
 </p>
 
@@ -60,20 +60,20 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>SUBMITTING_ITEMS</td>
-		<td>Default state when a <span class='incode'>Trade</span> is created. Indicates that <a href='users.html'>Users</a> can join the <span class='incode'>Trade</span> and submit <a href='items.html'>Items</a></td>
+		<td>SUBMITTING_ARTICLES</td>
+		<td>Default state when a <span class='incode'>Trade</span> is created. Indicates that <a href='users.html'>Users</a> can join the <span class='incode'>Trade</span> and submit <a href='articles.html'>Articles</a></td>
 	</tr>
 	<tr>
-		<td>MATCHING_ITEMS</td>
-		<td><a href='users.html'>Users</a> can match <a href='items.html'>Items</a> in the trade. Other <a href='users.html'>users</a> cannot join the trade nor submit <a href='items.html'>items</a></td>
+		<td>MATCHING_ARTICLES</td>
+		<td><a href='users.html'>Users</a> can match <a href='articles.html'>Articles</a> in the trade. Other <a href='users.html'>users</a> cannot join the trade nor submit <a href='articles.html'>articles</a></td>
 	</tr>
 	<tr>
-		<td>ITEMS_MATCHED</td>
-		<td><a href='items.html'>Items</a> are matched and results (TODO: add link to trade-results.html) can be generated.</td>
+		<td>ARTICLES_MATCHED</td>
+		<td><a href='articles.html'>Articles</a> are matched and results (TODO: add link to trade-results.html) can be generated.</td>
 	</tr>
 	<tr>
 		<td>GENERATE_RESULTS</td>
-		<td>Request the system to generate results (TODO: add link to trade-results.html) for the matched <a href='items.html'>Items</a>.</td>
+		<td>Request the system to generate results (TODO: add link to trade-results.html) for the matched <a href='articles.html'>Articles</a>.</td>
 	</tr>
 	<tr>
 		<td>RESULTS_GENERATED</td>
@@ -91,7 +91,7 @@ ${PAGINATION_TABLE}
 <h3>Rules</h3>
 <ul>
 	<li>When a new <span class='incode'>Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class='incode'>Authorization</span> header becomes the <span class='incode'>Trade</span> <i>organizer</i>.
-	Hence the system creates a <span class='incode'><a href='trade-memberships.html'>TradeMembership.type=OWNER</a></span></li>
+	Hence the system creates a <span class='incode'><a href='trade-memberships.html'>Membership.type=OWNER</a></span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a <span class='incode'>Trade</span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a <span class='incode'>Trade</span></li>
 </ul>

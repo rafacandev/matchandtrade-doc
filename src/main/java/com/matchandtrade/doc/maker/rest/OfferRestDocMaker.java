@@ -9,10 +9,10 @@ import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.ItemJson;
+import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.OfferJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.builder.RequestSpecBuilder;
@@ -47,12 +47,12 @@ public class OfferRestDocMaker implements RestDocMaker {
 		olavoApiFacade.saveUser(olavo);
 		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + new Date().getTime() + hashCode());
 		
-		// ITEM: Pandemic Legacy: Season 1
-		TradeMembershipJson olavoMembership = olavoApiFacade.findTradeMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
-		ItemJson pandemicOne = new ItemJson();
+		// ARTICLE: Pandemic Legacy: Season 1
+		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
+		ArticleJson pandemicOne = new ArticleJson();
 		pandemicOne.setName("Pandemic Legacy: Season 1");
-		Snippet pandemicOneSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOne, MatchAndTradeRestUtil.itemsUrl(olavoMembership.getTradeMembershipId()) + "/");
-		pandemicOne = pandemicOneSnippet.getResponse().body().as(ItemJson.class);
+		Snippet pandemicOneSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOne, MatchAndTradeRestUtil.articlesUrl(olavoMembership.getMembershipId()) + "/");
+		pandemicOne = pandemicOneSnippet.getResponse().body().as(ArticleJson.class);
 
 		// Trade Member 'Maria'
 		Header mariaAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -64,41 +64,41 @@ public class OfferRestDocMaker implements RestDocMaker {
 		mariaApiFacade.saveUser(maria);
 
 		// Maria's membership
-		TradeMembershipJson mariaMembership = mariaApiFacade.subscribeToTrade(trade);
-		ItemJson stoneAge = mariaApiFacade.createItem(mariaMembership, "Stone Age");
+		MembershipJson mariaMembership = mariaApiFacade.subscribeToTrade(trade);
+		ArticleJson stoneAge = mariaApiFacade.createArticle(mariaMembership, "Stone Age");
 		
 		// Make offers
 		OfferJson pandemicOneForStoneAge = new OfferJson();
 		pandemicOneForStoneAge.setOfferedArticleId(pandemicOne.getArticleId());
 		pandemicOneForStoneAge.setWantedArticleId(stoneAge.getArticleId());
-		Snippet pandemicOneForStoneAgeSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()) + "/");
+		Snippet pandemicOneForStoneAgeSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()) + "/");
 		pandemicOneForStoneAgeSnippet.getResponse().then().statusCode(201);
 		pandemicOneForStoneAge = pandemicOneForStoneAgeSnippet.getResponse().body().as(OfferJson.class);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, pandemicOneForStoneAgeSnippet.asHtml());
 
-		mariaApiFacade.createOffer(mariaMembership.getTradeMembershipId(), stoneAge.getArticleId(), pandemicOne.getArticleId());
+		mariaApiFacade.createOffer(mariaMembership.getMembershipId(), stoneAge.getArticleId(), pandemicOne.getArticleId());
 		
-		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
+		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		getSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getSnippet.asHtml());
 
-		ItemJson firstDummy = mariaApiFacade.createItem(mariaMembership, "First ummy item so it displays in the GET ALL");
-		ItemJson secondDummy = mariaApiFacade.createItem(mariaMembership, "Second dummy item so it displays in the GET ALL");
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getArticleId(), firstDummy.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), pandemicOne.getArticleId(), secondDummy.getArticleId());
+		ArticleJson firstDummy = mariaApiFacade.createArticle(mariaMembership, "First ummy article so it displays in the GET ALL");
+		ArticleJson secondDummy = mariaApiFacade.createArticle(mariaMembership, "Second dummy article so it displays in the GET ALL");
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), pandemicOne.getArticleId(), firstDummy.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), pandemicOne.getArticleId(), secondDummy.getArticleId());
 		
 		RequestSpecification searchRequest = new RequestSpecBuilder()
 				.addRequestSpecification(olavoSnippetFactory.getDefaultRequestSpecification())
 				.addQueryParam("_pageNumber", "1")
 				.addQueryParam("_pageSize", "3")
-				.addQueryParam("offeredItemId", pandemicOne.getArticleId())
-				.addQueryParam("wantedItemId", stoneAge.getArticleId())
+				.addQueryParam("offeredArticleId", pandemicOne.getArticleId())
+				.addQueryParam("wantedArticleId", stoneAge.getArticleId())
 				.build();
-		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId()));
+		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()));
 		searchSnippet.getResponse().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchSnippet.asHtml());
 
-		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getTradeMembershipId(), pandemicOneForStoneAge.getOfferId()));
+		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
 		deleteSnippet.getResponse().then().statusCode(204);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteSnippet.asHtml());
 		

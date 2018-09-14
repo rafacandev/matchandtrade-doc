@@ -1,7 +1,7 @@
 <h1>Use Cases</h1>
 <p>
 This page describes a typical use case where a <a href='users.html'>User</a> creates a <a href='trades.html'>Trade</a>
-<a href='users.html'>Users</a> submit and match <a href='items.html'>Items</a>
+<a href='users.html'>Users</a> submit and match <a href='articles.html'>Articles</a>
 and finally generate the <a href='trade-results.html'>TradeResults</a>
 </p>
 
@@ -21,21 +21,21 @@ ${OWNER_AUTHENTICATIONS}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
-	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ITEMS</span>
-	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='items.html'>Items</a>.
+	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ARTICLES</span>
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='articles.html'>Articles</a>.
 </p>
 ${OWNER_TRADES_POST}
 
 <p>
 	Olavo gets his <a href='trade-memberships.html'>TradeMemberhip</a> details.
 </p>
-${OWNER_TRADE_MEMBERSHIP}
+${OWNER_MEMBERSHIP}
 
 <p>
-  	Olavo adds two <a href='items.html'>Items</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
+  	Olavo adds two <a href='articles.html'>Articles</a> to his <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${OWNER_ITEM_ONE}
-${OWNER_ITEM_TWO}
+${OWNER_ARTICLE_ONE}
+${OWNER_ARTICLE_TWO}
 
 <p>
   	Maria <a href='authenticate.html'>Authenticates</a> on the system.
@@ -55,28 +55,28 @@ ${MEMBER_AUTHENTICATIONS}
 ${MEMBER_TRADES_MEMBERSHIP}
 
 <p>
-  	Maria adds three <a href='items.html'>Items</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
+  	Maria adds three <a href='articles.html'>Articles</a> to her <a href='trade-memberships.html'>TradeMemberhip</a>.
 </p>
-${MEMBER_ITEM_ONE}
-${MEMBER_ITEM_TWO}
-${MEMBER_ITEM_THREE}
+${MEMBER_ARTICLE_ONE}
+${MEMBER_ARTICLE_TWO}
+${MEMBER_ARTICLE_THREE}
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ITEMS</span>.
+	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ARTICLES</span>.
 	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
 </p>
-${TRADE_MATCHING_ITEMS}
+${TRADE_MATCHING_ARTICLES}
 
 <p>
-	Olavo matches his <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
-	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	Olavo matches his <a href='articles.html'>Articles</a> with <a href='articles.html'>Articles</a> from other <i>members</i>
+	via the <a href='want-articles.html'>WantArticles</a> endpoint.<br>
 	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
 ${OWNER_OFFER_ONE}
 
 <p>
-	Maria matches her <a href='items.html'>Items</a> with <a href='items.html'>Items</a> from other <i>members</i>
-	via the <a href='want-items.html'>WantItems</a> endpoint.<br>
+	Maria matches her <a href='articles.html'>Articles</a> with <a href='articles.html'>Articles</a> from other <i>members</i>
+	via the <a href='want-articles.html'>WantArticles</a> endpoint.<br>
 	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
 	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
@@ -90,11 +90,11 @@ ${TRADE_GENERATE_TRADES}
 
 <p>
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
-	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_item_id=1</span>)
-	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_item_id=3</span>)<br>
+	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_article_id=1</span>)
+	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_article_id=3</span>)<br>
 
-	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_item_id=3</span>)
-	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_item_id=1</span>)<br>
+	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_article_id=3</span>)
+	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_article_id=1</span>)<br>
 
 	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
 </p>

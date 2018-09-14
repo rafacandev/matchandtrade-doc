@@ -1,16 +1,16 @@
 <h1>Offer</h1>
 <p>
 	<i>Resource</i> for <span class='incode'>Offer</span>.
-	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='items.html'>Item</a>
-	for a wanted <a href='items.html'>Item</a>.
+	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='articles.html'>Article</a>
+	for a wanted <a href='articles.html'>Article</a>.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST /rest/v1/trade-memberships/{tradeMembershipId}/offers/</span></li>
-	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
-	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers?{queryParameters}</span></li>
-	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>POST /rest/v1/trade-memberships/{membershipId}/offers/</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{membershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>GET /rest/v1/trade-memberships/{membershipId}/offers?{queryParameters}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{membershipId}/offers/{offerId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -31,14 +31,14 @@
 		<td>Id associated with this resource</td>
 	</tr>
 	<tr>
-		<td>offeredItemId</td>
+		<td>offeredArticleId</td>
 		<td>ready-only</td>
-		<td>Id associated with the offered <a href='items.html'>Item</a></td>
+		<td>Id associated with the offered <a href='articles.html'>Article</a></td>
 	</tr>
 	<tr>
-		<td>wantedItemId</td>
+		<td>wantedArticleId</td>
 		<td>ready-only</td>
-		<td>Id associated with the wanted <a href='items.html'>Item</a> in exchange for the <span class="incode">Offer.offeredItemId</span></td>
+		<td>Id associated with the wanted <a href='articles.html'>Article</a> in exchange for the <span class="incode">Offer.offeredArticleId</span></td>
 	</tr>
 </table>
 
@@ -49,12 +49,12 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>offeredItemId</td>
-		<td>Refers to a <span class='incode'>Offer.offeredItemId</span></td>
+		<td>offeredArticleId</td>
+		<td>Refers to a <span class='incode'>Offer.offeredArticleId</span></td>
 	</tr>
 	<tr>
-		<td>wantedItemId</td>
-		<td>Refers to a <span class='incode'>Offer.wantedItemId</span></td>
+		<td>wantedArticleId</td>
+		<td>Refers to a <span class='incode'>Offer.wantedArticleId</span></td>
 	</tr>
 	${PAGINATION_ROWS}
 </table>
@@ -62,17 +62,17 @@
 <h3>Rules</h3>
 <ul>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must differ.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must differ.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must belong existing Items.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must belong existing Articles.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> must belong to the offering <span class="incode">User.userId</span>
+		<span class="incode">Offer.offeredArticleId</span> must belong to the offering <span class="incode">User.userId</span>
 		when performing a <span class="incode">POST</span> or <span class="incode">DELETE</span> operations.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must be associated to the same Trade.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must be associated to the same Trade.
 	</li>
 </ul>
 

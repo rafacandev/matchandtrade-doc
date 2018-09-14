@@ -11,9 +11,9 @@ import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.ItemJson;
+import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.http.ContentType;
@@ -39,9 +39,9 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		olavo.setName("Olavo");
 		olavoApiFacade.saveUser(olavo);
 		TradeJson trade = olavoApiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
-		TradeMembershipJson olavoMembership = olavoApiFacade.findTradeMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId());
-		ItemJson applesToApples = olavoApiFacade.createItem(olavoMembership, "Apples to Apples");
-		ItemJson beta = olavoApiFacade.createItem(olavoMembership, "Bora Bora");
+		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId());
+		ArticleJson applesToApples = olavoApiFacade.createArticle(olavoMembership, "Apples to Apples");
+		ArticleJson beta = olavoApiFacade.createArticle(olavoMembership, "Bora Bora");
 
 		// Create a trade member setup
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -49,10 +49,10 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		UserJson maria = mariaApiFacade.getUser();
 		maria.setName("Maria");
 		mariaApiFacade.saveUser(maria);
-		TradeMembershipJson memberMembership = mariaApiFacade.subscribeToTrade(trade);
-		ItemJson andromedra = mariaApiFacade.createItem(memberMembership, "Andromedra");
-		ItemJson blokus = mariaApiFacade.createItem(memberMembership, "Blokus");
-		ItemJson caylus = mariaApiFacade.createItem(memberMembership, "Caylus");
+		MembershipJson memberMembership = mariaApiFacade.subscribeToTrade(trade);
+		ArticleJson andromedra = mariaApiFacade.createArticle(memberMembership, "Andromedra");
+		ArticleJson blokus = mariaApiFacade.createArticle(memberMembership, "Blokus");
+		ArticleJson caylus = mariaApiFacade.createArticle(memberMembership, "Caylus");
 
 		// Create another trade member setup
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -60,32 +60,32 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		UserJson xavier = xavierApiFacade.getUser();
 		xavier.setName("Xavier");
 		xavierApiFacade.saveUser(xavier);
-		TradeMembershipJson xavierMembership = xavierApiFacade.subscribeToTrade(trade);
-		ItemJson agricola = xavierApiFacade.createItem(xavierMembership, "Agricola");
+		MembershipJson xavierMembership = xavierApiFacade.subscribeToTrade(trade);
+		ArticleJson agricola = xavierApiFacade.createArticle(xavierMembership, "Agricola");
 		
-		trade.setState(TradeJson.State.MATCHING_ITEMS);
+		trade.setState(TradeJson.State.MATCHING_ARTICLES);
 		olavoApiFacade.saveTrade(trade);
 
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), andromedra.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), beta.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), applesToApples.getArticleId(), caylus.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), andromedra.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), blokus.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getTradeMembershipId(), beta.getArticleId(), caylus.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), andromedra.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), beta.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), caylus.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), andromedra.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), blokus.getArticleId());
+		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), caylus.getArticleId());
 		
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), andromedra.getArticleId(), applesToApples.getArticleId());
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), blokus.getArticleId(), beta.getArticleId());
-		mariaApiFacade.createOffer(memberMembership.getTradeMembershipId(), caylus.getArticleId(), agricola.getArticleId());
+		mariaApiFacade.createOffer(memberMembership.getMembershipId(), andromedra.getArticleId(), applesToApples.getArticleId());
+		mariaApiFacade.createOffer(memberMembership.getMembershipId(), blokus.getArticleId(), beta.getArticleId());
+		mariaApiFacade.createOffer(memberMembership.getMembershipId(), caylus.getArticleId(), agricola.getArticleId());
 		
-		xavierApiFacade.createOffer(xavierMembership.getTradeMembershipId(), agricola.getArticleId(), applesToApples.getArticleId());
+		xavierApiFacade.createOffer(xavierMembership.getMembershipId(), agricola.getArticleId(), applesToApples.getArticleId());
 
 		trade.setState(TradeJson.State.GENERATE_RESULTS);
 		olavoApiFacade.saveTrade(trade);
 		
 		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.tradeResultsUrl(trade.getTradeId()));
-		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfItems\":6"));
-		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfTradedItems\":5"));
-		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfNotTradedItems\":1,"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfArticles\":6"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfTradedArticles\":5"));
+		assertTrue(getSnippet.getResponse().body().asString().contains("\"totalOfNotTradedArticles\":1,"));
 		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET, getSnippet.asHtml());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);

@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
 import com.matchandtrade.rest.v1.json.AttachmentJson;
-import com.matchandtrade.rest.v1.json.ItemJson;
+import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.OfferJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.TradeMembershipJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 
 import io.restassured.RestAssured;
@@ -45,20 +45,20 @@ public class MatchAndTradeApiFacade {
 		this.user = user;
 	}
 	
-	public ItemJson createItem(TradeMembershipJson tradeMembershipJson, String itemName) {
-		ItemJson requestBody = new ItemJson();
-		requestBody.setName(itemName);
+	public ArticleJson createArticle(MembershipJson membershipJson, String articleName) {
+		ArticleJson requestBody = new ArticleJson();
+		requestBody.setName(articleName);
 		Response response = RestAssured
 				.given()
 				.headers(defaultHeaders)
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post(MatchAndTradeRestUtil.itemsUrl(tradeMembershipJson.getTradeMembershipId()) + "/");
-		return response.body().as(ItemJson.class);
+				.post(MatchAndTradeRestUtil.articlesUrl(membershipJson.getMembershipId()) + "/");
+		return response.body().as(ArticleJson.class);
 	}
 
-	public OfferJson createOffer(Integer tradeMembershipId, Integer offeredArticleId, Integer wantedArticleId) {
+	public OfferJson createOffer(Integer membershipId, Integer offeredArticleId, Integer wantedArticleId) {
 		OfferJson requestBody = new OfferJson();
 		requestBody.setOfferedArticleId(offeredArticleId);
 		requestBody.setWantedArticleId(wantedArticleId);
@@ -68,7 +68,7 @@ public class MatchAndTradeApiFacade {
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post(MatchAndTradeRestUtil.offerUrl(tradeMembershipId) + "/");
+				.post(MatchAndTradeRestUtil.offerUrl(membershipId) + "/");
 		return response.body().as(OfferJson.class);
 	}
 
@@ -85,7 +85,7 @@ public class MatchAndTradeApiFacade {
 		return JsonUtil.fromResponse(response, TradeJson.class);
 	}
 
-	public TradeMembershipJson findTradeMembershipByUserIdAndTradeId(Integer userId, Integer tradeId) {
+	public MembershipJson findMembershipByUserIdAndTradeId(Integer userId, Integer tradeId) {
 		RequestSpecification request = new RequestSpecBuilder()
 				.addHeaders(defaultHeaders)
 				.addParam("userId", userId)
@@ -95,11 +95,11 @@ public class MatchAndTradeApiFacade {
 				.given()
 				.spec(request)
 				.when()
-				.get(MatchAndTradeRestUtil.tradeMembershipsUrl());
+				.get(MatchAndTradeRestUtil.membershipsUrl());
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		List<Map> responseList = response.body().as(List.class);
-		String tradeMembershipAsString = JsonUtil.toJson(responseList.get(0));
-		return JsonUtil.fromString(tradeMembershipAsString, TradeMembershipJson.class);
+		String membershipAsString = JsonUtil.toJson(responseList.get(0));
+		return JsonUtil.fromString(membershipAsString, MembershipJson.class);
 	}
 	
 	public UserJson getUser() {
@@ -128,8 +128,8 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(TradeJson.class);
 	}
 	
-	public TradeMembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
-		TradeMembershipJson requestBody = new TradeMembershipJson();
+	public MembershipJson subscribeToTrade(Integer userId, Integer tradeId) {
+		MembershipJson requestBody = new MembershipJson();
 		requestBody.setUserId(userId);
 		requestBody.setTradeId(tradeId);
 		Response response = RestAssured
@@ -138,12 +138,12 @@ public class MatchAndTradeApiFacade {
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
-		return JsonUtil.fromResponse(response, TradeMembershipJson.class);
+				.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
+		return JsonUtil.fromResponse(response, MembershipJson.class);
 	}
 
-	public TradeMembershipJson subscribeToTrade(TradeJson trade) {
-		TradeMembershipJson requestBody = new TradeMembershipJson();
+	public MembershipJson subscribeToTrade(TradeJson trade) {
+		MembershipJson requestBody = new MembershipJson();
 		requestBody.setTradeId(trade.getTradeId());
 		requestBody.setUserId(user.getUserId());
 		Response response = RestAssured
@@ -152,8 +152,8 @@ public class MatchAndTradeApiFacade {
 			.contentType(ContentType.JSON)
 			.body(requestBody)
 			.when()
-			.post(MatchAndTradeRestUtil.tradeMembershipsUrl() + "/");
-		return response.body().as(TradeMembershipJson.class);
+			.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
+		return response.body().as(MembershipJson.class);
 	}
 	
 	public AttachmentJson createAttachment(String fileName) {

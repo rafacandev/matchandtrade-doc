@@ -57,7 +57,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 		tradeName = "Board games in Toronto - " + new Date().getTime() + this.hashCode(); 
 		tradeJson.setName(tradeName);
 		tradeJson.setDescription("The event will take place at Toronto Convention Center");
-		tradeJson.setState(State.MATCHING_ITEMS);
+		tradeJson.setState(State.MATCHING_ARTICLES);
 		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, tradeJson, MatchAndTradeRestUtil.tradesUrl(tradeId));
 		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(tradeJson.getName()));
 		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putSnippet.asHtml());

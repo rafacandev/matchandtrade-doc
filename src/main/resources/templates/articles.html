@@ -1,0 +1,70 @@
+<h1>Article</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Articles</span>.
+	<span class='incode'>Article</span> is anything that a <a href="users.html">User</a> would put for up
+	for <a href="trades.html">Trade</a>.  
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>PUT rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/{articleId}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>DELETE rest/v1/memberships/{membershipId}/articles/{articleId}</span></li>
+</ul>
+
+
+<h3>Authorization</h3>
+<ul>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li>The URL parameter <span class='incode'>{membershipId}</span> must be associated to the authenticated client's <span class='incode'>userId</span></li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>articleId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>Name of this <span class='incode'>Article</span></td>
+	</tr>
+	<tr>
+		<td>description</td>
+		<td>read-write, optional, 500 max length</td>
+		<td>Description of this <span class='incode'>Article</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+${PAGINATION_TABLE}
+
+<h3>Rules</h3>
+<ul>
+	<li><a href="articles.html">Articles</a> can only be deleted by their owners.</li>
+	<li><span class="incode">Article.name</span> must be unique (case insensitive) within a <a href="memberships.html">Membership</a>.</li>
+</ul>
+
+
+<h3>Examples</h3>
+${ARTICLES_POST_PLACEHOLDER}
+
+${ARTICLES_PUT_PLACEHOLDER}
+
+${ARTICLES_GET_PLACEHOLDER}
+
+${ARTICLES_SEARCH_PLACEHOLDER}
+
+${ARTICLES_GET_ALL_PLACEHOLDER}
+
+${ARTICLES_DELETE_PLACEHOLDER}
