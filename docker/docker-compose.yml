@@ -1,7 +1,7 @@
 version: '2'
 services:
   matchandtrade-api:
-    image: matchandtrade-api:0.0-SNAPSHOT
+    image: rafaelsantosbra/matchandtrade-api:0.0-SNAPSHOT
     container_name: matchandtrade-api
     ports:
      - "8080:8080"
