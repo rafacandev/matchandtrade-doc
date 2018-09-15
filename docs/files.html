@@ -72,10 +72,10 @@
 
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_49' class='tablinks' onclick='openTab(event, "summaryTab_49")'>Summary</button><button id='httpTabLink_49' class='tablinks' onclick='openTab(event, "httpTab_49")'>HTTP</button><button id='curlTabLink_49' class='tablinks' onclick='openTab(event, "curlTab_49")'>curl</button></div><div id='summaryTab_49' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/files/
+<div class='tab'><button id='summaryTabLink_49' class='tablinks' onclick='openTab(event, "summaryTab_49")'>Summary</button><button id='httpTabLink_49' class='tablinks' onclick='openTab(event, "httpTab_49")'>HTTP</button><button id='curlTabLink_49' class='tablinks' onclick='openTab(event, "curlTab_49")'>curl</button></div><div id='summaryTab_49' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-api/v1/files/
 Response: HTTP/1.1 201 
 {&quot;fileId&quot;:13,&quot;name&quot;:&quot;my-image.png&quot;,&quot;contentType&quot;:&quot;image/png&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;thumbnail&quot;,&quot;href&quot;:&quot;/m...</div><div id='httpTab_49' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/matchandtrade-web-api/v1/files/
+POST http://localhost:8080/matchandtrade-api/v1/files/
 Headers:       Authorization: 7403-6465-1464
                Accept: */*
                Content-Type: multipart/form-data; boundary=&quot;bU-PBFbz2tNhzrNVBrtUTOElQKIqjqu71qDuaGW&quot;
@@ -92,10 +92,10 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
   }, {
     &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
   } ]
 }</div><div id='curlTab_49' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
@@ -103,7 +103,7 @@ curl -v -X POST \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: multipart/form-data; boundary=&quot;bU-PBFbz2tNhzrNVBrtUTOElQKIqjqu71qDuaGW&quot;&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/files/
+http://localhost:8080/matchandtrade-api/v1/files/
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
@@ -116,10 +116,10 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;contentType&quot; : &quot;image/png&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;thumbnail&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-api/files/2018/5/0e810f83-19ce-4b2a-80fb-da3bb31c32a0.file&quot;
   }, {
     &quot;rel&quot; : &quot;original&quot;,
-    &quot;href&quot; : &quot;/matchandtrade-web-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
+    &quot;href&quot; : &quot;/matchandtrade-api/files/2018/5/07ba4e4f-0b22-444d-9911-ed581ef42be8.file&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_49', "summaryTab_49");</script>

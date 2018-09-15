@@ -57,10 +57,10 @@
 <h3>Examples</h3>
 For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
 <i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
-<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
+<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trades/56/results
 Response: HTTP/1.1 200 
 {&quot;tradeId&quot;:56,&quot;tradeName&quot;:&quot;Board games in Montreal - 15277234662511607955941&quot;,&quot;totalOfItems&quot;:6,&quot;tota...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
+GET http://localhost:8080/matchandtrade-api/v1/trades/56/results
 Headers:       Authorization: 2055-339-3782
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -139,7 +139,7 @@ curl -v -X GET \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trades/56/results
+http://localhost:8080/matchandtrade-api/v1/trades/56/results
 
 -----  Response  -----
 Status:        HTTP/1.1 200 

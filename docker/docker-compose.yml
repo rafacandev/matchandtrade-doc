@@ -1,8 +1,8 @@
 version: '2'
 services:
-  matchandtrade-web-api:
-    image: matchandtrade-web-api:0.0-SNAPSHOT
-    container_name: matchandtrade-web-api
+  matchandtrade-api:
+    image: matchandtrade-api:0.0-SNAPSHOT
+    container_name: matchandtrade-api
     ports:
      - "8080:8080"
     volumes:

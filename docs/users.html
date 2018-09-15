@@ -67,11 +67,11 @@
 </table>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_6' class='tablinks' onclick='openTab(event, "summaryTab_6")'>Summary</button><button id='httpTabLink_6' class='tablinks' onclick='openTab(event, "httpTab_6")'>HTTP</button><button id='curlTabLink_6' class='tablinks' onclick='openTab(event, "curlTab_6")'>curl</button></div><div id='summaryTab_6' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-web-api/v1/users/57
+<div class='tab'><button id='summaryTabLink_6' class='tablinks' onclick='openTab(event, "summaryTab_6")'>Summary</button><button id='httpTabLink_6' class='tablinks' onclick='openTab(event, "httpTab_6")'>HTTP</button><button id='curlTabLink_6' class='tablinks' onclick='openTab(event, "curlTab_6")'>curl</button></div><div id='summaryTab_6' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-api/v1/users/57
 {&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;}
 Response: HTTP/1.1 200 
 {&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:57,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:...</div><div id='httpTab_6' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/matchandtrade-web-api/v1/users/57
+PUT http://localhost:8080/matchandtrade-api/v1/users/57
 Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -91,7 +91,7 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;userId&quot; : 57,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/57&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
   } ]
 }</div><div id='curlTab_6' class='tabcontent code'>-----  Request  -----
 curl -v -X PUT \
@@ -99,7 +99,7 @@ curl -v -X PUT \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;email\&quot;:\&quot;1527723463022@test.com\&quot;,\&quot;name\&quot;:\&quot;Scott Summers\&quot;}&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/users/57
+http://localhost:8080/matchandtrade-api/v1/users/57
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
@@ -112,15 +112,15 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;userId&quot; : 57,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/57&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_6', "summaryTab_6");</script>
 
-<div class='tab'><button id='summaryTabLink_7' class='tablinks' onclick='openTab(event, "summaryTab_7")'>Summary</button><button id='httpTabLink_7' class='tablinks' onclick='openTab(event, "httpTab_7")'>HTTP</button><button id='curlTabLink_7' class='tablinks' onclick='openTab(event, "curlTab_7")'>curl</button></div><div id='summaryTab_7' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/users/57
+<div class='tab'><button id='summaryTabLink_7' class='tablinks' onclick='openTab(event, "summaryTab_7")'>Summary</button><button id='httpTabLink_7' class='tablinks' onclick='openTab(event, "httpTab_7")'>HTTP</button><button id='curlTabLink_7' class='tablinks' onclick='openTab(event, "curlTab_7")'>curl</button></div><div id='summaryTab_7' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/users/57
 Response: HTTP/1.1 200 
 {&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:57,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:...</div><div id='httpTab_7' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/users/57
+GET http://localhost:8080/matchandtrade-api/v1/users/57
 Headers:       Authorization: 6572-9684-8741
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -137,7 +137,7 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;userId&quot; : 57,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/57&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
   } ]
 }</div><div id='curlTab_7' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
@@ -145,7 +145,7 @@ curl -v -X GET \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/users/57
+http://localhost:8080/matchandtrade-api/v1/users/57
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
@@ -158,7 +158,7 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;userId&quot; : 57,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/57&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_7', "summaryTab_7");</script></body>

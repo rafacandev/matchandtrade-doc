@@ -87,11 +87,11 @@
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_14' class='tablinks' onclick='openTab(event, "summaryTab_14")'>Summary</button><button id='httpTabLink_14' class='tablinks' onclick='openTab(event, "httpTab_14")'>HTTP</button><button id='curlTabLink_14' class='tablinks' onclick='openTab(event, "curlTab_14")'>curl</button></div><div id='summaryTab_14' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+<div class='tab'><button id='summaryTabLink_14' class='tablinks' onclick='openTab(event, "summaryTab_14")'>Summary</button><button id='httpTabLink_14' class='tablinks' onclick='openTab(event, "httpTab_14")'>HTTP</button><button id='curlTabLink_14' class='tablinks' onclick='openTab(event, "curlTab_14")'>curl</button></div><div id='summaryTab_14' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-api/v1/trade-memberships/
 {&quot;userId&quot;:59,&quot;tradeId&quot;:53}
 Response: HTTP/1.1 201 
 {&quot;tradeMembershipId&quot;:109,&quot;userId&quot;:59,&quot;tradeId&quot;:53,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;trade&quot;,&quot;href&quot;:&quot;h...</div><div id='httpTab_14' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+POST http://localhost:8080/matchandtrade-api/v1/trade-memberships/
 Headers:       Authorization: 8416-9170-7933
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -112,13 +112,13 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 }</div><div id='curlTab_14' class='tabcontent code'>-----  Request  -----
 curl -v -X POST \
@@ -126,7 +126,7 @@ curl -v -X POST \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;{\&quot;userId\&quot;:59,\&quot;tradeId\&quot;:53}&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/
+http://localhost:8080/matchandtrade-api/v1/trade-memberships/
 
 -----  Response  -----
 Status:        HTTP/1.1 201 
@@ -140,21 +140,21 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_14', "summaryTab_14");</script>
 
-<div class='tab'><button id='summaryTabLink_15' class='tablinks' onclick='openTab(event, "summaryTab_15")'>Summary</button><button id='httpTabLink_15' class='tablinks' onclick='openTab(event, "httpTab_15")'>HTTP</button><button id='curlTabLink_15' class='tablinks' onclick='openTab(event, "curlTab_15")'>curl</button></div><div id='summaryTab_15' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+<div class='tab'><button id='summaryTabLink_15' class='tablinks' onclick='openTab(event, "summaryTab_15")'>Summary</button><button id='httpTabLink_15' class='tablinks' onclick='openTab(event, "httpTab_15")'>HTTP</button><button id='curlTabLink_15' class='tablinks' onclick='openTab(event, "curlTab_15")'>curl</button></div><div id='summaryTab_15' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 Response: HTTP/1.1 200 
 {&quot;tradeMembershipId&quot;:109,&quot;userId&quot;:59,&quot;tradeId&quot;:53,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;trade&quot;,&quot;href&quot;:&quot;h...</div><div id='httpTab_15' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 Headers:       Authorization: 8416-9170-7933
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -172,13 +172,13 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 }</div><div id='curlTab_15' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
@@ -186,7 +186,7 @@ curl -v -X GET \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
@@ -200,21 +200,21 @@ Headers:       Content-Type: application/json;charset=UTF-8
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 }
 </div><script>openTabById('summaryTabLink_15', "summaryTab_15");</script>
 
-<div class='tab'><button id='summaryTabLink_17' class='tablinks' onclick='openTab(event, "summaryTab_17")'>Summary</button><button id='httpTabLink_17' class='tablinks' onclick='openTab(event, "httpTab_17")'>HTTP</button><button id='curlTabLink_17' class='tablinks' onclick='openTab(event, "curlTab_17")'>curl</button></div><div id='summaryTab_17' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=59&amp;_pageNumber=1&amp;_pageSize=3
+<div class='tab'><button id='summaryTabLink_17' class='tablinks' onclick='openTab(event, "summaryTab_17")'>Summary</button><button id='httpTabLink_17' class='tablinks' onclick='openTab(event, "httpTab_17")'>HTTP</button><button id='curlTabLink_17' class='tablinks' onclick='openTab(event, "curlTab_17")'>curl</button></div><div id='summaryTab_17' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trade-memberships?userId=59&amp;_pageNumber=1&amp;_pageSize=3
 Response: HTTP/1.1 200 
 [{&quot;tradeMembershipId&quot;:109,&quot;userId&quot;:59,&quot;tradeId&quot;:53,&quot;type&quot;:&quot;MEMBER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;trade&quot;,&quot;href&quot;:&quot;...</div><div id='httpTab_17' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=59&amp;_pageNumber=1&amp;_pageSize=3
+GET http://localhost:8080/matchandtrade-api/v1/trade-memberships?userId=59&amp;_pageNumber=1&amp;_pageSize=3
 Headers:       Authorization: 8416-9170-7933
                Accept: */*
 
@@ -232,20 +232,20 @@ Headers:       X-Pagination-Total-Count: 1
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 } ]</div><div id='curlTab_17' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
 -H &quot;Authorization: 8416-9170-7933&quot; \
 -H &quot;Accept: */*&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?userId=59\&amp;_pageNumber=1\&amp;_pageSize=3
+http://localhost:8080/matchandtrade-api/v1/trade-memberships?userId=59\&amp;_pageNumber=1\&amp;_pageSize=3
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
@@ -260,21 +260,21 @@ Headers:       X-Pagination-Total-Count: 1
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/53&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/53&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/109&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/59&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/59&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_17', "summaryTab_17");</script>
 
-<div class='tab'><button id='summaryTabLink_16' class='tablinks' onclick='openTab(event, "summaryTab_16")'>Summary</button><button id='httpTabLink_16' class='tablinks' onclick='openTab(event, "httpTab_16")'>HTTP</button><button id='curlTabLink_16' class='tablinks' onclick='openTab(event, "curlTab_16")'>curl</button></div><div id='summaryTab_16' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships
+<div class='tab'><button id='summaryTabLink_16' class='tablinks' onclick='openTab(event, "summaryTab_16")'>Summary</button><button id='httpTabLink_16' class='tablinks' onclick='openTab(event, "httpTab_16")'>HTTP</button><button id='curlTabLink_16' class='tablinks' onclick='openTab(event, "curlTab_16")'>curl</button></div><div id='summaryTab_16' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trade-memberships
 Response: HTTP/1.1 200 
 [{&quot;tradeMembershipId&quot;:1,&quot;userId&quot;:1,&quot;tradeId&quot;:1,&quot;type&quot;:&quot;OWNER&quot;,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http:/...</div><div id='httpTab_16' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/trade-memberships
+GET http://localhost:8080/matchandtrade-api/v1/trade-memberships
 Headers:       Authorization: 8416-9170-7933
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -283,7 +283,7 @@ Headers:       Authorization: 8416-9170-7933
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       X-Pagination-Total-Count: 95
-               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?_pageNumber=2&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trade-memberships?_pageNumber=2&gt;; rel=&quot;nextPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
                Date: Wed, 30 May 2018 23:37:45 GMT
@@ -294,13 +294,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/1&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 2,
@@ -309,13 +309,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/2&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 3,
@@ -323,13 +323,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/3&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 4,
@@ -337,13 +337,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/4&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 5,
@@ -352,13 +352,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/5&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/2&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 6,
@@ -367,13 +367,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/5&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/6&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/6&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 7,
@@ -382,13 +382,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/7&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/7&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 8,
@@ -396,13 +396,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/8&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 9,
@@ -410,13 +410,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/9&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/9&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 10,
@@ -425,13 +425,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/7&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/10&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/10&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/4&quot;
   } ]
 } ]</div><div id='curlTab_16' class='tabcontent code'>-----  Request  -----
 curl -v -X GET \
@@ -439,12 +439,12 @@ curl -v -X GET \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships
+http://localhost:8080/matchandtrade-api/v1/trade-memberships
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
 Headers:       X-Pagination-Total-Count: 95
-               Link: &lt;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships?_pageNumber=2&gt;; rel=&quot;nextPage&quot;
+               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trade-memberships?_pageNumber=2&gt;; rel=&quot;nextPage&quot;
                Content-Type: application/json;charset=UTF-8
                Transfer-Encoding: chunked
                Date: Wed, 30 May 2018 23:37:45 GMT
@@ -455,13 +455,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/1&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 2,
@@ -470,13 +470,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/2&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 3,
@@ -484,13 +484,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/3&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 4,
@@ -498,13 +498,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/4&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/1&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/1&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 5,
@@ -513,13 +513,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/5&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/2&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/2&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 6,
@@ -528,13 +528,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/5&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/5&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/6&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/6&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 7,
@@ -543,13 +543,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;MEMBER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/7&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/7&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 8,
@@ -557,13 +557,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/8&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/8&quot;
   }, {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 9,
@@ -571,13 +571,13 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/{userId}&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/{userId}&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/9&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/9&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/3&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/3&quot;
   } ]
 }, {
   &quot;tradeMembershipId&quot; : 10,
@@ -586,21 +586,21 @@ Headers:       X-Pagination-Total-Count: 95
   &quot;type&quot; : &quot;OWNER&quot;,
   &quot;_links&quot; : [ {
     &quot;rel&quot; : &quot;user&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/users/7&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/7&quot;
   }, {
     &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/10&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trade-memberships/10&quot;
   }, {
     &quot;rel&quot; : &quot;trade&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-web-api/v1/trades/4&quot;
+    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/4&quot;
   } ]
 } ]
 </div><script>openTabById('summaryTabLink_16', "summaryTab_16");</script>
 
-<div class='tab'><button id='summaryTabLink_18' class='tablinks' onclick='openTab(event, "summaryTab_18")'>Summary</button><button id='httpTabLink_18' class='tablinks' onclick='openTab(event, "httpTab_18")'>HTTP</button><button id='curlTabLink_18' class='tablinks' onclick='openTab(event, "curlTab_18")'>curl</button></div><div id='summaryTab_18' class='tabcontent code'>Request:  DELETE http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+<div class='tab'><button id='summaryTabLink_18' class='tablinks' onclick='openTab(event, "summaryTab_18")'>Summary</button><button id='httpTabLink_18' class='tablinks' onclick='openTab(event, "httpTab_18")'>HTTP</button><button id='curlTabLink_18' class='tablinks' onclick='openTab(event, "curlTab_18")'>curl</button></div><div id='summaryTab_18' class='tabcontent code'>Request:  DELETE http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 Response: HTTP/1.1 204 
 </div><div id='httpTab_18' class='tabcontent code'>-----  Request  -----
-DELETE http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+DELETE http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 Headers:       Authorization: 8416-9170-7933
                Accept: */*
                Content-Type: application/json; charset=UTF-8
@@ -615,7 +615,7 @@ curl -v -X DELETE \
 -H &quot;Accept: */*&quot; \
 -H &quot;Content-Type: application/json; charset=UTF-8&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/trade-memberships/109
+http://localhost:8080/matchandtrade-api/v1/trade-memberships/109
 
 -----  Response  -----
 Status:        HTTP/1.1 204 

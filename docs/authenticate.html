@@ -26,10 +26,10 @@ The <span class='incode'>Authorization</span> header acts as a session token and
 
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_2' class='tablinks' onclick='openTab(event, "summaryTab_2")'>Summary</button><button id='httpTabLink_2' class='tablinks' onclick='openTab(event, "httpTab_2")'>HTTP</button><button id='curlTabLink_2' class='tablinks' onclick='openTab(event, "curlTab_2")'>curl</button></div><div id='summaryTab_2' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+<div class='tab'><button id='summaryTabLink_2' class='tablinks' onclick='openTab(event, "summaryTab_2")'>Summary</button><button id='httpTabLink_2' class='tablinks' onclick='openTab(event, "httpTab_2")'>HTTP</button><button id='curlTabLink_2' class='tablinks' onclick='openTab(event, "curlTab_2")'>curl</button></div><div id='summaryTab_2' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate
 Response: HTTP/1.1 302 
 </div><div id='httpTab_2' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/authenticate
+GET http://localhost:8080/matchandtrade-api/v1/authenticate
 Headers:       Accept: */*
 
 
@@ -43,7 +43,7 @@ Headers:       Authorization: 9546-2191-8501
 curl -v -X GET \
 -H &quot;Accept: */*&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/authenticate
+http://localhost:8080/matchandtrade-api/v1/authenticate
 
 -----  Response  -----
 Status:        HTTP/1.1 302 
@@ -54,10 +54,10 @@ Headers:       Authorization: 9546-2191-8501
 
 </div><script>openTabById('summaryTabLink_2', "summaryTab_2");</script>
 
-<div class='tab'><button id='summaryTabLink_3' class='tablinks' onclick='openTab(event, "summaryTab_3")'>Summary</button><button id='httpTabLink_3' class='tablinks' onclick='openTab(event, "httpTab_3")'>HTTP</button><button id='curlTabLink_3' class='tablinks' onclick='openTab(event, "curlTab_3")'>curl</button></div><div id='summaryTab_3' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authenticate/info
+<div class='tab'><button id='summaryTabLink_3' class='tablinks' onclick='openTab(event, "summaryTab_3")'>Summary</button><button id='httpTabLink_3' class='tablinks' onclick='openTab(event, "httpTab_3")'>HTTP</button><button id='curlTabLink_3' class='tablinks' onclick='openTab(event, "curlTab_3")'>curl</button></div><div id='summaryTab_3' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
 Response: HTTP/1.1 200 
 {  &quot;authenticationHeader&quot; : &quot;9546-2191-8501&quot;}</div><div id='httpTab_3' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/authenticate/info
+GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
 Headers:       Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
                Accept: */*
 
@@ -74,7 +74,7 @@ curl -v -X GET \
 -H &quot;Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly&quot; \
 -H &quot;Accept: */*&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/authenticate/info
+http://localhost:8080/matchandtrade-api/v1/authenticate/info
 
 -----  Response  -----
 Status:        HTTP/1.1 200 
@@ -86,10 +86,10 @@ Headers:       Content-Type: application/json;charset=UTF-8
 }
 </div><script>openTabById('summaryTabLink_3', "summaryTab_3");</script>
 
-<div class='tab'><button id='summaryTabLink_4' class='tablinks' onclick='openTab(event, "summaryTab_4")'>Summary</button><button id='httpTabLink_4' class='tablinks' onclick='openTab(event, "httpTab_4")'>HTTP</button><button id='curlTabLink_4' class='tablinks' onclick='openTab(event, "curlTab_4")'>curl</button></div><div id='summaryTab_4' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-web-api/v1/authenticate/matchandtrade-web-api/v1/sign-out
+<div class='tab'><button id='summaryTabLink_4' class='tablinks' onclick='openTab(event, "summaryTab_4")'>Summary</button><button id='httpTabLink_4' class='tablinks' onclick='openTab(event, "httpTab_4")'>HTTP</button><button id='curlTabLink_4' class='tablinks' onclick='openTab(event, "curlTab_4")'>curl</button></div><div id='summaryTab_4' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
 Response: HTTP/1.1 205 
 </div><div id='httpTab_4' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-web-api/v1/authenticate/matchandtrade-web-api/v1/sign-out
+GET http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
 Headers:       Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
                Accept: */*
 
@@ -102,7 +102,7 @@ curl -v -X GET \
 -H &quot;Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly&quot; \
 -H &quot;Accept: */*&quot; \
 -d &quot;&quot; \
-http://localhost:8080/matchandtrade-web-api/v1/authenticate/matchandtrade-web-api/v1/sign-out
+http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
 
 -----  Response  -----
 Status:        HTTP/1.1 205 
