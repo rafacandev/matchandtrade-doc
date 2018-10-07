@@ -1,19 +1,18 @@
 package com.matchandtrade.doc.maker.rest;
 
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.AttachmentJson;
 import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
+import com.matchandtrade.rest.v1.json.AttachmentJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
-
-import io.restassured.http.ContentType;
-import io.restassured.http.Method;
+import com.matchandtrade.rest.v1.json.TradeJson;
+import io.restassured.RestAssured;
 
 
 public class ArticleAttachmentRestDocMaker implements RestDocMaker {
@@ -33,27 +32,54 @@ public class ArticleAttachmentRestDocMaker implements RestDocMaker {
 		
 		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
 		AttachmentJson attachment = apiFacade.createAttachment("front-picture.png");
-		
-		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		TradeJson trade = apiFacade.createTrade("Articles with images - " + System.currentTimeMillis() + "" + hashCode());
 		MembershipJson membership = apiFacade.findMembershipByUserIdAndTradeId(apiFacade.getUser().getUserId(), trade.getTradeId());
 		ArticleJson article = apiFacade.createArticle(membership, "Article with images");
-		
-		Snippet addAttachmentToArticle = snippetFactory.makeSnippet(Method.POST, MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId(), attachment.getAttachmentId()));
-		addAttachmentToArticle.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, addAttachmentToArticle.asHtml());
-		
-		Snippet getAllAttachmentsOfArticle = snippetFactory.makeSnippet(MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId()));
-		getAllAttachmentsOfArticle.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllAttachmentsOfArticle.asHtml());
-		
-		Snippet deleteAttachmentFromArticle = snippetFactory
-				.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId(), attachment.getAttachmentId()));
-		deleteAttachmentFromArticle.getResponse().then().statusCode(204);
-		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteAttachmentFromArticle.asHtml());
+
+		SpecificationParser postParser = parsePostAttachment(attachment, membership, article);
+		template = TemplateHelper.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
+
+		SpecificationParser getAllParser = parseGetAllAttachments(attachment, membership, article);
+		template = TemplateHelper.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+
+		SpecificationParser deleteParser = deleteAttachmentParser(attachment, membership, article);
+		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	private SpecificationParser deleteAttachmentParser(AttachmentJson attachment, MembershipJson membership, ArticleJson article) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.delete(MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId(), attachment.getAttachmentId()));
+		parser.getResponse().then().statusCode(204);
+		return parser;
+	}
+
+	private SpecificationParser parseGetAllAttachments(AttachmentJson attachment, MembershipJson membership, ArticleJson article) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.get(MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId()));
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	private SpecificationParser parsePostAttachment(AttachmentJson attachment, MembershipJson membership, ArticleJson article) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.post(MatchAndTradeRestUtil.attachmentsUrl(membership.getMembershipId(), article.getArticleId(), attachment.getAttachmentId()));
+		parser.getResponse().then().statusCode(201);
+		return parser;
 	}
 
 }
