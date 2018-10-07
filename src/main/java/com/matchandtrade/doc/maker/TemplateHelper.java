@@ -45,7 +45,6 @@ public class TemplateHelper {
         return header + template + footer;
     }
 
-
     /**
      * Replaces the <pre>placeholder</pre> by <pre>replacement</pre> in the given <pre>template</pre>.
      * @param template
@@ -58,6 +57,5 @@ public class TemplateHelper {
         }
         return template.replace("${" + placeholder + "}", replacement);
     }
-
 
 }

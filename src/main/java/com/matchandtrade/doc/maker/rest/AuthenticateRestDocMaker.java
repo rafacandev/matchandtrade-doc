@@ -1,16 +1,14 @@
 package com.matchandtrade.doc.maker.rest;
 
-import static org.hamcrest.Matchers.nullValue;
-
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import io.restassured.RestAssured;
 
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.Method;
-import io.restassured.specification.RequestSpecification;
+import static org.hamcrest.Matchers.nullValue;
 
 public class AuthenticateRestDocMaker implements RestDocMaker {
 
@@ -26,27 +24,58 @@ public class AuthenticateRestDocMaker implements RestDocMaker {
 	@Override
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
-		SnippetFactory snippetFactory = new SnippetFactory();
-		
+
 		// AUTHENTICATE_PLACEHOLDER
-		Snippet authenticateSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
-		// Asserts that statusCode = 200 and header "Authorization" exists
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateSnippet.asHtml());
-		String cookie = authenticateSnippet.getResponse().getHeader("Set-Cookie");
+		SpecificationParser authenticateParser = parseAuthenticate();
+		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateParser.asHtmlSnippet());
 
 		// AUTHENTICATE_INFO
-		RequestSpecification requestSpecification = new RequestSpecBuilder().addHeader("Cookie", cookie).build();
-		Snippet authenticateInfoSnippet = SnippetFactory.makeSnippet(Method.GET, requestSpecification, MatchAndTradeRestUtil.authenticateInfoUrl());
-		// Asserts that statusCode = 200 and header "AuthorizationHeader" exists in the body
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_INFO, authenticateInfoSnippet.asHtml());
+		SpecificationParser authenticationInfoParser = parseAuthenticateInfo(authenticateParser.getResponse().getHeader("Set-Cookie"));
+		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_INFO, authenticationInfoParser.asHtmlSnippet());
 
 		// SIGN_OUT_PLACEHOLDER
-		Snippet signOffSnippet = SnippetFactory.makeSnippet(Method.GET, requestSpecification, MatchAndTradeRestUtil.signOffUrl());
-		// Asserts that statusCode = 205 and header "Authorization" does not exists
-		signOffSnippet.getResponse().then().statusCode(205).and().header("Authorization", nullValue());
-		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffSnippet.asHtml());
+		SpecificationParser signOffParser = parseSingOut();
+		template = TemplateHelper.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	private SpecificationParser parseSingOut() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.get(MatchAndTradeRestUtil.signOffUrl());
+		parser.getResponse().then().statusCode(205).header("Authorization", nullValue());
+		return parser;
+	}
+
+	/**
+	 * Need to keep the same cookie between "authenticate" and "authenticate-info"
+	 * @param authenticateCookie cookie value from "authenticate" endpoint
+	 * @return
+	 */
+	private SpecificationParser parseAuthenticateInfo(String authenticateCookie) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.header("cookie", authenticateCookie)
+			.filter(filter)
+			.get(MatchAndTradeRestUtil.authenticateInfoUrl());
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	private SpecificationParser parseAuthenticate() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.get(MatchAndTradeRestUtil.authenticateUrl());
+		// Assert status is redirect
+		parser.getResponse().then().statusCode(302);
+		return parser;
 	}
 
 }

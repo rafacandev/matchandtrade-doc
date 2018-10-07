@@ -78,16 +78,18 @@ ${REST_GUIDE_PAGINATION}
 <p>Example:</p>
 <div class='code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/1
-Headers:  {Authorization: 7075-1255-9178}{Content-Type: application/json}
-
+-- Headers --
+  Authorization: 7075-1255-9178
+  Content-Type: application/json
+-- Body --
 {
   // Do not enter tradeId in this payload, it will be ignored.
   "name" : "Name to update"
 }
 
------  Response  -----
+---- Response ----
 Status:   HTTP/1.1 200 
-
+-- Body --
 {
   "name" : "Name to update",
   "tradeId" : 1,
