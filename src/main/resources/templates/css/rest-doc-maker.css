@@ -92,11 +92,11 @@ div.tab button.active {
 
 
 .snippet {
-    border: solid 2px darkgreen;
+    border: solid 2px #EAF6EC;
 }
 
 .snippet-labels {
-    background-color: honeydew;
+    background-color: #EAF6EC;
     display: flex;
 }
 
