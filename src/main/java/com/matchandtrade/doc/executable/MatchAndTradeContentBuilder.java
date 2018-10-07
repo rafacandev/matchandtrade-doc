@@ -1,5 +1,6 @@
 package com.matchandtrade.doc.executable;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,10 @@ import com.matchandtrade.doc.maker.rest.MembershipRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
 import com.matchandtrade.doc.maker.rest.TradeResultRestDocMaker;
 import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MatchAndTradeContentBuilder {
 

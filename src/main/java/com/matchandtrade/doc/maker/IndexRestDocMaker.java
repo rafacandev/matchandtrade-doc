@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.util.Date;
 
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.github.rafasantos.restdocmaker.template.Snippet;
 import com.github.rafasantos.restdocmaker.template.SnippetFactory;
@@ -27,14 +29,17 @@ public class IndexRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// REST_GUIDE_PAGINATION
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
 		matchAndTradeApiFacade.createTrade("Books in New York - " + new Date().getTime() + hashCode());
 		matchAndTradeApiFacade.createTrade("Books in Paris - " + new Date().getTime() + hashCode());
 		matchAndTradeApiFacade.createTrade("Books in Lima - " + new Date().getTime() + hashCode());
+
+		SpecificationFilter filter = new SpecificationFilter();
 		RequestSpecification requestSpecification = new RequestSpecBuilder()
+				.addFilter(filter)
 				.addHeaders(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.setContentType(ContentType.JSON)
 				.addParam("_pageNumber", 2)
@@ -45,11 +50,14 @@ public class IndexRestDocMaker implements RestDocMaker {
 				requestSpecification,
 				MatchAndTradeRestUtil.tradesUrl()
 		);
+
+		SpecificationParser parser = new SpecificationParser(filter);
+
 		paginationSnippet.getResponse().then().statusCode(200).and().body("[0].tradeId", notNullValue());
 
-		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, paginationSnippet.asHtml());
+		template = TemplateHelper.replacePlaceholder(template, REST_GUIDE_PAGINATION, parser.asHtmlSnippet());
 
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 }
