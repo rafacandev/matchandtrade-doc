@@ -1,12 +1,14 @@
 package com.matchandtrade.doc.maker.rest;
 
-import static org.hamcrest.Matchers.hasKey;
-
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
 import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import io.restassured.RestAssured;
+
+import static org.hamcrest.Matchers.hasKey;
 
 
 public class AuthenticationRestDocMaker implements RestDocMaker {
@@ -21,14 +23,18 @@ public class AuthenticationRestDocMaker implements RestDocMaker {
 	@Override
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
-		SnippetFactory snippetFactory = new SnippetFactory(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 
 		// AUTHENTICATIONS_PLACEHOLDER
-		Snippet snippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticationsUrl() + "/");
-		snippet.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.get(MatchAndTradeRestUtil.authenticationsUrl() + "/");
+		parser.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
+		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, parser.asHtmlSnippet());
 
-		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, snippet.asHtml());
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 }
