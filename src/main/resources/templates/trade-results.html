@@ -39,6 +39,12 @@
 ${PAGINATION_TABLE}
 
 <h3>Examples</h3>
-For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
+This endpoint supports <span class="incode">Content-Type: application/json</span> (default) and <span class="incode">Content-Type: text/csv</span>.
+<p>
+${RESULTS_GET_JSON}
+</p>
+<p>
+In this CSV example, the row <span class="incode">${SAMPLE_ROW}</span> translates to:
 <i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
-${RESULTS_GET}
+${RESULTS_GET_CSV}
+</p>
