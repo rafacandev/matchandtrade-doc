@@ -45,7 +45,7 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		template = TemplateHelper.replacePlaceholder(template, SAMPLE_ROW, sampleRow);
 
 		// RESULTS_GET_JSON
-		SpecificationParser jsonResultsParser = parseCsvResults(trade);
+		SpecificationParser jsonResultsParser = parseJsonResults(trade);
 		template = TemplateHelper.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
@@ -131,7 +131,7 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		return parser;
 	}
 
-	private SpecificationParser parseResultsAsJson(TradeJson trade) {
+	private SpecificationParser parseJsonResults(TradeJson trade) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
