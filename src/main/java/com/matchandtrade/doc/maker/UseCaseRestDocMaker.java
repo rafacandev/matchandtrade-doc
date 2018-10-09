@@ -24,7 +24,7 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 	
 	private static final String MEMBER_AUTHENTICATE = "MEMBER_AUTHENTICATE";
 	private static final String MEMBER_AUTHENTICATIONS = "MEMBER_AUTHENTICATIONS";
-	private static final String MEMBER_TRADES_MEMBERSHIP = "MEMBER_TRADES_MEMBERSHIP";
+	private static final String MEMBER_MEMBERSHIPS = "MEMBER_MEMBERSHIPS";
 	private static final String MEMBER_ARTICLE_ONE = "MEMBER_ARTICLE_ONE";
 	private static final String MEMBER_ARTICLE_TWO = "MEMBER_ARTICLE_TWO";
 	private static final String MEMBER_ARTICLE_THREE = "MEMBER_ARTICLE_THREE";
@@ -126,13 +126,13 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 		authenticationsSnippetMaria.getRequest().then().statusCode(200);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS, authenticationsSnippetMaria.asHtml());
 
-		// MEMBER_TRADES_MEMBERSHIP
+		// MEMBER_MEMBERSHIPS
 		MembershipJson membershipJsonMaria = new MembershipJson();
 		membershipJsonMaria.setTradeId(tradeJson.getTradeId());
 		membershipJsonMaria.setUserId(userMaria.getUserId());
 		Snippet membershipSnippetMaria = snippetFactoryMaria.makeSnippet(Method.POST, membershipJsonMaria, MatchAndTradeRestUtil.membershipsUrl() + "/");
 		membershipSnippetMaria.getResponse().then().statusCode(201);
-		template = TemplateUtil.replacePlaceholder(template, MEMBER_TRADES_MEMBERSHIP, membershipSnippetMaria.asHtml());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_MEMBERSHIPS, membershipSnippetMaria.asHtml());
 		
 		// MEMBER_ARTICLE_ONE
 		Integer membershipIdMaria = matchAndTradeApiFacadeMaria.findMembershipByUserIdAndTradeId(userMaria.getUserId(), tradeJson.getTradeId()).getMembershipId();
