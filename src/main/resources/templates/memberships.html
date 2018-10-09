@@ -6,11 +6,11 @@
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/trade-memberships/</span></li>
-	<li><span class='incode'>GET rest/v1/trade-memberships/{membershipId}</span></li>
-	<li><span class='incode'>GET rest/v1/trade-memberships?{queryParameters}</span></li>
-	<li><span class='incode'>GET rest/v1/trade-memberships/</span></li>
-	<li><span class='incode'>DELETE rest/v1/trade-memberships/{membershipId}</span></li>
+	<li><span class='incode'>POST rest/v1/memberships/</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/</span></li>
+	<li><span class='incode'>DELETE rest/v1/memberships/{membershipId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -46,7 +46,7 @@
 		<td>
 			<ul style="padding: 0em 0em 0em 0em; margin: 0em 0em 0em 0em">
 				<li style="margin-left: 1em"><span class="incode">OWNER</span> the <i>onwer</i> of the <span class="incode">tradeId</span>. This resource is created when a <a href="trades.html">Trade</a> is created.</li>
-				<li style="margin-left: 1em"><span class="incode">MEMBER</span> a <i>member</i> associated to the <span class="incode">tradeId</span>. When a new resource is created via <span class='incode'>POST rest/v1/trade-memberships/</span> it has <span class="incode">Membership.type=MEMBER</span></li>
+				<li style="margin-left: 1em"><span class="incode">MEMBER</span> a <i>member</i> associated to the <span class="incode">tradeId</span>. When a new resource is created via <span class='incode'>POST rest/v1/memberships/</span> it has <span class="incode">Membership.type=MEMBER</span></li>
 			</ul>
 		</td>
 	</tr>

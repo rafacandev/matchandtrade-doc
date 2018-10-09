@@ -3,7 +3,7 @@
 	<i>Resource</i> for <span class='incode'>Trades</span>. <span class='incode'>Trades</span> are the the central components of the system.
 	The <a href='users.html'>User</a> who creates a <span class='incode'>Trade</span> becomes the <i>organizer</i>
 	while other <a href='users.html'>Users</a> can subscribe to the <span class='incode'>Trade</span> and become <i>members</i>.
-	<i>Members</i> submit their <a href='articles.html'>Articles</a> through a <a href='trade-memberships.html'>Membership</a>.
+	<i>Members</i> submit their <a href='articles.html'>Articles</a> through a <a href='memberships.html'>Membership</a>.
 	Later the <i>organizer</i> closes the <span class='incode'>Trade</span> and the system generates the results of the <span class='incode'>Trade</span>.
 </p>
 
@@ -91,7 +91,7 @@ ${PAGINATION_TABLE}
 <h3>Rules</h3>
 <ul>
 	<li>When a new <span class='incode'>Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class='incode'>Authorization</span> header becomes the <span class='incode'>Trade</span> <i>organizer</i>.
-	Hence the system creates a <span class='incode'><a href='trade-memberships.html'>Membership.type=OWNER</a></span></li>
+	Hence the system creates a <span class='incode'><a href='memberships.html'>Membership.type=OWNER</a></span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a <span class='incode'>Trade</span></li>
 	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a <span class='incode'>Trade</span></li>
 </ul>

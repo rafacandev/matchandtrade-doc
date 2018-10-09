@@ -32,7 +32,7 @@ public class MembershipRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String contentFilePath() {
-		return "trade-memberships.html";
+		return "memberships.html";
 	}
 
 	@Override
