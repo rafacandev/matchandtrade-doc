@@ -26,6 +26,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class SearchRestDocMaker implements RestDocMaker {
 	
 	private static final String SEARCH_POST_PLACEHOLDER = "SEARCH_POST_PLACEHOLDER";
+	private static final String TRADE_ID_PLACEHOLDER = "TRADE_ID";
+	private static final String MEMBER_ID_PLACEHOLDER = "MEMBERSHIP_ID";
 
 	@Override
 	public String contentFilePath() {
@@ -39,6 +41,17 @@ public class SearchRestDocMaker implements RestDocMaker {
 		MembershipJson secondMember = buildSecondMember(trade);
 
 		// SEARCH_POST_PLACEHOLDER
+		SpecificationParser parser = parsePostSearch(trade, secondMember);
+
+		String template = TemplateHelper.buildTemplate(contentFilePath());
+		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
+		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
+		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
+		template = PaginationTemplateUtil.replacePaginationTable(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
+	}
+
+	private SpecificationParser parsePostSearch(TradeJson trade, MembershipJson secondMember) {
 		SearchCriteriaJson search = new SearchCriteriaJson();
 		search.setRecipe(Recipe.ARTICLES);
 		search.addCriterion("Trade.tradeId", trade.getTradeId());
@@ -55,13 +68,7 @@ public class SearchRestDocMaker implements RestDocMaker {
 			.body(search)
 			.post(MatchAndTradeRestUtil.searchUrl());
 		parser.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", equalTo("5"));
-
-		String template = TemplateHelper.buildTemplate(contentFilePath());
-		template = TemplateHelper.replacePlaceholder(template, "TRADE_ID", trade.getTradeId().toString());
-		template = TemplateHelper.replacePlaceholder(template, "MEMBERSHIP_ID", secondMember.getMembershipId().toString());
-		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
-		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return parser;
 	}
 
 	private MembershipJson buildSecondMember(TradeJson trade) {
