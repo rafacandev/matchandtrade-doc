@@ -27,7 +27,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class MatchAndTradeApiFacade {
 	
-	private Map<String, String> defaultHeaders = new HashMap<>();
+	private Map<String, String> defaultHeaders;
 	private UserJson user;
 	
 	public MatchAndTradeApiFacade() {

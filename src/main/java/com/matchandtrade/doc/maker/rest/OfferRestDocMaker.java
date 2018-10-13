@@ -1,25 +1,16 @@
 package com.matchandtrade.doc.maker.rest;
 
-import java.util.Date;
-
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.OfferJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.UserJson;
-
-import io.restassured.builder.RequestSpecBuilder;
+import com.matchandtrade.rest.v1.json.*;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import io.restassured.http.Method;
-import io.restassured.specification.RequestSpecification;
 
 
 public class OfferRestDocMaker implements RestDocMaker {
@@ -29,81 +20,112 @@ public class OfferRestDocMaker implements RestDocMaker {
 	private static final String OFFERS_SEARCH = "OFFERS_SEARCH";
 	private static final String OFFERS_DELETE = "OFFERS_DELETE";
 
+	@Override
+	public String content() {
+		String template = TemplateHelper.buildTemplate(contentFilePath());
+
+		// ### Setup a trade with an owner and a member so the can later make offers for their articles
+		// Create a user named 'Olavo'
+		Header olavoAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
+		MatchAndTradeApiFacade olavoApiFacade = new MatchAndTradeApiFacade(
+				MatchAndTradeRestUtil.getLastAuthenticatedUser(),
+				MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		UserJson olavo = olavoApiFacade.getUser();
+		olavo.setName("Olavo");
+		olavoApiFacade.saveUser(olavo);
+		// Olavo creates a trade
+		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + System.currentTimeMillis());
+		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
+		// Create another user named 'Maria'
+		Header mariaAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
+		MatchAndTradeApiFacade mariaApiFacade = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthenticatedUser(), mariaAuthorizationHeader);
+		UserJson maria = mariaApiFacade.getUser();
+		maria.setName("Maria");
+		mariaApiFacade.saveUser(maria);
+		// Maria subscribes to Olavo's trade
+		MembershipJson mariaMembership = mariaApiFacade.subscribeToTrade(trade);
+		// Create articles that will be used in offers
+		ArticleJson olavoPandemic = olavoApiFacade.createArticle(olavoMembership, "Pandemic Legacy: Season 1");
+		ArticleJson mariaStoneAge = mariaApiFacade.createArticle(mariaMembership, "Stone Age");
+		// End of setup
+
+		// OFFERS_POST
+		SpecificationParser postOfferParser = parsePostOffer(olavoAuthorizationHeader, olavoMembership, olavoPandemic.getArticleId(), mariaStoneAge.getArticleId());
+		template = TemplateHelper.replacePlaceholder(template, OFFERS_POST, postOfferParser.asHtmlSnippet());
+		OfferJson pandemicOneForStoneAge = postOfferParser.getResponse().body().as(OfferJson.class);
+
+		// OFFERS_GET
+		SpecificationParser getOfferById = parseGetOfferById(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
+		template = TemplateHelper.replacePlaceholder(template, OFFERS_GET, getOfferById.asHtmlSnippet());
+
+		// OFFERS_SEARCH
+		SpecificationParser searchOffersParser = parseSearchOffers(olavoAuthorizationHeader, olavoMembership, olavoPandemic, mariaStoneAge);
+		template = TemplateHelper.replacePlaceholder(template, OFFERS_SEARCH, searchOffersParser.asHtmlSnippet());
+
+		// OFFERS_DELETE
+		SpecificationParser deleteParser = parseDeleteOffer(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
+		template = TemplateHelper.replacePlaceholder(template, OFFERS_DELETE, deleteParser.asHtmlSnippet());
+
+		template = PaginationTemplateUtil.replacePaginationRows(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
+	}
 
 	@Override
 	public String contentFilePath() {
 		return "offers.html";
 	}
 
-	@Override
-	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+	private SpecificationParser parseDeleteOffer(Header olavoAuthorizationHeader, MembershipJson olavoMembership, OfferJson pandemicOneForStoneAge) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser deleteParser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(olavoAuthorizationHeader)
+			.delete(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
+		deleteParser.getResponse().then().statusCode(204);
+		return deleteParser;
+	}
 
-		// Trade Owner 'Olavo'
-		SnippetFactory olavoSnippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.nextAuthorizationHeader());
-		MatchAndTradeApiFacade olavoApiFacade = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthenticatedUser(), MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		UserJson olavo = olavoApiFacade.getUser();
-		olavo.setName("Olavo");
-		olavoApiFacade.saveUser(olavo);
-		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + new Date().getTime() + hashCode());
-		
-		// ARTICLE: Pandemic Legacy: Season 1
-		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
-		ArticleJson pandemicOne = new ArticleJson();
-		pandemicOne.setName("Pandemic Legacy: Season 1");
-		Snippet pandemicOneSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOne, MatchAndTradeRestUtil.articlesUrl(olavoMembership.getMembershipId()) + "/");
-		pandemicOne = pandemicOneSnippet.getResponse().body().as(ArticleJson.class);
+	private SpecificationParser parseSearchOffers(Header olavoAuthorizationHeader, MembershipJson olavoMembership, ArticleJson pandemicOne, ArticleJson stoneAge) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser searchOffersParser = new SpecificationParser(filter);
+		RestAssured.given().filter(filter)
+			.header(olavoAuthorizationHeader)
+			.queryParam("_pageNumber", "1")
+			.queryParam("_pageSize", "3")
+			.queryParam("offeredArticleId", pandemicOne.getArticleId())
+			.queryParam("wantedArticleId", stoneAge.getArticleId())
+			.get(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()));
+		searchOffersParser.getResponse().then().statusCode(200);
+		return searchOffersParser;
+	}
 
-		// Trade Member 'Maria'
-		Header mariaAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
-		MatchAndTradeApiFacade mariaApiFacade = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthenticatedUser(), mariaAuthorizationHeader);
+	private SpecificationParser parseGetOfferById(Header olavoAuthorizationHeader, MembershipJson olavoMembership, OfferJson pandemicOneForStoneAge) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(olavoAuthorizationHeader)
+			.get(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
 
-		// Building a user with a given user name for documentation clarity
-		UserJson maria = mariaApiFacade.getUser();
-		maria.setName("Maria");
-		mariaApiFacade.saveUser(maria);
-
-		// Maria's membership
-		MembershipJson mariaMembership = mariaApiFacade.subscribeToTrade(trade);
-		ArticleJson stoneAge = mariaApiFacade.createArticle(mariaMembership, "Stone Age");
-		
-		// Make offers
+	private SpecificationParser parsePostOffer(Header olavoAuthorizationHeader, MembershipJson olavoMembership, Integer offeredArticleId, Integer wantedArticleId) {
 		OfferJson pandemicOneForStoneAge = new OfferJson();
-		pandemicOneForStoneAge.setOfferedArticleId(pandemicOne.getArticleId());
-		pandemicOneForStoneAge.setWantedArticleId(stoneAge.getArticleId());
-		Snippet pandemicOneForStoneAgeSnippet = olavoSnippetFactory.makeSnippet(Method.POST, pandemicOneForStoneAge, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()) + "/");
-		pandemicOneForStoneAgeSnippet.getResponse().then().statusCode(201);
-		pandemicOneForStoneAge = pandemicOneForStoneAgeSnippet.getResponse().body().as(OfferJson.class);
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, pandemicOneForStoneAgeSnippet.asHtml());
+		pandemicOneForStoneAge.setOfferedArticleId(offeredArticleId);
+		pandemicOneForStoneAge.setWantedArticleId(wantedArticleId);
 
-		mariaApiFacade.createOffer(mariaMembership.getMembershipId(), stoneAge.getArticleId(), pandemicOne.getArticleId());
-		
-		Snippet getSnippet = olavoSnippetFactory.makeSnippet(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
-		getSnippet.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getSnippet.asHtml());
-
-		ArticleJson firstDummy = mariaApiFacade.createArticle(mariaMembership, "First ummy article so it displays in the GET ALL");
-		ArticleJson secondDummy = mariaApiFacade.createArticle(mariaMembership, "Second dummy article so it displays in the GET ALL");
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), pandemicOne.getArticleId(), firstDummy.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), pandemicOne.getArticleId(), secondDummy.getArticleId());
-		
-		RequestSpecification searchRequest = new RequestSpecBuilder()
-				.addRequestSpecification(olavoSnippetFactory.getDefaultRequestSpecification())
-				.addQueryParam("_pageNumber", "1")
-				.addQueryParam("_pageSize", "3")
-				.addQueryParam("offeredArticleId", pandemicOne.getArticleId())
-				.addQueryParam("wantedArticleId", stoneAge.getArticleId())
-				.build();
-		Snippet searchSnippet = SnippetFactory.makeSnippet(Method.GET, searchRequest, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()));
-		searchSnippet.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchSnippet.asHtml());
-
-		Snippet deleteSnippet = olavoSnippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId(), pandemicOneForStoneAge.getOfferId()));
-		deleteSnippet.getResponse().then().statusCode(204);
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteSnippet.asHtml());
-		
-		template = PaginationTemplateUtil.replacePaginationRows(template);
-		return TemplateUtil.appendHeaderAndFooter(template);
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(olavoAuthorizationHeader)
+			.contentType(ContentType.JSON)
+			.body(pandemicOneForStoneAge)
+			.post(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()) + "/");
+		parser.getResponse().then().statusCode(201);
+		return parser;
 	}
 
 }
