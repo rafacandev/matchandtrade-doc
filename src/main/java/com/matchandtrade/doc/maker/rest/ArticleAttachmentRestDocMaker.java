@@ -30,20 +30,20 @@ public class ArticleAttachmentRestDocMaker implements RestDocMaker {
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		
-		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
-		AttachmentJson attachment = apiFacade.createAttachment("front-picture.png");
-		TradeJson trade = apiFacade.createTrade("Articles with images - " + System.currentTimeMillis() + "" + hashCode());
-		MembershipJson membership = apiFacade.findMembershipByUserIdAndTradeId(apiFacade.getUser().getUserId(), trade.getTradeId());
-		ArticleJson article = apiFacade.createArticle(membership, "Article with images");
-
-		SpecificationParser postParser = parsePostAttachment(attachment, membership, article);
-		template = TemplateHelper.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
-
-		SpecificationParser getAllParser = parseGetAllAttachments(attachment, membership, article);
-		template = TemplateHelper.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
-
-		SpecificationParser deleteParser = deleteAttachmentParser(attachment, membership, article);
-		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
+//		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
+//		AttachmentJson attachment = apiFacade.createAttachment("front-picture.png");
+//		TradeJson trade = apiFacade.createTrade("Articles with images - " + System.currentTimeMillis() + "" + hashCode());
+//		MembershipJson membership = apiFacade.findMembershipByUserIdAndTradeId(apiFacade.getUser().getUserId(), trade.getTradeId());
+//		ArticleJson article = apiFacade.createArticle(membership, "Article with images");
+//
+//		SpecificationParser postParser = parsePostAttachment(attachment, membership, article);
+//		template = TemplateHelper.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
+//
+//		SpecificationParser getAllParser = parseGetAllAttachments(attachment, membership, article);
+//		template = TemplateHelper.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+//
+//		SpecificationParser deleteParser = deleteAttachmentParser(attachment, membership, article);
+//		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);

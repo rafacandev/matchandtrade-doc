@@ -75,9 +75,13 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		olavo.setName("Olavo");
 		olavoApiFacade.saveUser(olavo);
 		TradeJson trade = olavoApiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
+
 		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId());
-		ArticleJson applesToApples = olavoApiFacade.createArticle(olavoMembership, "Apples to Apples");
-		ArticleJson beta = olavoApiFacade.createArticle(olavoMembership, "Bora Bora");
+
+		ArticleJson applesToApples = olavoApiFacade.createArticle("Apples to Apples");
+		int responseCode = olavoApiFacade.createListing(olavoMembership.getMembershipId(), applesToApples.getArticleId());
+		ArticleJson beta = olavoApiFacade.createArticle("Bora Bora");
+		responseCode = olavoApiFacade.createListing(olavoMembership.getMembershipId(), beta.getArticleId());
 
 		// Create a trade member setup
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -86,9 +90,12 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		maria.setName("Maria");
 		mariaApiFacade.saveUser(maria);
 		MembershipJson memberMembership = mariaApiFacade.subscribeToTrade(trade);
-		ArticleJson andromedra = mariaApiFacade.createArticle(memberMembership, "Andromedra");
-		ArticleJson blokus = mariaApiFacade.createArticle(memberMembership, "Blokus");
-		ArticleJson caylus = mariaApiFacade.createArticle(memberMembership, "Caylus");
+		ArticleJson andromedra = mariaApiFacade.createArticle("Andromedra");
+		mariaApiFacade.createListing(memberMembership.getMembershipId(), andromedra.getArticleId());
+		ArticleJson blokus = mariaApiFacade.createArticle("Blokus");
+		mariaApiFacade.createListing(memberMembership.getMembershipId(), blokus.getArticleId());
+		ArticleJson caylus = mariaApiFacade.createArticle("Caylus");
+		mariaApiFacade.createListing(memberMembership.getMembershipId(), caylus.getArticleId());
 
 		// Create another trade member setup
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -97,7 +104,8 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		xavier.setName("Xavier");
 		xavierApiFacade.saveUser(xavier);
 		MembershipJson xavierMembership = xavierApiFacade.subscribeToTrade(trade);
-		ArticleJson agricola = xavierApiFacade.createArticle(xavierMembership, "Agricola");
+		ArticleJson agricola = xavierApiFacade.createArticle("Agricola");
+		xavierApiFacade.createListing(xavierMembership.getMembershipId(), agricola.getArticleId());
 
 		trade.setState(TradeJson.State.MATCHING_ARTICLES);
 		olavoApiFacade.saveTrade(trade);

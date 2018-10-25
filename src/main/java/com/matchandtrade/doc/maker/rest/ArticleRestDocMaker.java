@@ -41,46 +41,46 @@ public class ArticleRestDocMaker implements RestDocMaker {
 		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		
 		// Create a trade membership
-		TradeJson trade = apiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
-		Integer membershipId = apiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId()).getMembershipId();
-		
-		// ARTICLES_POST_PLACEHOLDER
-		ArticleJson article = new ArticleJson();
-		article.setName("Pandemic Legacy: Season 1");
-		article.setDescription("In mint condition");
-		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, article, MatchAndTradeRestUtil.articlesUrl(membershipId) + "/");
-		postSnippet.getResponse().then().statusCode(201).and().body("name", equalTo(article.getName()));
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postSnippet.asHtml());
-		article = JsonUtil.fromResponse(postSnippet.getResponse(), ArticleJson.class);
-		
-		// ARTICLES_PUT_PLACEHOLDER
-		Integer articleId = article.getArticleId();
-		article.setArticleId(null); // Set as null because we do not want to display in the documentation
-		article.setLinks(null); // Set as null because we do not want to display in the documentation
-		article.setName(article.getName() + " After PUT");
-		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, article, MatchAndTradeRestUtil.articlesUrl(membershipId, articleId));
-		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(article.getName()));
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_PUT_PLACEHOLDER, putSnippet.asHtml());
-
-		// ARTICLES_GET_PLACEHOLDER
-		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.articlesUrl(membershipId, articleId));
-		getSnippet.getResponse().then().statusCode(200);
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_PLACEHOLDER, getSnippet.asHtml());
-		
-		// ARTICLES_GET_ALL_PLACEHOLDER
-		Snippet getAllSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.articlesUrl(membershipId) + "/");
-		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_ALL_PLACEHOLDER, getAllSnippet.asHtml());
-
-		// ARTICLES_SEARCH_PLACEHOLDER
-		Snippet searchSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.articlesUrl(membershipId));
-		searchSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", "1");
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
-		
-		// ARTICLES_DELETE_PLACEHOLDER
-		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.articlesUrl(membershipId, articleId));
-		deleteSnippet.getResponse().then().statusCode(204);
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
+//		TradeJson trade = apiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
+//		Integer membershipId = apiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId()).getMembershipId();
+//
+//		// ARTICLES_POST_PLACEHOLDER
+//		ArticleJson article = new ArticleJson();
+//		article.setName("Pandemic Legacy: Season 1");
+//		article.setDescription("In mint condition");
+//		Snippet postSnippet = snippetFactory.makeSnippet(Method.POST, article, MatchAndTradeRestUtil.listingUrl(membershipId) + "/");
+//		postSnippet.getResponse().then().statusCode(201).and().body("name", equalTo(article.getName()));
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postSnippet.asHtml());
+//		article = JsonUtil.fromResponse(postSnippet.getResponse(), ArticleJson.class);
+//
+//		// ARTICLES_PUT_PLACEHOLDER
+//		Integer articleId = article.getArticleId();
+//		article.setArticleId(null); // Set as null because we do not want to display in the documentation
+//		article.setLinks(null); // Set as null because we do not want to display in the documentation
+//		article.setName(article.getName() + " After PUT");
+//		Snippet putSnippet = snippetFactory.makeSnippet(Method.PUT, article, MatchAndTradeRestUtil.listingUrl(membershipId, articleId));
+//		putSnippet.getResponse().then().statusCode(200).and().body("name", equalTo(article.getName()));
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_PUT_PLACEHOLDER, putSnippet.asHtml());
+//
+//		// ARTICLES_GET_PLACEHOLDER
+//		Snippet getSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.listingUrl(membershipId, articleId));
+//		getSnippet.getResponse().then().statusCode(200);
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_PLACEHOLDER, getSnippet.asHtml());
+//
+//		// ARTICLES_GET_ALL_PLACEHOLDER
+//		Snippet getAllSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.listingUrl(membershipId) + "/");
+//		getAllSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", notNullValue());
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_ALL_PLACEHOLDER, getAllSnippet.asHtml());
+//
+//		// ARTICLES_SEARCH_PLACEHOLDER
+//		Snippet searchSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.listingUrl(membershipId));
+//		searchSnippet.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", "1");
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_SEARCH_PLACEHOLDER, searchSnippet.asHtml());
+//
+//		// ARTICLES_DELETE_PLACEHOLDER
+//		Snippet deleteSnippet = snippetFactory.makeSnippet(Method.DELETE, MatchAndTradeRestUtil.listingUrl(membershipId, articleId));
+//		deleteSnippet.getResponse().then().statusCode(204);
+//		template = TemplateUtil.replacePlaceholder(template, ARTICLES_DELETE_PLACEHOLDER, deleteSnippet.asHtml());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);

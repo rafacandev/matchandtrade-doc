@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.github.rafasantos.restapidoc.SpecificationFilter;
+import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
 import com.matchandtrade.rest.v1.json.AttachmentJson;
@@ -55,6 +57,22 @@ public class MatchAndTradeApiFacade {
 				.body(requestBody)
 				.when()
 				.post(MatchAndTradeRestUtil.articlesUrl(membershipJson.getMembershipId()) + "/");
+		return response.body().as(ArticleJson.class);
+	}
+
+	public ArticleJson createArticle(String articleName) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		ArticleJson requestBody = new ArticleJson();
+		requestBody.setName(articleName);
+		Response response = RestAssured
+				.given()
+				.filter(filter)
+				.headers(defaultHeaders)
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post(MatchAndTradeRestUtil.articlesUrl());
 		return response.body().as(ArticleJson.class);
 	}
 
@@ -168,4 +186,17 @@ public class MatchAndTradeApiFacade {
 				.post(MatchAndTradeRestUtil.attachmentsUrl());
 		return response.body().as(AttachmentJson.class);
 	}
+
+	public int createListing(Integer membershipId, Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		Response response = RestAssured
+			.given()
+			.filter(filter)
+			.headers(defaultHeaders)
+			.when()
+			.post(MatchAndTradeRestUtil.listingUrl(membershipId, articleId));
+		return  response.statusCode();
+	}
+
 }

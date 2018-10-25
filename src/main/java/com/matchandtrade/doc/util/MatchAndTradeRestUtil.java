@@ -18,15 +18,16 @@ public class MatchAndTradeRestUtil {
 	private static final SnippetFactory snippetFactory = new SnippetFactory();
 	
 	private enum Endpoint {
+		ARTICLES("matchandtrade-api/v1/articles"),
+		ARTICLE_ATTACHMENTS("attachments"),
 		AUTHENTICATE("matchandtrade-api/v1/authenticate"),
-		SIGN_OFF("matchandtrade-api/v1/sign-out"),
 		AUTHENTICATIONS("matchandtrade-api/v1/authentications"),
+		LISTING("matchandtrade-api/v1/listing"),
+		SIGN_OFF("matchandtrade-api/v1/sign-out"),
 		TRADES("matchandtrade-api/v1/trades"),
 		ATTACHMENTS("matchandtrade-api/v1/attachments"),
 		SEARCH("matchandtrade-api/v1/search"),
 		TRADE_RESULTS("results"),
-		ARTICLES("articles"),
-		ARTICLE_ATTACHMENTS("attachments"),
 		INFO("info"),
 		WANT_ARTICLES("want-articles"),
 		MEMBERSHIPS("matchandtrade-api/v1/memberships"),
@@ -92,6 +93,9 @@ public class MatchAndTradeRestUtil {
 	public static String articlesUrl(Integer membershipId, Integer articleId) {
 		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId;
 	}
+	public static String articlesUrl() {
+		return Endpoint.ARTICLES.asURL(baseUrl);
+	}
 	public static String articlesUrl(Integer membershipId) {
 		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path;
 	}
@@ -109,6 +113,9 @@ public class MatchAndTradeRestUtil {
 	}
 	public static String offerUrl(Integer membershipId, Integer offerId) {
 		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.OFFERS.path + "/" + offerId;
+	}
+	public static String listingUrl(Integer membershipId, Integer articleId) {
+		return Endpoint.LISTING.asURL(baseUrl) + "/" + membershipId + "/" + articleId;
 	}
 	
 

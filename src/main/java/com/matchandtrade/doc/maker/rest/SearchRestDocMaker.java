@@ -36,17 +36,17 @@ public class SearchRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		TradeJson trade = buildTrade();
-		buildFirstMember(trade);
-		MembershipJson secondMember = buildSecondMember(trade);
-
-		// SEARCH_POST_PLACEHOLDER
-		SpecificationParser parser = parsePostSearch(trade, secondMember);
-
+//		TradeJson trade = buildTrade();
+//		buildFirstMember(trade);
+//		MembershipJson secondMember = buildSecondMember(trade);
+//
+//		// SEARCH_POST_PLACEHOLDER
+//		SpecificationParser parser = parsePostSearch(trade, secondMember);
+//
 		String template = TemplateHelper.buildTemplate(contentFilePath());
-		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
-		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
-		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
+//		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
+//		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
+//		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateHelper.appendHeaderAndFooter(template);
 	}
