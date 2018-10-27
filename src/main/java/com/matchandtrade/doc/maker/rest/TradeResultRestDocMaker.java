@@ -8,10 +8,7 @@ import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.UserJson;
+import com.matchandtrade.rest.v1.json.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -79,9 +76,9 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId());
 
 		ArticleJson applesToApples = olavoApiFacade.createArticle("Apples to Apples");
-		int responseCode = olavoApiFacade.createListing(olavoMembership.getMembershipId(), applesToApples.getArticleId());
+		olavoApiFacade.createListing(olavoMembership.getMembershipId(), applesToApples.getArticleId());
 		ArticleJson beta = olavoApiFacade.createArticle("Bora Bora");
-		responseCode = olavoApiFacade.createListing(olavoMembership.getMembershipId(), beta.getArticleId());
+		olavoApiFacade.createListing(olavoMembership.getMembershipId(), beta.getArticleId());
 
 		// Create a trade member setup
 		MatchAndTradeRestUtil.nextAuthorizationHeader();

@@ -11,12 +11,7 @@ import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
-import com.matchandtrade.rest.v1.json.AttachmentJson;
-import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.OfferJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.UserJson;
+import com.matchandtrade.rest.v1.json.*;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.MultiPartSpecBuilder;
@@ -62,7 +57,6 @@ public class MatchAndTradeApiFacade {
 
 	public ArticleJson createArticle(String articleName) {
 		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
 		ArticleJson requestBody = new ArticleJson();
 		requestBody.setName(articleName);
 		Response response = RestAssured
@@ -189,11 +183,13 @@ public class MatchAndTradeApiFacade {
 
 	public int createListing(Integer membershipId, Integer articleId) {
 		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
+		ListingJson request = new ListingJson(membershipId, articleId);
 		Response response = RestAssured
 			.given()
 			.filter(filter)
 			.headers(defaultHeaders)
+			.contentType(ContentType.JSON)
+			.body(request)
 			.when()
 			.post(MatchAndTradeRestUtil.listingUrl(membershipId, articleId));
 		return  response.statusCode();

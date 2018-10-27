@@ -115,7 +115,7 @@ public class MatchAndTradeRestUtil {
 		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.OFFERS.path + "/" + offerId;
 	}
 	public static String listingUrl(Integer membershipId, Integer articleId) {
-		return Endpoint.LISTING.asURL(baseUrl) + "/" + membershipId + "/" + articleId;
+		return Endpoint.LISTING.asURL(baseUrl) + "/";
 	}
 	
 
