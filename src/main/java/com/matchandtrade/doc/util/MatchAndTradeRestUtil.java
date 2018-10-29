@@ -96,8 +96,8 @@ public class MatchAndTradeRestUtil {
 	public static String articlesUrl() {
 		return Endpoint.ARTICLES.asURL(baseUrl);
 	}
-	public static String articlesUrl(Integer membershipId) {
-		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path;
+	public static String articlesUrl(Integer articleId) {
+		return Endpoint.ARTICLES.asURL(baseUrl) + "/" + articleId;
 	}
 	public static String membershipsUrl() {
 		return Endpoint.MEMBERSHIPS.asURL(baseUrl);
