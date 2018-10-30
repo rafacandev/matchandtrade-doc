@@ -1,26 +1,6 @@
 package com.matchandtrade.doc.maker;
 
-import java.util.Date;
-
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
-import com.github.rafasantos.restdocmaker.util.JsonUtil;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
-import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.OfferJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.UserJson;
-
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.http.Method;
-import io.restassured.specification.RequestSpecification;
-
-public class UseCaseRestDocMaker implements RestDocMaker {
+public class UseCaseRestDocMaker implements DocumentContent {
 	
 	private static final String MEMBER_AUTHENTICATE = "MEMBER_AUTHENTICATE";
 	private static final String MEMBER_AUTHENTICATIONS = "MEMBER_AUTHENTICATIONS";
@@ -50,8 +30,11 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-		
+		String template = TemplateHelper.buildTemplate(contentFilePath());
+		return template;
+	}
+
+		// TODO
 //		SnippetFactory snippetFactoryOlavo = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 //		MatchAndTradeApiFacade matchAndTradeApiFacadeOlavo = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 //
@@ -186,27 +169,28 @@ public class UseCaseRestDocMaker implements RestDocMaker {
 //		plainTextRequestSpecification.contentType(ContentType.TEXT);
 //		Snippet tradeResultsSnippet = SnippetFactory.makeSnippet(Method.GET, plainTextRequestSpecification, MatchAndTradeRestUtil.tradeResultsUrl(tradeId));
 //		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultsSnippet.asHtml());
-		
-		return TemplateUtil.appendHeaderAndFooter(template);
-	}
+//
+//		return TemplateUtil.appendHeaderAndFooter(template);
+//	}
+//
+//	private String offer(
+//			SnippetFactory snippetFactory,
+//			Integer membershipId,
+//			ArticleJson offeredArticle,
+//			ArticleJson wantedArticle,
+//			String template,
+//			String templatePlaceHolder) {
+//		OfferJson offerJson = new OfferJson();
+//		offerJson.setOfferedArticleId(offeredArticle.getArticleId());
+//		offerJson.setWantedArticleId(wantedArticle.getArticleId());
+//		Snippet snippet = snippetFactory.makeSnippet(
+//				Method.POST,
+//				offerJson,
+//				MatchAndTradeRestUtil.offerUrl(membershipId) + "/"
+//				);
+//		snippet.getResponse().then().statusCode(201);
+//		return TemplateUtil.replacePlaceholder(template, templatePlaceHolder, snippet.asHtml());
+//	}
 
-	private String offer(
-			SnippetFactory snippetFactory,
-			Integer membershipId,
-			ArticleJson offeredArticle,
-			ArticleJson wantedArticle,
-			String template,
-			String templatePlaceHolder) {
-		OfferJson offerJson = new OfferJson();
-		offerJson.setOfferedArticleId(offeredArticle.getArticleId());
-		offerJson.setWantedArticleId(wantedArticle.getArticleId());
-		Snippet snippet = snippetFactory.makeSnippet(
-				Method.POST,
-				offerJson,
-				MatchAndTradeRestUtil.offerUrl(membershipId) + "/"
-				);
-		snippet.getResponse().then().statusCode(201);
-		return TemplateUtil.replacePlaceholder(template, templatePlaceHolder, snippet.asHtml());
-	}
 
 }

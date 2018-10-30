@@ -1,22 +1,19 @@
 package com.matchandtrade.doc.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
-import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.config.PropertiesLoader;
 import com.matchandtrade.rest.v1.json.UserJson;
-
+import io.restassured.RestAssured;
 import io.restassured.http.Header;
+import io.restassured.response.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MatchAndTradeRestUtil {
 	
 	private static String baseUrl = PropertiesLoader.serverUrl();
 	private static Header lastAuthorizationHeader;
-	private static final SnippetFactory snippetFactory = new SnippetFactory();
-	
+
 	private enum Endpoint {
 		ARTICLES("matchandtrade-api/v1/articles"),
 		ARTICLE_ATTACHMENTS("attachments"),
@@ -136,22 +133,28 @@ public class MatchAndTradeRestUtil {
 	}
 
 	public static Integer getLastAuthenticatedUserId() {
-		SnippetFactory snippetFactory = new SnippetFactory(getLastAuthorizationHeader());
-		Snippet snippet = snippetFactory.makeSnippet(authenticationsUrl() + "/");
-		return snippet.getResponse().body().path("userId");
+		Response response = RestAssured
+			.given()
+			.header(getLastAuthorizationHeader())
+			.get(authenticationsUrl() + "/");
+		return response.body().path("userId");
 	}
 
 	public static UserJson getLastAuthenticatedUser() {
-		SnippetFactory snippetFactory = new SnippetFactory(getLastAuthorizationHeader());
-		Snippet snippet = snippetFactory.makeSnippet(usersUrl() + "/" + getLastAuthenticatedUserId());
-		snippet.getResponse().then().statusCode(200);
-		return JsonUtil.fromString(snippet.getResponse().asString(), UserJson.class);
+		Response response = RestAssured
+				.given()
+				.header(getLastAuthorizationHeader())
+				.get(usersUrl() + "/" + getLastAuthenticatedUserId());
+		response.then().statusCode(200);
+		return response.body().as(UserJson.class);
 	}
 	
 	public static Header nextAuthorizationHeader() {
-		Snippet authenticateSnippet = snippetFactory.makeSnippet(MatchAndTradeRestUtil.authenticateUrl());
-		String headerValue = authenticateSnippet.getResponse().getHeader("Authorization");
-		lastAuthorizationHeader = new Header("Authorization", headerValue);
+		Response response = RestAssured
+				.given()
+				.get(MatchAndTradeRestUtil.authenticateUrl());
+		String authorizationHeader = response.getHeader("Authorization");
+		lastAuthorizationHeader = new Header("Authorization", authorizationHeader);
 		return lastAuthorizationHeader;
 	}
 

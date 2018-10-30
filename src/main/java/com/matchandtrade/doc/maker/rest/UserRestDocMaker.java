@@ -1,25 +1,19 @@
 
 package com.matchandtrade.doc.maker.rest;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasKey;
-
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.UserJson;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Header;
-import org.hibernate.sql.Template;
+
+import static org.hamcrest.Matchers.equalTo;
 
 
-public class UserRestDocMaker implements RestDocMaker {
+public class UserRestDocMaker implements DocumentContent {
 	
 	private static final String USERS_GET_PLACEHOLDER = "USERS_GET_PLACEHOLDER";
 	private static final String USERS_PUT_PLACEHOLDER = "USERS_PUT_PLACEHOLDER";
@@ -40,7 +34,7 @@ public class UserRestDocMaker implements RestDocMaker {
 		SpecificationParser parser = parseGetUser();
 		template = TemplateHelper.replacePlaceholder(template, USERS_GET_PLACEHOLDER, parser.asHtmlSnippet());
 
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseGetUser() {

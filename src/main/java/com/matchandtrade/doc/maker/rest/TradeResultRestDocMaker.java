@@ -2,22 +2,24 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.*;
+import com.matchandtrade.rest.v1.json.ArticleJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
+import com.matchandtrade.rest.v1.json.TradeJson;
+import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 import java.util.Date;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
 
-public class TradeResultRestDocMaker implements RestDocMaker {
+public class TradeResultRestDocMaker implements DocumentContent {
 	
 	private static final String RESULTS_GET_CSV = "RESULTS_GET_CSV";
 	private static final String RESULTS_GET_JSON = "RESULTS_GET_JSON";
@@ -30,7 +32,7 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+		String template = TemplateHelper.buildTemplate(contentFilePath());
 		TradeJson trade = buildTrade();
 
 		// RESULTS_GET_CSV
@@ -46,7 +48,7 @@ public class TradeResultRestDocMaker implements RestDocMaker {
 		template = TemplateHelper.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private String buildSampleRow(SpecificationParser csvResultsParser) {

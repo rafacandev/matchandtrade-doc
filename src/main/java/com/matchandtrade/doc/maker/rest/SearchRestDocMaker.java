@@ -3,7 +3,7 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
@@ -23,7 +23,7 @@ import java.util.Date;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class SearchRestDocMaker implements RestDocMaker {
+public class SearchRestDocMaker implements DocumentContent {
 	
 	private static final String SEARCH_POST_PLACEHOLDER = "SEARCH_POST_PLACEHOLDER";
 	private static final String TRADE_ID_PLACEHOLDER = "TRADE_ID";
@@ -44,6 +44,7 @@ public class SearchRestDocMaker implements RestDocMaker {
 //		SpecificationParser parser = parsePostSearch(trade, secondMember);
 //
 		String template = TemplateHelper.buildTemplate(contentFilePath());
+		// TODO
 //		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
 //		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
 //		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());

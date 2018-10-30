@@ -2,7 +2,6 @@ package com.matchandtrade.doc.maker;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import io.restassured.RestAssured;
@@ -13,7 +12,7 @@ import java.util.Date;
 
 import static org.hamcrest.Matchers.notNullValue;
 
-public class IndexRestDocMaker implements RestDocMaker {
+public class IndexRestDocMaker implements DocumentContent {
 
 	public static final String REST_GUIDE_PAGINATION = "REST_GUIDE_PAGINATION";
 

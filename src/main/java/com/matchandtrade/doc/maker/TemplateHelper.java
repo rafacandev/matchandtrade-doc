@@ -1,7 +1,5 @@
 package com.matchandtrade.doc.maker;
 
-import com.github.rafasantos.restdocmaker.exception.RestDocMakerException;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -20,7 +18,7 @@ public class TemplateHelper {
      */
     public static String buildTemplate(String templateRelativePath) {
         String result;
-        String templatePath = TemplateUtil.class.getClassLoader().getResource(rootDirectory + templateRelativePath).getFile();
+        String templatePath = TemplateHelper.class.getClassLoader().getResource(rootDirectory + templateRelativePath).getFile();
         File templateFile = new File(templatePath);
         try {
             result = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);
@@ -38,8 +36,8 @@ public class TemplateHelper {
     public static String appendHeaderAndFooter(String template) {
         String header = "<html>"
             + "<head><title>REST Doc Maker</title></head>\n"
-            + "<link rel='stylesheet' href='css/rest-doc-maker.css'>"
-            + "<script src='js/rest-doc-maker.js'></script>"
+            + "<link rel='stylesheet' href='css/rest-api-doc.css'>"
+            + "<script src='js/rest-api-doc.js'></script>"
             + "<body>\n";
         String footer = "</body>\n</html>\n";
         return header + template + footer;
@@ -53,7 +51,8 @@ public class TemplateHelper {
      */
     public static String replacePlaceholder(String template, String placeholder, String replacement) {
         if (!template.contains(placeholder)) {
-            throw new RestDocMakerException("Not able to find any placeholder: ${" + placeholder +"}");
+            //TODO Custom exception
+            throw new RuntimeException("Not able to find any placeholder: ${" + placeholder +"}");
         }
         return template.replace("${" + placeholder + "}", replacement);
     }

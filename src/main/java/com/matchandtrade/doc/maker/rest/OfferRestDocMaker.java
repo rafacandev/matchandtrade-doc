@@ -2,18 +2,19 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
-import com.matchandtrade.rest.v1.json.*;
+import com.matchandtrade.rest.v1.json.ArticleJson;
+import com.matchandtrade.rest.v1.json.MembershipJson;
+import com.matchandtrade.rest.v1.json.OfferJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 
 
-public class OfferRestDocMaker implements RestDocMaker {
+public class OfferRestDocMaker implements DocumentContent {
 	
 	private static final String OFFERS_POST = "OFFERS_POST";
 	private static final String OFFERS_GET = "OFFERS_GET";
@@ -24,6 +25,7 @@ public class OfferRestDocMaker implements RestDocMaker {
 	public String content() {
 		String template = TemplateHelper.buildTemplate(contentFilePath());
 
+		// TODO
 //		// ### Setup a trade with an owner and a member so the can later make offers for their articles
 //		// Create a user named 'Olavo'
 //		Header olavoAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();

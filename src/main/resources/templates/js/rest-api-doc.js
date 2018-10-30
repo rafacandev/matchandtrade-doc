@@ -24,7 +24,6 @@ function openTab(evt, tabId) {
 function openTabById(tabLinkId, tabId) {
 	document.getElementById(tabId).style.display = "block";
 	document.getElementById(tabId).className += " active";
-
 	document.getElementById(tabLinkId).className += " active";
 }
 

@@ -27,13 +27,6 @@
 			<version>${com.matchandtrade.matchandtrade-api.version}</version>
 		</dependency>
 		
-		<!-- REST Doc Maker -->
-		<dependency>
-			<groupId>com.github.rafasantos</groupId>
-			<artifactId>rest-doc-maker</artifactId>
-			<version>${com.github.rafasantos.rest-doc-maker}</version>
-		</dependency>
-
 		<!-- REST API Doc -->
 		<dependency>
 			<groupId>rafaelsantosbra</groupId>

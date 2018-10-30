@@ -2,9 +2,7 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
-import com.github.rafasantos.restdocmaker.util.JsonUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
@@ -18,7 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 
-public class MembershipRestDocMaker implements RestDocMaker {
+public class MembershipRestDocMaker implements DocumentContent {
 	
 	private static final String MEMBERSHIPS_POST_PLACEHOLDER = "MEMBERSHIPS_POST_PLACEHOLDER";
 	private static final String MEMBERSHIPS_GET_PLACEHOLDER = "MEMBERSHIPS_GET_PLACEHOLDER";
@@ -33,12 +31,12 @@ public class MembershipRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// MEMBERSHIPS_POST_PLACEHOLDER
 		SpecificationParser postMembershipParser = parserPostMembership();
 		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_POST_PLACEHOLDER, postMembershipParser.asHtmlSnippet());
-		MembershipJson membership = JsonUtil.fromResponse(postMembershipParser.getResponse(), MembershipJson.class);
+		MembershipJson membership = postMembershipParser.getResponse().body().as(MembershipJson.class);
 
 		// MEMBERSHIPS_GET_PLACEHOLDER
 		SpecificationParser getMembershipParser = parseGetMembership(membership);
@@ -57,7 +55,7 @@ public class MembershipRestDocMaker implements RestDocMaker {
 		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_DELETE_PLACEHOLDER, deleteMembershipParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationRows(template);
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseDeleteMembership(MembershipJson membership) {

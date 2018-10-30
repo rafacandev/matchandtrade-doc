@@ -1,18 +1,8 @@
 package com.matchandtrade.doc.util;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import com.github.rafasantos.restapidoc.SpecificationFilter;
-import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.util.JsonUtil;
 import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
 import com.matchandtrade.rest.v1.json.*;
-
 import io.restassured.RestAssured;
 import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
@@ -21,6 +11,12 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MatchAndTradeApiFacade {
 	
@@ -94,7 +90,7 @@ public class MatchAndTradeApiFacade {
 				.body(tradeJson)
 				.when()
 				.post(MatchAndTradeRestUtil.tradesUrl() + "/");
-		return JsonUtil.fromResponse(response, TradeJson.class);
+		return response.body().as(TradeJson.class);
 	}
 
 	public MembershipJson findMembershipByUserIdAndTradeId(Integer userId, Integer tradeId) {
@@ -110,10 +106,21 @@ public class MatchAndTradeApiFacade {
 				.get(MatchAndTradeRestUtil.membershipsUrl());
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		List<Map> responseList = response.body().as(List.class);
-		String membershipAsString = JsonUtil.toJson(responseList.get(0));
-		return JsonUtil.fromString(membershipAsString, MembershipJson.class);
+		Map<String, Object> membershipAsMap = responseList.get(0);
+		return obtainMembership(membershipAsMap, userId, tradeId);
 	}
-	
+
+	private MembershipJson obtainMembership(Map<String, Object> membershipAsMap, Integer userId, Integer tradeId) {
+		MembershipJson result = new MembershipJson();
+		result.setUserId(userId);
+		result.setTradeId(tradeId);
+		int membershipId = Integer.parseInt(membershipAsMap.get("membershipId").toString());
+		result.setMembershipId(membershipId);
+		String type = membershipAsMap.get("type").toString();
+		result.setType(MembershipJson.Type.valueOf(type));
+		return result;
+	}
+
 	public UserJson getUser() {
 		return user;
 	}
@@ -151,7 +158,7 @@ public class MatchAndTradeApiFacade {
 				.body(requestBody)
 				.when()
 				.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
-		return JsonUtil.fromResponse(response, MembershipJson.class);
+		return response.body().as(MembershipJson.class);
 	}
 
 	public MembershipJson subscribeToTrade(TradeJson trade) {

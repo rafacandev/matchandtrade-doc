@@ -2,15 +2,14 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import io.restassured.RestAssured;
 
 import static org.hamcrest.Matchers.nullValue;
 
-public class AuthenticateRestDocMaker implements RestDocMaker {
+public class AuthenticateRestDocMaker implements DocumentContent {
 
 	private static final String AUTHENTICATE_PLACEHOLDER = "AUTHENTICATE_PLACEHOLDER";
 	private static final String AUTHENTICATE_INFO = "AUTHENTICATE_INFO";
@@ -23,7 +22,7 @@ public class AuthenticateRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// AUTHENTICATE_PLACEHOLDER
 		SpecificationParser authenticateParser = parseAuthenticate();
@@ -37,7 +36,7 @@ public class AuthenticateRestDocMaker implements RestDocMaker {
 		SpecificationParser signOffParser = parseSingOut();
 		template = TemplateHelper.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffParser.asHtmlSnippet());
 
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseSingOut() {

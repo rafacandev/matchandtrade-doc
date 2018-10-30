@@ -1,25 +1,19 @@
 package com.matchandtrade.doc.maker.rest;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.Snippet;
-import com.github.rafasantos.restdocmaker.template.SnippetFactory;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.maker.DocumentContent;
+import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Method;
+
+import static org.hamcrest.Matchers.equalTo;
 
 
-public class ArticleRestDocMaker implements RestDocMaker {
+public class ArticleRestDocMaker implements DocumentContent {
 	
 	private static final String ARTICLES_POST_PLACEHOLDER = "ARTICLES_POST_PLACEHOLDER";
 	private static final String ARTICLES_PUT_PLACEHOLDER = "ARTICLES_PUT_PLACEHOLDER";
@@ -34,35 +28,34 @@ public class ArticleRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-		SnippetFactory snippetFactory = new SnippetFactory(ContentType.JSON, MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		
+		String template = TemplateHelper.buildTemplate(contentFilePath());
+
 		// ARTICLES_POST_PLACEHOLDER
 		ArticleJson article = new ArticleJson();
 		article.setName("Pandemic Legacy: Season 1");
 		article.setDescription("In mint condition");
 
 		SpecificationParser postParser = buildPostParser(article);
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
 
 		// ARTICLES_PUT_PLACEHOLDER
 		SpecificationParser putParser = buildPutParser(article);
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, ARTICLES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
 
 		// ARTICLES_GET_PLACEHOLDER
 		SpecificationParser getParser = buildGetSnippet(article.getArticleId());
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_PLACEHOLDER, getParser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, ARTICLES_GET_PLACEHOLDER, getParser.asHtmlSnippet());
 
 		// ARTICLES_GET_ALL_PLACEHOLDER
-		SpecificationParser getAllParser = buildGetAllSnippet(snippetFactory);
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+		SpecificationParser getAllParser = buildGetAllSnippet();
+		template = TemplateHelper.replacePlaceholder(template, ARTICLES_GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
 
 		// ARTICLES_DELETE_PLACEHOLDER
 		SpecificationParser deleteParser = buildDeleteSnippet(article.getArticleId());
-		template = TemplateUtil.replacePlaceholder(template, ARTICLES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, ARTICLES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser buildDeleteSnippet(Integer articleId) {
@@ -77,7 +70,7 @@ public class ArticleRestDocMaker implements RestDocMaker {
 		return parser;
 	}
 
-	private SpecificationParser buildGetAllSnippet(SnippetFactory snippetFactory) {
+	private SpecificationParser buildGetAllSnippet() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured
@@ -94,7 +87,7 @@ public class ArticleRestDocMaker implements RestDocMaker {
 		RestAssured
 				.given()
 				.filter(filter)
-				.get(MatchAndTradeRestUtil.articlesUrl() + "/");
+				.get(MatchAndTradeRestUtil.articlesUrl(articleId) + "/");
 		parser.getResponse().then().statusCode(200);
 		return parser;
 	}

@@ -2,8 +2,7 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
@@ -15,7 +14,7 @@ import io.restassured.http.ContentType;
 import static org.hamcrest.Matchers.*;
 
 
-public class TradeRestDocMaker implements RestDocMaker {
+public class TradeRestDocMaker implements DocumentContent {
 	
 	private static final String TRADES_POST_PLACEHOLDER = "TRADES_POST_PLACEHOLDER";
 	private static final String TRADES_PUT_PLACEHOLDER = "TRADES_PUT_PLACEHOLDER";	
@@ -40,7 +39,7 @@ public class TradeRestDocMaker implements RestDocMaker {
 
 		// TRADES_PUT_PLACEHOLDER
 		SpecificationParser putParser = parsePut(tradeJson);
-		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
 		tradeJson = putParser.getResponse().body().as(TradeJson.class);
 
 		// TRADES_GET_PLACEHOLDER

@@ -2,20 +2,17 @@ package com.matchandtrade.doc.maker.rest;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.github.rafasantos.restdocmaker.RestDocMaker;
-import com.github.rafasantos.restdocmaker.template.TemplateUtil;
+import com.matchandtrade.doc.maker.DocumentContent;
 import com.matchandtrade.doc.maker.TemplateHelper;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.AttachmentJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
 import io.restassured.RestAssured;
 
 
-public class ArticleAttachmentRestDocMaker implements RestDocMaker {
+public class ArticleAttachmentRestDocMaker implements DocumentContent {
 	
 	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
 	private static final String GET_ALL_PLACEHOLDER = "GET_ALL_PLACEHOLDER";
@@ -28,8 +25,9 @@ public class ArticleAttachmentRestDocMaker implements RestDocMaker {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-		
+		String template = TemplateHelper.buildTemplate(contentFilePath());
+
+		// TODO
 //		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
 //		AttachmentJson attachment = apiFacade.createAttachment("front-picture.png");
 //		TradeJson trade = apiFacade.createTrade("Articles with images - " + System.currentTimeMillis() + "" + hashCode());
@@ -46,7 +44,7 @@ public class ArticleAttachmentRestDocMaker implements RestDocMaker {
 //		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateUtil.appendHeaderAndFooter(template);
+		return TemplateHelper.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser deleteAttachmentParser(AttachmentJson attachment, MembershipJson membership, ArticleJson article) {

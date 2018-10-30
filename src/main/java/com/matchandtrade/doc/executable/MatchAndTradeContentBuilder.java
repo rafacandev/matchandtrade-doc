@@ -1,59 +1,47 @@
 package com.matchandtrade.doc.executable;
 
-import org.apache.commons.io.FileUtils;
+import com.matchandtrade.doc.maker.DocumentContent;
+import com.matchandtrade.doc.maker.IndexRestDocMaker;
+import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
+import com.matchandtrade.doc.maker.rest.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.rafasantos.restdocmaker.RestDocMakerConfiguration;
-import com.github.rafasantos.restdocmaker.RestDocMakerGenerator;
-import com.matchandtrade.doc.maker.IndexRestDocMaker;
-import com.matchandtrade.doc.maker.UseCaseRestDocMaker;
-import com.matchandtrade.doc.maker.rest.AuthenticateRestDocMaker;
-import com.matchandtrade.doc.maker.rest.AuthenticationRestDocMaker;
-import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
-import com.matchandtrade.doc.maker.rest.ArticleAttachmentRestDocMaker;
-import com.matchandtrade.doc.maker.rest.ArticleRestDocMaker;
-import com.matchandtrade.doc.maker.rest.OfferRestDocMaker;
-import com.matchandtrade.doc.maker.rest.SearchRestDocMaker;
-import com.matchandtrade.doc.maker.rest.MembershipRestDocMaker;
-import com.matchandtrade.doc.maker.rest.TradeRestDocMaker;
-import com.matchandtrade.doc.maker.rest.TradeResultRestDocMaker;
-import com.matchandtrade.doc.maker.rest.UserRestDocMaker;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MatchAndTradeContentBuilder {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MatchAndTradeContentBuilder.class);
 	private final String destinationFolder;
-	
+
 	public MatchAndTradeContentBuilder(String destinationFolder) {
 		this.destinationFolder = destinationFolder;
 	}
 
 	public void buildContent() {
 		try {
-			RestDocMakerConfiguration config = new RestDocMakerConfiguration()
-				.destinationFolderRootPath(destinationFolder)
-				.makers(
-					new IndexRestDocMaker(),
-					new AuthenticateRestDocMaker(),
-					new AuthenticationRestDocMaker(),
-					new UserRestDocMaker(),
-					new TradeRestDocMaker(),
-					new MembershipRestDocMaker(),
-					new ArticleRestDocMaker(),
-					new OfferRestDocMaker(),
-					new TradeResultRestDocMaker(),
-					new SearchRestDocMaker(),
-					new UseCaseRestDocMaker(),
-					new AttachmentRestDocMaker(),
-					new ArticleAttachmentRestDocMaker()
-				);
-			RestDocMakerGenerator generator = new RestDocMakerGenerator();
-			generator.generateDocumentation(config);
+			// TODO Remove hardcoded css
+			ContentGenerator contentGenerator = new ContentGenerator(destinationFolder, "/templates/css/rest-api-doc.css");
+			List<DocumentContent> contents = new ArrayList<>();
+			contents.add(new IndexRestDocMaker());
+			contents.add(new AuthenticateRestDocMaker());
+			contents.add(new AuthenticationRestDocMaker());
+			contents.add(new UserRestDocMaker());
+			contents.add(new TradeRestDocMaker());
+			contents.add(new MembershipRestDocMaker());
+			contents.add(new ArticleRestDocMaker());
+			contents.add(new OfferRestDocMaker());
+			contents.add(new TradeResultRestDocMaker());
+			contents.add(new SearchRestDocMaker());
+			contents.add(new UseCaseRestDocMaker());
+			contents.add(new AttachmentRestDocMaker());
+			contents.add(new ArticleAttachmentRestDocMaker());
+
+			contents.forEach(content -> {
+				contentGenerator.generate(content);
+			});
+
 		} catch (Exception e) {
 			LOGGER.error("\n\nFailed to generate documentation!\n\nException message {}\n", e.getMessage(), e);
 			throw e;
