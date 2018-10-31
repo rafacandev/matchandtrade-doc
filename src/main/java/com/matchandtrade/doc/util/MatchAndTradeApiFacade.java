@@ -47,7 +47,7 @@ public class MatchAndTradeApiFacade {
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post(MatchAndTradeRestUtil.articlesUrl(membershipJson.getMembershipId()) + "/");
+				.post(MatchAndTradeRestUtil.articlesUrl() + "/");
 		return response.body().as(ArticleJson.class);
 	}
 
