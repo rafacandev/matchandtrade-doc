@@ -8,6 +8,7 @@ import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.UserJson;
@@ -36,18 +37,18 @@ public class SearchRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-//		TradeJson trade = buildTrade();
-//		buildFirstMember(trade);
-//		MembershipJson secondMember = buildSecondMember(trade);
-//
-//		// SEARCH_POST_PLACEHOLDER
-//		SpecificationParser parser = parsePostSearch(trade, secondMember);
+		TradeJson trade = buildTrade();
+		initOwnerData(trade);
+		MembershipJson secondMember = initMemberData(trade);
+
+		// SEARCH_POST_PLACEHOLDER
+		SpecificationParser parser = parsePostSearch(trade, secondMember);
 //
 		String template = TemplateHelper.buildTemplate(contentFilePath());
 		// TODO
-//		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
-//		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
-//		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
+		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
+		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
+		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateHelper.appendHeaderAndFooter(template);
 	}
@@ -72,32 +73,37 @@ public class SearchRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private MembershipJson buildSecondMember(TradeJson trade) {
+	private MembershipJson initMemberData(TradeJson trade) {
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
-		UserJson anotherMember = MatchAndTradeRestUtil.getLastAuthenticatedUser();
-		MatchAndTradeApiFacade apiAsAnotherMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		MembershipJson anotherMemberMembership = apiAsAnotherMember.subscribeToTrade(anotherMember.getUserId(), trade.getTradeId());
-		apiAsAnotherMember.createArticle(anotherMemberMembership, "DO NOT DISPLAY THIS ARTICLE");
-		return anotherMemberMembership;
+		UserJson user = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		MembershipJson membership = apiFacade.subscribeToTrade(user.getUserId(), trade.getTradeId());
+		apiFacade.createArticle(membership, "DO NOT DISPLAY THIS ARTICLE");
+		return membership;
 	}
 
-	private void buildFirstMember(TradeJson trade) {
+	private void initOwnerData(TradeJson trade) {
 		MatchAndTradeRestUtil.nextAuthorizationHeader();
-		UserJson member = MatchAndTradeRestUtil.getLastAuthenticatedUser();
-		MatchAndTradeApiFacade apiAsMember = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		MembershipJson memberMembership = apiAsMember.subscribeToTrade(member.getUserId(), trade.getTradeId());
-		apiAsMember.createArticle(memberMembership, "Elysium");
-		apiAsMember.createArticle(memberMembership, "The Voyages of Marco Polo");
-		apiAsMember.createArticle(memberMembership, "Deus");
+		UserJson user = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		MembershipJson memberMembership = apiFacade.subscribeToTrade(user.getUserId(), trade.getTradeId());
+		ArticleJson elysiumArticle = apiFacade.createArticle(memberMembership, "Elysium");
+		apiFacade.createListing(memberMembership.getMembershipId(), elysiumArticle.getArticleId());
+		ArticleJson voyagesOfMarcoPoloArticle = apiFacade.createArticle(memberMembership, "The Voyages of Marco Polo");
+		apiFacade.createListing(memberMembership.getMembershipId(), voyagesOfMarcoPoloArticle.getArticleId());
+		ArticleJson deusArticle = apiFacade.createArticle(memberMembership, "Deus");
+		apiFacade.createListing(memberMembership.getMembershipId(), deusArticle.getArticleId());
 	}
 
 	private TradeJson buildTrade() {
-		UserJson owner = MatchAndTradeRestUtil.getLastAuthenticatedUser();
-		MatchAndTradeApiFacade apiAsOwner = new MatchAndTradeApiFacade();
-		TradeJson trade = apiAsOwner.createTrade("Search Recipe ARTICLES - " + new Date().getTime() + hashCode());
-		MembershipJson membership = apiAsOwner.findMembershipByUserIdAndTradeId(owner.getUserId(), trade.getTradeId());
-		apiAsOwner.createArticle(membership, "Imperial Settlers");
-		apiAsOwner.createArticle(membership, "Dead of Winter: A Crossroads Game");
+		UserJson user = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
+		TradeJson trade = apiFacade.createTrade("Search Recipe ARTICLES - " + new Date().getTime() + hashCode());
+		MembershipJson membership = apiFacade.findMembershipByUserIdAndTradeId(user.getUserId(), trade.getTradeId());
+		ArticleJson imperialSettlersArticle = apiFacade.createArticle(membership, "Imperial Settlers");
+		apiFacade.createListing(membership.getMembershipId(), imperialSettlersArticle.getArticleId());
+		ArticleJson deadOfWinterArticle = apiFacade.createArticle(membership, "Dead of Winter: A Crossroads Game");
+		apiFacade.createListing(membership.getMembershipId(), deadOfWinterArticle.getArticleId());
 		return trade;
 	}
 
