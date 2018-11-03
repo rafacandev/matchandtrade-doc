@@ -1,13 +1,11 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
+import com.matchandtrade.rest.v1.json.TradeJson;
 
 import java.util.Date;
 
@@ -22,30 +20,30 @@ public class IndexDocument implements Document {
 		return "index.html";
 	}
 
+	private String template;
+	private MatchAndTradeClient clientApi;
+
+	public IndexDocument() {
+		clientApi = new MatchAndTradeClient(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		template = TemplateUtil.buildTemplate(contentFilePath());
+	}
+
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-
 		// REST_GUIDE_PAGINATION
-		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
-		matchAndTradeApiFacade.createTrade("Books in New York - " + new Date().getTime() + hashCode());
-		matchAndTradeApiFacade.createTrade("Books in Paris - " + new Date().getTime() + hashCode());
-		matchAndTradeApiFacade.createTrade("Books in Lima - " + new Date().getTime() + hashCode());
+		createTrade("Books in Berlin " + System.currentTimeMillis());
+		createTrade("Books in Paris " + System.currentTimeMillis());
+		createTrade("Books in Lima " + System.currentTimeMillis());
+		SpecificationParser findTradesParser = MatchAndTradeClient.findTrades();
+		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, findTradesParser.asHtmlSnippet());
 
-		SpecificationFilter filter = new SpecificationFilter();
-		Response response = RestAssured.given()
-			.filter(filter)
-			.headers(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
-			.contentType(ContentType.JSON)
-			.param("_pageNumber", 2)
-			.param("_pageSize", 2)
-			.get(MatchAndTradeRestUtil.tradesUrl());
-
-		response.then().statusCode(200).and().body("[0].tradeId", notNullValue());
-
-		SpecificationParser parser = new SpecificationParser(filter);
-		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, parser.asHtmlSnippet());
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	private void createTrade(String name) {
+		TradeJson trade = new TradeJson();
+		trade.setName(name);
+		clientApi.create(trade);
 	}
 
 }
