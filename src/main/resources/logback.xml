@@ -29,7 +29,7 @@
 	<!-- Match And Trade Doc Maker Logs -->
 	<!-- ============================== -->
 	<!-- Documentation generation summary -->
-	<logger level="INFO" name="com.matchandtrade.doc.executable.MatchAndTradeDocExecutable" />
+	<logger level="INFO" name="com.matchandtrade.doc.executable.MainExecutable" />
 	<logger level="INFO" name="com.github.rafasantos.restdocmaker.RestDocMakerGenerator" />
 	
 	<!-- Log all Request/Response via SnippetFactory -->

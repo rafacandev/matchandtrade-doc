@@ -13,9 +13,9 @@ import com.matchandtrade.doc.config.PropertiesLoader;
  * Expects an argument <code>-cf</code> indicating the configuration file location.
  * Usage:  java -jar matchandtrade-doc.jar -cf <CONFIGURATION_FILE_LOCATION>.
  */
-public class MatchAndTradeDocExecutable {
+public class MainExecutable {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MatchAndTradeDocExecutable.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainExecutable.class);
 
 	public static void main(String[] arguments) throws Throwable {
 		logger.info("Loading environment variables and JVM properties as system properties.");
@@ -23,7 +23,7 @@ public class MatchAndTradeDocExecutable {
 		String configurationFilePath = obtainConfigurationFilePath(arguments);
 		PropertiesLoader.loadPropertiesFromConfigFile(configurationFilePath);
 
-		MatchAndTradeContentBuilder docContentMaker = new MatchAndTradeContentBuilder(PropertiesLoader.destinationFolder());
+		ContentBuilder docContentMaker = new ContentBuilder(PropertiesLoader.destinationFolder());
 		try {
 			logger.info("Making documentation.");
 			docContentMaker.buildContent();

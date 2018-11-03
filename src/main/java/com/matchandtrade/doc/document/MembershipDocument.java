@@ -1,12 +1,11 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import io.restassured.RestAssured;
@@ -18,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 
-public class MembershipRestDocMaker implements DocumentContent {
+public class MembershipDocument implements Document {
 	
 	private static final String MEMBERSHIPS_POST_PLACEHOLDER = "MEMBERSHIPS_POST_PLACEHOLDER";
 	private static final String MEMBERSHIPS_GET_PLACEHOLDER = "MEMBERSHIPS_GET_PLACEHOLDER";
@@ -33,34 +32,34 @@ public class MembershipRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// MEMBERSHIPS_POST_PLACEHOLDER
 		SpecificationParser postMembershipParser = parserPostMembership();
-		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_POST_PLACEHOLDER, postMembershipParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_POST_PLACEHOLDER, postMembershipParser.asHtmlSnippet());
 		MembershipJson membership = postMembershipParser.getResponse().body().as(MembershipJson.class);
 
 		// MEMBERSHIPS_GET_PLACEHOLDER
-		SpecificationParser getMembershipParser = MembershipRestDocMaker.parseGetMembership(membership);
-		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_GET_PLACEHOLDER, getMembershipParser.asHtmlSnippet());
+		SpecificationParser getMembershipParser = MembershipDocument.parseGetMembership(membership);
+		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_GET_PLACEHOLDER, getMembershipParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_GET_ALL_PLACEHOLDER
 		SpecificationParser getAllMembershipsParser = parseGetAllMemberships();
-		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_GET_ALL_PLACEHOLDER, getAllMembershipsParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_GET_ALL_PLACEHOLDER, getAllMembershipsParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_SEARCH_PLACEHOLDER
 		SpecificationParser searchMembershipParser = buildSearchMembershipParser(
 				MatchAndTradeRestUtil.getLastAuthenticatedUserId(),
 				null,
 				MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_SEARCH_PLACEHOLDER, searchMembershipParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_SEARCH_PLACEHOLDER, searchMembershipParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_DELETE_PLACEHOLDER
 		SpecificationParser deleteMembershipParser = parseDeleteMembership(membership);
-		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_DELETE_PLACEHOLDER, deleteMembershipParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_DELETE_PLACEHOLDER, deleteMembershipParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationRows(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseDeleteMembership(MembershipJson membership) {

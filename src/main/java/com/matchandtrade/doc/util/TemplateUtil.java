@@ -1,4 +1,4 @@
-package com.matchandtrade.doc.maker;
+package com.matchandtrade.doc.util;
 
 import org.apache.commons.io.FileUtils;
 
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 
-public class TemplateHelper {
+public class TemplateUtil {
 
     private static String rootDirectory = "templates/";
 
@@ -18,7 +18,7 @@ public class TemplateHelper {
      */
     public static String buildTemplate(String templateRelativePath) {
         String result;
-        String templatePath = TemplateHelper.class.getClassLoader().getResource(rootDirectory + templateRelativePath).getFile();
+        String templatePath = TemplateUtil.class.getClassLoader().getResource(rootDirectory + templateRelativePath).getFile();
         File templateFile = new File(templatePath);
         try {
             result = FileUtils.readFileToString(templateFile, StandardCharsets.UTF_8);

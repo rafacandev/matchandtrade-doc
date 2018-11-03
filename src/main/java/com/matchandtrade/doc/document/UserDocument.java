@@ -1,10 +1,9 @@
 
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
@@ -13,7 +12,7 @@ import io.restassured.http.ContentType;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class UserRestDocMaker implements DocumentContent {
+public class UserDocument implements Document {
 	
 	private static final String USERS_GET_PLACEHOLDER = "USERS_GET_PLACEHOLDER";
 	private static final String USERS_PUT_PLACEHOLDER = "USERS_PUT_PLACEHOLDER";
@@ -24,17 +23,17 @@ public class UserRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// USERS_PUT_PLACEHOLDER
 		SpecificationParser putUserParser = parsePutUser();
-		template = TemplateHelper.replacePlaceholder(template, USERS_PUT_PLACEHOLDER, putUserParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_PLACEHOLDER, putUserParser.asHtmlSnippet());
 
 		// USERS_GET_PLACEHOLDER
 		SpecificationParser parser = parseGetUser();
-		template = TemplateHelper.replacePlaceholder(template, USERS_GET_PLACEHOLDER, parser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, USERS_GET_PLACEHOLDER, parser.asHtmlSnippet());
 
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseGetUser() {

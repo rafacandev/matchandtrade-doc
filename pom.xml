@@ -97,7 +97,7 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
-							<mainClass>com.matchandtrade.doc.executable.MatchAndTradeDocExecutable</mainClass>
+							<mainClass>com.matchandtrade.doc.executable.MainExecutable</mainClass>
 							<arguments>
 								<argument>-cf</argument>
 								<argument>${basedir}/config/matchandtrade-doc.properties</argument>

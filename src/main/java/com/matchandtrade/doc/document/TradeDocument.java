@@ -1,11 +1,10 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
 import io.restassured.RestAssured;
@@ -16,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 import static org.hamcrest.Matchers.*;
 
 
-public class TradeRestDocMaker implements DocumentContent {
+public class TradeDocument implements Document {
 	
 	private static final String TRADES_POST_PLACEHOLDER = "TRADES_POST_PLACEHOLDER";
 	private static final String TRADES_PUT_PLACEHOLDER = "TRADES_PUT_PLACEHOLDER";	
@@ -32,40 +31,40 @@ public class TradeRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// TRADES_POST_PLACEHOLDER
 		SpecificationParser postParser = buildPostParser(MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		template = TemplateHelper.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
 		TradeJson tradeJson = postParser.getResponse().body().as(TradeJson.class);
 
 		// TRADES_PUT_PLACEHOLDER
 		tradeJson.setName("Board games in Toronto - " + System.currentTimeMillis() + "Updated");
 		tradeJson.setState(State.GENERATE_RESULTS);
-		SpecificationParser putParser = TradeRestDocMaker.buildPutParser(
+		SpecificationParser putParser = TradeDocument.buildPutParser(
 				MatchAndTradeRestUtil.getLastAuthorizationHeader(),
 				tradeJson);
-		template = TemplateHelper.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
 		tradeJson = putParser.getResponse().body().as(TradeJson.class);
 
 		// TRADES_GET_PLACEHOLDER
 		SpecificationParser getByIdParser = buildGetParser(tradeJson);
-		template = TemplateHelper.replacePlaceholder(template, TRADES_GET_PLACEHOLDER, getByIdParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_PLACEHOLDER, getByIdParser.asHtmlSnippet());
 
 		// TRADES_SEARCH_PLACEHOLDER
 		SpecificationParser searchParser = parseSearch();
-		template = TemplateHelper.replacePlaceholder(template, TRADES_SEARCH_PLACEHOLDER, searchParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_SEARCH_PLACEHOLDER, searchParser.asHtmlSnippet());
 
 		// TRADES_GET_ALL_PLACEHOLDER
 		SpecificationParser getAllParser = getAllParser();
-		template = TemplateHelper.replacePlaceholder(template, TRADES_GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
 		
 		// TRADES_DELETE_PLACEHOLDER
 		SpecificationParser deleteParser = parseDelete(tradeJson);
-		template = TemplateHelper.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseDelete(TradeJson tradeJson) {

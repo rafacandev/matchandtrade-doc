@@ -1,16 +1,15 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import io.restassured.RestAssured;
 
 import static org.hamcrest.Matchers.hasKey;
 
 
-public class AuthenticationRestDocMaker implements DocumentContent {
+public class AuthenticationDocument implements Document {
 	
 	private static final String AUTHENTICATIONS_PLACEHOLDER = "AUTHENTICATIONS_PLACEHOLDER";
 
@@ -21,13 +20,13 @@ public class AuthenticationRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// AUTHENTICATIONS_PLACEHOLDER
 		SpecificationParser parser = buildGetParser();
-		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, parser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, parser.asHtmlSnippet());
 
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	public static SpecificationParser buildGetParser() {

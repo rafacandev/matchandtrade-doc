@@ -1,7 +1,5 @@
 package com.matchandtrade.doc.util;
 
-import com.matchandtrade.doc.maker.TemplateHelper;
-
 public class PaginationTemplateUtil {
 
 	private static final String PAGINATION_ROW_PLACEHOLDER = "" +
@@ -26,11 +24,11 @@ public class PaginationTemplateUtil {
 			"";
 	
 	public static String replacePaginationRows(String template) {
-		return TemplateHelper.replacePlaceholder(template, "PAGINATION_ROWS", PAGINATION_ROW_PLACEHOLDER);
+		return TemplateUtil.replacePlaceholder(template, "PAGINATION_ROWS", PAGINATION_ROW_PLACEHOLDER);
 	}
 
 	public static String replacePaginationTable(String template) {
-		return TemplateHelper.replacePlaceholder(template, "PAGINATION_TABLE", PAGINATION_TABLE_PLACEHOLDER);
+		return TemplateUtil.replacePlaceholder(template, "PAGINATION_TABLE", PAGINATION_TABLE_PLACEHOLDER);
 	}
 	
 }

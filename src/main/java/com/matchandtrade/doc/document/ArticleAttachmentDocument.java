@@ -1,9 +1,8 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
@@ -12,7 +11,7 @@ import com.matchandtrade.rest.v1.json.MembershipJson;
 import io.restassured.RestAssured;
 
 
-public class ArticleAttachmentRestDocMaker implements DocumentContent {
+public class ArticleAttachmentDocument implements Document {
 	
 	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
 	private static final String GET_ALL_PLACEHOLDER = "GET_ALL_PLACEHOLDER";
@@ -25,7 +24,7 @@ public class ArticleAttachmentRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// TODO
 //		MatchAndTradeApiFacade apiFacade = new MatchAndTradeApiFacade();
@@ -35,16 +34,16 @@ public class ArticleAttachmentRestDocMaker implements DocumentContent {
 //		ArticleJson article = apiFacade.createArticle(membership, "Article with images");
 //
 //		SpecificationParser postParser = parsePostAttachment(attachment, membership, article);
-//		template = TemplateHelper.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
+//		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
 //
 //		SpecificationParser getAllParser = parseGetAllAttachments(attachment, membership, article);
-//		template = TemplateHelper.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+//		template = TemplateUtil.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
 //
 //		SpecificationParser deleteParser = deleteAttachmentParser(attachment, membership, article);
 //		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 		
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser deleteAttachmentParser(AttachmentJson attachment, MembershipJson membership, ArticleJson article) {

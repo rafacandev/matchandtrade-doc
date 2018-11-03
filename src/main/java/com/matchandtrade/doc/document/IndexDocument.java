@@ -1,9 +1,10 @@
-package com.matchandtrade.doc.maker;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -12,7 +13,7 @@ import java.util.Date;
 
 import static org.hamcrest.Matchers.notNullValue;
 
-public class IndexRestDocMaker implements DocumentContent {
+public class IndexDocument implements Document {
 
 	public static final String REST_GUIDE_PAGINATION = "REST_GUIDE_PAGINATION";
 
@@ -23,7 +24,7 @@ public class IndexRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// REST_GUIDE_PAGINATION
 		MatchAndTradeApiFacade matchAndTradeApiFacade = new MatchAndTradeApiFacade();
@@ -43,8 +44,8 @@ public class IndexRestDocMaker implements DocumentContent {
 		response.then().statusCode(200).and().body("[0].tradeId", notNullValue());
 
 		SpecificationParser parser = new SpecificationParser(filter);
-		template = TemplateHelper.replacePlaceholder(template, REST_GUIDE_PAGINATION, parser.asHtmlSnippet());
-		return TemplateHelper.appendHeaderAndFooter(template);
+		template = TemplateUtil.replacePlaceholder(template, REST_GUIDE_PAGINATION, parser.asHtmlSnippet());
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 }

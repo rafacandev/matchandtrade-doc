@@ -1,10 +1,9 @@
 
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
@@ -24,7 +23,7 @@ import java.util.Date;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class SearchRestDocMaker implements DocumentContent {
+public class SearchDocument implements Document {
 	
 	private static final String SEARCH_POST_PLACEHOLDER = "SEARCH_POST_PLACEHOLDER";
 	private static final String TRADE_ID_PLACEHOLDER = "TRADE_ID";
@@ -44,13 +43,13 @@ public class SearchRestDocMaker implements DocumentContent {
 		// SEARCH_POST_PLACEHOLDER
 		SpecificationParser parser = parsePostSearch(trade, secondMember);
 //
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		// TODO
-		template = TemplateHelper.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
-		template = TemplateHelper.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
-		template = TemplateHelper.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, TRADE_ID_PLACEHOLDER, trade.getTradeId().toString());
+		template = TemplateUtil.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, secondMember.getMembershipId().toString());
+		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parsePostSearch(TradeJson trade, MembershipJson secondMember) {

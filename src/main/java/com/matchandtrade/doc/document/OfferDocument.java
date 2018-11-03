@@ -1,9 +1,8 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
@@ -13,7 +12,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 
 
-public class OfferRestDocMaker implements DocumentContent {
+public class OfferDocument implements Document {
 	
 	private static final String OFFERS_POST = "OFFERS_POST";
 	private static final String OFFERS_GET = "OFFERS_GET";
@@ -22,7 +21,7 @@ public class OfferRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// ### Setup a trade with an owner and a member so the can later make offers for their articles
 		// Create a user named 'Olavo'
@@ -53,23 +52,23 @@ public class OfferRestDocMaker implements DocumentContent {
 
 		// OFFERS_POST
 		SpecificationParser postOfferParser = parsePostOffer(olavoAuthorizationHeader, olavoMembership, olavoPandemic.getArticleId(), mariaStoneAge.getArticleId());
-		template = TemplateHelper.replacePlaceholder(template, OFFERS_POST, postOfferParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, postOfferParser.asHtmlSnippet());
 		OfferJson pandemicOneForStoneAge = postOfferParser.getResponse().body().as(OfferJson.class);
 
 		// OFFERS_GET
 		SpecificationParser getOfferById = parseGetOfferById(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
-		template = TemplateHelper.replacePlaceholder(template, OFFERS_GET, getOfferById.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getOfferById.asHtmlSnippet());
 
 		// OFFERS_SEARCH
 		SpecificationParser searchOffersParser = parseSearchOffers(olavoAuthorizationHeader, olavoMembership, olavoPandemic, mariaStoneAge);
-		template = TemplateHelper.replacePlaceholder(template, OFFERS_SEARCH, searchOffersParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchOffersParser.asHtmlSnippet());
 
 		// OFFERS_DELETE
 		SpecificationParser deleteParser = parseDeleteOffer(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
-		template = TemplateHelper.replacePlaceholder(template, OFFERS_DELETE, deleteParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationRows(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	@Override

@@ -1,21 +1,21 @@
 package com.matchandtrade.exception;
 
-public class MatchAndTradeDocException extends RuntimeException {
+public class ContentGenerationException extends RuntimeException {
 
 	private static final long serialVersionUID = -5955298202431584165L;
 	private String message;
 
-	public MatchAndTradeDocException(Throwable t) {
+	public ContentGenerationException(Throwable t) {
 		super(t);
 		this.message = t.getMessage();
 		
 	}
 
-	public MatchAndTradeDocException(Object objectThrowingException, Throwable t) {
+	public ContentGenerationException(Object objectThrowingException, Throwable t) {
 		message = "Error on class: " + objectThrowingException.getClass().getSimpleName() + ". Exception message: " + t.getMessage();
 	}
 	
-	public MatchAndTradeDocException(String message) {
+	public ContentGenerationException(String message) {
 		this.message = message;
 	}
 

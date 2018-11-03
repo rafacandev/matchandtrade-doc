@@ -1,7 +1,7 @@
 package com.matchandtrade.doc.util;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
-import com.matchandtrade.doc.maker.rest.AttachmentRestDocMaker;
+import com.matchandtrade.doc.document.AttachmentDocument;
 import com.matchandtrade.rest.v1.json.*;
 import io.restassured.RestAssured;
 import io.restassured.builder.MultiPartSpecBuilder;
@@ -176,7 +176,7 @@ public class MatchAndTradeApiFacade {
 	}
 	
 	public AttachmentJson createAttachment(String fileName) {
-		String filePath = AttachmentRestDocMaker.class.getClassLoader().getResource("image-landscape.png").getFile();
+		String filePath = AttachmentDocument.class.getClassLoader().getResource("image-landscape.png").getFile();
 		File file = new File(filePath);
 		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
 		Response response = RestAssured

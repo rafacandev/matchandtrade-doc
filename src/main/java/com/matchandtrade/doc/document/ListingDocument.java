@@ -1,11 +1,9 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.ListingJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
@@ -19,7 +17,7 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.notNullValue;
 
-public class ListingRestDocMaker implements DocumentContent {
+public class ListingDocument implements Document {
 	
 	private static final String LISTING_POST_PLACEHOLDER = "LISTING_POST_PLACEHOLDER";
 	private static final String LISTING_DELETE_PLACEHOLDER = "LISTING_DELETE_PLACEHOLDER";
@@ -31,21 +29,21 @@ public class ListingRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		Header authenticationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
 		TradeJson trade = buildTrade(authenticationHeader);
 		MembershipJson membership = buildMembership(authenticationHeader, trade);
 		ArticleJson article = buildArticle();
 
 		// LISTING_POST_PLACEHOLDER
-		SpecificationParser listingPostParser = ListingRestDocMaker.buildPostListingParser(authenticationHeader, membership, article);
-		template = TemplateHelper.replacePlaceholder(template, LISTING_POST_PLACEHOLDER, listingPostParser.asHtmlSnippet());
+		SpecificationParser listingPostParser = ListingDocument.buildPostListingParser(authenticationHeader, membership, article);
+		template = TemplateUtil.replacePlaceholder(template, LISTING_POST_PLACEHOLDER, listingPostParser.asHtmlSnippet());
 
 		// LISTING_DELETE_PLACEHOLDER
 		SpecificationParser listingDeleteParser = buildDeleteParser(authenticationHeader, membership, article);
-		template = TemplateHelper.replacePlaceholder(template, LISTING_DELETE_PLACEHOLDER, listingDeleteParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, LISTING_DELETE_PLACEHOLDER, listingDeleteParser.asHtmlSnippet());
 
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	public static SpecificationParser buildPostListingParser(Header authenticationHeader, MembershipJson membership, ArticleJson article) {
@@ -82,13 +80,13 @@ public class ListingRestDocMaker implements DocumentContent {
 		ArticleJson article = new ArticleJson();
 		article.setName("Love Letter");
 		article.setDescription("First edition in great condition");
-		SpecificationParser parser = ArticleRestDocMaker.buildPostParser(article);
+		SpecificationParser parser = ArticleDocument.buildPostParser(article);
 		article = parser.getResponse().as(ArticleJson.class);
 		return article;
 	}
 
 	public static MembershipJson buildMembership(Header authenticationHeader, TradeJson trade) {
-		SpecificationParser parser = MembershipRestDocMaker.buildSearchMembershipParser(
+		SpecificationParser parser = MembershipDocument.buildSearchMembershipParser(
 				MatchAndTradeRestUtil.getLastAuthenticatedUserId(),
 				trade.getTradeId(),
 				authenticationHeader);
@@ -102,7 +100,7 @@ public class ListingRestDocMaker implements DocumentContent {
 	}
 
 	private TradeJson buildTrade(Header authenticationHeader) {
-		SpecificationParser tradeParser = TradeRestDocMaker.buildPostParser(authenticationHeader);
+		SpecificationParser tradeParser = TradeDocument.buildPostParser(authenticationHeader);
 		return tradeParser.getResponse().as(TradeJson.class);
 	}
 

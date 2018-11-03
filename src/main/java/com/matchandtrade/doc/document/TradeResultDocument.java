@@ -1,12 +1,11 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
@@ -20,7 +19,7 @@ import java.util.Date;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class TradeResultRestDocMaker implements DocumentContent {
+public class TradeResultDocument implements Document {
 	
 	private static final String RESULTS_GET_CSV = "RESULTS_GET_CSV";
 	private static final String RESULTS_GET_JSON = "RESULTS_GET_JSON";
@@ -33,23 +32,23 @@ public class TradeResultRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 		TradeJson trade = buildTrade();
 
 		// RESULTS_GET_CSV
-		SpecificationParser csvResultsParser = TradeResultRestDocMaker.parseCsvResults(trade, MatchAndTradeRestUtil.getLastAuthorizationHeader());
-		template = TemplateHelper.replacePlaceholder(template, RESULTS_GET_CSV, csvResultsParser.asHtmlSnippet());
+		SpecificationParser csvResultsParser = TradeResultDocument.parseCsvResults(trade, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET_CSV, csvResultsParser.asHtmlSnippet());
 
 		// SAMPLE_ROW
 		String sampleRow = buildSampleRow(csvResultsParser);
-		template = TemplateHelper.replacePlaceholder(template, SAMPLE_ROW, sampleRow);
+		template = TemplateUtil.replacePlaceholder(template, SAMPLE_ROW, sampleRow);
 
 		// RESULTS_GET_JSON
 		SpecificationParser jsonResultsParser = parseJsonResults(trade);
-		template = TemplateHelper.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private String buildSampleRow(SpecificationParser csvResultsParser) {

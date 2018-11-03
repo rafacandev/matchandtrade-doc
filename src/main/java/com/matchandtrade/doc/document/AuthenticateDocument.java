@@ -1,15 +1,14 @@
-package com.matchandtrade.doc.maker.rest;
+package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.maker.DocumentContent;
-import com.matchandtrade.doc.maker.TemplateHelper;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.TemplateUtil;
 import io.restassured.RestAssured;
 
 import static org.hamcrest.Matchers.nullValue;
 
-public class AuthenticateRestDocMaker implements DocumentContent {
+public class AuthenticateDocument implements Document {
 
 	private static final String AUTHENTICATE_PLACEHOLDER = "AUTHENTICATE_PLACEHOLDER";
 	private static final String AUTHENTICATE_INFO = "AUTHENTICATE_INFO";
@@ -22,21 +21,21 @@ public class AuthenticateRestDocMaker implements DocumentContent {
 
 	@Override
 	public String content() {
-		String template = TemplateHelper.buildTemplate(contentFilePath());
+		String template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// AUTHENTICATE_PLACEHOLDER
-		SpecificationParser authenticateParser = AuthenticateRestDocMaker.buildGetParser();
-		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateParser.asHtmlSnippet());
+		SpecificationParser authenticateParser = AuthenticateDocument.buildGetParser();
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateParser.asHtmlSnippet());
 
 		// AUTHENTICATE_INFO
 		SpecificationParser authenticationInfoParser = buildGetInfoParser(authenticateParser.getResponse().getHeader("Set-Cookie"));
-		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_INFO, authenticationInfoParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_INFO, authenticationInfoParser.asHtmlSnippet());
 
 		// SIGN_OUT_PLACEHOLDER
 		SpecificationParser signOffParser = parseSingOut();
-		template = TemplateHelper.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffParser.asHtmlSnippet());
+		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffParser.asHtmlSnippet());
 
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
 	private SpecificationParser parseSingOut() {

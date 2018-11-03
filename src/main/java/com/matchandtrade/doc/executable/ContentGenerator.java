@@ -1,6 +1,6 @@
 package com.matchandtrade.doc.executable;
 
-import com.matchandtrade.doc.maker.DocumentContent;
+import com.matchandtrade.doc.document.Document;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class ContentGenerator {
 		this.cssFilePath = cssFilePath;
 	}
 
-	public void generate(DocumentContent content) {
+	public void generate(Document content) {
 
 		InputStream restDocMakerCss = ContentGenerator.class.getResourceAsStream(cssFilePath);
 		File cssDestinationFolder = new File(destinationFolderRootPath + File.separatorChar + "css" + File.separatorChar + "rest-api-doc.css");
