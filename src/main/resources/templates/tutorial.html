@@ -1,65 +1,81 @@
-<h1>Use Cases</h1>
+<h1>Tutorial</h1>
+<h2>Summary</h2>
 <p>
-This page describes a typical use case where a <a href='users.html'>User</a> creates a <a href='trades.html'>Trade</a>
-<a href='users.html'>Users</a> submit and match <a href='articles.html'>Articles</a>
-and finally generate the <a href='trade-results.html'>TradeResults</a>
+	This page describes a typical use case where a <a href='users.html'>User</a> (Olavo) creates a <a href='trades.html'>Trade</a>
+	and lists <a href='articles.html'>Articles</a> for trading.
+	Next, another <a href='users.html'>User</a> (Maria) subscribes to the <a href='trades.html'>Trade</a> and also
+	lists <a href='articles.html'>Articles</a> for trading.
+	Subsequently, they make <a href='offers.html'>Offers</a>.
+	Finally, the <a href='trade-results.html'>TradeResults</a> are generated and the trade is concluded.
 </p>
 
-<p></p>
-
+<h2>Workflow</h2>
 <p>
-	Olavo is a <a href='users.html'>User</a> which <a href='authenticate.html'>Authenticates</a> on the system.
-	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>	
+	Olavo is a <a href='users.html'>User</a> and <a href='authenticate.html'>Authenticates</a> on the system.
+	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
 ${OWNER_AUTHENTICATE}
 
 <p>
 	Olavo gets his <a href='authentications.html'>Authentication</a> details.
-	<i>Note that Olavo will need know his <span class="incode">User.userId</span> in the future</i>.
+	Mainly because the returned <span class="incode">User.userId</span> is required in some of the future requests.
 </p>
 ${OWNER_AUTHENTICATIONS}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
 	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ARTICLES</span>
-	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and submit <a href='articles.html'>Articles</a>.
+	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and list <a href='articles.html'>Articles</a>.
 </p>
 ${OWNER_TRADES_POST}
 
 <p>
-	Olavo gets his <a href='memberships.html'>TradeMemberhip</a> details.
+	Olavo searches his <a href='memberships.html'>Membership</a> details.
 </p>
 ${OWNER_MEMBERSHIP}
 
 <p>
-  	Olavo adds two <a href='articles.html'>Articles</a> to his <a href='memberships.html'>TradeMemberhip</a>.
+  	Olavo creates two <a href='articles.html'>Articles</a>.
 </p>
 ${OWNER_ARTICLE_ONE}
 ${OWNER_ARTICLE_TWO}
 
 <p>
-  	Maria <a href='authenticate.html'>Authenticates</a> on the system.
-  	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
+	Olavo lists his <a href='articles.html'>Articles</a> in his <a href='memberships.html'>Membership</a>.
+</p>
+${OWNER_LISTING_ONE}
+${OWNER_LISTING_TWO}
+
+<p>
+  	Maria is another <a href='users.html'>User</a> and she <a href='authenticate.html'>Authenticates</a> on the system.
 </p>
 ${MEMBER_AUTHENTICATE}
 
 <p>
 	Maria gets her <a href='authentications.html'>Authentication</a> details.
-	<i>Note that Maria will need know her <span class="incode">User.userId</span> in the future</i>.
 </p>
 ${MEMBER_AUTHENTICATIONS}
 
 <p>
-	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via <a href='memberships.html'>TradeMemberhip</a> endpoint.
+	Maria subscribes to Olavo's <a href='trades.html'>Trade</a> via the <a href='memberships.html'>Memberhip</a> endpoint.
+	She is now a <a href='trades.html'>Trade</a> <i>member</i>.
 </p>
 ${MEMBER_MEMBERSHIPS}
 
 <p>
-  	Maria adds three <a href='articles.html'>Articles</a> to her <a href='memberships.html'>TradeMemberhip</a>.
+  	Maria creates three <a href='articles.html'>Articles</a>.
 </p>
 ${MEMBER_ARTICLE_ONE}
 ${MEMBER_ARTICLE_TWO}
 ${MEMBER_ARTICLE_THREE}
+
+<p>
+    Maria lists her <a href='articles.html'>Articles</a> in her <a href='memberships.html'>Membership</a>.
+</p>
+${MEMBER_LISTING_ONE}
+${MEMBER_LISTING_TWO}
+${MEMBER_LISTING_THREE}
+
 
 <p>
 	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ARTICLES</span>.
@@ -68,15 +84,13 @@ ${MEMBER_ARTICLE_THREE}
 ${TRADE_MATCHING_ARTICLES}
 
 <p>
-	Olavo matches his <a href='articles.html'>Articles</a> with <a href='articles.html'>Articles</a> from other <i>members</i>
-	via the <a href='want-articles.html'>WantArticles</a> endpoint.<br>
+	Olavo offers his <a href='articles.html'>Articles</a> for others.
 	He offers <i>Pandemic Legacy: Season 1</i> and wants Maria's <i>Stone Age</i> in exchange.
 </p>
 ${OWNER_OFFER_ONE}
 
 <p>
-	Maria matches her <a href='articles.html'>Articles</a> with <a href='articles.html'>Articles</a> from other <i>members</i>
-	via the <a href='want-articles.html'>WantArticles</a> endpoint.<br>
+	Maria offers her <a href='articles.html'>Articles</a>;
 	She offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 1</i> in exchange.<br>
 	She also offers <i>Stone Age</i> and wants Olavo's <i>Pandemic Legacy: Season 2</i> in exchange.
 </p>
@@ -90,12 +104,15 @@ ${TRADE_GENERATE_TRADES}
 
 <p>
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
+</p>
+<p>
 	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_article_id=1</span>)
 	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_article_id=3</span>)<br>
 
 	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_article_id=3</span>)
 	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_article_id=1</span>)<br>
-
+</p>
+<p>
 	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
 </p>
 ${TRADE_RESULTS}

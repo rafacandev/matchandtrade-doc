@@ -10,6 +10,8 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
+import org.springframework.beans.BeanUtils;
 
 import static org.hamcrest.Matchers.*;
 
@@ -33,17 +35,21 @@ public class TradeRestDocMaker implements DocumentContent {
 		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// TRADES_POST_PLACEHOLDER
-		SpecificationParser postParser = parsePost();
+		SpecificationParser postParser = buildPostParser(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateHelper.replacePlaceholder(template, TRADES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
 		TradeJson tradeJson = postParser.getResponse().body().as(TradeJson.class);
 
 		// TRADES_PUT_PLACEHOLDER
-		SpecificationParser putParser = parsePut(tradeJson);
+		tradeJson.setName("Board games in Toronto - " + System.currentTimeMillis() + "Updated");
+		tradeJson.setState(State.GENERATE_RESULTS);
+		SpecificationParser putParser = TradeRestDocMaker.buildPutParser(
+				MatchAndTradeRestUtil.getLastAuthorizationHeader(),
+				tradeJson);
 		template = TemplateHelper.replacePlaceholder(template, TRADES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
 		tradeJson = putParser.getResponse().body().as(TradeJson.class);
 
 		// TRADES_GET_PLACEHOLDER
-		SpecificationParser getByIdParser = parseGetById(tradeJson);
+		SpecificationParser getByIdParser = buildGetParser(tradeJson);
 		template = TemplateHelper.replacePlaceholder(template, TRADES_GET_PLACEHOLDER, getByIdParser.asHtmlSnippet());
 
 		// TRADES_SEARCH_PLACEHOLDER
@@ -96,7 +102,7 @@ public class TradeRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parseGetById(TradeJson tradeJson) {
+	private SpecificationParser buildGetParser(TradeJson tradeJson) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given().filter(filter).header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
@@ -105,38 +111,35 @@ public class TradeRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parsePut(TradeJson tradeJson) {
-		Integer tradeId = tradeJson.getTradeId();
-		tradeJson.setTradeId(null); // Set as null because we do not want to display in the documentation
-		tradeJson.setLinks(null); // Set as null because we do not want to display in the documentation
-		String tradeName = "Board games in Toronto - " + System.currentTimeMillis() + "Updated";
-		tradeJson.setName(tradeName);
-		tradeJson.setDescription("The event will take place at Toronto Convention Center");
-		tradeJson.setState(State.MATCHING_ARTICLES);
-
+	public static SpecificationParser buildPutParser(Header authorizationHeader, final TradeJson trade) {
+		TradeJson requestBody = new TradeJson();
+		BeanUtils.copyProperties(trade, requestBody);
+		Integer tradeId = trade.getTradeId();
+		requestBody.setTradeId(null); // Set as null because we do not want to display in the documentation
+		requestBody.setLinks(null); // Set as null because we do not want to display in the documentation
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.header(authorizationHeader)
 				.contentType(ContentType.JSON)
-				.body(tradeJson)
+				.body(requestBody)
 				.put(MatchAndTradeRestUtil.tradesUrl(tradeId));
-		parser.getResponse().then().statusCode(200).and().body("name", equalTo(tradeName));
+		parser.getResponse().then().statusCode(200).and().body("name", equalTo(trade.getName()));
 		return parser;
 	}
 
-	private SpecificationParser parsePost() {
+	public static SpecificationParser buildPostParser(Header authenticationHeader) {
 		TradeJson tradeJson = new TradeJson();
-		String tradeName = "Board games location TBD - " + System.currentTimeMillis();
+		String tradeName = "Board games in Toronto - " + System.currentTimeMillis();
 		tradeJson.setName(tradeName);
-		tradeJson.setDescription("We will update the trade information once the description is defined");
+		tradeJson.setDescription("More information to come.");
 
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.header(authenticationHeader)
 			.contentType(ContentType.JSON)
 			.body(tradeJson)
 			.post(MatchAndTradeRestUtil.tradesUrl() + "/");

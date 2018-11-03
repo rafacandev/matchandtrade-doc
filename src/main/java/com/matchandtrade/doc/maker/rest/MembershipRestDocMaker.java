@@ -11,6 +11,8 @@ import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
+import io.restassured.specification.RequestSpecification;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -39,7 +41,7 @@ public class MembershipRestDocMaker implements DocumentContent {
 		MembershipJson membership = postMembershipParser.getResponse().body().as(MembershipJson.class);
 
 		// MEMBERSHIPS_GET_PLACEHOLDER
-		SpecificationParser getMembershipParser = parseGetMembership(membership);
+		SpecificationParser getMembershipParser = MembershipRestDocMaker.parseGetMembership(membership);
 		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_GET_PLACEHOLDER, getMembershipParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_GET_ALL_PLACEHOLDER
@@ -47,7 +49,10 @@ public class MembershipRestDocMaker implements DocumentContent {
 		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_GET_ALL_PLACEHOLDER, getAllMembershipsParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_SEARCH_PLACEHOLDER
-		SpecificationParser searchMembershipParser = parseSearchMembership();
+		SpecificationParser searchMembershipParser = buildSearchMembershipParser(
+				MatchAndTradeRestUtil.getLastAuthenticatedUserId(),
+				null,
+				MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateHelper.replacePlaceholder(template, MEMBERSHIPS_SEARCH_PLACEHOLDER, searchMembershipParser.asHtmlSnippet());
 
 		// MEMBERSHIPS_DELETE_PLACEHOLDER
@@ -69,14 +74,17 @@ public class MembershipRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parseSearchMembership() {
+	public static SpecificationParser buildSearchMembershipParser(Integer userId, Integer tradeId, Header authorizationHeader) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
+		RequestSpecification request = RestAssured.given()
 				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-				.queryParam("userId", MatchAndTradeRestUtil.getLastAuthenticatedUserId())
-				.get(MatchAndTradeRestUtil.membershipsUrl());
+				.header(authorizationHeader)
+				.queryParam("userId", userId);
+		if (tradeId != null) {
+			request.queryParam("tradeId", tradeId);
+		}
+		request.get(MatchAndTradeRestUtil.membershipsUrl());
 		return parser;
 	}
 
@@ -92,7 +100,7 @@ public class MembershipRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parseGetMembership(MembershipJson membership) {
+	public static SpecificationParser parseGetMembership(MembershipJson membership) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
@@ -103,16 +111,26 @@ public class MembershipRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
+	public static SpecificationParser parseGetMembership(Integer membershipId) {
+		MembershipJson request = new MembershipJson();
+		request.setMembershipId(membershipId);
+		return parseGetMembership(request);
+	}
+
 	private SpecificationParser parserPostMembership() {
 		MembershipJson membership = buildMembership();
+		return parserPostMembership(membership);
+	}
+
+	public static SpecificationParser parserPostMembership(MembershipJson membership) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
-			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-			.contentType(ContentType.JSON)
-			.body(membership)
-			.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
+				.filter(filter)
+				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.contentType(ContentType.JSON)
+				.body(membership)
+				.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
 		parser.getResponse().then().statusCode(201).and().body("membershipId", notNullValue());
 		return parser;
 	}

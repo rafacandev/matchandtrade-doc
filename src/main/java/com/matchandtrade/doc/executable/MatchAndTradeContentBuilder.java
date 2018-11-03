@@ -34,6 +34,7 @@ public class MatchAndTradeContentBuilder {
 			contents.add(new OfferRestDocMaker());
 			contents.add(new TradeResultRestDocMaker());
 			contents.add(new SearchRestDocMaker());
+			contents.add(new ListingRestDocMaker());
 			contents.add(new UseCaseRestDocMaker());
 			contents.add(new AttachmentRestDocMaker());
 			contents.add(new ArticleAttachmentRestDocMaker());

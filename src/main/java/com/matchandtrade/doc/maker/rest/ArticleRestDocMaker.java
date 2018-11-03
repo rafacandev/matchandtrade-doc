@@ -35,7 +35,7 @@ public class ArticleRestDocMaker implements DocumentContent {
 		article.setName("Pandemic Legacy: Season 1");
 		article.setDescription("In mint condition");
 
-		SpecificationParser postParser = buildPostParser(article);
+		SpecificationParser postParser = ArticleRestDocMaker.buildPostParser(article);
 		template = TemplateHelper.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
 
 		// ARTICLES_PUT_PLACEHOLDER
@@ -92,7 +92,7 @@ public class ArticleRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser buildPostParser(ArticleJson article) {
+	public static SpecificationParser buildPostParser(ArticleJson article) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured

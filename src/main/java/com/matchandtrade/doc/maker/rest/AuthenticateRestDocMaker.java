@@ -25,11 +25,11 @@ public class AuthenticateRestDocMaker implements DocumentContent {
 		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// AUTHENTICATE_PLACEHOLDER
-		SpecificationParser authenticateParser = parseAuthenticate();
+		SpecificationParser authenticateParser = AuthenticateRestDocMaker.buildGetParser();
 		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateParser.asHtmlSnippet());
 
 		// AUTHENTICATE_INFO
-		SpecificationParser authenticationInfoParser = parseAuthenticateInfo(authenticateParser.getResponse().getHeader("Set-Cookie"));
+		SpecificationParser authenticationInfoParser = buildGetInfoParser(authenticateParser.getResponse().getHeader("Set-Cookie"));
 		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATE_INFO, authenticationInfoParser.asHtmlSnippet());
 
 		// SIGN_OUT_PLACEHOLDER
@@ -55,7 +55,7 @@ public class AuthenticateRestDocMaker implements DocumentContent {
 	 * @param authenticateCookie cookie value from "authenticate" endpoint
 	 * @return
 	 */
-	private SpecificationParser parseAuthenticateInfo(String authenticateCookie) {
+	private SpecificationParser buildGetInfoParser(String authenticateCookie) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
@@ -66,7 +66,7 @@ public class AuthenticateRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parseAuthenticate() {
+	public static SpecificationParser buildGetParser() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()

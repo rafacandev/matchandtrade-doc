@@ -13,6 +13,7 @@ import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 
 import java.util.Date;
 
@@ -36,7 +37,7 @@ public class TradeResultRestDocMaker implements DocumentContent {
 		TradeJson trade = buildTrade();
 
 		// RESULTS_GET_CSV
-		SpecificationParser csvResultsParser = parseCsvResults(trade);
+		SpecificationParser csvResultsParser = TradeResultRestDocMaker.parseCsvResults(trade, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateHelper.replacePlaceholder(template, RESULTS_GET_CSV, csvResultsParser.asHtmlSnippet());
 
 		// SAMPLE_ROW
@@ -127,12 +128,12 @@ public class TradeResultRestDocMaker implements DocumentContent {
 		return trade;
 	}
 
-	private SpecificationParser parseCsvResults(TradeJson trade) {
+	public static SpecificationParser parseCsvResults(TradeJson trade, Header authorizationHeader) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.header(authorizationHeader)
 				.contentType("text/csv")
 				.get(MatchAndTradeRestUtil.tradeResultsUrl(trade.getTradeId()));
 		return parser;

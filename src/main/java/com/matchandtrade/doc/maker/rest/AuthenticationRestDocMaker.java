@@ -24,6 +24,13 @@ public class AuthenticationRestDocMaker implements DocumentContent {
 		String template = TemplateHelper.buildTemplate(contentFilePath());
 
 		// AUTHENTICATIONS_PLACEHOLDER
+		SpecificationParser parser = buildGetParser();
+		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, parser.asHtmlSnippet());
+
+		return TemplateHelper.appendHeaderAndFooter(template);
+	}
+
+	public static SpecificationParser buildGetParser() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
@@ -31,9 +38,7 @@ public class AuthenticationRestDocMaker implements DocumentContent {
 			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
 			.get(MatchAndTradeRestUtil.authenticationsUrl() + "/");
 		parser.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
-		template = TemplateHelper.replacePlaceholder(template, AUTHENTICATIONS_PLACEHOLDER, parser.asHtmlSnippet());
-
-		return TemplateHelper.appendHeaderAndFooter(template);
+		return parser;
 	}
 
 }

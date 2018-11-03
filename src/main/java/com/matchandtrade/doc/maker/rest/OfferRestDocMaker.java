@@ -113,7 +113,12 @@ public class OfferRestDocMaker implements DocumentContent {
 		return parser;
 	}
 
-	private SpecificationParser parsePostOffer(Header olavoAuthorizationHeader, MembershipJson olavoMembership, Integer offeredArticleId, Integer wantedArticleId) {
+	public static SpecificationParser parsePostOffer(
+			Header authorizationHeader,
+	        MembershipJson membership,
+			Integer offeredArticleId,
+			Integer wantedArticleId) {
+
 		OfferJson offer = new OfferJson();
 		offer.setOfferedArticleId(offeredArticleId);
 		offer.setWantedArticleId(wantedArticleId);
@@ -122,10 +127,10 @@ public class OfferRestDocMaker implements DocumentContent {
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 			.filter(filter)
-			.header(olavoAuthorizationHeader)
+			.header(authorizationHeader)
 			.contentType(ContentType.JSON)
 			.body(offer)
-			.post(MatchAndTradeRestUtil.offerUrl(olavoMembership.getMembershipId()) + "/");
+			.post(MatchAndTradeRestUtil.offerUrl(membership.getMembershipId()) + "/");
 		parser.getResponse().then().statusCode(201);
 		return parser;
 	}
