@@ -2,11 +2,10 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import io.restassured.RestAssured;
-
-import static org.hamcrest.Matchers.nullValue;
 
 public class AuthenticateDocument implements Document {
 
@@ -14,55 +13,35 @@ public class AuthenticateDocument implements Document {
 	private static final String AUTHENTICATE_INFO = "AUTHENTICATE_INFO";
 	private static final String SIGN_OUT_PLACEHOLDER = "SIGN_OUT_PLACEHOLDER";
 
-	@Override
-	public String contentFilePath() {
-		return "authenticate.html";
+	private String template;
+	private MatchAndTradeClient clientApi;
+
+	public AuthenticateDocument() {
+		clientApi = new MatchAndTradeClient();
+		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-
 		// AUTHENTICATE_PLACEHOLDER
-		SpecificationParser authenticateParser = AuthenticateDocument.buildGetParser();
+		SpecificationParser authenticateParser = MatchAndTradeClient.authenticate();
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_PLACEHOLDER, authenticateParser.asHtmlSnippet());
+		String cookie = authenticateParser.getResponse().getHeader("Set-Cookie");
 
 		// AUTHENTICATE_INFO
-		SpecificationParser authenticationInfoParser = buildGetInfoParser(authenticateParser.getResponse().getHeader("Set-Cookie"));
+		SpecificationParser authenticationInfoParser = clientApi.findAuthenticationInfo(cookie);
 		template = TemplateUtil.replacePlaceholder(template, AUTHENTICATE_INFO, authenticationInfoParser.asHtmlSnippet());
 
 		// SIGN_OUT_PLACEHOLDER
-		SpecificationParser signOffParser = parseSingOut();
+		SpecificationParser signOffParser = clientApi.singOff();
 		template = TemplateUtil.replacePlaceholder(template, SIGN_OUT_PLACEHOLDER, signOffParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	private SpecificationParser parseSingOut() {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-			.get(MatchAndTradeRestUtil.signOffUrl());
-		parser.getResponse().then().statusCode(205).header("Authorization", nullValue());
-		return parser;
-	}
-
-	/**
-	 * Need to keep the same cookie between "authenticate" and "authenticate-info"
-	 * @param authenticateCookie cookie value from "authenticate" endpoint
-	 * @return
-	 */
-	private SpecificationParser buildGetInfoParser(String authenticateCookie) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.header("cookie", authenticateCookie)
-			.filter(filter)
-			.get(MatchAndTradeRestUtil.authenticateInfoUrl());
-		parser.getResponse().then().statusCode(200);
-		return parser;
+	@Override
+	public String contentFilePath() {
+		return "authenticate.html";
 	}
 
 	public static SpecificationParser buildGetParser() {

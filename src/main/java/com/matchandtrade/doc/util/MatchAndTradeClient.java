@@ -9,13 +9,30 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 
 public class MatchAndTradeClient {
 
 	private final Header authenticationHeader;
+//	private final String cookie;
 
-	public MatchAndTradeClient(Header authenticationHeader) {
-		this.authenticationHeader = authenticationHeader;
+	public MatchAndTradeClient() {
+		SpecificationParser parser = authenticate();
+		String authorizationHeaderName = "Authorization";
+		String authorizationHeaderValue = parser.getResponse().getHeader(authorizationHeaderName);
+//		this.cookie = parser.getResponse().getCookie("MTSESSION");
+		this.authenticationHeader = new Header(authorizationHeaderName, authorizationHeaderValue);
+	}
+
+	public static SpecificationParser authenticate() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.get(MatchAndTradeRestUtil.authenticateUrl());
+		// Assert status is redirect
+		parser.getResponse().then().statusCode(302);
+		return parser;
 	}
 
 	public SpecificationParser create(TradeJson trade) {
@@ -24,11 +41,28 @@ public class MatchAndTradeClient {
 		RestAssured
 			.given()
 			.filter(filter)
-			.header(authenticationHeader)
+			.header(getAuthenticationHeader())
 			.contentType(ContentType.JSON)
 			.body(trade)
 			.when()
 			.post(MatchAndTradeRestUtil.tradesUrl() + "/");
+		return parser;
+	}
+
+	/**
+	 * Need to keep the same cookie between "authenticate" and "authenticate info"
+	 *
+	 * @param cookie
+	 * @return
+	 */
+	public SpecificationParser findAuthenticationInfo(String cookie) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.header("cookie", cookie)
+				.filter(filter)
+				.get(MatchAndTradeRestUtil.authenticateInfoUrl());
+		parser.getResponse().then().statusCode(200);
 		return parser;
 	}
 
@@ -48,6 +82,17 @@ public class MatchAndTradeClient {
 
 	public Header getAuthenticationHeader() {
 		return authenticationHeader;
+	}
+
+	public SpecificationParser singOff() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.get(MatchAndTradeRestUtil.signOffUrl());
+		parser.getResponse().then().statusCode(205).header("Authorization", nullValue());
+		return parser;
 	}
 
 }

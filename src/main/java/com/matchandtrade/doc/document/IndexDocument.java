@@ -15,16 +15,11 @@ public class IndexDocument implements Document {
 
 	public static final String REST_GUIDE_PAGINATION = "REST_GUIDE_PAGINATION";
 
-	@Override
-	public String contentFilePath() {
-		return "index.html";
-	}
-
 	private String template;
 	private MatchAndTradeClient clientApi;
 
 	public IndexDocument() {
-		clientApi = new MatchAndTradeClient(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		clientApi = new MatchAndTradeClient();
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
@@ -44,6 +39,11 @@ public class IndexDocument implements Document {
 		TradeJson trade = new TradeJson();
 		trade.setName(name);
 		clientApi.create(trade);
+	}
+
+	@Override
+	public String contentFilePath() {
+		return "index.html";
 	}
 
 }

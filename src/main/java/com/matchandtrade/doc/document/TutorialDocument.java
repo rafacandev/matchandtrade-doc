@@ -2,6 +2,7 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
@@ -41,6 +42,15 @@ public class TutorialDocument implements Document {
 		return "tutorial.html";
 	}
 
+	private String template;
+	private MatchAndTradeClient clientApi;
+
+	public TutorialDocument() {
+		clientApi = new MatchAndTradeClient();
+		template = TemplateUtil.buildTemplate(contentFilePath());
+	}
+
+
 	@Override
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
@@ -54,7 +64,7 @@ public class TutorialDocument implements Document {
 		ownerApiFacade.saveUser(ownerUser);
 
 		// OWNER_AUTHENTICATE
-		SpecificationParser ownerAuthenticateParser = AuthenticateDocument.buildGetParser();
+		SpecificationParser ownerAuthenticateParser = MatchAndTradeClient.authenticate();
 		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE, ownerAuthenticateParser.asHtmlSnippet());
 
 		// OWNER_AUTHENTICATIONS
@@ -108,7 +118,7 @@ public class TutorialDocument implements Document {
 		memberApiFacade.saveUser(memberUser);
 
 		// MEMBER_AUTHENTICATE
-		SpecificationParser memberAuthenticateParser = AuthenticateDocument.buildGetParser();
+		SpecificationParser memberAuthenticateParser = MatchAndTradeClient.authenticate();
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE, memberAuthenticateParser.asHtmlSnippet());
 
 		// MEMBER_AUTHENTICATIONS
