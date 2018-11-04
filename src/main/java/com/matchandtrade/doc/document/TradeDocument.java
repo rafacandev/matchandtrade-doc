@@ -1,19 +1,11 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
-import org.springframework.beans.BeanUtils;
-
-import static org.hamcrest.Matchers.*;
 
 
 public class TradeDocument implements Document {
@@ -25,7 +17,7 @@ public class TradeDocument implements Document {
 	private static final String TRADES_SEARCH_PLACEHOLDER = "TRADES_SEARCH_PLACEHOLDER";
 	private static final String TRADES_GET_ALL_PLACEHOLDER = "TRADES_GET_ALL_PLACEHOLDER";
 
-	private MatchAndTradeClient clientApi;
+	private final MatchAndTradeClient clientApi;
 	private String template;
 
 	public TradeDocument() {

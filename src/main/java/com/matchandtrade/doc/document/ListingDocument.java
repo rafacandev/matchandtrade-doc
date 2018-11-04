@@ -87,10 +87,8 @@ public class ListingDocument implements Document {
 	}
 
 	public static MembershipJson buildMembership(Header authenticationHeader, TradeJson trade, Integer userId) {
-		SpecificationParser parser = MembershipDocument.buildSearchMembershipParser(
-				userId,
-				trade.getTradeId(),
-				authenticationHeader);
+		MatchAndTradeClient clientApi = new MatchAndTradeClient(authenticationHeader);
+		SpecificationParser parser = clientApi.findMembershipByUserIdOrTradeId(userId, trade.getTradeId());
 		List<Map<String, Object>> response = parser.getResponse().as(List.class);
 		Map<String, Object> membershipMap = response.get(0);
 		MembershipJson result = new MembershipJson();

@@ -81,7 +81,9 @@ public class TutorialDocument implements Document {
 		trade = ownerTradeParser.getResponse().as(TradeJson.class);
 
 		//OWNER_MEMBERSHIP
-		SpecificationParser ownerMembershipParser = MembershipDocument.buildSearchMembershipParser(ownerUser.getUserId(), trade.getTradeId(), ownerAuthorizationHeader);
+//		SpecificationParser ownerMembershipParser = MembershipDocument.buildSearchMembershipParser(ownerUser.getUserId(), trade.getTradeId(), ownerAuthorizationHeader);
+		SpecificationParser ownerMembershipParser = ownerClientApi.findMembershipByUserIdOrTradeId(ownerUser.getUserId(), trade.getTradeId());
+
 		template = TemplateUtil.replacePlaceholder(template, OWNER_MEMBERSHIP, ownerMembershipParser.asHtmlSnippet());
 		MembershipJson ownerMembership = ListingDocument.buildMembership(ownerAuthorizationHeader, trade, ownerUser.getUserId());
 
@@ -134,7 +136,7 @@ public class TutorialDocument implements Document {
 		MembershipJson memberMembership = new MembershipJson();
 		memberMembership.setUserId(memberUser.getUserId());
 		memberMembership.setTradeId(trade.getTradeId());
-		SpecificationParser memberMembershipParser = MembershipDocument.parserPostMembership(memberMembership);
+		SpecificationParser memberMembershipParser = memberClientApi.create(memberMembership);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_MEMBERSHIPS, memberMembershipParser.asHtmlSnippet());
 		memberMembership = memberMembershipParser.getResponse().as(MembershipJson.class);
 

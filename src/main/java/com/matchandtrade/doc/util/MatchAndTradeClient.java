@@ -2,12 +2,14 @@ package com.matchandtrade.doc.util;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import static org.hamcrest.Matchers.*;
 
@@ -59,6 +61,19 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser create(MembershipJson membership) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.contentType(ContentType.JSON)
+				.body(membership)
+				.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
+		parser.getResponse().then().statusCode(201);
+		return parser;
+	}
+
 	/**
 	 * Need to keep the same cookie between "authenticate" and "authenticate info"
 	 *
@@ -87,6 +102,50 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser findMembership(Integer membershipId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.get(MatchAndTradeRestUtil.membershipsUrl(membershipId));
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	public SpecificationParser findMemberships(Integer pageNumber, Integer pageSize) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.contentType(ContentType.JSON)
+				.param("_pageNumber", pageNumber)
+				.param("_pageSize", pageSize)
+				.get(MatchAndTradeRestUtil.membershipsUrl());
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	public SpecificationParser findMembershipByUserIdOrTradeId(Integer userId, Integer tradeId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RequestSpecification request = RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.contentType(ContentType.JSON);
+		if (userId != null) {
+			request.queryParam("userId", userId);
+		}
+		if (userId != null) {
+			request.queryParam("tradeId", tradeId);
+		}
+		request.get(MatchAndTradeRestUtil.membershipsUrl());
+
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
 	public SpecificationParser findTrade(Integer tradeId) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -95,6 +154,17 @@ public class MatchAndTradeClient {
 				.header(authorizationHeader)
 				.get(MatchAndTradeRestUtil.tradesUrl(tradeId));
 		parser.getResponse().then().statusCode(200).and().body("tradeId", equalTo(tradeId));
+		return parser;
+	}
+
+	public SpecificationParser deleteMembership(Integer membershipId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.delete(MatchAndTradeRestUtil.membershipsUrl(membershipId));
+		parser.getResponse().then().statusCode(204);
 		return parser;
 	}
 
@@ -115,8 +185,8 @@ public class MatchAndTradeClient {
 		Response response = RestAssured.given()
 				.filter(filter)
 				.contentType(ContentType.JSON)
-				.param("_pageNumber", 2)
-				.param("_pageSize", 2)
+				.param("_pageNumber", pageNumber)
+				.param("_pageSize", pageSize)
 				.get(MatchAndTradeRestUtil.tradesUrl());
 		response.then().statusCode(200).and().body("[0].tradeId", notNullValue());
 		return parser;
@@ -146,6 +216,10 @@ public class MatchAndTradeClient {
 
 	public Header getAuthorizationHeader() {
 		return authorizationHeader;
+	}
+
+	public Integer getUserId() {
+		return userId;
 	}
 
 	public SpecificationParser update(TradeJson trade) {
