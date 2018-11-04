@@ -81,7 +81,8 @@ public class ListingDocument implements Document {
 		ArticleJson article = new ArticleJson();
 		article.setName("Love Letter");
 		article.setDescription("First edition in great condition");
-		SpecificationParser parser = ArticleDocument.buildPostParser(article, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		MatchAndTradeClient clientApi = new MatchAndTradeClient(MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser parser = clientApi.create(article);
 		article = parser.getResponse().as(ArticleJson.class);
 		return article;
 	}

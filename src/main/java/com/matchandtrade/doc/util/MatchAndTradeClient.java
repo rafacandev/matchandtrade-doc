@@ -2,14 +2,19 @@ package com.matchandtrade.doc.util;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.springframework.beans.BeanUtils;
 
 import static org.hamcrest.Matchers.*;
 
@@ -47,6 +52,20 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser create(ArticleJson article) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.contentType(ContentType.JSON)
+				.header(authorizationHeader)
+				.body(article)
+				.post(MatchAndTradeRestUtil.articlesUrl() + "/");
+		parser.getResponse().then().statusCode(201);
+		return parser;
+	}
+
 	public SpecificationParser create(TradeJson trade) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -71,6 +90,28 @@ public class MatchAndTradeClient {
 				.body(membership)
 				.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
 		parser.getResponse().then().statusCode(201);
+		return parser;
+	}
+
+	public static SpecificationParser findArticle(Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.get(MatchAndTradeRestUtil.articlesUrl(articleId) + "/");
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	public static SpecificationParser findArticles() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.get(MatchAndTradeRestUtil.articlesUrl());
+		parser.getResponse().then().statusCode(200);
 		return parser;
 	}
 
@@ -157,6 +198,18 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser deleteArticle(Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.delete(MatchAndTradeRestUtil.articlesUrl(articleId));
+		parser.getResponse().then().statusCode(204);
+		return parser;
+	}
+
 	public SpecificationParser deleteMembership(Integer membershipId) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -222,7 +275,29 @@ public class MatchAndTradeClient {
 		return userId;
 	}
 
+	public SpecificationParser update(ArticleJson article) {
+		ArticleJson requestBody = new ArticleJson();
+		BeanUtils.copyProperties(article, requestBody);
+		requestBody.setArticleId(null);
+
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.contentType(ContentType.JSON)
+				.header(authorizationHeader)
+				.body(article)
+				.put(MatchAndTradeRestUtil.articlesUrl(article.getArticleId()));
+		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
 	public SpecificationParser update(TradeJson trade) {
+		TradeJson requestBody = new TradeJson();
+		BeanUtils.copyProperties(trade, requestBody);
+		requestBody.setTradeId(null);
+
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured
@@ -230,13 +305,17 @@ public class MatchAndTradeClient {
 				.filter(filter)
 				.header(getAuthorizationHeader())
 				.contentType(ContentType.JSON)
-				.body(trade)
+				.body(requestBody)
 				.put(MatchAndTradeRestUtil.tradesUrl(trade.getTradeId()));
 		parser.getResponse().then().statusCode(200);
 		return parser;
 	}
 
 	public SpecificationParser updateUser(UserJson user) {
+		UserJson requestBody = new UserJson();
+		BeanUtils.copyProperties(user, requestBody);
+		user.setUserId(null);
+
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
@@ -259,5 +338,6 @@ public class MatchAndTradeClient {
 		parser.getResponse().then().statusCode(205).header("Authorization", nullValue());
 		return parser;
 	}
+
 
 }

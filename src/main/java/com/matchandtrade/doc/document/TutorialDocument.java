@@ -44,12 +44,17 @@ public class TutorialDocument implements Document {
 
 	private String template;
 	private final MatchAndTradeClient ownerClientApi;
+	private Header memberAuthorizationHeader;
 	private MatchAndTradeClient memberClientApi;
-	private final Header ownerAuthorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
+	private final Header ownerAuthorizationHeader;
 
 	public TutorialDocument() {
+		ownerAuthorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
 		ownerClientApi = new MatchAndTradeClient(ownerAuthorizationHeader);
-		memberClientApi = new MatchAndTradeClient();
+
+		memberAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
+		memberClientApi = new MatchAndTradeClient(memberAuthorizationHeader);
+
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
@@ -81,7 +86,6 @@ public class TutorialDocument implements Document {
 		trade = ownerTradeParser.getResponse().as(TradeJson.class);
 
 		//OWNER_MEMBERSHIP
-//		SpecificationParser ownerMembershipParser = MembershipDocument.buildSearchMembershipParser(ownerUser.getUserId(), trade.getTradeId(), ownerAuthorizationHeader);
 		SpecificationParser ownerMembershipParser = ownerClientApi.findMembershipByUserIdOrTradeId(ownerUser.getUserId(), trade.getTradeId());
 
 		template = TemplateUtil.replacePlaceholder(template, OWNER_MEMBERSHIP, ownerMembershipParser.asHtmlSnippet());
@@ -90,15 +94,16 @@ public class TutorialDocument implements Document {
 		// OWNER_ARTICLE_ONE
 		ArticleJson ownerPandemicOneArticle = new ArticleJson();
 		ownerPandemicOneArticle.setName("Pandemic Legacy: Season 1");
-		SpecificationParser ownerPandemicOneParser = ArticleDocument.buildPostParser(ownerPandemicOneArticle, ownerAuthorizationHeader);
+		SpecificationParser ownerPandemicOneParser = ownerClientApi.create(ownerPandemicOneArticle);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ARTICLE_ONE, ownerPandemicOneParser.asHtmlSnippet());
 		ownerPandemicOneArticle = ownerPandemicOneParser.getResponse().as(ArticleJson.class);
 
 		// OWNER_ARTICLE_TWO
 		ArticleJson ownerPandemicTwoArticle = new ArticleJson();
 		ownerPandemicTwoArticle.setName("Pandemic Legacy: Season 2");
-		SpecificationParser ownerPandemicTwoParser = ArticleDocument.buildPostParser(ownerPandemicTwoArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser ownerPandemicTwoParser = ownerClientApi.create(ownerPandemicTwoArticle);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ARTICLE_TWO, ownerPandemicTwoParser.asHtmlSnippet());
+		ownerPandemicTwoArticle = ownerPandemicTwoParser.getResponse().as(ArticleJson.class);
 
 		// OWNER_LISTING_ONE
 		SpecificationParser ownerPandemicOneListingParser = ListingDocument.buildPostListingParser(
@@ -115,11 +120,10 @@ public class TutorialDocument implements Document {
 
 
 		// MEMBER SETUP
-		Header memberAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
 		MatchAndTradeApiFacade memberApiFacade = new MatchAndTradeApiFacade(memberAuthorizationHeader);
 
 		// Building a user with a given user name for documentation clarity
-		UserJson memberUser = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		UserJson memberUser = memberClientApi.findUser().getResponse().as(UserJson.class);
 		memberUser.setName("Maria");
 		memberApiFacade.saveUser(memberUser);
 
@@ -143,21 +147,21 @@ public class TutorialDocument implements Document {
 		// MEMBER_ARTICLE_ONE
 		ArticleJson memberStoneAgeArticle = new ArticleJson();
 		memberStoneAgeArticle.setName("Stone Age");
-		SpecificationParser memberStoneAgeParser = ArticleDocument.buildPostParser(memberStoneAgeArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser memberStoneAgeParser = memberClientApi.create(memberStoneAgeArticle);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_ONE, memberStoneAgeParser.asHtmlSnippet());
 		memberStoneAgeArticle = memberStoneAgeParser.getResponse().as(ArticleJson.class);
 
 		// MEMBER_ARTICLE_TWO
 		ArticleJson memberCarcassoneArticle = new ArticleJson();
 		memberCarcassoneArticle.setName("Carcassonne");
-		SpecificationParser memberCarcasssoneParser = ArticleDocument.buildPostParser(memberCarcassoneArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser memberCarcasssoneParser = memberClientApi.create(memberCarcassoneArticle);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_TWO, memberStoneAgeParser.asHtmlSnippet());
 		memberCarcassoneArticle = memberCarcasssoneParser.getResponse().as(ArticleJson.class);
 
 		// MEMBER_ARTICLE_THREE
 		ArticleJson memberNoThanksArticle = new ArticleJson();
 		memberNoThanksArticle.setName("No Thanks!");
-		SpecificationParser memberNoThanksParser = ArticleDocument.buildPostParser(memberNoThanksArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser memberNoThanksParser = memberClientApi.create(memberNoThanksArticle);
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_THREE, memberNoThanksParser.asHtmlSnippet());
 		memberNoThanksArticle = memberNoThanksParser.getResponse().as(ArticleJson.class);
 

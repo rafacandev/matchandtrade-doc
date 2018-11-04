@@ -1,16 +1,12 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-
-import static org.hamcrest.Matchers.equalTo;
 
 
 public class ArticleDocument implements Document {
@@ -20,6 +16,18 @@ public class ArticleDocument implements Document {
 	private static final String ARTICLES_GET_PLACEHOLDER = "ARTICLES_GET_PLACEHOLDER";
 	private static final String ARTICLES_GET_ALL_PLACEHOLDER = "ARTICLES_GET_ALL_PLACEHOLDER";
 	private static final String ARTICLES_DELETE_PLACEHOLDER = "ARTICLES_DELETE_PLACEHOLDER";
+
+
+	private final Header authorizationHeader;
+	private final MatchAndTradeClient clientApi;
+	private String template;
+
+	public ArticleDocument() {
+		template = TemplateUtil.buildTemplate(contentFilePath());
+		authorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
+		clientApi = new MatchAndTradeClient(authorizationHeader);
+	}
+
 
 	@Override
 	public String contentFilePath() {
@@ -35,98 +43,29 @@ public class ArticleDocument implements Document {
 		article.setName("Pandemic Legacy: Season 1");
 		article.setDescription("In mint condition");
 
-		SpecificationParser postParser = ArticleDocument.buildPostParser(article, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser postParser = clientApi.create(article);
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
+		article = postParser.getResponse().as(ArticleJson.class);
 
 		// ARTICLES_PUT_PLACEHOLDER
-		SpecificationParser putParser = buildPutParser(article);
+		article.setName(article.getName() + " Updated");
+		SpecificationParser putParser = clientApi.update(article);
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_PUT_PLACEHOLDER, putParser.asHtmlSnippet());
 
 		// ARTICLES_GET_PLACEHOLDER
-		SpecificationParser getParser = buildGetSnippet(article.getArticleId());
+		SpecificationParser getParser = MatchAndTradeClient.findArticle(article.getArticleId());
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_PLACEHOLDER, getParser.asHtmlSnippet());
 
 		// ARTICLES_GET_ALL_PLACEHOLDER
-		SpecificationParser getAllParser = buildGetAllSnippet();
+		SpecificationParser getAllParser = MatchAndTradeClient.findArticles();
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
 
 		// ARTICLES_DELETE_PLACEHOLDER
-		SpecificationParser deleteParser = buildDeleteSnippet(article.getArticleId());
+		SpecificationParser deleteParser = clientApi.deleteArticle(article.getArticleId());
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
-	}
-
-	private SpecificationParser buildDeleteSnippet(Integer articleId) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-				.given()
-				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-				.get(MatchAndTradeRestUtil.articlesUrl(articleId));
-		parser.getResponse().then().statusCode(200);
-		return parser;
-	}
-
-	private SpecificationParser buildGetAllSnippet() {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-				.given()
-				.filter(filter)
-				.get(MatchAndTradeRestUtil.articlesUrl());
-		parser.getResponse().then().statusCode(200);
-		return parser;
-	}
-
-	private SpecificationParser buildGetSnippet(Integer articleId) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-				.given()
-				.filter(filter)
-				.get(MatchAndTradeRestUtil.articlesUrl(articleId) + "/");
-		parser.getResponse().then().statusCode(200);
-		return parser;
-	}
-
-	public static SpecificationParser buildPostParser(ArticleJson article, Header authorizationHeader) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-				.given()
-				.filter(filter)
-				.contentType(ContentType.JSON)
-				.header(authorizationHeader)
-				.body(article)
-				.post(MatchAndTradeRestUtil.articlesUrl() + "/");
-		parser.getResponse().then().statusCode(201).and().body("name", equalTo(article.getName()));
-		ArticleJson articleFromResponse = parser.getResponse().as(ArticleJson.class);
-		article.setArticleId(articleFromResponse.getArticleId());
-		return parser;
-	}
-
-	private SpecificationParser buildPutParser(ArticleJson article) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		Integer articleId = article.getArticleId();
-		article.setArticleId(null);
-		article.setLinks(null);
-		article.setName(article.getName() + " After PUT");
-		RestAssured
-				.given()
-				.filter(filter)
-				.contentType(ContentType.JSON)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-				.body(article)
-				.put(MatchAndTradeRestUtil.articlesUrl(articleId));
-		parser.getResponse().then().statusCode(200).and().body("name", equalTo(article.getName()));
-		ArticleJson articleFromResponse = parser.getResponse().as(ArticleJson.class);
-		article.setArticleId(articleFromResponse.getArticleId());
-		article.setName(articleFromResponse.getName());
-		return parser;
 	}
 
 }
