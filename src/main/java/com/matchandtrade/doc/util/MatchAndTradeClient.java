@@ -3,18 +3,18 @@ package com.matchandtrade.doc.util;
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.rest.v1.json.TradeJson;
+import com.matchandtrade.rest.v1.json.UserJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 
 public class MatchAndTradeClient {
 
 	private final Header authorizationHeader;
+	private Integer userId;
 //	private final String cookie;
 
 	public MatchAndTradeClient() {
@@ -23,6 +23,9 @@ public class MatchAndTradeClient {
 		String authorizationHeaderValue = parser.getResponse().getHeader(authorizationHeaderName);
 //		this.cookie = parser.getResponse().getCookie("MTSESSION");
 		this.authorizationHeader = new Header(authorizationHeaderName, authorizationHeaderValue);
+
+		SpecificationParser authenticationsParser = findAuthentications();
+		userId = authenticationsParser.getResponse().body().path("userId");
 	}
 
 	public static SpecificationParser authenticate() {
@@ -78,7 +81,6 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-
 	public static SpecificationParser findTrades() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -93,8 +95,32 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser findUser() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.get(MatchAndTradeRestUtil.usersUrl(userId));
+		return parser;
+	}
+
 	public Header getAuthorizationHeader() {
 		return authorizationHeader;
+	}
+
+	public SpecificationParser updateUser(UserJson user) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.contentType(ContentType.JSON)
+				.body(user)
+				.put(MatchAndTradeRestUtil.usersUrl(userId));
+		parser.getResponse().then().statusCode(200).and().body("name", equalTo(user.getName()));
+		return parser;
 	}
 
 	public SpecificationParser singOff() {

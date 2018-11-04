@@ -1,66 +1,42 @@
 
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.TemplateUtil;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.rest.v1.json.UserJson;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-
-import static org.hamcrest.Matchers.equalTo;
-
 
 public class UserDocument implements Document {
 	
 	private static final String USERS_GET_PLACEHOLDER = "USERS_GET_PLACEHOLDER";
 	private static final String USERS_PUT_PLACEHOLDER = "USERS_PUT_PLACEHOLDER";
-	@Override
-	public String contentFilePath() {
-		return "users.html";
+
+	private MatchAndTradeClient clientApi;
+	private String template;
+
+	public UserDocument() {
+		clientApi = new MatchAndTradeClient();
+		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-
 		// USERS_PUT_PLACEHOLDER
-		SpecificationParser putUserParser = parsePutUser();
+		UserJson user = clientApi.findUser().getResponse().as(UserJson.class);
+		user.setName("Scott Summers");
+		SpecificationParser putUserParser = clientApi.updateUser(user);
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_PLACEHOLDER, putUserParser.asHtmlSnippet());
 
 		// USERS_GET_PLACEHOLDER
-		SpecificationParser parser = parseGetUser();
+		SpecificationParser parser = clientApi.findUser();
 		template = TemplateUtil.replacePlaceholder(template, USERS_GET_PLACEHOLDER, parser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	private SpecificationParser parseGetUser() {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-			.get(MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
-		parser.getResponse().then().statusCode(200);
-		return parser;
-	}
-
-	private SpecificationParser parsePutUser() {
-		UserJson userJson = new UserJson();
-		userJson.setEmail(MatchAndTradeRestUtil.getLastAuthenticatedUser().getEmail());
-		userJson.setName("Scott Summers");
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-			.contentType(ContentType.JSON)
-			.body(userJson)
-			.put(MatchAndTradeRestUtil.usersUrl() + "/" + MatchAndTradeRestUtil.getLastAuthenticatedUserId());
-		parser.getResponse().then().statusCode(200).and().body("name", equalTo(userJson.getName()));
-		return parser;
+	@Override
+	public String contentFilePath() {
+		return "users.html";
 	}
 
 }
