@@ -13,8 +13,8 @@ public class AuthenticateDocument implements Document {
 	private static final String AUTHENTICATE_INFO = "AUTHENTICATE_INFO";
 	private static final String SIGN_OUT_PLACEHOLDER = "SIGN_OUT_PLACEHOLDER";
 
-	private String template;
 	private MatchAndTradeClient clientApi;
+	private String template;
 
 	public AuthenticateDocument() {
 		clientApi = new MatchAndTradeClient();

@@ -43,10 +43,12 @@ public class TutorialDocument implements Document {
 	}
 
 	private String template;
-	private MatchAndTradeClient clientApi;
+	private MatchAndTradeClient ownerClientApi;
+	private MatchAndTradeClient memberClientApi;
 
 	public TutorialDocument() {
-		clientApi = new MatchAndTradeClient();
+		ownerClientApi = new MatchAndTradeClient();
+		memberClientApi = new MatchAndTradeClient();
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
@@ -68,7 +70,7 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATE, ownerAuthenticateParser.asHtmlSnippet());
 
 		// OWNER_AUTHENTICATIONS
-		SpecificationParser ownerAuthenticationsParser = AuthenticationDocument.buildGetParser();
+		SpecificationParser ownerAuthenticationsParser = ownerClientApi.findAuthentications();
 		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS, ownerAuthenticationsParser.asHtmlSnippet());
 
 		// OWNER_TRADES_POST
@@ -122,7 +124,7 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATE, memberAuthenticateParser.asHtmlSnippet());
 
 		// MEMBER_AUTHENTICATIONS
-		SpecificationParser memberAuthenticationsParser = AuthenticationDocument.buildGetParser();
+		SpecificationParser memberAuthenticationsParser = memberClientApi.findAuthentications();
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_AUTHENTICATIONS, memberAuthenticationsParser.asHtmlSnippet());
 		memberAuthenticationsParser.getResponse().as(AuthenticationJson.class);
 

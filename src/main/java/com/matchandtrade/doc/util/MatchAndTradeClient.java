@@ -8,12 +8,13 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 
+import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 
 public class MatchAndTradeClient {
 
-	private final Header authenticationHeader;
+	private final Header authorizationHeader;
 //	private final String cookie;
 
 	public MatchAndTradeClient() {
@@ -21,7 +22,7 @@ public class MatchAndTradeClient {
 		String authorizationHeaderName = "Authorization";
 		String authorizationHeaderValue = parser.getResponse().getHeader(authorizationHeaderName);
 //		this.cookie = parser.getResponse().getCookie("MTSESSION");
-		this.authenticationHeader = new Header(authorizationHeaderName, authorizationHeaderValue);
+		this.authorizationHeader = new Header(authorizationHeaderName, authorizationHeaderValue);
 	}
 
 	public static SpecificationParser authenticate() {
@@ -41,7 +42,7 @@ public class MatchAndTradeClient {
 		RestAssured
 			.given()
 			.filter(filter)
-			.header(getAuthenticationHeader())
+			.header(getAuthorizationHeader())
 			.contentType(ContentType.JSON)
 			.body(trade)
 			.when()
@@ -66,6 +67,18 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
+	public SpecificationParser findAuthentications() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(getAuthorizationHeader())
+			.get(MatchAndTradeRestUtil.authenticationsUrl() + "/");
+		parser.getResponse().then().statusCode(200).and().body("", hasKey("userId"));
+		return parser;
+	}
+
+
 	public static SpecificationParser findTrades() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -80,8 +93,8 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public Header getAuthenticationHeader() {
-		return authenticationHeader;
+	public Header getAuthorizationHeader() {
+		return authorizationHeader;
 	}
 
 	public SpecificationParser singOff() {
