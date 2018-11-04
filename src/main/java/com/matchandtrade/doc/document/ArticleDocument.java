@@ -8,6 +8,7 @@ import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -34,7 +35,7 @@ public class ArticleDocument implements Document {
 		article.setName("Pandemic Legacy: Season 1");
 		article.setDescription("In mint condition");
 
-		SpecificationParser postParser = ArticleDocument.buildPostParser(article);
+		SpecificationParser postParser = ArticleDocument.buildPostParser(article, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateUtil.replacePlaceholder(template, ARTICLES_POST_PLACEHOLDER, postParser.asHtmlSnippet());
 
 		// ARTICLES_PUT_PLACEHOLDER
@@ -91,14 +92,14 @@ public class ArticleDocument implements Document {
 		return parser;
 	}
 
-	public static SpecificationParser buildPostParser(ArticleJson article) {
+	public static SpecificationParser buildPostParser(ArticleJson article, Header authorizationHeader) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured
 				.given()
 				.filter(filter)
 				.contentType(ContentType.JSON)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.header(authorizationHeader)
 				.body(article)
 				.post(MatchAndTradeRestUtil.articlesUrl() + "/");
 		parser.getResponse().then().statusCode(201).and().body("name", equalTo(article.getName()));

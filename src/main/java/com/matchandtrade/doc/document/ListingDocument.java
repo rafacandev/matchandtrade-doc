@@ -2,6 +2,7 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
@@ -32,7 +33,7 @@ public class ListingDocument implements Document {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 		Header authenticationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
 		TradeJson trade = buildTrade(authenticationHeader);
-		MembershipJson membership = buildMembership(authenticationHeader, trade);
+		MembershipJson membership = buildMembership(authenticationHeader, trade, MatchAndTradeRestUtil.getLastAuthenticatedUserId());
 		ArticleJson article = buildArticle();
 
 		// LISTING_POST_PLACEHOLDER
@@ -80,14 +81,14 @@ public class ListingDocument implements Document {
 		ArticleJson article = new ArticleJson();
 		article.setName("Love Letter");
 		article.setDescription("First edition in great condition");
-		SpecificationParser parser = ArticleDocument.buildPostParser(article);
+		SpecificationParser parser = ArticleDocument.buildPostParser(article, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		article = parser.getResponse().as(ArticleJson.class);
 		return article;
 	}
 
-	public static MembershipJson buildMembership(Header authenticationHeader, TradeJson trade) {
+	public static MembershipJson buildMembership(Header authenticationHeader, TradeJson trade, Integer userId) {
 		SpecificationParser parser = MembershipDocument.buildSearchMembershipParser(
-				MatchAndTradeRestUtil.getLastAuthenticatedUserId(),
+				userId,
 				trade.getTradeId(),
 				authenticationHeader);
 		List<Map<String, Object>> response = parser.getResponse().as(List.class);
@@ -100,7 +101,10 @@ public class ListingDocument implements Document {
 	}
 
 	private TradeJson buildTrade(Header authenticationHeader) {
-		SpecificationParser tradeParser = TradeDocument.buildPostParser(authenticationHeader);
+		MatchAndTradeClient api = new MatchAndTradeClient(authenticationHeader);
+		TradeJson trade = new TradeJson();
+		trade.setName("Books in Buffalo");
+		SpecificationParser tradeParser = api.create(trade);
 		return tradeParser.getResponse().as(TradeJson.class);
 	}
 

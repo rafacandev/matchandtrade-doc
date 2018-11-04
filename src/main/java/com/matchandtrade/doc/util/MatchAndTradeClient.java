@@ -28,6 +28,12 @@ public class MatchAndTradeClient {
 		userId = authenticationsParser.getResponse().body().path("userId");
 	}
 
+	public MatchAndTradeClient(Header authorizationHeader) {
+		this.authorizationHeader = authorizationHeader;
+		SpecificationParser authenticationsParser = findAuthentications();
+		userId = authenticationsParser.getResponse().body().path("userId");
+	}
+
 	public static SpecificationParser authenticate() {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -81,17 +87,49 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public static SpecificationParser findTrades() {
+	public SpecificationParser findTrade(Integer tradeId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.get(MatchAndTradeRestUtil.tradesUrl(tradeId));
+		parser.getResponse().then().statusCode(200).and().body("tradeId", equalTo(tradeId));
+		return parser;
+	}
+
+	public SpecificationParser deleteTrade(Integer tradeId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+				.filter(filter)
+				.header(authorizationHeader)
+				.delete(MatchAndTradeRestUtil.tradesUrl(tradeId));
+		parser.getResponse().then().statusCode(204);
+		return parser;
+	}
+
+	public static SpecificationParser findTrades(Integer pageNumber, Integer pageSize) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		Response response = RestAssured.given()
 				.filter(filter)
-				.headers(MatchAndTradeRestUtil.getLastAuthorizationHeaderAsMap())
 				.contentType(ContentType.JSON)
 				.param("_pageNumber", 2)
 				.param("_pageSize", 2)
 				.get(MatchAndTradeRestUtil.tradesUrl());
 		response.then().statusCode(200).and().body("[0].tradeId", notNullValue());
+		return parser;
+	}
+
+	public static SpecificationParser findTrades() {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		Response response = RestAssured.given()
+				.filter(filter)
+				.contentType(ContentType.JSON)
+				.get(MatchAndTradeRestUtil.tradesUrl());
+		response.then().statusCode(200);
 		return parser;
 	}
 
@@ -108,6 +146,20 @@ public class MatchAndTradeClient {
 
 	public Header getAuthorizationHeader() {
 		return authorizationHeader;
+	}
+
+	public SpecificationParser update(TradeJson trade) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+				.given()
+				.filter(filter)
+				.header(getAuthorizationHeader())
+				.contentType(ContentType.JSON)
+				.body(trade)
+				.put(MatchAndTradeRestUtil.tradesUrl(trade.getTradeId()));
+		parser.getResponse().then().statusCode(200);
+		return parser;
 	}
 
 	public SpecificationParser updateUser(UserJson user) {

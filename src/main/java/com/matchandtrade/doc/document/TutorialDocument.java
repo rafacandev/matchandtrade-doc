@@ -43,11 +43,12 @@ public class TutorialDocument implements Document {
 	}
 
 	private String template;
-	private MatchAndTradeClient ownerClientApi;
+	private final MatchAndTradeClient ownerClientApi;
 	private MatchAndTradeClient memberClientApi;
+	private final Header ownerAuthorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
 
 	public TutorialDocument() {
-		ownerClientApi = new MatchAndTradeClient();
+		ownerClientApi = new MatchAndTradeClient(ownerAuthorizationHeader);
 		memberClientApi = new MatchAndTradeClient();
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
@@ -57,11 +58,10 @@ public class TutorialDocument implements Document {
 	public String content() {
 		String template = TemplateUtil.buildTemplate(contentFilePath());
 
-		Header ownerAuthorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
 		MatchAndTradeApiFacade ownerApiFacade = new MatchAndTradeApiFacade(ownerAuthorizationHeader);
 
 		// Building a user with a given user name for documentation clarity
-		UserJson ownerUser = MatchAndTradeRestUtil.getLastAuthenticatedUser();
+		UserJson ownerUser = ownerClientApi.findUser().getResponse().as(UserJson.class);
 		ownerUser.setName("Olavo");
 		ownerApiFacade.saveUser(ownerUser);
 
@@ -74,26 +74,28 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, OWNER_AUTHENTICATIONS, ownerAuthenticationsParser.asHtmlSnippet());
 
 		// OWNER_TRADES_POST
-		SpecificationParser ownerTradeParser = TradeDocument.buildPostParser(ownerAuthorizationHeader);
+		TradeJson trade = new TradeJson();
+		trade.setName("Board games in Toronto - " + System.currentTimeMillis());
+		SpecificationParser ownerTradeParser = ownerClientApi.create(trade);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_TRADES_POST, ownerTradeParser.asHtmlSnippet());
-		TradeJson trade = ownerTradeParser.getResponse().as(TradeJson.class);
+		trade = ownerTradeParser.getResponse().as(TradeJson.class);
 
 		//OWNER_MEMBERSHIP
 		SpecificationParser ownerMembershipParser = MembershipDocument.buildSearchMembershipParser(ownerUser.getUserId(), trade.getTradeId(), ownerAuthorizationHeader);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_MEMBERSHIP, ownerMembershipParser.asHtmlSnippet());
-		MembershipJson ownerMembership = ListingDocument.buildMembership(ownerAuthorizationHeader, trade);
+		MembershipJson ownerMembership = ListingDocument.buildMembership(ownerAuthorizationHeader, trade, ownerUser.getUserId());
 
 		// OWNER_ARTICLE_ONE
 		ArticleJson ownerPandemicOneArticle = new ArticleJson();
 		ownerPandemicOneArticle.setName("Pandemic Legacy: Season 1");
-		SpecificationParser ownerPandemicOneParser = ArticleDocument.buildPostParser(ownerPandemicOneArticle);
+		SpecificationParser ownerPandemicOneParser = ArticleDocument.buildPostParser(ownerPandemicOneArticle, ownerAuthorizationHeader);
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ARTICLE_ONE, ownerPandemicOneParser.asHtmlSnippet());
 		ownerPandemicOneArticle = ownerPandemicOneParser.getResponse().as(ArticleJson.class);
 
 		// OWNER_ARTICLE_TWO
 		ArticleJson ownerPandemicTwoArticle = new ArticleJson();
 		ownerPandemicTwoArticle.setName("Pandemic Legacy: Season 2");
-		SpecificationParser ownerPandemicTwoParser = ArticleDocument.buildPostParser(ownerPandemicTwoArticle);
+		SpecificationParser ownerPandemicTwoParser = ArticleDocument.buildPostParser(ownerPandemicTwoArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateUtil.replacePlaceholder(template, OWNER_ARTICLE_TWO, ownerPandemicTwoParser.asHtmlSnippet());
 
 		// OWNER_LISTING_ONE
@@ -139,21 +141,21 @@ public class TutorialDocument implements Document {
 		// MEMBER_ARTICLE_ONE
 		ArticleJson memberStoneAgeArticle = new ArticleJson();
 		memberStoneAgeArticle.setName("Stone Age");
-		SpecificationParser memberStoneAgeParser = ArticleDocument.buildPostParser(memberStoneAgeArticle);
+		SpecificationParser memberStoneAgeParser = ArticleDocument.buildPostParser(memberStoneAgeArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_ONE, memberStoneAgeParser.asHtmlSnippet());
 		memberStoneAgeArticle = memberStoneAgeParser.getResponse().as(ArticleJson.class);
 
 		// MEMBER_ARTICLE_TWO
 		ArticleJson memberCarcassoneArticle = new ArticleJson();
 		memberCarcassoneArticle.setName("Carcassonne");
-		SpecificationParser memberCarcasssoneParser = ArticleDocument.buildPostParser(memberCarcassoneArticle);
+		SpecificationParser memberCarcasssoneParser = ArticleDocument.buildPostParser(memberCarcassoneArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_TWO, memberStoneAgeParser.asHtmlSnippet());
 		memberCarcassoneArticle = memberCarcasssoneParser.getResponse().as(ArticleJson.class);
 
 		// MEMBER_ARTICLE_THREE
 		ArticleJson memberNoThanksArticle = new ArticleJson();
 		memberNoThanksArticle.setName("No Thanks!");
-		SpecificationParser memberNoThanksParser = ArticleDocument.buildPostParser(memberNoThanksArticle);
+		SpecificationParser memberNoThanksParser = ArticleDocument.buildPostParser(memberNoThanksArticle, MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ARTICLE_THREE, memberNoThanksParser.asHtmlSnippet());
 		memberNoThanksArticle = memberNoThanksParser.getResponse().as(ArticleJson.class);
 
@@ -184,7 +186,7 @@ public class TutorialDocument implements Document {
 
 		// TRADE_MATCHING_ARTICLES
 		trade.setState(TradeJson.State.MATCHING_ARTICLES);
-		SpecificationParser tradeMatchArticlesParser = TradeDocument.buildPutParser(ownerAuthorizationHeader, trade);
+		SpecificationParser tradeMatchArticlesParser = ownerClientApi.update(trade);
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ARTICLES, tradeMatchArticlesParser.asHtmlSnippet());
 
 		// OWNER_OFFER_ONE
@@ -219,7 +221,7 @@ public class TutorialDocument implements Document {
 
 		// TRADE_GENERATE_TRADES
 		trade.setState(TradeJson.State.GENERATE_RESULTS);
-		SpecificationParser tradeGenerateResultsParser = TradeDocument.buildPutParser(ownerAuthorizationHeader, trade);
+		SpecificationParser tradeGenerateResultsParser = ownerClientApi.update(trade);
 		template = TemplateUtil.replacePlaceholder(template, TRADE_GENERATE_TRADES, tradeGenerateResultsParser.asHtmlSnippet());
 
 		// TRADE_RESULTS
