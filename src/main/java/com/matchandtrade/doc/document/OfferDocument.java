@@ -2,10 +2,7 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.TemplateUtil;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
+import com.matchandtrade.doc.util.*;
 import com.matchandtrade.rest.v1.json.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -19,20 +16,29 @@ public class OfferDocument implements Document {
 	private static final String OFFERS_SEARCH = "OFFERS_SEARCH";
 	private static final String OFFERS_DELETE = "OFFERS_DELETE";
 
+	private final MatchAndTradeClient ownerClientApi;
+	private String template;
+	private Header ownerAuthorizationHeader;
+
+	public OfferDocument() {
+		ownerAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
+		ownerClientApi = new MatchAndTradeClient(ownerAuthorizationHeader);
+		template = TemplateUtil.buildTemplate(contentFilePath());
+	}
+
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-
 		// ### Setup a trade with an owner and a member so the can later make offers for their articles
 		// Create a user named 'Olavo'
-		Header olavoAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
-		UserJson olavo = MatchAndTradeRestUtil.getLastAuthenticatedUser();
-		MatchAndTradeApiFacade olavoApiFacade = new MatchAndTradeApiFacade(olavo, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		UserJson olavo = ownerClientApi.findUser().getResponse().as(UserJson.class);
+		MatchAndTradeApiFacade olavoApiFacade = new MatchAndTradeApiFacade(olavo, ownerAuthorizationHeader);
 		olavo.setName("Olavo");
-		olavoApiFacade.saveUser(olavo);
+		ownerClientApi.update(olavo);
 
 		// Olavo creates a trade
-		TradeJson trade = olavoApiFacade.createTrade("Board games in Brasilia - " + System.currentTimeMillis());
+		TradeJson trade = new TradeJson();
+		trade.setName("Board games in Brasilia - " + System.currentTimeMillis());
+		trade = ownerClientApi.create(trade).getResponse().as(TradeJson.class);
 		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(olavo.getUserId(), trade.getTradeId());
 		// Create another user named 'Maria'
 		Header mariaAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
@@ -51,20 +57,20 @@ public class OfferDocument implements Document {
 		// End of setup
 
 		// OFFERS_POST
-		SpecificationParser postOfferParser = parsePostOffer(olavoAuthorizationHeader, olavoMembership, olavoPandemic.getArticleId(), mariaStoneAge.getArticleId());
+		SpecificationParser postOfferParser = parsePostOffer(ownerAuthorizationHeader, olavoMembership, olavoPandemic.getArticleId(), mariaStoneAge.getArticleId());
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_POST, postOfferParser.asHtmlSnippet());
 		OfferJson pandemicOneForStoneAge = postOfferParser.getResponse().body().as(OfferJson.class);
 
 		// OFFERS_GET
-		SpecificationParser getOfferById = parseGetOfferById(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
+		SpecificationParser getOfferById = parseGetOfferById(ownerAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getOfferById.asHtmlSnippet());
 
 		// OFFERS_SEARCH
-		SpecificationParser searchOffersParser = parseSearchOffers(olavoAuthorizationHeader, olavoMembership, olavoPandemic, mariaStoneAge);
+		SpecificationParser searchOffersParser = parseSearchOffers(ownerAuthorizationHeader, olavoMembership, olavoPandemic, mariaStoneAge);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchOffersParser.asHtmlSnippet());
 
 		// OFFERS_DELETE
-		SpecificationParser deleteParser = parseDeleteOffer(olavoAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
+		SpecificationParser deleteParser = parseDeleteOffer(ownerAuthorizationHeader, olavoMembership, pandemicOneForStoneAge);
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationRows(template);

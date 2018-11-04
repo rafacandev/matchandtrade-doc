@@ -36,7 +36,7 @@ public class ArticleDocument implements Document {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
+		template = TemplateUtil.buildTemplate(contentFilePath());
 
 		// ARTICLES_POST_PLACEHOLDER
 		ArticleJson article = new ArticleJson();

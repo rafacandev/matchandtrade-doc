@@ -28,10 +28,10 @@ public class ContentBuilder {
 			contents.add(new TradeDocument());
 			contents.add(new MembershipDocument());
 			contents.add(new ArticleDocument());
+			contents.add(new ListingDocument());
 			contents.add(new OfferDocument());
 			contents.add(new TradeResultDocument());
 			contents.add(new SearchDocument());
-			contents.add(new ListingDocument());
 			contents.add(new TutorialDocument());
 			contents.add(new AttachmentDocument());
 			contents.add(new ArticleAttachmentDocument());

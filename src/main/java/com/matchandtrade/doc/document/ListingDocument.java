@@ -1,22 +1,13 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.ListingJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.hamcrest.Matchers.notNullValue;
 
 public class ListingDocument implements Document {
 	
@@ -28,81 +19,53 @@ public class ListingDocument implements Document {
 		return "listing.html";
 	}
 
+	private final Header authorizationHeader;
+	private final MatchAndTradeClient clientApi;
+	private String template;
+
+	public ListingDocument() {
+		clientApi = new MatchAndTradeClient();
+		authorizationHeader = clientApi.getAuthorizationHeader();
+		template = TemplateUtil.buildTemplate(contentFilePath());
+	}
+
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-		Header authenticationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
-		TradeJson trade = buildTrade(authenticationHeader);
-		MembershipJson membership = buildMembership(authenticationHeader, trade, MatchAndTradeRestUtil.getLastAuthenticatedUserId());
+		TradeJson trade = buildTrade(authorizationHeader);
+		MembershipJson membership = clientApi.findMembershipByUserIdOrTradeIdAsMembership(clientApi.getUserId(), trade.getTradeId());
 		ArticleJson article = buildArticle();
 
 		// LISTING_POST_PLACEHOLDER
-		SpecificationParser listingPostParser = ListingDocument.buildPostListingParser(authenticationHeader, membership, article);
+		ListingJson listing = buildListing(membership, article);
+		SpecificationParser listingPostParser = clientApi.create(listing);
 		template = TemplateUtil.replacePlaceholder(template, LISTING_POST_PLACEHOLDER, listingPostParser.asHtmlSnippet());
 
 		// LISTING_DELETE_PLACEHOLDER
-		SpecificationParser listingDeleteParser = buildDeleteParser(authenticationHeader, membership, article);
+		SpecificationParser listingDeleteParser = clientApi.deleteListing(listing);
 		template = TemplateUtil.replacePlaceholder(template, LISTING_DELETE_PLACEHOLDER, listingDeleteParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
-	}
-
-	public static SpecificationParser buildPostListingParser(Header authenticationHeader, MembershipJson membership, ArticleJson article) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		ListingJson requestBody = new ListingJson();
-		requestBody.setArticleId(article.getArticleId());
-		requestBody.setMembershipId(membership.getMembershipId());
-		RestAssured.given()
-				.filter(filter)
-				.header(authenticationHeader)
-				.contentType(ContentType.JSON)
-				.body(requestBody)
-				.post(MatchAndTradeRestUtil.listingUrl(membership.getMembershipId(), article.getArticleId()));
-		return parser;
-	}
-
-	private SpecificationParser buildDeleteParser(Header authenticationHeader, MembershipJson membership, ArticleJson article) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		ListingJson requestBody = new ListingJson();
-		requestBody.setArticleId(article.getArticleId());
-		requestBody.setMembershipId(membership.getMembershipId());
-		RestAssured.given()
-				.filter(filter)
-				.header(authenticationHeader)
-				.contentType(ContentType.JSON)
-				.body(requestBody)
-				.delete(MatchAndTradeRestUtil.listingUrl(membership.getMembershipId(), article.getArticleId()));
-		return parser;
 	}
 
 	private ArticleJson buildArticle() {
 		ArticleJson article = new ArticleJson();
 		article.setName("Love Letter");
 		article.setDescription("First edition in great condition");
-		MatchAndTradeClient clientApi = new MatchAndTradeClient(MatchAndTradeRestUtil.getLastAuthorizationHeader());
 		SpecificationParser parser = clientApi.create(article);
-		article = parser.getResponse().as(ArticleJson.class);
-		return article;
+		return parser.getResponse().as(ArticleJson.class);
 	}
 
-	public static MembershipJson buildMembership(Header authenticationHeader, TradeJson trade, Integer userId) {
-		MatchAndTradeClient clientApi = new MatchAndTradeClient(authenticationHeader);
-		SpecificationParser parser = clientApi.findMembershipByUserIdOrTradeId(userId, trade.getTradeId());
-		List<Map<String, Object>> response = parser.getResponse().as(List.class);
-		Map<String, Object> membershipMap = response.get(0);
-		MembershipJson result = new MembershipJson();
-		result.setUserId(Integer.parseInt(membershipMap.get("userId").toString()));
-		result.setTradeId(Integer.parseInt(membershipMap.get("tradeId").toString()));
-		result.setMembershipId(Integer.parseInt(membershipMap.get("membershipId").toString()));
-		return result;
+	private ListingJson buildListing(MembershipJson membership, ArticleJson article) {
+		ListingJson listing = new ListingJson();
+		listing.setMembershipId(membership.getMembershipId());
+		listing.setArticleId(article.getArticleId());
+		return listing;
 	}
 
 	private TradeJson buildTrade(Header authenticationHeader) {
 		MatchAndTradeClient api = new MatchAndTradeClient(authenticationHeader);
 		TradeJson trade = new TradeJson();
-		trade.setName("Books in Buffalo");
+		trade.setName("Books in Buffalo - " + System.currentTimeMillis());
 		SpecificationParser tradeParser = api.create(trade);
 		return tradeParser.getResponse().as(TradeJson.class);
 	}

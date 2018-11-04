@@ -114,7 +114,10 @@ public class MatchAndTradeRestUtil {
 	public static String listingUrl(Integer membershipId, Integer articleId) {
 		return Endpoint.LISTING.asURL(baseUrl) + "/";
 	}
-	
+	public static String listingUrl() {
+		return Endpoint.LISTING.asURL(baseUrl);
+	}
+
 
 	
 	public static Header getLastAuthorizationHeader() {

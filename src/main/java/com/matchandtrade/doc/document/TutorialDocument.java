@@ -87,9 +87,8 @@ public class TutorialDocument implements Document {
 
 		//OWNER_MEMBERSHIP
 		SpecificationParser ownerMembershipParser = ownerClientApi.findMembershipByUserIdOrTradeId(ownerUser.getUserId(), trade.getTradeId());
-
 		template = TemplateUtil.replacePlaceholder(template, OWNER_MEMBERSHIP, ownerMembershipParser.asHtmlSnippet());
-		MembershipJson ownerMembership = ListingDocument.buildMembership(ownerAuthorizationHeader, trade, ownerUser.getUserId());
+		MembershipJson ownerMembership = ownerClientApi.findMembershipByUserIdOrTradeIdAsMembership(ownerUser.getUserId(), trade.getTradeId());
 
 		// OWNER_ARTICLE_ONE
 		ArticleJson ownerPandemicOneArticle = new ArticleJson();
@@ -106,18 +105,12 @@ public class TutorialDocument implements Document {
 		ownerPandemicTwoArticle = ownerPandemicTwoParser.getResponse().as(ArticleJson.class);
 
 		// OWNER_LISTING_ONE
-		SpecificationParser ownerPandemicOneListingParser = ListingDocument.buildPostListingParser(
-				ownerAuthorizationHeader,
-				ownerMembership,
-				ownerPandemicOneArticle);
+		SpecificationParser ownerPandemicOneListingParser = ownerClientApi.create(buildListing(ownerMembership, ownerPandemicOneArticle));
 		template = TemplateUtil.replacePlaceholder(template, OWNER_LISTING_ONE, ownerPandemicOneListingParser.asHtmlSnippet());
 
-		SpecificationParser ownerPandemicTwoListingParser = ListingDocument.buildPostListingParser(
-				ownerAuthorizationHeader,
-				ownerMembership,
-				ownerPandemicTwoArticle);
+		// OWNER_LISTING_TWO
+		SpecificationParser ownerPandemicTwoListingParser = ownerClientApi.create(buildListing(ownerMembership, ownerPandemicTwoArticle));
 		template = TemplateUtil.replacePlaceholder(template, OWNER_LISTING_TWO, ownerPandemicTwoListingParser.asHtmlSnippet());
-
 
 		// MEMBER SETUP
 		MatchAndTradeApiFacade memberApiFacade = new MatchAndTradeApiFacade(memberAuthorizationHeader);
@@ -166,26 +159,17 @@ public class TutorialDocument implements Document {
 		memberNoThanksArticle = memberNoThanksParser.getResponse().as(ArticleJson.class);
 
 		// MEMBER_LISTING_ONE
-		SpecificationParser memberStoneAgeListing = ListingDocument.buildPostListingParser(
-				memberAuthorizationHeader,
-				memberMembership,
-				memberStoneAgeArticle);
+		SpecificationParser memberStoneAgeListing = memberClientApi.create(buildListing(memberMembership, memberStoneAgeArticle));
 		template = TemplateUtil.replacePlaceholder(template,
 				MEMBER_LISTING_ONE,
 				memberStoneAgeListing.asHtmlSnippet());
 		// MEMBER_LISTING_ONE
-		SpecificationParser memberCarcassonneListing = ListingDocument.buildPostListingParser(
-				memberAuthorizationHeader,
-				memberMembership,
-				memberCarcassoneArticle);
+		SpecificationParser memberCarcassonneListing = memberClientApi.create(buildListing(memberMembership, memberCarcassoneArticle));
 		template = TemplateUtil.replacePlaceholder(template,
 				MEMBER_LISTING_TWO,
 				memberCarcassonneListing.asHtmlSnippet());
 		// MEMBER_LISTING_ONE
-		SpecificationParser memberNoThanksListingParser = ListingDocument.buildPostListingParser(
-				memberAuthorizationHeader,
-				memberMembership,
-				memberNoThanksArticle);
+		SpecificationParser memberNoThanksListingParser = memberClientApi.create(buildListing(memberMembership, memberNoThanksArticle));
 		template = TemplateUtil.replacePlaceholder(template,
 				MEMBER_LISTING_THREE,
 				memberNoThanksListingParser.asHtmlSnippet());
@@ -235,5 +219,12 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	private ListingJson buildListing(MembershipJson ownerMembership, ArticleJson ownerPandemicOneArticle) {
+		ListingJson result = new ListingJson();
+		result.setMembershipId(ownerMembership.getMembershipId());
+		result.setArticleId(ownerPandemicOneArticle.getArticleId());
+		return result;
 	}
 }

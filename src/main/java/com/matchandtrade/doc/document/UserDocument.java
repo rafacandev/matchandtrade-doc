@@ -24,7 +24,7 @@ public class UserDocument implements Document {
 		// USERS_PUT_PLACEHOLDER
 		UserJson user = clientApi.findUser().getResponse().as(UserJson.class);
 		user.setName("Scott Summers");
-		SpecificationParser putUserParser = clientApi.updateUser(user);
+		SpecificationParser putUserParser = clientApi.update(user);
 		template = TemplateUtil.replacePlaceholder(template, USERS_PUT_PLACEHOLDER, putUserParser.asHtmlSnippet());
 
 		// USERS_GET_PLACEHOLDER
