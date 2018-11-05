@@ -88,7 +88,7 @@ public class TutorialDocument implements Document {
 		//OWNER_MEMBERSHIP
 		SpecificationParser ownerMembershipParser = ownerClientApi.findMembershipByUserIdOrTradeId(ownerUser.getUserId(), trade.getTradeId());
 		template = TemplateUtil.replacePlaceholder(template, OWNER_MEMBERSHIP, ownerMembershipParser.asHtmlSnippet());
-		MembershipJson ownerMembership = ownerClientApi.findMembershipByUserIdOrTradeIdAsMembership(ownerUser.getUserId(), trade.getTradeId());
+		MembershipJson ownerMembership = ownerClientApi.findMembershipByUserIdAndTradeIdAsMembership(ownerUser.getUserId(), trade.getTradeId());
 
 		// OWNER_ARTICLE_ONE
 		ArticleJson ownerPandemicOneArticle = new ArticleJson();
@@ -180,31 +180,19 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, TRADE_MATCHING_ARTICLES, tradeMatchArticlesParser.asHtmlSnippet());
 
 		// OWNER_OFFER_ONE
-		SpecificationParser ownerPandemicOneForStoneAgeOffer = OfferDocument.parsePostOffer(
-				ownerAuthorizationHeader,
-				ownerMembership,
-				ownerPandemicOneArticle.getArticleId(),
-				memberStoneAgeArticle.getArticleId());
+		SpecificationParser ownerPandemicOneForStoneAgeOffer = buildOffer(ownerClientApi, ownerMembership, ownerPandemicOneArticle, memberStoneAgeArticle);
 		template = TemplateUtil.replacePlaceholder(template,
 				OWNER_OFFER_ONE,
 				ownerPandemicOneForStoneAgeOffer.asHtmlSnippet());
 
 		// MEMBER_OFFER_ONE
-		SpecificationParser memberStoneAgeForPandemicOneArticle = OfferDocument.parsePostOffer(
-				memberAuthorizationHeader,
-				memberMembership,
-				memberStoneAgeArticle.getArticleId(),
-				ownerPandemicOneArticle.getArticleId());
+		SpecificationParser memberStoneAgeForPandemicOneArticle = buildOffer(memberClientApi, memberMembership, memberStoneAgeArticle, ownerPandemicOneArticle);
 		template = TemplateUtil.replacePlaceholder(template,
 				MEMBER_OFFER_ONE,
 				memberStoneAgeForPandemicOneArticle.asHtmlSnippet());
 
 		// MEMBER_OFFER_ONE
-		SpecificationParser memberStoneAgeForPandemicTwoArticle = OfferDocument.parsePostOffer(
-				memberAuthorizationHeader,
-				memberMembership,
-				memberStoneAgeArticle.getArticleId(),
-				ownerPandemicTwoArticle.getArticleId());
+		SpecificationParser memberStoneAgeForPandemicTwoArticle = buildOffer(memberClientApi, memberMembership, memberStoneAgeArticle, ownerPandemicTwoArticle);
 		template = TemplateUtil.replacePlaceholder(template,
 				MEMBER_OFFER_TWO,
 				memberStoneAgeForPandemicTwoArticle.asHtmlSnippet());
@@ -219,6 +207,13 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	private SpecificationParser buildOffer(MatchAndTradeClient clientApi, MembershipJson membership, ArticleJson offeredArticle, ArticleJson wantedaArticle) {
+		OfferJson offer = new OfferJson();
+		offer.setOfferedArticleId(offeredArticle.getArticleId());
+		offer.setWantedArticleId(wantedaArticle.getArticleId());
+		return clientApi.create(membership.getMembershipId(), offer);
 	}
 
 	private ListingJson buildListing(MembershipJson ownerMembership, ArticleJson ownerPandemicOneArticle) {

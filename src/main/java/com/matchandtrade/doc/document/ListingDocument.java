@@ -32,7 +32,7 @@ public class ListingDocument implements Document {
 	@Override
 	public String content() {
 		TradeJson trade = buildTrade(authorizationHeader);
-		MembershipJson membership = clientApi.findMembershipByUserIdOrTradeIdAsMembership(clientApi.getUserId(), trade.getTradeId());
+		MembershipJson membership = clientApi.findMembershipByUserIdAndTradeIdAsMembership(clientApi.getUserId(), trade.getTradeId());
 		ArticleJson article = buildArticle();
 
 		// LISTING_POST_PLACEHOLDER
