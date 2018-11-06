@@ -203,7 +203,7 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, TRADE_GENERATE_TRADES, tradeGenerateResultsParser.asHtmlSnippet());
 
 		// TRADE_RESULTS
-		SpecificationParser tradeResultParser = TradeResultDocument.parseCsvResults(trade, ownerAuthorizationHeader);
+		SpecificationParser tradeResultParser = ownerClientApi.findTradeResult(trade.getTradeId());
 		template = TemplateUtil.replacePlaceholder(template, TRADE_RESULTS, tradeResultParser.asHtmlSnippet());
 
 		return TemplateUtil.appendHeaderAndFooter(template);

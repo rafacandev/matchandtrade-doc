@@ -7,7 +7,6 @@ import com.matchandtrade.rest.v1.json.ArticleJson;
 import com.matchandtrade.rest.v1.json.ListingJson;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
-import io.restassured.http.Header;
 
 public class ListingDocument implements Document {
 	
@@ -19,21 +18,19 @@ public class ListingDocument implements Document {
 		return "listing.html";
 	}
 
-	private final Header authorizationHeader;
 	private final MatchAndTradeClient clientApi;
 	private String template;
 
 	public ListingDocument() {
 		clientApi = new MatchAndTradeClient();
-		authorizationHeader = clientApi.getAuthorizationHeader();
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
 	@Override
 	public String content() {
-		TradeJson trade = buildTrade(authorizationHeader);
+		TradeJson trade = createTrade();
 		MembershipJson membership = clientApi.findMembershipByUserIdAndTradeIdAsMembership(clientApi.getUserId(), trade.getTradeId());
-		ArticleJson article = buildArticle();
+		ArticleJson article = createArticle();
 
 		// LISTING_POST_PLACEHOLDER
 		ListingJson listing = buildListing(membership, article);
@@ -47,7 +44,7 @@ public class ListingDocument implements Document {
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
-	private ArticleJson buildArticle() {
+	private ArticleJson createArticle() {
 		ArticleJson article = new ArticleJson();
 		article.setName("Love Letter");
 		article.setDescription("First edition in great condition");
@@ -62,11 +59,10 @@ public class ListingDocument implements Document {
 		return listing;
 	}
 
-	private TradeJson buildTrade(Header authenticationHeader) {
-		MatchAndTradeClient api = new MatchAndTradeClient(authenticationHeader);
+	private TradeJson createTrade() {
 		TradeJson trade = new TradeJson();
 		trade.setName("Books in Buffalo - " + System.currentTimeMillis());
-		SpecificationParser tradeParser = api.create(trade);
+		SpecificationParser tradeParser = clientApi.create(trade);
 		return tradeParser.getResponse().as(TradeJson.class);
 	}
 

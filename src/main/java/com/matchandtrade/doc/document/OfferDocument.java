@@ -26,7 +26,7 @@ public class OfferDocument implements Document {
 	@Override
 	public String content() {
 		// ### Setup a trade with an owner and a member so the can later make offers for their articles
-		// Create a user named 'Olavo'
+		// Create a user named 'Olavo', this is the trade owner
 		UserJson ownerUser = ownerClientApi.findUser().getResponse().as(UserJson.class);
 		ownerUser.setName("Olavo");
 		ownerClientApi.update(ownerUser);
@@ -35,7 +35,7 @@ public class OfferDocument implements Document {
 		TradeJson trade = createTrade();
 		MembershipJson ownerMembership = ownerClientApi.findMembershipByUserIdAndTradeIdAsMembership(ownerUser.getUserId(), trade.getTradeId());
 
-		// Create another user named 'Maria'
+		// Create another user named 'Maria', this will become a trade member
 		UserJson memberUser = memberClientApi.findUser().getResponse().as(UserJson.class);
 		memberUser.setName("Maria");
 		memberClientApi.update(memberUser);
@@ -66,16 +66,16 @@ public class OfferDocument implements Document {
 		offer = postOfferParser.getResponse().body().as(OfferJson.class);
 
 		// OFFERS_GET
-		SpecificationParser getOfferById = ownerClientApi.findOffer(ownerMembership.getMembershipId(), offer.getOfferId());
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getOfferById.asHtmlSnippet());
+		SpecificationParser getOfferParser = ownerClientApi.findOffer(ownerMembership.getMembershipId(), offer.getOfferId());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_GET, getOfferParser.asHtmlSnippet());
 
 		// OFFERS_SEARCH
 		SpecificationParser searchOffersParser = ownerClientApi.findOffersByMembershipIdAndOfferedArticleIdAndWantedArticleId(ownerMembership.getMembershipId(), ownerArticle.getArticleId(), memberArticle.getArticleId());
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_SEARCH, searchOffersParser.asHtmlSnippet());
 
 		// OFFERS_DELETE
-		SpecificationParser deleteParser = ownerClientApi.deleteOffer(ownerMembership.getMembershipId(), offer.getOfferId());
-		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteParser.asHtmlSnippet());
+		SpecificationParser deleteOfferParser = ownerClientApi.deleteOffer(ownerMembership.getMembershipId(), offer.getOfferId());
+		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteOfferParser.asHtmlSnippet());
 
 		template = PaginationTemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);

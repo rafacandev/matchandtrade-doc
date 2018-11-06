@@ -1,22 +1,11 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
+import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
-import com.matchandtrade.rest.v1.json.ArticleJson;
-import com.matchandtrade.rest.v1.json.MembershipJson;
-import com.matchandtrade.rest.v1.json.TradeJson;
-import com.matchandtrade.rest.v1.json.UserJson;
-import io.restassured.RestAssured;
+import com.matchandtrade.rest.v1.json.*;
 import io.restassured.http.ContentType;
-import io.restassured.http.Header;
-
-import java.util.Date;
-
-import static org.hamcrest.Matchers.equalTo;
 
 
 public class TradeResultDocument implements Document {
@@ -25,30 +14,50 @@ public class TradeResultDocument implements Document {
 	private static final String RESULTS_GET_JSON = "RESULTS_GET_JSON";
 	private static final String SAMPLE_ROW = "SAMPLE_ROW";
 
-	@Override
-	public String contentFilePath() {
-		return "trade-results.html";
+	private final MatchAndTradeClient primaryClientApi;
+	private final MatchAndTradeClient secondaryClientApi;
+	private final MatchAndTradeClient tertiaryClientApi;
+
+	private UserJson primaryUser;
+	private UserJson secondaryUser;
+	private UserJson tertiaryUser;
+
+	private String template;
+
+	public TradeResultDocument() {
+		primaryClientApi = new MatchAndTradeClient();
+		primaryUser = primaryClientApi.findUser().getResponse().as(UserJson.class);
+		secondaryClientApi = new MatchAndTradeClient();
+		secondaryUser = secondaryClientApi.findUser().getResponse().as(UserJson.class);
+		tertiaryClientApi = new MatchAndTradeClient();
+		tertiaryUser = tertiaryClientApi.findUser().getResponse().as(UserJson.class);
+
+		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
 		TradeJson trade = buildTrade();
 
+		// RESULTS_GET_JSON
+		SpecificationParser jsonResultsParser = primaryClientApi.findTradeResult(trade.getTradeId(), ContentType.JSON.toString());
+		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
+
 		// RESULTS_GET_CSV
-		SpecificationParser csvResultsParser = TradeResultDocument.parseCsvResults(trade, MatchAndTradeRestUtil.getLastAuthorizationHeader());
+		SpecificationParser csvResultsParser = primaryClientApi.findTradeResult(trade.getTradeId());
 		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET_CSV, csvResultsParser.asHtmlSnippet());
 
 		// SAMPLE_ROW
 		String sampleRow = buildSampleRow(csvResultsParser);
 		template = TemplateUtil.replacePlaceholder(template, SAMPLE_ROW, sampleRow);
 
-		// RESULTS_GET_JSON
-		SpecificationParser jsonResultsParser = parseJsonResults(trade);
-		template = TemplateUtil.replacePlaceholder(template, RESULTS_GET_JSON, jsonResultsParser.asHtmlSnippet());
-
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	@Override
+	public String contentFilePath() {
+		return "trade-results.html";
 	}
 
 	private String buildSampleRow(SpecificationParser csvResultsParser) {
@@ -68,89 +77,93 @@ public class TradeResultDocument implements Document {
 	}
 
 	private TradeJson buildTrade() {
-		// Create a trade owner setup
-		MatchAndTradeApiFacade olavoApiFacade = new MatchAndTradeApiFacade();
-		UserJson olavo = olavoApiFacade.getUser();
-		olavo.setName("Olavo");
-		olavoApiFacade.saveUser(olavo);
-		TradeJson trade = olavoApiFacade.createTrade("Board games in Montreal - " + new Date().getTime() + this.hashCode());
+		// Primary user setup
+		primaryUser.setName("Olavo");
+		primaryClientApi.update(primaryUser);
 
-		MembershipJson olavoMembership = olavoApiFacade.findMembershipByUserIdAndTradeId(MatchAndTradeRestUtil.getLastAuthenticatedUserId(), trade.getTradeId());
+		TradeJson trade = new TradeJson();
+		trade.setName("Board games in Montreal - " + System.currentTimeMillis());
+		trade = primaryClientApi.create(trade).getResponse().as(TradeJson.class);
 
-		ArticleJson applesToApples = olavoApiFacade.createArticle("Apples to Apples");
-		olavoApiFacade.createListing(olavoMembership.getMembershipId(), applesToApples.getArticleId());
-		ArticleJson beta = olavoApiFacade.createArticle("Bora Bora");
-		olavoApiFacade.createListing(olavoMembership.getMembershipId(), beta.getArticleId());
+		MembershipJson primaryMembership = primaryClientApi.findMembershipByUserIdAndTradeIdAsMembership(primaryUser.getUserId(), trade.getTradeId());
 
-		// Create a trade member setup
-		MatchAndTradeRestUtil.nextAuthorizationHeader();
-		MatchAndTradeApiFacade mariaApiFacade = new MatchAndTradeApiFacade();
-		UserJson maria = mariaApiFacade.getUser();
-		maria.setName("Maria");
-		mariaApiFacade.saveUser(maria);
-		MembershipJson memberMembership = mariaApiFacade.subscribeToTrade(trade);
-		ArticleJson andromedra = mariaApiFacade.createArticle("Andromedra");
-		mariaApiFacade.createListing(memberMembership.getMembershipId(), andromedra.getArticleId());
-		ArticleJson blokus = mariaApiFacade.createArticle("Blokus");
-		mariaApiFacade.createListing(memberMembership.getMembershipId(), blokus.getArticleId());
-		ArticleJson caylus = mariaApiFacade.createArticle("Caylus");
-		mariaApiFacade.createListing(memberMembership.getMembershipId(), caylus.getArticleId());
+		ArticleJson primaryAplesToAplesArticle = createArticle(primaryClientApi, "Apples to Apples");
+		listArticle(primaryClientApi, primaryMembership, primaryAplesToAplesArticle);
+
+		ArticleJson primaryBoraBoraArticle = createArticle(primaryClientApi, "Bora bora");
+		listArticle(primaryClientApi, primaryMembership, primaryBoraBoraArticle);
+
+		// Secondary user setup
+		secondaryUser.setName("Maria");
+		secondaryClientApi.update(secondaryUser);
+
+		MembershipJson secondaryMembership = new MembershipJson();
+		secondaryMembership.setTradeId(trade.getTradeId());
+		secondaryMembership.setUserId(secondaryUser.getUserId());
+		secondaryMembership = secondaryClientApi.create(secondaryMembership).getResponse().as(MembershipJson.class);
+
+
+		ArticleJson secondaryAndromedraArticle = createArticle(secondaryClientApi, "Andromedra");
+		listArticle(secondaryClientApi, secondaryMembership, secondaryAndromedraArticle);
+		ArticleJson secondaryBlokusArticle = createArticle(secondaryClientApi, "Blokus");
+		listArticle(secondaryClientApi, secondaryMembership, secondaryBlokusArticle);
+		ArticleJson secondaryCaylusArticle = createArticle(secondaryClientApi, "Caylus");
+		listArticle(secondaryClientApi, secondaryMembership, secondaryCaylusArticle);
 
 		// Create another trade member setup
-		MatchAndTradeRestUtil.nextAuthorizationHeader();
-		MatchAndTradeApiFacade xavierApiFacade = new MatchAndTradeApiFacade();
-		UserJson xavier = xavierApiFacade.getUser();
-		xavier.setName("Xavier");
-		xavierApiFacade.saveUser(xavier);
-		MembershipJson xavierMembership = xavierApiFacade.subscribeToTrade(trade);
-		ArticleJson agricola = xavierApiFacade.createArticle("Agricola");
-		xavierApiFacade.createListing(xavierMembership.getMembershipId(), agricola.getArticleId());
+		tertiaryUser.setName("Xavier");
+		tertiaryClientApi.update(tertiaryUser);
+
+		MembershipJson tertiaryMembership = new MembershipJson();
+		tertiaryMembership.setUserId(tertiaryUser.getUserId());
+		tertiaryMembership.setTradeId(trade.getTradeId());
+		tertiaryMembership = tertiaryClientApi.create(tertiaryMembership).getResponse().as(MembershipJson.class);
+
+		ArticleJson tertiaryAgricolaArticle = createArticle(tertiaryClientApi, "Agricola");
+		listArticle(tertiaryClientApi, tertiaryMembership, tertiaryAgricolaArticle);
 
 		trade.setState(TradeJson.State.MATCHING_ARTICLES);
-		olavoApiFacade.saveTrade(trade);
+		primaryClientApi.update(trade);
 
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), andromedra.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), beta.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), applesToApples.getArticleId(), caylus.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), andromedra.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), blokus.getArticleId());
-		olavoApiFacade.createOffer(olavoMembership.getMembershipId(), beta.getArticleId(), caylus.getArticleId());
+		offer(primaryClientApi, primaryMembership, primaryAplesToAplesArticle, secondaryAndromedraArticle);
+		offer(primaryClientApi, primaryMembership, primaryAplesToAplesArticle, secondaryCaylusArticle);
+		offer(primaryClientApi, primaryMembership, primaryBoraBoraArticle, secondaryAndromedraArticle);
+		offer(primaryClientApi, primaryMembership, primaryBoraBoraArticle, secondaryBlokusArticle);
+		offer(primaryClientApi, primaryMembership, primaryBoraBoraArticle, secondaryCaylusArticle);
 
-		mariaApiFacade.createOffer(memberMembership.getMembershipId(), andromedra.getArticleId(), applesToApples.getArticleId());
-		mariaApiFacade.createOffer(memberMembership.getMembershipId(), blokus.getArticleId(), beta.getArticleId());
-		mariaApiFacade.createOffer(memberMembership.getMembershipId(), caylus.getArticleId(), agricola.getArticleId());
+		offer(secondaryClientApi, secondaryMembership, secondaryAndromedraArticle, primaryAplesToAplesArticle);
+		offer(secondaryClientApi, secondaryMembership, secondaryBlokusArticle, primaryBoraBoraArticle);
+		offer(secondaryClientApi, secondaryMembership, secondaryCaylusArticle, tertiaryAgricolaArticle);
 
-		xavierApiFacade.createOffer(xavierMembership.getMembershipId(), agricola.getArticleId(), applesToApples.getArticleId());
+		offer(tertiaryClientApi, tertiaryMembership, tertiaryAgricolaArticle, primaryAplesToAplesArticle);
 
 		trade.setState(TradeJson.State.GENERATE_RESULTS);
-		olavoApiFacade.saveTrade(trade);
+		primaryClientApi.update(trade);
+
 		return trade;
 	}
 
-	public static SpecificationParser parseCsvResults(TradeJson trade, Header authorizationHeader) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-				.filter(filter)
-				.header(authorizationHeader)
-				.contentType("text/csv")
-				.get(MatchAndTradeRestUtil.tradeResultsUrl(trade.getTradeId()));
-		return parser;
+	private ArticleJson createArticle(MatchAndTradeClient clientApi, String articleName) {
+		ArticleJson article = new ArticleJson();
+		article.setName(articleName);
+		return clientApi.create(article).getResponse().as(ArticleJson.class);
 	}
 
-	private SpecificationParser parseJsonResults(TradeJson trade) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
-				.contentType(ContentType.JSON)
-				.get(MatchAndTradeRestUtil.tradeResultsUrl(trade.getTradeId()));
-		parser.getResponse().then()
-				.body("totalOfArticles", equalTo(6))
-				.body("totalOfTradedArticles", equalTo(5))
-				.body("totalOfNotTradedArticles", equalTo(1));
-		return parser;
+	private void listArticle(MatchAndTradeClient clientApi, MembershipJson membership, ArticleJson article) {
+		ListingJson listing = new ListingJson();
+		listing.setMembershipId(membership.getMembershipId());
+		listing.setArticleId(article.getArticleId());
+		clientApi.create(listing);
+	}
+
+	private SpecificationParser offer(MatchAndTradeClient clientApi,
+	                                  MembershipJson membership,
+	                                  ArticleJson offeredArticle,
+	                                  ArticleJson wantedaArticle) {
+		OfferJson offer = new OfferJson();
+		offer.setOfferedArticleId(offeredArticle.getArticleId());
+		offer.setWantedArticleId(wantedaArticle.getArticleId());
+		return clientApi.create(membership.getMembershipId(), offer);
 	}
 
 }

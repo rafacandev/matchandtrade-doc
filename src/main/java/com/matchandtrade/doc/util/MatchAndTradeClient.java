@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.omg.CORBA.Request;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -259,8 +260,24 @@ public class MatchAndTradeClient {
 		RestAssured.given()
 			.filter(filter)
 			.header(authorizationHeader)
+			.contentType(ContentType.JSON)
 			.get(MatchAndTradeRestUtil.tradesUrl(tradeId));
 		parser.getResponse().then().statusCode(200).and().body("tradeId", equalTo(tradeId));
+		return parser;
+	}
+
+	public SpecificationParser findTradeResult(Integer tradeId) {
+		return findTradeResult(tradeId, "text/csv");
+	}
+
+	public SpecificationParser findTradeResult(Integer tradeId, String contentType) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.contentType(contentType)
+			.get(MatchAndTradeRestUtil.tradeResultsUrl(tradeId));
 		return parser;
 	}
 
