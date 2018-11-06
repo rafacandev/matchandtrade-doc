@@ -4,13 +4,16 @@ import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.rest.v1.json.*;
 import io.restassured.RestAssured;
+import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
+import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.omg.CORBA.Request;
 import org.springframework.beans.BeanUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +118,20 @@ public class MatchAndTradeClient {
 			.contentType(ContentType.JSON)
 			.body(membership)
 			.post(MatchAndTradeRestUtil.membershipsUrl() + "/");
+		parser.getResponse().then().statusCode(201);
+		return parser;
+	}
+
+	public SpecificationParser createAttachment(String filePath) {
+		File file = new File(filePath);
+		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.multiPart(fileSpec)
+			.header(authorizationHeader)
+			.post(MatchAndTradeRestUtil.attachmentsUrl());
 		parser.getResponse().then().statusCode(201);
 		return parser;
 	}
