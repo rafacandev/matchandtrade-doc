@@ -44,16 +44,11 @@ public class TutorialDocument implements Document {
 
 	private String template;
 	private final MatchAndTradeClient ownerClientApi;
-	private Header memberAuthorizationHeader;
 	private MatchAndTradeClient memberClientApi;
-	private final Header ownerAuthorizationHeader;
 
 	public TutorialDocument() {
-		ownerAuthorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
-		ownerClientApi = new MatchAndTradeClient(ownerAuthorizationHeader);
-
-		memberAuthorizationHeader = MatchAndTradeRestUtil.nextAuthorizationHeader();
-		memberClientApi = new MatchAndTradeClient(memberAuthorizationHeader);
+		ownerClientApi = new MatchAndTradeClient();
+		memberClientApi = new MatchAndTradeClient();
 
 		template = TemplateUtil.buildTemplate(contentFilePath());
 	}
@@ -61,14 +56,10 @@ public class TutorialDocument implements Document {
 
 	@Override
 	public String content() {
-		String template = TemplateUtil.buildTemplate(contentFilePath());
-
-		MatchAndTradeApiFacade ownerApiFacade = new MatchAndTradeApiFacade(ownerAuthorizationHeader);
-
 		// Building a user with a given user name for documentation clarity
 		UserJson ownerUser = ownerClientApi.findUser().getResponse().as(UserJson.class);
 		ownerUser.setName("Olavo");
-		ownerApiFacade.saveUser(ownerUser);
+		ownerClientApi.update(ownerUser);
 
 		// OWNER_AUTHENTICATE
 		SpecificationParser ownerAuthenticateParser = MatchAndTradeClient.authenticate();
@@ -113,12 +104,10 @@ public class TutorialDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, OWNER_LISTING_TWO, ownerPandemicTwoListingParser.asHtmlSnippet());
 
 		// MEMBER SETUP
-		MatchAndTradeApiFacade memberApiFacade = new MatchAndTradeApiFacade(memberAuthorizationHeader);
-
 		// Building a user with a given user name for documentation clarity
 		UserJson memberUser = memberClientApi.findUser().getResponse().as(UserJson.class);
 		memberUser.setName("Maria");
-		memberApiFacade.saveUser(memberUser);
+		memberClientApi.update(memberUser);
 
 		// MEMBER_AUTHENTICATE
 		SpecificationParser memberAuthenticateParser = MatchAndTradeClient.authenticate();
