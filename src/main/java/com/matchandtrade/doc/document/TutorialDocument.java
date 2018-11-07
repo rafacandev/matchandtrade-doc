@@ -1,12 +1,9 @@
 package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
-import io.restassured.http.Header;
 
 public class TutorialDocument implements Document {
 	

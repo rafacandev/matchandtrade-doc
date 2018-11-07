@@ -1,15 +1,9 @@
 package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.MatchAndTradeApiFacade;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
-
-import java.util.Date;
-
-import static org.hamcrest.Matchers.notNullValue;
 
 public class IndexDocument implements Document {
 

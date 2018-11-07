@@ -22,13 +22,11 @@ public class MatchAndTradeClient {
 
 	private final Header authorizationHeader;
 	private Integer userId;
-//	private final String cookie;
 
 	public MatchAndTradeClient() {
 		SpecificationParser parser = authenticate();
 		String authorizationHeaderName = "Authorization";
 		String authorizationHeaderValue = parser.getResponse().getHeader(authorizationHeaderName);
-//		this.cookie = parser.getResponse().getCookie("MTSESSION");
 		this.authorizationHeader = new Header(authorizationHeaderName, authorizationHeaderValue);
 
 		SpecificationParser authenticationsParser = findAuthentications();
