@@ -41,7 +41,26 @@ public class MatchAndTradeRestUtil {
 			return baseUrl + "/" + path;
 		}
 	}
-	
+
+	public static String deleteArticleAttachment(Integer articleId, Integer attachmentId) {
+		return Endpoint.ARTICLES.asURL(baseUrl) + "/" + articleId + "/attachments/" + attachmentId;
+	}
+
+	public static String findArticleAttachments(Integer articleId, Integer attachmentId) {
+		return Endpoint.ATTACHMENTS.asURL(baseUrl) + "/" + articleId + "/" + attachmentId;
+	}
+
+
+	public static String createAttachment() {
+		return Endpoint.ATTACHMENTS.asURL(baseUrl);
+	}
+
+
+	public static String findArticleAttachments(Integer articleId) {
+		return Endpoint.ARTICLES.asURL(baseUrl) + "/" + articleId + "/attachments";
+	}
+
+
 	public static String authenticateUrl() {
 		return Endpoint.AUTHENTICATE.asURL(baseUrl);
 	}
@@ -53,6 +72,11 @@ public class MatchAndTradeRestUtil {
 	public static String authenticationsUrl() {
 		return Endpoint.AUTHENTICATIONS.asURL(baseUrl);
 	}
+
+	public static String attachmentsUrl(Integer attachmentId) {
+		return Endpoint.ATTACHMENTS.asURL(baseUrl) + "/" + attachmentId;
+	}
+
 
 	public static String signOffUrl() {
 		return Endpoint.AUTHENTICATE.asURL(baseUrl) + "/" + Endpoint.SIGN_OFF.path;
@@ -69,14 +93,23 @@ public class MatchAndTradeRestUtil {
 	public static String tradesUrl() {
 		return Endpoint.TRADES.asURL(baseUrl);
 	}
-	public static String attachmentsUrl() {
-		return Endpoint.ATTACHMENTS.asURL(baseUrl) + "/";
+	public static String articleAttachmentsUrl() {
+		return Endpoint.ARTICLES.asURL(baseUrl) + "/";
 	}
-	public static String attachmentsUrl(Integer membershipId, Integer articleId, Integer attachmentId) {
-		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.ARTICLE_ATTACHMENTS.path + "/" + attachmentId;
+
+	public static String articleAttachmentsUrl(Integer articleId, Integer attachmentId) {
+		return Endpoint.ARTICLES.asURL(baseUrl) + "/" + articleId + "/attachments/" + attachmentId;
 	}
-	public static String attachmentsUrl(Integer membershipId, Integer articleId) {
-		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/" + Endpoint.ARTICLES.path + "/" + articleId + "/" + Endpoint.ARTICLE_ATTACHMENTS.path + "/";
+
+
+	public static String articleAttachmentsUrl(Integer membershipId, Integer articleId, Integer attachmentId) {
+		return Endpoint.MEMBERSHIPS.asURL(baseUrl) + "/" + membershipId + "/articles/" + articleId + "/" + Endpoint.ARTICLE_ATTACHMENTS.path + "/" + attachmentId;
+	}
+	public static String articleAttachmentsUrl(Integer articleId) {
+		return Endpoint.ARTICLES.asURL(baseUrl) +"/" + articleId + "/attachments/";
+	}
+	public static String ttachmentsUrl(Integer attachmentId) {
+		return Endpoint.ATTACHMENTS.asURL(baseUrl) +"/" + attachmentId;
 	}
 	public static String tradesUrl(Integer tradeId) {
 		return Endpoint.TRADES.asURL(baseUrl) + "/" + tradeId;

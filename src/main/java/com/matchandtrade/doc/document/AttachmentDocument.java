@@ -5,6 +5,7 @@ import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
+import com.matchandtrade.rest.v1.json.AttachmentJson;
 
 
 public class AttachmentDocument implements Document {
@@ -13,6 +14,7 @@ public class AttachmentDocument implements Document {
 
 	private final MatchAndTradeClient clientApi;
 	private String template;
+	public static final String ATTACHMENT_FILE_PATH = "image-landscape.png";
 
 	public AttachmentDocument() {
 		clientApi = new MatchAndTradeClient();
@@ -21,9 +23,11 @@ public class AttachmentDocument implements Document {
 
 	@Override
 	public String content() {
-		String filePath = AttachmentDocument.class.getClassLoader().getResource("image-landscape.png").getFile();
-		SpecificationParser parser = clientApi.createAttachment(filePath);
-		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, parser.asHtmlSnippet());
+		SpecificationParser postParser = clientApi.createAttachment(ATTACHMENT_FILE_PATH);
+		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
+		AttachmentJson attachment = postParser.getResponse().as(AttachmentJson.class);
+
+		// TODO: DELETE_PLACEHOLDER
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);

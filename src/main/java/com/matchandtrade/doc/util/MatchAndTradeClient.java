@@ -10,7 +10,6 @@ import io.restassured.http.Header;
 import io.restassured.response.Response;
 import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
-import org.omg.CORBA.Request;
 import org.springframework.beans.BeanUtils;
 
 import java.io.File;
@@ -64,6 +63,17 @@ public class MatchAndTradeClient {
 			.body(article)
 			.post(MatchAndTradeRestUtil.articlesUrl() + "/");
 		parser.getResponse().then().statusCode(201);
+		return parser;
+	}
+
+	public SpecificationParser create(Integer articleId, Integer attachmentId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.contentType(ContentType.JSON)
+			.post(MatchAndTradeRestUtil.articleAttachmentsUrl(articleId, attachmentId) + "/");
 		return parser;
 	}
 
@@ -122,8 +132,9 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public SpecificationParser createAttachment(String filePath) {
-		File file = new File(filePath);
+	public SpecificationParser createAttachment(String filepathForAnImagePng) {
+		String fileLocation = MatchAndTradeClient.class.getClassLoader().getResource(filepathForAnImagePng).getFile();
+		File file = new File(fileLocation);
 		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
@@ -131,7 +142,7 @@ public class MatchAndTradeClient {
 			.filter(filter)
 			.multiPart(fileSpec)
 			.header(authorizationHeader)
-			.post(MatchAndTradeRestUtil.attachmentsUrl());
+			.post(MatchAndTradeRestUtil.createAttachment() + "/");
 		parser.getResponse().then().statusCode(201);
 		return parser;
 	}
@@ -155,6 +166,28 @@ public class MatchAndTradeClient {
 			.filter(filter)
 			.get(MatchAndTradeRestUtil.articlesUrl());
 		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	public SpecificationParser findArticleAttachment(Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.get(MatchAndTradeRestUtil.findArticleAttachments(articleId) + "/");
+//		parser.getResponse().then().statusCode(200);
+		return parser;
+	}
+
+	public SpecificationParser findArticleAttachment(Integer articleId, Integer attachmentId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.get(MatchAndTradeRestUtil.findArticleAttachments(articleId, attachmentId) + "/");
+//		parser.getResponse().then().statusCode(200);
 		return parser;
 	}
 
@@ -306,6 +339,18 @@ public class MatchAndTradeClient {
 			.filter(filter)
 			.header(authorizationHeader)
 			.delete(MatchAndTradeRestUtil.articlesUrl(articleId));
+		parser.getResponse().then().statusCode(204);
+		return parser;
+	}
+
+	public SpecificationParser deleteArticleAttachment(Integer articleId, Integer attachmentId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.delete(MatchAndTradeRestUtil.deleteArticleAttachment(articleId, attachmentId) + "/");
 		parser.getResponse().then().statusCode(204);
 		return parser;
 	}

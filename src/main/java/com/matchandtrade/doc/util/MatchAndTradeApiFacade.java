@@ -175,19 +175,6 @@ public class MatchAndTradeApiFacade {
 		return response.body().as(MembershipJson.class);
 	}
 	
-	public AttachmentJson createAttachment(String fileName) {
-		String filePath = AttachmentDocument.class.getClassLoader().getResource("image-landscape.png").getFile();
-		File file = new File(filePath);
-		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
-		Response response = RestAssured
-				.given()
-				.headers(defaultHeaders)
-				.multiPart(fileSpec)
-				.when()
-				.post(MatchAndTradeRestUtil.attachmentsUrl());
-		return response.body().as(AttachmentJson.class);
-	}
-
 	public int createListing(Integer membershipId, Integer articleId) {
 		SpecificationFilter filter = new SpecificationFilter();
 		ListingJson request = new ListingJson(membershipId, articleId);
