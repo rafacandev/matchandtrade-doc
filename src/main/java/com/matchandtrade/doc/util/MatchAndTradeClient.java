@@ -222,7 +222,7 @@ public class MatchAndTradeClient {
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 			.filter(filter)
-			.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+			.header(authorizationHeader)
 			.get(MatchAndTradeRestUtil.membershipsUrl(membershipId));
 		parser.getResponse().then().statusCode(200);
 		return parser;
@@ -503,7 +503,7 @@ public class MatchAndTradeClient {
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 				.filter(filter)
-				.header(MatchAndTradeRestUtil.getLastAuthorizationHeader())
+				.header(authorizationHeader)
 				.get(MatchAndTradeRestUtil.signOffUrl());
 		parser.getResponse().then().statusCode(205).header("Authorization", nullValue());
 		return parser;

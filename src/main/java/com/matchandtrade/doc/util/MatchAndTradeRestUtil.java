@@ -1,17 +1,12 @@
 package com.matchandtrade.doc.util;
 
 import com.matchandtrade.doc.config.PropertiesLoader;
-import com.matchandtrade.rest.v1.json.UserJson;
-import io.restassured.RestAssured;
 import io.restassured.http.Header;
-import io.restassured.response.Response;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MatchAndTradeRestUtil {
 	
 	private static String baseUrl = PropertiesLoader.serverUrl();
+	private final static String rootUrl = PropertiesLoader.serverUrl() + "matchandtrade-api/v1";
 	private static Header lastAuthorizationHeader;
 
 	private enum Endpoint {
@@ -41,6 +36,12 @@ public class MatchAndTradeRestUtil {
 			return baseUrl + "/" + path;
 		}
 	}
+
+
+
+
+
+
 
 	public static String deleteArticleAttachment(Integer articleId, Integer attachmentId) {
 		return Endpoint.ARTICLES.asURL(baseUrl) + "/" + articleId + "/attachments/" + attachmentId;
@@ -151,47 +152,5 @@ public class MatchAndTradeRestUtil {
 		return Endpoint.LISTING.asURL(baseUrl);
 	}
 
-
-	
-	public static Header getLastAuthorizationHeader() {
-		if (lastAuthorizationHeader == null) {
-			return nextAuthorizationHeader();
-		} else {
-			return lastAuthorizationHeader;
-		}
-	}
-	
-	public static Map<String, String> getLastAuthorizationHeaderAsMap() {
-		Map<String, String> result = new HashMap<>();
-		Header authorizationHeader = getLastAuthorizationHeader();
-		result.put(authorizationHeader.getName(), authorizationHeader.getValue());
-		return result;
-	}
-
-	public static Integer getLastAuthenticatedUserId() {
-		Response response = RestAssured
-			.given()
-			.header(getLastAuthorizationHeader())
-			.get(authenticationsUrl() + "/");
-		return response.body().path("userId");
-	}
-
-	public static UserJson getLastAuthenticatedUser() {
-		Response response = RestAssured
-				.given()
-				.header(getLastAuthorizationHeader())
-				.get(usersUrl() + "/" + getLastAuthenticatedUserId());
-		response.then().statusCode(200);
-		return response.body().as(UserJson.class);
-	}
-	
-	public static Header nextAuthorizationHeader() {
-		Response response = RestAssured
-				.given()
-				.get(MatchAndTradeRestUtil.authenticateUrl());
-		String authorizationHeader = response.getHeader("Authorization");
-		lastAuthorizationHeader = new Header("Authorization", authorizationHeader);
-		return lastAuthorizationHeader;
-	}
 
 }

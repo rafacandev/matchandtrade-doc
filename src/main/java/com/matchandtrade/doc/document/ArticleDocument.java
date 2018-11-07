@@ -2,11 +2,9 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
-import io.restassured.http.Header;
 
 
 public class ArticleDocument implements Document {
@@ -17,21 +15,12 @@ public class ArticleDocument implements Document {
 	private static final String ARTICLES_GET_ALL_PLACEHOLDER = "ARTICLES_GET_ALL_PLACEHOLDER";
 	private static final String ARTICLES_DELETE_PLACEHOLDER = "ARTICLES_DELETE_PLACEHOLDER";
 
-
-	private final Header authorizationHeader;
 	private final MatchAndTradeClient clientApi;
 	private String template;
 
 	public ArticleDocument() {
 		template = TemplateUtil.buildTemplate(contentFilePath());
-		authorizationHeader = MatchAndTradeRestUtil.getLastAuthorizationHeader();
-		clientApi = new MatchAndTradeClient(authorizationHeader);
-	}
-
-
-	@Override
-	public String contentFilePath() {
-		return "articles.html";
+		clientApi = new MatchAndTradeClient();
 	}
 
 	@Override
@@ -66,6 +55,11 @@ public class ArticleDocument implements Document {
 
 		template = PaginationTemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
+	}
+
+	@Override
+	public String contentFilePath() {
+		return "articles.html";
 	}
 
 }
