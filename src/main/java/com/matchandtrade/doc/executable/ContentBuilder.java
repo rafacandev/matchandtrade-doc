@@ -10,16 +10,20 @@ import java.util.List;
 public class ContentBuilder {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ContentBuilder.class);
-	private final String destinationFolder;
+	private final String destinationDirectory;
+	private final String cssFilePath;
+	private final String jsFilePath;
 
-	public ContentBuilder(String destinationFolder) {
-		this.destinationFolder = destinationFolder;
+	public ContentBuilder(String destinationDirectory, String cssFilePath, String jsFilePath) {
+		this.destinationDirectory = destinationDirectory;
+		this.cssFilePath = cssFilePath;
+		this.jsFilePath = jsFilePath;
+
 	}
 
 	public void buildContent() {
 		try {
-			// TODO Remove hardcoded css
-			ContentGenerator contentGenerator = new ContentGenerator(destinationFolder, "/templates/css/rest-api-doc.css");
+			ContentGenerator contentGenerator = new ContentGenerator(destinationDirectory, cssFilePath, jsFilePath);
 			List<Document> contents = new ArrayList<>();
 			contents.add(new IndexDocument());
 			contents.add(new AuthenticateDocument());

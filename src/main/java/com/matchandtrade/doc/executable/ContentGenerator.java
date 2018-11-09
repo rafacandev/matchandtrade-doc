@@ -14,24 +14,24 @@ import java.nio.charset.StandardCharsets;
 public class ContentGenerator {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ContentGenerator.class);
-	// TODO remove these hardcoded string values, move to a config
-	private String destinationFolderRootPath = "rest-api-doc";
-	private String cssFilePath = "/templates/css/rest-api-doc.css";
-	private String jsFilePath = "/templates/js/rest-api-doc.js";
+	private final String destinationDirectory;
+	private final String cssFilePath;
+	private final String jsFilePath;
 
 
-	public ContentGenerator(String destinationFolderRootPath, String cssFilePath) {
-		this.destinationFolderRootPath = destinationFolderRootPath;
+	public ContentGenerator(String destinationDirectory, String cssFilePath, String jsFilePath) {
+		this.destinationDirectory = destinationDirectory;
 		this.cssFilePath = cssFilePath;
+		this.jsFilePath = jsFilePath;
 	}
 
 	public void generate(Document content) {
 
 		InputStream restDocMakerCss = ContentGenerator.class.getResourceAsStream(cssFilePath);
-		File cssDestinationFolder = new File(destinationFolderRootPath + File.separatorChar + "css" + File.separatorChar + "rest-api-doc.css");
+		File cssDestinationFolder = new File(destinationDirectory + File.separatorChar + "css" + File.separatorChar + "rest-api-doc.css");
 
 		InputStream restDocMakerJs = ContentGenerator.class.getResourceAsStream(jsFilePath);
-		File jsDestinationFolder = new File(destinationFolderRootPath + File.separatorChar + "js" + File.separatorChar + "rest-api-doc.js");
+		File jsDestinationFolder = new File(destinationDirectory + File.separatorChar + "js" + File.separatorChar + "rest-api-doc.js");
 
 		try {
 			FileUtils.copyInputStreamToFile(restDocMakerCss, cssDestinationFolder);
@@ -41,7 +41,7 @@ public class ContentGenerator {
 		}
 
 		try {
-			File contentFile = new File(destinationFolderRootPath + File.separatorChar + content.contentFilePath());
+			File contentFile = new File(destinationDirectory + File.separatorChar + content.contentFilePath());
 			FileUtils.write(contentFile, content.content(), StandardCharsets.UTF_8);
 			LOGGER.info("Documentation file generated: {}", contentFile.getPath());
 		} catch (IOException e) {

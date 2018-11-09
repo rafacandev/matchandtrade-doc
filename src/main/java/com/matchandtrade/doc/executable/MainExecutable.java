@@ -23,7 +23,11 @@ public class MainExecutable {
 		String configurationFilePath = obtainConfigurationFilePath(arguments);
 		PropertiesLoader.loadPropertiesFromConfigFile(configurationFilePath);
 
-		ContentBuilder docContentMaker = new ContentBuilder(PropertiesLoader.destinationFolder());
+		String destinationFilder = PropertiesLoader.destinationFolder();
+		String cssFilePath = PropertiesLoader.cssFile();
+		String jsFilePath = PropertiesLoader.jsFile();
+
+		ContentBuilder docContentMaker = new ContentBuilder(destinationFilder, cssFilePath, jsFilePath);
 		try {
 			logger.info("Making documentation.");
 			docContentMaker.buildContent();

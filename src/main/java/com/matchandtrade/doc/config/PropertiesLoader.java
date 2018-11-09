@@ -8,9 +8,12 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 
 public class PropertiesLoader {
-	
+
+
 	public enum Key {
-		DESTINATION_FOLDER("matchandtrade.doc.destination.folder");
+		CSS_FILE("matchandtrade.doc.css.file"),
+		DESTINATION_FOLDER("matchandtrade.doc.destination.folder"),
+		JS_FILE("matchandtrade.doc.js.file");
 
 		private final String key;
 
@@ -22,7 +25,7 @@ public class PropertiesLoader {
 			return key;
 		}
 	}
-	
+
 	public static void loadPropertiesFromConfigFile(String configFilePath) throws IOException {
 		File configFile = new File(configFilePath);
 		InputStream configFileAsInputStream = FileUtils.openInputStream(configFile);
@@ -32,7 +35,15 @@ public class PropertiesLoader {
 				System.setProperty(e.getKey().toString(), e.getValue().toString())
 		);
 	}
-	
+
+	public static String jsFile() {
+		return System.getProperty(Key.JS_FILE.toString());
+	}
+
+	public static String cssFile() {
+		return System.getProperty(Key.CSS_FILE.toString());
+	}
+
 	public static String serverUrl() {
 		return "http://localhost:" + System.getProperty("server.port");
 	}
