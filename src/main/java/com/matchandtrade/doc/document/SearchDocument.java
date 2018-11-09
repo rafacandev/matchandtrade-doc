@@ -3,8 +3,8 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
+import com.matchandtrade.doc.clientapi.Endpoint;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
@@ -86,7 +86,7 @@ public class SearchDocument implements Document {
 			.queryParam("_pageSize", "2")
 			.contentType(ContentType.JSON)
 			.body(search)
-			.post(MatchAndTradeRestUtil.searchUrl());
+			.post(Endpoint.search());
 		parser.getResponse().then().statusCode(200).and().header("X-Pagination-Total-Count", equalTo("4"));
 		return parser;
 	}

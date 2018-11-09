@@ -1,11 +1,8 @@
 package com.matchandtrade.doc.document;
 
-import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.util.MatchAndTradeClient;
-import com.matchandtrade.doc.util.MatchAndTradeRestUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
-import io.restassured.RestAssured;
 
 public class AuthenticateDocument implements Document {
 
@@ -42,17 +39,6 @@ public class AuthenticateDocument implements Document {
 	@Override
 	public String contentFilePath() {
 		return "authenticate.html";
-	}
-
-	public static SpecificationParser buildGetParser() {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.get(MatchAndTradeRestUtil.authenticateUrl());
-		// Assert status is redirect
-		parser.getResponse().then().statusCode(302);
-		return parser;
 	}
 
 }

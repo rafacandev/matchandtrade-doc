@@ -46,7 +46,7 @@ public class OfferDocument implements Document {
 		memberMembership.setTradeId(trade.getTradeId());
 		memberMembership = memberClientApi.create(memberMembership).getResponse().as(MembershipJson.class);
 
-		// List article
+		// List articles
 		ArticleJson ownerArticle = new ArticleJson();
 		ownerArticle.setName("Pandemic Legacy: Season 1");
 		ownerArticle = ownerClientApi.create(ownerArticle).getResponse().as(ArticleJson.class);
