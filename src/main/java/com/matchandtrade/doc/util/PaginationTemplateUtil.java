@@ -1,5 +1,6 @@
 package com.matchandtrade.doc.util;
 
+// TODO insert in TemplateUtil
 public class PaginationTemplateUtil {
 
 	private static final String PAGINATION_ROW_PLACEHOLDER = "" +

@@ -1,7 +1,7 @@
 package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.MatchAndTradeClient;
+import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
 import com.matchandtrade.doc.util.TemplateUtil;
 
 

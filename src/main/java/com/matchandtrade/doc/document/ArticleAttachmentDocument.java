@@ -1,7 +1,7 @@
 package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.util.MatchAndTradeClient;
+import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
 import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.ArticleJson;
@@ -11,6 +11,7 @@ import com.matchandtrade.rest.v1.json.AttachmentJson;
 public class ArticleAttachmentDocument implements Document {
 	
 	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
+	// TODO
 	private static final String GET_ALL_PLACEHOLDER = "GET_ALL_PLACEHOLDER";
 	private static final String GET_PLACEHOLDER = "GET_PLACEHOLDER";
 	private static final String DELETE_PLACEHOLDER = "DELETE_PLACEHOLDER";

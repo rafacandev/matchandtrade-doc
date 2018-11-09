@@ -1,8 +1,7 @@
-package com.matchandtrade.doc.util;
+package com.matchandtrade.doc.clientapi;
 
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
-import com.matchandtrade.doc.clientapi.Endpoint;
 import com.matchandtrade.rest.v1.json.*;
 import io.restassured.RestAssured;
 import io.restassured.builder.MultiPartSpecBuilder;
@@ -28,7 +27,7 @@ public class MatchAndTradeClient {
 	private static final Logger log = LoggerFactory.getLogger(MatchAndTradeClient.class);
 
 	private final Header authorizationHeader;
-	private Integer userId;
+	private final Integer userId;
 
 	public MatchAndTradeClient() {
 		SpecificationParser parser = authenticate();

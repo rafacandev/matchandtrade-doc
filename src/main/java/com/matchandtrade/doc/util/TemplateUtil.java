@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TemplateUtil {
 
+    // TODO static final?
     private static String rootDirectory = "templates/";
 
     /**

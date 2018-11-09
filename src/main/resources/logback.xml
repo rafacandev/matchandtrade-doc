@@ -33,6 +33,6 @@
 	<logger level="INFO" name="com.github.rafasantos.restdocmaker.RestDocMakerGenerator" />
 	
 	<!-- Log all Request/Response via MatchAndTradeClient -->
-	<logger level="INFO" name="com.matchandtrade.doc.util.MatchAndTradeClient" />
+	<logger level="INFO" name="com.matchandtrade.doc.clientapi.MatchAndTradeClient" />
 	
 </configuration>
