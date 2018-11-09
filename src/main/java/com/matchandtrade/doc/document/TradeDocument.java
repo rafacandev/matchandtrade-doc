@@ -2,7 +2,6 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.TradeJson;
 import com.matchandtrade.rest.v1.json.TradeJson.State;
@@ -55,7 +54,7 @@ public class TradeDocument implements Document {
 		SpecificationParser deleteParser = clientApi.deleteTrade(trade.getTradeId());
 		template = TemplateUtil.replacePlaceholder(template, TRADES_DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 
-		template = PaginationTemplateUtil.replacePaginationTable(template);
+		template = TemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

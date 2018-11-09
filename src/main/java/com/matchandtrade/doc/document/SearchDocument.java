@@ -5,7 +5,6 @@ import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.Endpoint;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
 import com.matchandtrade.rest.v1.json.search.Recipe;
@@ -58,7 +57,7 @@ public class SearchDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, MEMBER_ID_PLACEHOLDER, membership.getMembershipId().toString());
 		template = TemplateUtil.replacePlaceholder(template, SEARCH_POST_PLACEHOLDER, parser.asHtmlSnippet());
 
-		template = PaginationTemplateUtil.replacePaginationTable(template);
+		template = TemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

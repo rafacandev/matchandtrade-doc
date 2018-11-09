@@ -2,7 +2,6 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.MembershipJson;
 import com.matchandtrade.rest.v1.json.TradeJson;
@@ -54,7 +53,7 @@ public class MembershipDocument implements Document {
 		SpecificationParser deleteMembershipParser = clientApi.deleteMembership(membership.getMembershipId());
 		template = TemplateUtil.replacePlaceholder(template, MEMBERSHIPS_DELETE_PLACEHOLDER, deleteMembershipParser.asHtmlSnippet());
 
-		template = PaginationTemplateUtil.replacePaginationRows(template);
+		template = TemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

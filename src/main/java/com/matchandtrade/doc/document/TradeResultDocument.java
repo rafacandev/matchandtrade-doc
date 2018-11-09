@@ -2,7 +2,6 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
 import io.restassured.http.ContentType;
@@ -51,7 +50,7 @@ public class TradeResultDocument implements Document {
 		String sampleRow = buildSampleRow(csvResultsParser);
 		template = TemplateUtil.replacePlaceholder(template, SAMPLE_ROW, sampleRow);
 
-		template = PaginationTemplateUtil.replacePaginationTable(template);
+		template = TemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

@@ -2,7 +2,6 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.*;
 
@@ -77,7 +76,7 @@ public class OfferDocument implements Document {
 		SpecificationParser deleteOfferParser = ownerClientApi.deleteOffer(ownerMembership.getMembershipId(), offer.getOfferId());
 		template = TemplateUtil.replacePlaceholder(template, OFFERS_DELETE, deleteOfferParser.asHtmlSnippet());
 
-		template = PaginationTemplateUtil.replacePaginationRows(template);
+		template = TemplateUtil.replacePaginationRows(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 

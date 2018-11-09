@@ -3,7 +3,6 @@ package com.matchandtrade.doc.document;
 
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.doc.clientapi.MatchAndTradeClient;
-import com.matchandtrade.doc.util.PaginationTemplateUtil;
 import com.matchandtrade.doc.util.TemplateUtil;
 import com.matchandtrade.rest.v1.json.AttachmentJson;
 
@@ -29,7 +28,7 @@ public class AttachmentDocument implements Document {
 
 		// TODO: DELETE_PLACEHOLDER
 
-		template = PaginationTemplateUtil.replacePaginationTable(template);
+		template = TemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
