@@ -3,12 +3,15 @@
 <p>
 	<i>Resource</i> for <span class='incode'>Attachments</span>.
 	<span class='incode'>Attachments</span> uploaded to the system.
-	Example, <a href='articles.html'>article</a> pictures are uploaded via this resource and then associated to the <a href='articles.html'>article</a> via <a href='article-attachmetns.html'>Article Attachments</a>.
+	Example, pictures are uploaded via this resource and then associated to the <a href='articles.html'>article</a>
+	via <a href='article-attachmetns.html'>Article Attachments</a>.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/attachments</span></li>
+	<li><span class='incode'>POST rest/v1/attachments/{attachmentId}</span></li>
+	<li><span class='incode'>GET rest/v1/attachments/{attachmentId}</span></li>
+	<li><span class='incode'>GET rest/v1/attachments</span></li>
 	<li><span class='incode'>DELETE rest/v1/attachments/{attachmentId}</span></li>
 </ul>
 
@@ -57,6 +60,5 @@ ${PAGINATION_TABLE}
 
 
 <h3>Examples</h3>
-${POST_PLACEHOLDER}
 <br>
-TODO: ${DELETE_PLACEHOLDER}
+TODO: ${GET_PLACEHOLDER}

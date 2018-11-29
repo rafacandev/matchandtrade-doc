@@ -3,6 +3,8 @@ package com.matchandtrade.doc.clientapi;
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.rest.v1.json.*;
+import com.matchandtrade.rest.v1.json.search.Recipe;
+import com.matchandtrade.rest.v1.json.search.SearchCriteriaJson;
 import io.restassured.RestAssured;
 import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.http.ContentType;
@@ -59,18 +61,6 @@ public class MatchAndTradeClient {
 			.header(authorizationHeader)
 			.body(article)
 			.post(Endpoint.articles());
-		logAndAssertStatus(parser, CREATED);
-		return parser;
-	}
-
-	public SpecificationParser create(Integer articleId, Integer attachmentId) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.header(authorizationHeader)
-			.contentType(ContentType.JSON)
-			.post(Endpoint.articleAttachments(articleId, attachmentId));
 		logAndAssertStatus(parser, CREATED);
 		return parser;
 	}
@@ -141,6 +131,21 @@ public class MatchAndTradeClient {
 			.multiPart(fileSpec)
 			.header(authorizationHeader)
 			.post(Endpoint.attachments());
+		logAndAssertStatus(parser, CREATED);
+		return parser;
+	}
+
+	public SpecificationParser createArticleAttachment(Integer articleId, String filepathForAnImagePng) {
+		String fileLocation = MatchAndTradeClient.class.getClassLoader().getResource(filepathForAnImagePng).getFile();
+		File file = new File(fileLocation);
+		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.multiPart(fileSpec)
+			.header(authorizationHeader)
+			.post(Endpoint.articleAttachments(articleId));
 		logAndAssertStatus(parser, CREATED);
 		return parser;
 	}
@@ -426,6 +431,23 @@ public class MatchAndTradeClient {
 	public Integer getUserId() {
 		return userId;
 	}
+
+	public SpecificationParser searchByTradeId(Integer tradeId) {
+		SearchCriteriaJson requestBody = new SearchCriteriaJson();
+		requestBody.setRecipe(Recipe.ARTICLES);
+		requestBody.addCriterion("Trade.tradeId", tradeId);
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.contentType(ContentType.JSON)
+			.body(requestBody)
+			.post(Endpoint.search());
+		logAndAssertStatus(parser, HttpStatus.OK);
+		return parser;
+	}
+
 
 	public SpecificationParser update(ArticleJson article) {
 		ArticleJson requestBody = new ArticleJson();

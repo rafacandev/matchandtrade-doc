@@ -30,6 +30,10 @@ public class Endpoint {
 		return String.format("%s/attachments/%s/", articles(articleId), attachmentId);
 	}
 
+	public static String articleAttachments(Integer articleId) {
+		return String.format("%s/attachments/", articles(articleId));
+	}
+
 	public static String attachments() {
 		return String.format("%s/%s/", BASE_URL, "attachments");
 	}
@@ -59,7 +63,7 @@ public class Endpoint {
 	}
 
 	public static String signOff() {
-		return String.format("%s/%s", authenticate(), "sign-out");
+		return String.format("%s/%s", authenticate(), "sign-off");
 	}
 
 	public static String trades() {

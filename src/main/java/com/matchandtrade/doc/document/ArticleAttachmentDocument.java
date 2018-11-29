@@ -29,13 +29,9 @@ public class ArticleAttachmentDocument implements Document {
 		article.setName("Article");
 		article = clientApi.create(article).getResponse().as(ArticleJson.class);
 
-		AttachmentJson attachment = clientApi
-			.createAttachment(AttachmentDocument.ATTACHMENT_FILE_PATH)
-			.getResponse()
-			.as(AttachmentJson.class);
-
-		SpecificationParser postParser = clientApi.create(article.getArticleId(), attachment.getAttachmentId());
+		SpecificationParser postParser = clientApi.createArticleAttachment(article.getArticleId(), "image-landscape.png");
 		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
+		AttachmentJson attachment = postParser.getResponse().as(AttachmentJson.class);
 
 		SpecificationParser deleteParser = clientApi.deleteArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
 		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());

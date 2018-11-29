@@ -44,11 +44,8 @@
 		<td>ARTICLES</td>
 		<td>Returns an array of <a href='articles.html'>Articles</a> matching the given <span class='incode'>Search.criteria</span></td>
 		<td>
-			<span class='incode'>"key": "trade.tradeId"</span> references <a href='trades.html' class='incode'>Trade.tradeId</a><br>
-			<span class='incode'>"value": n</span> numeric value
-			<hr>
-			<span class='incode'>"key": "trade.membershipId"</span> references <a href='memberships.html' class='incode'>Membership.membershipId</a><br>
-			<span class='incode'>"value": n</span> numeric value
+			<span class='incode'>"key": "Trade.tradeId"</span> from a <a href='trades.html' class='incode'>Trade</a><br>
+			<span class='incode'>"value":</span> numeric value
 		</td>
 	</tr>
 </table>
@@ -63,7 +60,7 @@
 	<tr>
 		<td>key</td>
 		<td>mandatory, string</td>
-		<td>Values differ according to the <span class='incode'>search.recipe</span></td>
+		<td>Values differ according to the <span class='incode'>Search.recipe</span></td>
 	</tr>
 	<tr>
 		<td>value</td>
@@ -87,7 +84,6 @@ ${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 <p>
-	Search for all <a href='articles.html'>Articles</a> belonging to <a href='trades.html' class='incode'>Trade.tradeId = ${TRADE_ID}</a>
-	except for those belonging to <a href='memberships.html' class='incode'>Membership.membershipId = ${MEMBERSHIP_ID}</a>.
+	Search for all <a href='articles.html'>Articles</a> belonging to <a class='incode' href='trades.html'>Trade.tradeId = ${TRADE_ID}</a>
 </p>
 ${SEARCH_POST_PLACEHOLDER}

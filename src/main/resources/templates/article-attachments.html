@@ -1,14 +1,21 @@
 <h1>Article Attachment</h1>
 <p>
-	<i>Resource</i> for <span class='incode'>Attachments</span> of an <span class='incode'>Article</span>, typically images for an <span class='incode'>Article</span>.
+	<i>Resource</i> for <span class='incode'>Attachments</span> of an <span class='incode'>Article</span>
+</p>
+<p>
+	This resource only manages the one-to-many relationship between <span class='incode'>Articles</span>
+	and <span class='incode'>Attachments</span>. Therefore the <span class='incode'>POST</span>
+	and	<span class='incode'>DELETE</span> operations only create or delete the relationship.
+</p>
+<p>
+	Refer to <span class='incode'>Attachments</span> resource for more operations.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/memberships/{membershipId}/articles/{articleId}/attachments/{attachmentId}</span></li>
-	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/{articleId}/attachments/</span></li>
-	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/{articleId}/attachments/{attachmentId}</span></li>
-	<li><span class='incode'>DELETE rest/v1/memberships/{membershipId}/articles/{articleId}/attachments/</span></li>
+	<li><span class='incode'>POST rest/v1/articles/{articleId}/attachments/{attachmentId}</span></li>
+	<li><span class='incode'>GET rest/v1/articles/{articleId}/attachments/</span></li>
+	<li><span class='incode'>DELETE rest/v1/articles/{articleId}/attachments/{attachmentId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -17,7 +24,7 @@
 </ul>	
 
 <h3>Resource</h3>
-See <a href="attachments.html">Attachment</a> documentation.
+
 
 <h3>Query Parameters</h3>
 ${PAGINATION_TABLE}
