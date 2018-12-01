@@ -33,6 +33,12 @@ public class ArticleAttachmentDocument implements Document {
 		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
 		AttachmentJson attachment = postParser.getResponse().as(AttachmentJson.class);
 
+		SpecificationParser getParser = clientApi.findArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
+		template = TemplateUtil.replacePlaceholder(template, GET_PLACEHOLDER, getParser.asHtmlSnippet());
+
+		SpecificationParser getAllParser = clientApi.findArticleAttachment(article.getArticleId());
+		template = TemplateUtil.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
+
 		SpecificationParser deleteParser = clientApi.deleteArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
 		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 

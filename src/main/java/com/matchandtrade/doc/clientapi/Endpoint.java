@@ -27,15 +27,11 @@ public class Endpoint {
 	}
 
 	public static String articleAttachments(Integer articleId, Integer attachmentId) {
-		return String.format("%s/attachments/%s/", articles(articleId), attachmentId);
+		return String.format("%s/attachments/%s", articles(articleId), attachmentId);
 	}
 
 	public static String articleAttachments(Integer articleId) {
 		return String.format("%s/attachments/", articles(articleId));
-	}
-
-	public static String attachments() {
-		return String.format("%s/%s/", BASE_URL, "attachments");
 	}
 
 	public static String listing() {

@@ -3,19 +3,16 @@
 	<i>Resource</i> for <span class='incode'>Attachments</span> of an <span class='incode'>Article</span>
 </p>
 <p>
-	This resource only manages the one-to-many relationship between <span class='incode'>Articles</span>
-	and <span class='incode'>Attachments</span>. Therefore the <span class='incode'>POST</span>
-	and	<span class='incode'>DELETE</span> operations only create or delete the relationship.
-</p>
-<p>
-	Refer to <span class='incode'>Attachments</span> resource for more operations.
+	When the <span class='incode'>Attachments</span> is an image, the system will attemp to generate a
+	thumbnail for it.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/articles/{articleId}/attachments/{attachmentId}</span></li>
-	<li><span class='incode'>GET rest/v1/articles/{articleId}/attachments/</span></li>
 	<li><span class='incode'>DELETE rest/v1/articles/{articleId}/attachments/{attachmentId}</span></li>
+	<li><span class='incode'>GET rest/v1/articles/{articleId}/attachments/</span></li>
+	<li><span class='incode'>GET rest/v1/articles/{articleId}/attachments/{attachmentId}</span></li>
+	<li><span class='incode'>POST rest/v1/articles/{articleId}/attachments/</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -24,21 +21,53 @@
 </ul>	
 
 <h3>Resource</h3>
-
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>contentType</td>
+		<td>read-only, 150 max length</td>
+		<td>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">Content Type</a> of this <span class='incode'>Attachment</span>, this value extracted when the attachment is uploaded to the system</td>
+	</tr>
+	<tr>
+		<td>attachmentId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>_links</td>
+		<td>read-only</td>
+		<td>
+			<p>Links for versions of the <span class='incode'>Attachment</span> (aka essence file).</p>
+			<ul>
+				<li><code>original</code>: the uploaded file in its original form</li>
+				<li><code>thumbnail</code>: thumbnail generated from the <code>original</code> file</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-only</td>
+		<td>The name of the <span class='incode'>Attachment</span>, this value extracted when the attachment is uploaded to the system</td>
+	</tr>
+</table>
 
 <h3>Query Parameters</h3>
 ${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 <p>
-${POST_PLACEHOLDER}
-</p>
-<p>
-${GET_ALL_PLACEHOLDER}
+${DELETE_PLACEHOLDER}
 </p>
 <p>
 ${GET_PLACEHOLDER}
 </p>
 <p>
-${DELETE_PLACEHOLDER}
+${GET_ALL_PLACEHOLDER}
+</p>
+<p>
+${POST_PLACEHOLDER}
 </p>

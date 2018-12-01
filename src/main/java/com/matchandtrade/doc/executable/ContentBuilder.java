@@ -25,20 +25,19 @@ public class ContentBuilder {
 		try {
 			ContentGenerator contentGenerator = new ContentGenerator(destinationDirectory, cssFilePath, jsFilePath);
 			List<Document> contents = new ArrayList<>();
-			contents.add(new IndexDocument());
+			contents.add(new ArticleDocument());
+			contents.add(new ArticleAttachmentDocument());
 			contents.add(new AuthenticateDocument());
 			contents.add(new AuthenticationDocument());
-			contents.add(new UserDocument());
-			contents.add(new TradeDocument());
-			contents.add(new MembershipDocument());
-			contents.add(new ArticleDocument());
+			contents.add(new IndexDocument());
 			contents.add(new ListingDocument());
+			contents.add(new MembershipDocument());
 			contents.add(new OfferDocument());
-			contents.add(new TradeResultDocument());
 			contents.add(new SearchDocument());
+			contents.add(new TradeDocument());
+			contents.add(new TradeResultDocument());
 			contents.add(new TutorialDocument());
-			contents.add(new AttachmentDocument());
-			contents.add(new ArticleAttachmentDocument());
+			contents.add(new UserDocument());
 
 			contents.forEach(content -> {
 				contentGenerator.generate(content);

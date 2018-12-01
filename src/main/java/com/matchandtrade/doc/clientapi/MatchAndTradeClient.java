@@ -47,7 +47,7 @@ public class MatchAndTradeClient {
 		RestAssured.given()
 			.filter(filter)
 			.get(Endpoint.authenticate());
-		logAndAssertStatus(parser, FOUND);
+		log(parser);
 		return parser;
 	}
 
@@ -116,21 +116,6 @@ public class MatchAndTradeClient {
 			.contentType(ContentType.JSON)
 			.body(trade)
 			.post(Endpoint.trades());
-		logAndAssertStatus(parser, CREATED);
-		return parser;
-	}
-
-	public SpecificationParser createAttachment(String filepathForAnImagePng) {
-		String fileLocation = MatchAndTradeClient.class.getClassLoader().getResource(filepathForAnImagePng).getFile();
-		File file = new File(fileLocation);
-		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured.given()
-			.filter(filter)
-			.multiPart(fileSpec)
-			.header(authorizationHeader)
-			.post(Endpoint.attachments());
 		logAndAssertStatus(parser, CREATED);
 		return parser;
 	}
@@ -230,6 +215,30 @@ public class MatchAndTradeClient {
 			.given()
 			.filter(filter)
 			.get(Endpoint.articles(articleId));
+		logAndAssertStatus(parser, OK);
+		return parser;
+	}
+
+	public SpecificationParser findArticleAttachment(Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.get(Endpoint.articleAttachments(articleId));
+		logAndAssertStatus(parser, OK);
+		return parser;
+	}
+
+	public SpecificationParser findArticleAttachment(Integer articleId, Integer attachmentId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.get(Endpoint.articleAttachments(articleId, attachmentId));
 		logAndAssertStatus(parser, OK);
 		return parser;
 	}
@@ -384,8 +393,12 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	private static void logAndAssertStatus(SpecificationParser parser, HttpStatus httpStatus) {
+	private static void log(SpecificationParser parser) {
 		log.debug("HTTP request/response:\n{}\n{}", parser.requestAsText(), parser.responseAsText());
+	}
+
+	private static void logAndAssertStatus(SpecificationParser parser, HttpStatus httpStatus) {
+		log(parser);
 		parser.getResponse().then().statusCode(httpStatus.value());
 	}
 
@@ -398,7 +411,7 @@ public class MatchAndTradeClient {
 			.param("_pageNumber", pageNumber)
 			.param("_pageSize", pageSize)
 			.get(Endpoint.trades());
-		response.then().statusCode(200).and().body("[0].tradeId", notNullValue());
+		response.then().statusCode(OK.value()).and().body("[0].tradeId", notNullValue());
 		return parser;
 	}
 

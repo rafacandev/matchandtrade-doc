@@ -26,7 +26,6 @@ public class ContentGenerator {
 	}
 
 	public void generate(Document content) {
-
 		InputStream restDocMakerCss = ContentGenerator.class.getResourceAsStream(cssFilePath);
 		File cssDestinationFolder = new File(destinationDirectory + File.separatorChar + "css" + File.separatorChar + "rest-api-doc.css");
 
