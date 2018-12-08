@@ -33,13 +33,6 @@
 			<version>${rafaelsantosbra.rest-api-doc.version}</version>
 		</dependency>
 
-		<!-- Apache HttpComponents -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>${org.apache.httpcomponents.httpclient}</version>
-		</dependency>
-		
 		<!-- Apache Commons-IO -->
 		<dependency>
 		    <groupId>commons-io</groupId>
@@ -59,13 +52,6 @@
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
 		    <version>${org.slf4j.version}</version>
-		</dependency>
-
-		<!-- JAXB required for JDK 9+ -->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
 		</dependency>
 
 	</dependencies>
