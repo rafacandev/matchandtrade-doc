@@ -3,6 +3,8 @@ package com.matchandtrade.doc.clientapi;
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.rest.v1.json.*;
+import com.matchandtrade.rest.v1.json.search.Matcher;
+import com.matchandtrade.rest.v1.json.search.Operator;
 import com.matchandtrade.rest.v1.json.search.Recipe;
 import com.matchandtrade.rest.v1.json.search.SearchCriteriaJson;
 import io.restassured.RestAssured;
@@ -447,7 +449,7 @@ public class MatchAndTradeClient {
 
 	public SpecificationParser searchByTradeId(Integer tradeId) {
 		SearchCriteriaJson requestBody = new SearchCriteriaJson();
-		requestBody.setRecipe(Recipe.ARTICLES);
+		requestBody.setRecipe(Recipe.ARTICLES.name());
 		requestBody.addCriterion("Trade.tradeId", tradeId);
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
