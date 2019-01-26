@@ -1,5 +1,5 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Authenticate</h1>
 <p>
 	<i>Endpoint</i> to authenticate on the system.
@@ -24,90 +24,131 @@ The <span class='incode'>Authorization</span> header acts as a session token and
 	<li>Only requests containing <span class='incode'>Cookie: MTSESSION</span> are authorized to access <span class='incode'>authenticate/info</span></li>
 </ul>
 
-
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_2' class='tablinks' onclick='openTab(event, "summaryTab_2")'>Summary</button><button id='httpTabLink_2' class='tablinks' onclick='openTab(event, "httpTab_2")'>HTTP</button><button id='curlTabLink_2' class='tablinks' onclick='openTab(event, "curlTab_2")'>curl</button></div><div id='summaryTab_2' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate
-Response: HTTP/1.1 302 
-</div><div id='httpTab_2' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/authenticate
-Headers:       Accept: */*
+<p>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-28" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-29" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-30" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-28" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-29" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate
 
-
------  Response  -----
-Status:        HTTP/1.1 302 
-Headers:       Authorization: 9546-2191-8501
-               Set-Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
-               Content-Length: 0
-               Date: Wed, 30 May 2018 23:37:44 GMT
-</div><div id='curlTab_2' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Accept: */*&quot; \
--d &quot;&quot; \
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Authorization: 5283-637-2674
+   Set-Cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-30" class="snippet-content">
+    <pre>curl -v \
 http://localhost:8080/matchandtrade-api/v1/authenticate
 
------  Response  -----
-Status:        HTTP/1.1 302 
-Headers:       Authorization: 9546-2191-8501
-               Set-Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
-               Content-Length: 0
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Authorization: 5283-637-2674
+   Set-Cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+</div>
+</p>
+<p>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-31" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-32" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-33" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-31" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-32" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
+-- Headers --
+   cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
 
-</div><script>openTabById('summaryTabLink_2', "summaryTab_2");</script>
-
-<div class='tab'><button id='summaryTabLink_3' class='tablinks' onclick='openTab(event, "summaryTab_3")'>Summary</button><button id='httpTabLink_3' class='tablinks' onclick='openTab(event, "httpTab_3")'>HTTP</button><button id='curlTabLink_3' class='tablinks' onclick='openTab(event, "curlTab_3")'>curl</button></div><div id='summaryTab_3' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
-Response: HTTP/1.1 200 
-{  &quot;authenticationHeader&quot; : &quot;9546-2191-8501&quot;}</div><div id='httpTab_3' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
-Headers:       Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
-               Accept: */*
-
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Content-Length: 48
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Content-Length: 46
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
 {
-  &quot;authenticationHeader&quot; : &quot;9546-2191-8501&quot;
-}</div><div id='curlTab_3' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly&quot; \
--H &quot;Accept: */*&quot; \
--d &quot;&quot; \
+  "authorizationHeader" : "5283-637-2674"
+}</pre>
+  </div>
+  <div id="snippet-content-33" class="snippet-content">
+    <pre>curl -v \
+-H "cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly" \
 http://localhost:8080/matchandtrade-api/v1/authenticate/info
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Content-Length: 48
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Content-Length: 46
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
 {
-  &quot;authenticationHeader&quot; : &quot;9546-2191-8501&quot;
-}
-</div><script>openTabById('summaryTabLink_3', "summaryTab_3");</script>
+  "authorizationHeader" : "5283-637-2674"
+}</pre>
+  </div>
+</div>
+</p>
+<p>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-34" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-35" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-36" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-34" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/sign-off
+HTTP/1.1 205 </pre>
+  </div>
+  <div id="snippet-content-35" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/sign-off
+-- Headers --
+   Authorization: 7718-5469-3876
 
-<div class='tab'><button id='summaryTabLink_4' class='tablinks' onclick='openTab(event, "summaryTab_4")'>Summary</button><button id='httpTabLink_4' class='tablinks' onclick='openTab(event, "httpTab_4")'>HTTP</button><button id='curlTabLink_4' class='tablinks' onclick='openTab(event, "curlTab_4")'>curl</button></div><div id='summaryTab_4' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
-Response: HTTP/1.1 205 
-</div><div id='httpTab_4' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
-Headers:       Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly
-               Accept: */*
+---- Response ----
+HTTP/1.1 205 
+-- Headers --
+   Set-Cookie: MTSESSION=95818BCFEFAE986B2A69AC650FBEC029; Path=/; HttpOnly
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-36" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 7718-5469-3876" \
+http://localhost:8080/matchandtrade-api/v1/authenticate/sign-off
 
-
------  Response  -----
-Status:        HTTP/1.1 205 
-Headers:       Date: Wed, 30 May 2018 23:37:44 GMT
-</div><div id='curlTab_4' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Cookie: MTSESSION=AA4BB84CC68D6CEB7588571ED89A5185; Path=/; HttpOnly&quot; \
--H &quot;Accept: */*&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/authenticate/matchandtrade-api/v1/sign-out
-
------  Response  -----
-Status:        HTTP/1.1 205 
-Headers:       Date: Wed, 30 May 2018 23:37:44 GMT
-
-</div><script>openTabById('summaryTabLink_4', "summaryTab_4");</script>
-</body>
+---- Response ----
+HTTP/1.1 205 
+-- Headers --
+   Set-Cookie: MTSESSION=95818BCFEFAE986B2A69AC650FBEC029; Path=/; HttpOnly
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+</div>
+</p></body>
 </html>

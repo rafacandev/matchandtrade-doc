@@ -1,5 +1,5 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Users</h1>
 <p>
 <p>
@@ -67,99 +67,106 @@
 </table>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_6' class='tablinks' onclick='openTab(event, "summaryTab_6")'>Summary</button><button id='httpTabLink_6' class='tablinks' onclick='openTab(event, "httpTab_6")'>HTTP</button><button id='curlTabLink_6' class='tablinks' onclick='openTab(event, "curlTab_6")'>curl</button></div><div id='summaryTab_6' class='tabcontent code'>Request:  PUT http://localhost:8080/matchandtrade-api/v1/users/57
-{&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;}
-Response: HTTP/1.1 200 
-{&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:57,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:...</div><div id='httpTab_6' class='tabcontent code'>-----  Request  -----
-PUT http://localhost:8080/matchandtrade-api/v1/users/57
-Headers:       Authorization: 6572-9684-8741
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-172" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-173" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-174" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-172" class="snippet-content active">
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/users/768
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-173" class="snippet-content">
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/users/768
+-- Headers --
+   Authorization: 3692-1416-266
+   Content-Type: application/json; charset=UTF-8
+-- Body --
 {
-  &quot;email&quot; : &quot;1527723463022@test.com&quot;,
-  &quot;name&quot; : &quot;Scott Summers&quot;
+  "email" : "1548517792910@test.com",
+  "name" : "Scott Summers"
 }
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
 {
-  &quot;email&quot; : &quot;1527723463022@test.com&quot;,
-  &quot;name&quot; : &quot;Scott Summers&quot;,
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
-  } ]
-}</div><div id='curlTab_6' class='tabcontent code'>-----  Request  -----
-curl -v -X PUT \
--H &quot;Authorization: 6572-9684-8741&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;email\&quot;:\&quot;1527723463022@test.com\&quot;,\&quot;name\&quot;:\&quot;Scott Summers\&quot;}&quot; \
-http://localhost:8080/matchandtrade-api/v1/users/57
+  "email" : "1548517792910@test.com",
+  "name" : "Scott Summers",
+  "userId" : 768
+}</pre>
+  </div>
+  <div id="snippet-content-174" class="snippet-content">
+    <pre>curl -v -X PUT \
+-H "Authorization: 3692-1416-266" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"email\":\"1548517792910@test.com\",\"name\":\"Scott Summers\"}" \
+http://localhost:8080/matchandtrade-api/v1/users/768
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
 {
-  &quot;email&quot; : &quot;1527723463022@test.com&quot;,
-  &quot;name&quot; : &quot;Scott Summers&quot;,
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
-  } ]
-}
-</div><script>openTabById('summaryTabLink_6', "summaryTab_6");</script>
+  "email" : "1548517792910@test.com",
+  "name" : "Scott Summers",
+  "userId" : 768
+}</pre>
+  </div>
+</div>
 
-<div class='tab'><button id='summaryTabLink_7' class='tablinks' onclick='openTab(event, "summaryTab_7")'>Summary</button><button id='httpTabLink_7' class='tablinks' onclick='openTab(event, "httpTab_7")'>HTTP</button><button id='curlTabLink_7' class='tablinks' onclick='openTab(event, "curlTab_7")'>curl</button></div><div id='summaryTab_7' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/users/57
-Response: HTTP/1.1 200 
-{&quot;email&quot;:&quot;1527723463022@test.com&quot;,&quot;name&quot;:&quot;Scott Summers&quot;,&quot;userId&quot;:57,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:...</div><div id='httpTab_7' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/users/57
-Headers:       Authorization: 6572-9684-8741
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-175" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-176" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-177" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-175" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/users/768
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-176" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/users/768
+-- Headers --
+   Authorization: 3692-1416-266
 
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
 {
-  &quot;email&quot; : &quot;1527723463022@test.com&quot;,
-  &quot;name&quot; : &quot;Scott Summers&quot;,
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
-  } ]
-}</div><div id='curlTab_7' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 6572-9684-8741&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/users/57
+  "email" : "1548517792910@test.com",
+  "name" : "Scott Summers",
+  "userId" : 768
+}</pre>
+  </div>
+  <div id="snippet-content-177" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 3692-1416-266" \
+http://localhost:8080/matchandtrade-api/v1/users/768
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
 {
-  &quot;email&quot; : &quot;1527723463022@test.com&quot;,
-  &quot;name&quot; : &quot;Scott Summers&quot;,
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/users/57&quot;
-  } ]
-}
-</div><script>openTabById('summaryTabLink_7', "summaryTab_7");</script></body>
+  "email" : "1548517792910@test.com",
+  "name" : "Scott Summers",
+  "userId" : 768
+}</pre>
+  </div>
+</div></body>
 </html>

@@ -1,0 +1,91 @@
+<html><head><title>REST Doc Maker</title></head>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-43" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-44" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-45" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-43" class="snippet-content active">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
+HTTP/1.1 201 </pre>
+  </div>
+  <div id="snippet-content-44" class="snippet-content">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
+-- Headers --
+   Authorization: 6435-4503-5256
+   Content-Type: application/json; charset=UTF-8
+-- Body --
+{
+  "membershipId" : 655,
+  "articleId" : 704
+}
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-45" class="snippet-content">
+    <pre>curl -v -X POST \
+-H "Authorization: 6435-4503-5256" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"membershipId\":655,\"articleId\":704}" \
+http://localhost:8080/matchandtrade-api/v1/listing/
+
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Length: 0
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+</div>
+
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-46" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-47" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-48" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-46" class="snippet-content active">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/listing/
+HTTP/1.1 204 </pre>
+  </div>
+  <div id="snippet-content-47" class="snippet-content">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/listing/
+-- Headers --
+   Authorization: 6435-4503-5256
+   Content-Type: application/json; charset=UTF-8
+-- Body --
+{
+  "membershipId" : 655,
+  "articleId" : 704
+}
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-48" class="snippet-content">
+    <pre>curl -v -X DELETE \
+-H "Authorization: 6435-4503-5256" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"membershipId\":655,\"articleId\":704}" \
+http://localhost:8080/matchandtrade-api/v1/listing/
+
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+</div>
+</body>
+</html>

@@ -1,15 +1,15 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Welcome to Match and Trade</h1>
 
-Match and Trade is a web application where many people trade several items at once using an algorithm to determine which items will be traded. A typical trade normally follow distinct steps:
+Match and Trade is a web application where many people trade several articles at once using an algorithm to determine which articles will be traded. A typical trade normally follow distinct steps:
 
 <ul>
 	<li>An organizer creates a trade</li>
-	<li>Members subscribe to the trade and submit their items</li>
-	<li>Members choose which items they would like to trade</li>
-	<li>The organizer closes the trade and the website generates a list with the items to be traded</li>
-	<li>Members exchange items according to the generated list</li>
+	<li>Members subscribe to the trade and submit their articles</li>
+	<li>Members choose which articles they would like to trade</li>
+	<li>The organizer closes the trade and the website generates a list with the articles to be traded</li>
+	<li>Members exchange articles according to the generated list</li>
 </ul>
 
 <h1>Development Guide</h1>
@@ -23,16 +23,16 @@ See <a href='https://github.com/rafasantos/matchandtrade-api'>matchandtrade-api<
 Here is the list of all endpoints available through the REST API.
 
 <ul>
+	<li><code><a href='articles.html'>articles</a></code></li>
+	<li><code><a href='article-attachments.html'>articles/{articleId}/attachments</a></code></li>
 	<li><code><a href='authenticate.html'>authenticate</a></code></li>
 	<li><code><a href='authentications.html'>authentications</a></code></li>
-	<li><code><a href='files.html'>files</a></code></li>
+	<li><code><a href='listing.html'>listing</a></code></li>
+	<li><code><a href='memberships.html'>memberships</a></code></li>
+	<li><code><a href='offers.html'>memberships/{membershipId}/offers</a></code></li>
 	<li><code><a href='search.html'>search</a></code></li>
 	<li><code><a href='trades.html'>trades</a></code></li>
 	<li><code><a href='trade-results.html'>trades/{tradeId}/trades-results</a></code></li>
-	<li><code><a href='trade-memberships.html'>trade-memberships</a></code></li>
-	<li><code><a href='offers.html'>trade-memberships/{tradeMembershipId}/offers</a></code></li>
-	<li><code><a href='items.html'>trade-memberships/{tradeMembershipId}/items</a></code></li>
-	<li><code><a href='item-files.html'>trade-memberships/{tradeMembershipId}/items/{itemId}/files</a></code></li>
 	<li><code><a href='users.html'>users</a></code></li>
 </ul>
 
@@ -46,9 +46,9 @@ Here is the list of all endpoints available through the REST API.
 	 See <a href='https://www.w3.org/TR/2011/REC-ws-metadata-exchange-20111213/#terms'>Web Services - Terminology</a> for more details.
 </p>
 
-<h2>Use Cases</h2>
+<h2>Tutorial</h2>
 <p>
-	Check out the <a href='use-cases.html'>Use Cases</a> page for typical usage with examples.
+	Check out the <a href='tutorial.html'>Tutorial</a> page for typical usage with examples.
 </p>
 
 <h2>HATEOAS</h2>
@@ -70,73 +70,189 @@ Here is the list of all endpoints available through the REST API.
 </p>
 
 <p>Example:<p>
-<div class='tab'><button id='summaryTabLink_1' class='tablinks' onclick='openTab(event, "summaryTab_1")'>Summary</button><button id='httpTabLink_1' class='tablinks' onclick='openTab(event, "httpTab_1")'>HTTP</button><button id='curlTabLink_1' class='tablinks' onclick='openTab(event, "curlTab_1")'>curl</button></div><div id='summaryTab_1' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trades?_pageNumber=2&amp;_pageSize=2
-Response: HTTP/1.1 200 
-[{&quot;name&quot;:&quot;Books in New York - 15277234640191438519374&quot;,&quot;tradeId&quot;:49,&quot;state&quot;:&quot;SUBMITTING_ITEMS&quot;,&quot;_lin...</div><div id='httpTab_1' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/trades?_pageNumber=2&amp;_pageSize=2
-Headers:       Authorization: 6572-9684-8741
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-40" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-41" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-42" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-40" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-41" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/
+-- Headers --
+   Content-Type: application/json; charset=UTF-8
 
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 47
-               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-               Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 188
+   Link: <http://localhost:8080/matchandtrade-api/v1/trades/?_pageNumber=2>; rel="nextPage"
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
 [ {
-  &quot;name&quot; : &quot;Books in New York - 15277234640191438519374&quot;,
-  &quot;tradeId&quot; : 49,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/49&quot;
+  "name" : "Books in Lima 1548517793630",
+  "tradeId" : 354,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/354"
   } ]
 }, {
-  &quot;name&quot; : &quot;Items with images - 1527723252717647280631&quot;,
-  &quot;tradeId&quot; : 48,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/48&quot;
-  } ]
-} ]</div><div id='curlTab_1' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 6572-9684-8741&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/trades?_pageNumber=2\&amp;_pageSize=2
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 47
-               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trades?_pageSize=2&amp;_pageNumber=3&gt;; rel=&quot;nextPage&quot;
-               Link: &lt;http://localhost:8080/matchandtrade-api/v1/trades?_pageSize=2&amp;_pageNumber=1&gt;; rel=&quot;previousPage&quot;
-               Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
-[ {
-  &quot;name&quot; : &quot;Books in New York - 15277234640191438519374&quot;,
-  &quot;tradeId&quot; : 49,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/49&quot;
+  "name" : "Books in Paris 1548517793619",
+  "tradeId" : 353,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/353"
   } ]
 }, {
-  &quot;name&quot; : &quot;Items with images - 1527723252717647280631&quot;,
-  &quot;tradeId&quot; : 48,
-  &quot;state&quot; : &quot;SUBMITTING_ITEMS&quot;,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/trades/48&quot;
+  "name" : "Books in Berlin 1548517793550",
+  "tradeId" : 352,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/352"
   } ]
-} ]
-</div><script>openTabById('summaryTabLink_1', "summaryTab_1");</script>
+}, {
+  "name" : "Board games in Toronto - 1548516340428",
+  "tradeId" : 348,
+  "state" : "RESULTS_GENERATED",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/348"
+  } ]
+}, {
+  "name" : "Board games in Montreal - 1548516340085",
+  "tradeId" : 347,
+  "state" : "RESULTS_GENERATED",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/347"
+  } ]
+}, {
+  "name" : "Trading books - 1548516339876",
+  "tradeId" : 345,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/345"
+  } ]
+}, {
+  "name" : "Board games in Brasilia - 1548516339739",
+  "tradeId" : 344,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/344"
+  } ]
+}, {
+  "name" : "Board games in Vancouver - 1548516339653",
+  "tradeId" : 343,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/343"
+  } ]
+}, {
+  "name" : "Books in Buffalo - 1548516339569",
+  "tradeId" : 342,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/342"
+  } ]
+}, {
+  "name" : "Books in Lima 1548516339542",
+  "tradeId" : 341,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/341"
+  } ]
+} ]</pre>
+  </div>
+  <div id="snippet-content-42" class="snippet-content">
+    <pre>curl -v \
+-H "Content-Type: application/json; charset=UTF-8" \
+http://localhost:8080/matchandtrade-api/v1/trades/
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 188
+   Link: <http://localhost:8080/matchandtrade-api/v1/trades/?_pageNumber=2>; rel="nextPage"
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+[ {
+  "name" : "Books in Lima 1548517793630",
+  "tradeId" : 354,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/354"
+  } ]
+}, {
+  "name" : "Books in Paris 1548517793619",
+  "tradeId" : 353,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/353"
+  } ]
+}, {
+  "name" : "Books in Berlin 1548517793550",
+  "tradeId" : 352,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/352"
+  } ]
+}, {
+  "name" : "Board games in Toronto - 1548516340428",
+  "tradeId" : 348,
+  "state" : "RESULTS_GENERATED",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/348"
+  } ]
+}, {
+  "name" : "Board games in Montreal - 1548516340085",
+  "tradeId" : 347,
+  "state" : "RESULTS_GENERATED",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/347"
+  } ]
+}, {
+  "name" : "Trading books - 1548516339876",
+  "tradeId" : 345,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/345"
+  } ]
+}, {
+  "name" : "Board games in Brasilia - 1548516339739",
+  "tradeId" : 344,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/344"
+  } ]
+}, {
+  "name" : "Board games in Vancouver - 1548516339653",
+  "tradeId" : 343,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/343"
+  } ]
+}, {
+  "name" : "Books in Buffalo - 1548516339569",
+  "tradeId" : 342,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/342"
+  } ]
+}, {
+  "name" : "Books in Lima 1548516339542",
+  "tradeId" : 341,
+  "state" : "SUBMITTING_ARTICLES",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/341"
+  } ]
+} ]</pre>
+  </div>
+</div>
 
 <h2>PUT vs PATCH</h2>
 <p><span class='incode'>PUT</span> requests are favored over <span class='incode'>PATH</span> requests. While <span class='incode'>PATH</span> may offer smaller payloads, it also introduces development complexity for little benefit.</p>
@@ -146,16 +262,18 @@ Headers:       X-Pagination-Total-Count: 47
 <p>Example:</p>
 <div class='code'>-----  Request  -----
 PUT http://localhost:8081/rest/v1/trades/1
-Headers:  {Authorization: 7075-1255-9178}{Content-Type: application/json}
-
+-- Headers --
+  Authorization: 7075-1255-9178
+  Content-Type: application/json
+-- Body --
 {
   // Do not enter tradeId in this payload, it will be ignored.
   "name" : "Name to update"
 }
 
------  Response  -----
+---- Response ----
 Status:   HTTP/1.1 200 
-
+-- Body --
 {
   "name" : "Name to update",
   "tradeId" : 1,

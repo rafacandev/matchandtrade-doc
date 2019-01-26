@@ -1,5 +1,5 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Authentications</h1>
 <p>
 	<i>Resource</i> for <span class='incode'>Authentications</span>.
@@ -31,44 +31,48 @@
 </table>
 
 <h3>Example</h3>
-<div class='tab'><button id='summaryTabLink_5' class='tablinks' onclick='openTab(event, "summaryTab_5")'>Summary</button><button id='httpTabLink_5' class='tablinks' onclick='openTab(event, "httpTab_5")'>HTTP</button><button id='curlTabLink_5' class='tablinks' onclick='openTab(event, "curlTab_5")'>curl</button></div><div id='summaryTab_5' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/authentications/
-Response: HTTP/1.1 200 
-{&quot;userId&quot;:57,&quot;_links&quot;:[{&quot;rel&quot;:&quot;self&quot;,&quot;href&quot;:&quot;http://localhost:8080/matchandtrade-api/v1/authenti...</div><div id='httpTab_5' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/authentications/
-Headers:       Authorization: 6572-9684-8741
-               Accept: */*
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-37" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-38" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-39" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-37" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authentications/
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-38" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/authentications/
+-- Headers --
+   Authorization: 2304-8244-9125
 
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
 {
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/authentications/&quot;
-  } ]
-}</div><div id='curlTab_5' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 6572-9684-8741&quot; \
--H &quot;Accept: */*&quot; \
--d &quot;&quot; \
+  "userId" : 755
+}</pre>
+  </div>
+  <div id="snippet-content-39" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 2304-8244-9125" \
 http://localhost:8080/matchandtrade-api/v1/authentications/
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:44 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
 {
-  &quot;userId&quot; : 57,
-  &quot;_links&quot; : [ {
-    &quot;rel&quot; : &quot;self&quot;,
-    &quot;href&quot; : &quot;http://localhost:8080/matchandtrade-api/v1/authentications/&quot;
-  } ]
-}
-</div><script>openTabById('summaryTabLink_5', "summaryTab_5");</script>
+  "userId" : 755
+}</pre>
+  </div>
+</div>
 </body>
 </html>
