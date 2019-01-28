@@ -24,6 +24,16 @@ function openTab(evt, tabId) {
 function openTabById(tabLinkId, tabId) {
 	document.getElementById(tabId).style.display = "block";
 	document.getElementById(tabId).className += " active";
-
 	document.getElementById(tabLinkId).className += " active";
+}
+
+
+function onSnippetLabelClick(label) {
+    var snippetContents = label.parentElement.parentElement.getElementsByClassName('snippet-content');
+    var targetContent = document.getElementById(label.htmlFor);
+    for (var i=0; i < snippetContents.length; i++) {
+      var content = snippetContents[i];
+      content.classList.remove('active');
+    }
+    targetContent.classList.add('active');
 }

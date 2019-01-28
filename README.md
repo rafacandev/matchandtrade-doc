@@ -1,32 +1,37 @@
-Match and Trade Document Maker
-==============================
+Match and Trade Document
+========================
 
-This project creates detailed documentation for [Match And Trade Web API][1].
+This project creates detailed documentation for [Match And Trade Web][1]
+
+The released version of this documentation is hosted at: [Match And Trade Documentation][2]
 
 ### Generating the documentation
 
+Run [Match And Trade Web][1] with the configuration located at `docker/config/matchandtrade.properties`.
+Then, run maven's default goal. Example:
+
 ```
-mvn clean package
+cp ~/matchandtrade-doc/docker/config/matchandtrade.properties
+cd ~/matchandtrade-web-api
+mvn
+cd ~/matchandtrade-doc
+mvn
 ```
 
-The application will start the embedded web server on the port 8081, perform a series or tests and generate the documentation. Hence, all examples in the documentation are real and functional examples, this approach promotes precision and also serves as high level testing. Open the file `target/doc-maker/index.html` to explore the documentation.
+The application will perform a series of tests and generate the documentation.
+Hence, all examples in the documentation are real and functional examples,
+this approach promotes precision and also serves as a high level testing.
 
-Finally, to publish the documentation to _GitHub Pages_ replace the content of the folder `docs` with the content from `target/doc-maker` which is automatically published [here][2]. Example:
+Finally, to publish the documentation to _GitHub Pages_ replace the content of the folder `docs`
+with the content from `target/doc-maker` which will automatically published. Example:
 
 ```
 rm -rf docs
-cp -r target/rest-doc-maker
+mvn
+cp -r target/rest-doc-maker docs
 git add docs
-git commit -m "Updated 'docs' folder with the content from 'target/rest-doc-maker'"
+git commit -m "Updated 'docs' folder with the current version"
 git push
-```
-
-### Extra features
-
-Generate the documentation and keeps `matchandtrade-api` running in the background. This allows to interacts with the API on http://localhost:8081
-
-```
-mvn -Dmatchandtrade.doc.stop.webserver=false
 ```
 
 [1]: https://github.com/rafasantos/matchandtrade

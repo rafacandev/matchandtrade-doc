@@ -1,0 +1,450 @@
+<html><head><title>REST Doc Maker</title></head>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
+<h1>Article</h1>
+<p>
+	<i>Resource</i> for <span class='incode'>Articles</span>.
+	<span class='incode'>Article</span> is anything that a <a href="users.html">User</a> would put for up
+	for <a href="trades.html">Trade</a>.  
+</p>
+
+<h3>Operations</h3>
+<ul>
+	<li><span class='incode'>POST rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>PUT rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/{articleId}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles?{queryParameters}</span></li>
+	<li><span class='incode'>GET rest/v1/memberships/{membershipId}/articles/</span></li>
+	<li><span class='incode'>DELETE rest/v1/memberships/{membershipId}/articles/{articleId}</span></li>
+</ul>
+
+
+<h3>Authorization</h3>
+<ul>
+	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li>The URL parameter <span class='incode'>{membershipId}</span> must be associated to the authenticated client's <span class='incode'>userId</span></li>
+</ul>
+
+<h3>Resource</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Format</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>articleId</td>
+		<td>read-only</td>
+		<td>Id associated with this resource</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
+		<td>Name of this <span class='incode'>Article</span></td>
+	</tr>
+	<tr>
+		<td>description</td>
+		<td>read-write, optional, 500 max length</td>
+		<td>Description of this <span class='incode'>Article</span></td>
+	</tr>
+</table>
+
+<h3>Query Parameters</h3>
+<table>
+	<tr>
+		<th>Property Name</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>_pageNumber</td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
+	</tr>
+	<tr>
+		<td>_pageSize</td>
+		<td>See <a href='index.html#pagination'>pagination</a></td>
+	</tr>
+</table>
+
+
+<h3>Rules</h3>
+<ul>
+	<li><a href="articles.html">Articles</a> can only be deleted by their owners.</li>
+	<li><span class="incode">Article.name</span> must be unique (case insensitive) within a <a href="memberships.html">Membership</a>.</li>
+</ul>
+
+
+<h3>Examples</h3>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-1" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-2" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-3" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-1" class="snippet-content active">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
+HTTP/1.1 201 </pre>
+  </div>
+  <div id="snippet-content-2" class="snippet-content">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
+-- Headers --
+   Authorization: 6046-5783-2587
+   Content-Type: application/json; charset=UTF-8
+-- Body --
+{
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1"
+}
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+  <div id="snippet-content-3" class="snippet-content">
+    <pre>curl -v -X POST \
+-H "Authorization: 6046-5783-2587" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"description\":\"In mint condition\",\"name\":\"Pandemic Legacy: Season 1\"}" \
+http://localhost:8080/matchandtrade-api/v1/articles/
+
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+</div>
+
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-4" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-5" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-6" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-4" class="snippet-content active">
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/702
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-5" class="snippet-content">
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/702
+-- Headers --
+   Authorization: 6046-5783-2587
+   Content-Type: application/json; charset=UTF-8
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1 Updated",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1 Updated",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+  <div id="snippet-content-6" class="snippet-content">
+    <pre>curl -v -X PUT \
+-H "Authorization: 6046-5783-2587" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"articleId\":702,\"description\":\"In mint condition\",\"name\":\"Pandemic Legacy: Season 1 Updated\",\"_links\":[{\"self\":\"http:\/\/localhost:8080\/matchandtrade-api\/v1\/articles\/702\"}]}" \
+http://localhost:8080/matchandtrade-api/v1/articles/702
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1 Updated",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+</div>
+
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-7" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-8" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-9" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-7" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/702
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-8" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/702
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1 Updated",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+  <div id="snippet-content-9" class="snippet-content">
+    <pre>curl -v \
+http://localhost:8080/matchandtrade-api/v1/articles/702
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+{
+  "articleId" : 702,
+  "description" : "In mint condition",
+  "name" : "Pandemic Legacy: Season 1 Updated",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+  } ]
+}</pre>
+  </div>
+</div>
+
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-10" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-11" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-12" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-10" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-11" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 355
+   Link: <http://localhost:8080/matchandtrade-api/v1/articles/?_pageNumber=2>; rel="nextPage"
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+[ {
+  "articleId" : 1,
+  "name" : "blue way - 70513",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/1"
+  } ]
+}, {
+  "articleId" : 2,
+  "name" : "expensive area - 33933",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2"
+  } ]
+}, {
+  "articleId" : 3,
+  "name" : "useless job - 99220",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/3"
+  } ]
+}, {
+  "articleId" : 4,
+  "name" : "spirited minute - 64888",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/4"
+  } ]
+}, {
+  "articleId" : 5,
+  "name" : "complete system - 26640",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/5"
+  } ]
+}, {
+  "articleId" : 6,
+  "name" : "silly lot - 97217",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/6"
+  } ]
+}, {
+  "articleId" : 7,
+  "name" : "elementary day - 61410",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/7"
+  } ]
+}, {
+  "articleId" : 8,
+  "name" : "long-term moment - 48269",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/8"
+  } ]
+}, {
+  "articleId" : 9,
+  "name" : "strange life - 94116",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/9"
+  } ]
+}, {
+  "articleId" : 10,
+  "name" : "whimsical problem - 5374",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/10"
+  } ]
+} ]</pre>
+  </div>
+  <div id="snippet-content-12" class="snippet-content">
+    <pre>curl -v \
+http://localhost:8080/matchandtrade-api/v1/articles/
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 355
+   Link: <http://localhost:8080/matchandtrade-api/v1/articles/?_pageNumber=2>; rel="nextPage"
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+[ {
+  "articleId" : 1,
+  "name" : "blue way - 70513",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/1"
+  } ]
+}, {
+  "articleId" : 2,
+  "name" : "expensive area - 33933",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2"
+  } ]
+}, {
+  "articleId" : 3,
+  "name" : "useless job - 99220",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/3"
+  } ]
+}, {
+  "articleId" : 4,
+  "name" : "spirited minute - 64888",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/4"
+  } ]
+}, {
+  "articleId" : 5,
+  "name" : "complete system - 26640",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/5"
+  } ]
+}, {
+  "articleId" : 6,
+  "name" : "silly lot - 97217",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/6"
+  } ]
+}, {
+  "articleId" : 7,
+  "name" : "elementary day - 61410",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/7"
+  } ]
+}, {
+  "articleId" : 8,
+  "name" : "long-term moment - 48269",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/8"
+  } ]
+}, {
+  "articleId" : 9,
+  "name" : "strange life - 94116",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/9"
+  } ]
+}, {
+  "articleId" : 10,
+  "name" : "whimsical problem - 5374",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/10"
+  } ]
+} ]</pre>
+  </div>
+</div>
+
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-13" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-14" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-15" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-13" class="snippet-content active">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/702
+HTTP/1.1 204 </pre>
+  </div>
+  <div id="snippet-content-14" class="snippet-content">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/702
+-- Headers --
+   Authorization: 6046-5783-2587
+
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-15" class="snippet-content">
+    <pre>curl -v -X DELETE \
+-H "Authorization: 6046-5783-2587" \
+http://localhost:8080/matchandtrade-api/v1/articles/702
+
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:52 GMT
+-- Body --
+</pre>
+  </div>
+</div>
+</body>
+</html>

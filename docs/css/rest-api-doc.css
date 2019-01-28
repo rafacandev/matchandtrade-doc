@@ -4,8 +4,13 @@
 body {
 	margin-left: 10px;
 	margin-right: 10px;
-	line-height: 1.5;
+	line-height: 1.5em;
 	font-family: BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;	
+}
+
+a {
+    text-decoration: none;
+    border-bottom: dotted 1px;
 }
 
 ul {
@@ -17,14 +22,20 @@ h3 {
 }
 
 table, td, th {
-	border: 1px solid black;
+	border: 1px solid seagreen;
+	border-collapse: collapse;
 	padding: 5px;
+	line-height: 1.4em;
 }
 
 th {
-	background-color: #CFFED7;
+	background-color: #EAF6EC;
+	color: darkgreen;
 }
 
+pre {
+    white-space: pre-wrap;
+}
 
 /* ==================
    CLASSES
@@ -83,4 +94,43 @@ div.tab button.active {
 .tabcontent {
     display: none;
     padding: 6px 12px;
+}
+
+
+.snippet {
+    border: solid 2px #EAF6EC;
+}
+
+.snippet-labels {
+    background-color: #EAF6EC;
+    display: flex;
+}
+
+.snippet-labels label {
+    color: darkgreen;
+    cursor: pointer;
+    font-size: small;
+    padding: .5em 1em .5em 1em;
+}
+
+.snippet-labels label:hover {
+    background-color: palegreen;
+}
+
+.snippet-labels label:active {
+    background-color: springgreen;
+}
+
+.snippet-content {
+    background-color: white;
+    display: none;
+    padding: .5em;
+}
+
+.snippet-content pre {
+    margin: 0em;
+}
+
+.snippet-content.active {
+    display: block;
 }

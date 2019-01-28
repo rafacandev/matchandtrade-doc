@@ -1,9 +1,9 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>TradeResult</h1>
 <p>
 	<i>Resource</i> for <span class='incode'>TradeResults</span>.
-	<span class='incode'>TradeResults</span> is a report which describes how <a href="items.html">Items</a> should be traded
+	<span class='incode'>TradeResults</span> is a report which describes how <a href="articles.html">Articles</a> should be traded
 	according to the <a href="offers.html">Offers</a> in place.
 </p>
 
@@ -26,14 +26,14 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>itemId</td>
+		<td>articleId</td>
 		<td>read-only</td>
 		<td>Id associated with this resource</td>
 	</tr>
 	<tr>
 		<td>name</td>
 		<td>read-write, mandatory, unique, 3 min length, 150 max length</td>
-		<td>Name of this <span class='incode'>Item</span></td>
+		<td>Name of this <span class='incode'>Article</span></td>
 	</tr>
 </table>
 
@@ -55,160 +55,251 @@
 
 
 <h3>Examples</h3>
-For example, the row <span class="incode">1,Olavo,488,Apples to Apples,:RECEIVES:,2,Maria,492,Caylus,:SENDS:,3,Xavier</span> translates to:
+This endpoint supports <span class="incode">Content-Type: application/json</span> (default) and <span class="incode">Content-Type: text/csv</span>.
+<p>
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-97" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-98" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-99" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-97" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/360/results/
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-98" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/360/results/
+-- Headers --
+   Authorization: 5369-4437-8817
+   Content-Type: application/json; charset=UTF-8
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
+{
+  "tradeId" : 360,
+  "tradeName" : "Board games in Montreal - 1548517794448",
+  "totalOfArticles" : 6,
+  "totalOfTradedArticles" : 5,
+  "totalOfNotTradedArticles" : 1,
+  "tradedArticles" : [ {
+    "userId" : 763,
+    "userName" : "Olavo",
+    "articleId" : 711,
+    "articleName" : "Apples to Apples",
+    "receivingUserId" : 764,
+    "receivingUserName" : "Maria",
+    "receivingArticleId" : 715,
+    "receivingArticleName" : "Caylus",
+    "sendingUserId" : 765,
+    "sendingUserName" : "Xavier"
+  }, {
+    "userId" : 763,
+    "userName" : "Olavo",
+    "articleId" : 712,
+    "articleName" : "Bora bora",
+    "receivingUserId" : 764,
+    "receivingUserName" : "Maria",
+    "receivingArticleId" : 714,
+    "receivingArticleName" : "Blokus",
+    "sendingUserId" : 764,
+    "sendingUserName" : "Maria"
+  }, {
+    "userId" : 764,
+    "userName" : "Maria",
+    "articleId" : 714,
+    "articleName" : "Blokus",
+    "receivingUserId" : 763,
+    "receivingUserName" : "Olavo",
+    "receivingArticleId" : 712,
+    "receivingArticleName" : "Bora bora",
+    "sendingUserId" : 763,
+    "sendingUserName" : "Olavo"
+  }, {
+    "userId" : 764,
+    "userName" : "Maria",
+    "articleId" : 715,
+    "articleName" : "Caylus",
+    "receivingUserId" : 765,
+    "receivingUserName" : "Xavier",
+    "receivingArticleId" : 716,
+    "receivingArticleName" : "Agricola",
+    "sendingUserId" : 763,
+    "sendingUserName" : "Olavo"
+  }, {
+    "userId" : 765,
+    "userName" : "Xavier",
+    "articleId" : 716,
+    "articleName" : "Agricola",
+    "receivingUserId" : 763,
+    "receivingUserName" : "Olavo",
+    "receivingArticleId" : 711,
+    "receivingArticleName" : "Apples to Apples",
+    "sendingUserId" : 764,
+    "sendingUserName" : "Maria"
+  } ]
+}</pre>
+  </div>
+  <div id="snippet-content-99" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 5369-4437-8817" \
+-H "Content-Type: application/json; charset=UTF-8" \
+http://localhost:8080/matchandtrade-api/v1/trades/360/results/
+
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
+{
+  "tradeId" : 360,
+  "tradeName" : "Board games in Montreal - 1548517794448",
+  "totalOfArticles" : 6,
+  "totalOfTradedArticles" : 5,
+  "totalOfNotTradedArticles" : 1,
+  "tradedArticles" : [ {
+    "userId" : 763,
+    "userName" : "Olavo",
+    "articleId" : 711,
+    "articleName" : "Apples to Apples",
+    "receivingUserId" : 764,
+    "receivingUserName" : "Maria",
+    "receivingArticleId" : 715,
+    "receivingArticleName" : "Caylus",
+    "sendingUserId" : 765,
+    "sendingUserName" : "Xavier"
+  }, {
+    "userId" : 763,
+    "userName" : "Olavo",
+    "articleId" : 712,
+    "articleName" : "Bora bora",
+    "receivingUserId" : 764,
+    "receivingUserName" : "Maria",
+    "receivingArticleId" : 714,
+    "receivingArticleName" : "Blokus",
+    "sendingUserId" : 764,
+    "sendingUserName" : "Maria"
+  }, {
+    "userId" : 764,
+    "userName" : "Maria",
+    "articleId" : 714,
+    "articleName" : "Blokus",
+    "receivingUserId" : 763,
+    "receivingUserName" : "Olavo",
+    "receivingArticleId" : 712,
+    "receivingArticleName" : "Bora bora",
+    "sendingUserId" : 763,
+    "sendingUserName" : "Olavo"
+  }, {
+    "userId" : 764,
+    "userName" : "Maria",
+    "articleId" : 715,
+    "articleName" : "Caylus",
+    "receivingUserId" : 765,
+    "receivingUserName" : "Xavier",
+    "receivingArticleId" : 716,
+    "receivingArticleName" : "Agricola",
+    "sendingUserId" : 763,
+    "sendingUserName" : "Olavo"
+  }, {
+    "userId" : 765,
+    "userName" : "Xavier",
+    "articleId" : 716,
+    "articleName" : "Agricola",
+    "receivingUserId" : 763,
+    "receivingUserName" : "Olavo",
+    "receivingArticleId" : 711,
+    "receivingArticleName" : "Apples to Apples",
+    "sendingUserId" : 764,
+    "sendingUserName" : "Maria"
+  } ]
+}</pre>
+  </div>
+</div>
+</p>
+<p>
+In this CSV example, the row <span class="incode">763,Olavo,711,Apples to Apples,:RECEIVES:,764,Maria,715,Caylus,:SENDS:,765,Xavier</span> translates to:
 <i>Olavo receives Maria's Caylus and Olavo sends his Apples to Apples to Xavier</i>
-<div class='tab'><button id='summaryTabLink_29' class='tablinks' onclick='openTab(event, "summaryTab_29")'>Summary</button><button id='httpTabLink_29' class='tablinks' onclick='openTab(event, "httpTab_29")'>HTTP</button><button id='curlTabLink_29' class='tablinks' onclick='openTab(event, "curlTab_29")'>curl</button></div><div id='summaryTab_29' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trades/56/results
-Response: HTTP/1.1 200 
-{&quot;tradeId&quot;:56,&quot;tradeName&quot;:&quot;Board games in Montreal - 15277234662511607955941&quot;,&quot;totalOfItems&quot;:6,&quot;tota...</div><div id='httpTab_29' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/trades/56/results
-Headers:       Authorization: 2055-339-3782
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-100" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-101" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-102" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-100" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/360/results/
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-101" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/360/results/
+-- Headers --
+   Authorization: 5369-4437-8817
+   Content-Type: text/csv; charset=ISO-8859-1
 
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: text/csv;charset=ISO-8859-1
+   Content-Length: 1043
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
+user_id,user_name,article_id,article_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_article_id,receiving_article_name,sends_to,sending_to_user_id,sending_to_user_name
+763,Olavo,711,Apples to Apples,:RECEIVES:,764,Maria,715,Caylus,:SENDS:,765,Xavier
+763,Olavo,712,Bora bora,:RECEIVES:,764,Maria,714,Blokus,:SENDS:,764,Maria
+764,Maria,714,Blokus,:RECEIVES:,763,Olavo,712,Bora bora,:SENDS:,763,Olavo
+764,Maria,715,Caylus,:RECEIVES:,765,Xavier,716,Agricola,:SENDS:,763,Olavo
+765,Xavier,716,Agricola,:RECEIVES:,763,Olavo,711,Apples to Apples,:SENDS:,764,Maria
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:46 GMT
-{
-  &quot;tradeId&quot; : 56,
-  &quot;tradeName&quot; : &quot;Board games in Montreal - 15277234662511607955941&quot;,
-  &quot;totalOfItems&quot; : 6,
-  &quot;totalOfTradedItems&quot; : 5,
-  &quot;totalOfNotTradedItems&quot; : 1,
-  &quot;tradedItems&quot; : [ {
-    &quot;userId&quot; : 61,
-    &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 110,
-    &quot;itemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;receivingUserId&quot; : 62,
-    &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 114,
-    &quot;receivingItemName&quot; : &quot;Caylus&quot;,
-    &quot;sendingUserId&quot; : 63,
-    &quot;sendingUserName&quot; : &quot;Xavier&quot;
-  }, {
-    &quot;userId&quot; : 61,
-    &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 111,
-    &quot;itemName&quot; : &quot;Bora Bora&quot;,
-    &quot;receivingUserId&quot; : 62,
-    &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 113,
-    &quot;receivingItemName&quot; : &quot;Blokus&quot;,
-    &quot;sendingUserId&quot; : 62,
-    &quot;sendingUserName&quot; : &quot;Maria&quot;
-  }, {
-    &quot;userId&quot; : 62,
-    &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 113,
-    &quot;itemName&quot; : &quot;Blokus&quot;,
-    &quot;receivingUserId&quot; : 61,
-    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 111,
-    &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
-    &quot;sendingUserId&quot; : 61,
-    &quot;sendingUserName&quot; : &quot;Olavo&quot;
-  }, {
-    &quot;userId&quot; : 62,
-    &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 114,
-    &quot;itemName&quot; : &quot;Caylus&quot;,
-    &quot;receivingUserId&quot; : 63,
-    &quot;receivingUserName&quot; : &quot;Xavier&quot;,
-    &quot;receivingItemId&quot; : 115,
-    &quot;receivingItemName&quot; : &quot;Agricola&quot;,
-    &quot;sendingUserId&quot; : 61,
-    &quot;sendingUserName&quot; : &quot;Olavo&quot;
-  }, {
-    &quot;userId&quot; : 63,
-    &quot;userName&quot; : &quot;Xavier&quot;,
-    &quot;itemId&quot; : 115,
-    &quot;itemName&quot; : &quot;Agricola&quot;,
-    &quot;receivingUserId&quot; : 61,
-    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 110,
-    &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;sendingUserId&quot; : 62,
-    &quot;sendingUserName&quot; : &quot;Maria&quot;
-  } ]
-}</div><div id='curlTab_29' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 2055-339-3782&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/trades/56/results
+# --------------------------------
+# Summary of Trade [360 : Board games in Montreal - 1548517794448]
+# Total of articles: 6
+# Total of traded articles: 5
+# Total of articles not traded: 1
+# --------------------------------
+# 
+# Below is an example to help you understand the results:
+# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
+# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
+</pre>
+  </div>
+  <div id="snippet-content-102" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 5369-4437-8817" \
+-H "Content-Type: text/csv; charset=ISO-8859-1" \
+http://localhost:8080/matchandtrade-api/v1/trades/360/results/
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:46 GMT
-{
-  &quot;tradeId&quot; : 56,
-  &quot;tradeName&quot; : &quot;Board games in Montreal - 15277234662511607955941&quot;,
-  &quot;totalOfItems&quot; : 6,
-  &quot;totalOfTradedItems&quot; : 5,
-  &quot;totalOfNotTradedItems&quot; : 1,
-  &quot;tradedItems&quot; : [ {
-    &quot;userId&quot; : 61,
-    &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 110,
-    &quot;itemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;receivingUserId&quot; : 62,
-    &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 114,
-    &quot;receivingItemName&quot; : &quot;Caylus&quot;,
-    &quot;sendingUserId&quot; : 63,
-    &quot;sendingUserName&quot; : &quot;Xavier&quot;
-  }, {
-    &quot;userId&quot; : 61,
-    &quot;userName&quot; : &quot;Olavo&quot;,
-    &quot;itemId&quot; : 111,
-    &quot;itemName&quot; : &quot;Bora Bora&quot;,
-    &quot;receivingUserId&quot; : 62,
-    &quot;receivingUserName&quot; : &quot;Maria&quot;,
-    &quot;receivingItemId&quot; : 113,
-    &quot;receivingItemName&quot; : &quot;Blokus&quot;,
-    &quot;sendingUserId&quot; : 62,
-    &quot;sendingUserName&quot; : &quot;Maria&quot;
-  }, {
-    &quot;userId&quot; : 62,
-    &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 113,
-    &quot;itemName&quot; : &quot;Blokus&quot;,
-    &quot;receivingUserId&quot; : 61,
-    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 111,
-    &quot;receivingItemName&quot; : &quot;Bora Bora&quot;,
-    &quot;sendingUserId&quot; : 61,
-    &quot;sendingUserName&quot; : &quot;Olavo&quot;
-  }, {
-    &quot;userId&quot; : 62,
-    &quot;userName&quot; : &quot;Maria&quot;,
-    &quot;itemId&quot; : 114,
-    &quot;itemName&quot; : &quot;Caylus&quot;,
-    &quot;receivingUserId&quot; : 63,
-    &quot;receivingUserName&quot; : &quot;Xavier&quot;,
-    &quot;receivingItemId&quot; : 115,
-    &quot;receivingItemName&quot; : &quot;Agricola&quot;,
-    &quot;sendingUserId&quot; : 61,
-    &quot;sendingUserName&quot; : &quot;Olavo&quot;
-  }, {
-    &quot;userId&quot; : 63,
-    &quot;userName&quot; : &quot;Xavier&quot;,
-    &quot;itemId&quot; : 115,
-    &quot;itemName&quot; : &quot;Agricola&quot;,
-    &quot;receivingUserId&quot; : 61,
-    &quot;receivingUserName&quot; : &quot;Olavo&quot;,
-    &quot;receivingItemId&quot; : 110,
-    &quot;receivingItemName&quot; : &quot;Apples to Apples&quot;,
-    &quot;sendingUserId&quot; : 62,
-    &quot;sendingUserName&quot; : &quot;Maria&quot;
-  } ]
-}
-</div><script>openTabById('summaryTabLink_29', "summaryTab_29");</script>
-</body>
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: text/csv;charset=ISO-8859-1
+   Content-Length: 1043
+   Date: Sat, 26 Jan 2019 15:49:54 GMT
+-- Body --
+user_id,user_name,article_id,article_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_article_id,receiving_article_name,sends_to,sending_to_user_id,sending_to_user_name
+763,Olavo,711,Apples to Apples,:RECEIVES:,764,Maria,715,Caylus,:SENDS:,765,Xavier
+763,Olavo,712,Bora bora,:RECEIVES:,764,Maria,714,Blokus,:SENDS:,764,Maria
+764,Maria,714,Blokus,:RECEIVES:,763,Olavo,712,Bora bora,:SENDS:,763,Olavo
+764,Maria,715,Caylus,:RECEIVES:,765,Xavier,716,Agricola,:SENDS:,763,Olavo
+765,Xavier,716,Agricola,:RECEIVES:,763,Olavo,711,Apples to Apples,:SENDS:,764,Maria
+
+# --------------------------------
+# Summary of Trade [360 : Board games in Montreal - 1548517794448]
+# Total of articles: 6
+# Total of traded articles: 5
+# Total of articles not traded: 1
+# --------------------------------
+# 
+# Below is an example to help you understand the results:
+# Sample row:  1,Alice,10,Ticket to Ride,:RECEIVES:,2,Bob,11,Power Grid,:SENDS:,3,Charlie
+# Explanation: Alice receives Bob's Power Grid and sends her Ticket to Ride to Charlie
+</pre>
+  </div>
+</div>
+</p></body>
 </html>

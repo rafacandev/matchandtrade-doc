@@ -1,7 +1,7 @@
 <h1>Search</h1>
 <p>
 	<i>Endpoint</i> to perform advanced searches.
-	Its usage differs according to the given <span class='incode'>Search.recipe</span> property.
+	Its usage differs according to the given <span class='incode'>Search.recipe</span>.
 </p>
 
 <h3>Operations</h3>
@@ -44,7 +44,7 @@
 		<td>ARTICLES</td>
 		<td>Returns an array of <a href='articles.html'>Articles</a> matching the given <span class='incode'>Search.criteria</span></td>
 		<td>
-			<span class='incode'>"key": "Trade.tradeId"</span> from a <a href='trades.html' class='incode'>Trade</a><br>
+			<span class='incode'>"field": "Trade.tradeId"</span> from a <a href='trades.html'>Trade</a><br>
 			<span class='incode'>"value":</span> numeric value
 		</td>
 	</tr>
@@ -58,24 +58,24 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>key</td>
+		<td>field</td>
 		<td>mandatory, string</td>
 		<td>Values differ according to the <span class='incode'>Search.recipe</span></td>
 	</tr>
 	<tr>
 		<td>value</td>
 		<td>mandatory, number or string according to the <span class='incode'>Search.recipe</span></td>
-		<td>Possible values and types differ according to the <span class='incode'>Search.recipe</span></td>
+		<td>Values and types differ according to the <span class='incode'>Search.recipe</span></td>
 	</tr>
 	<tr>
 		<td>operator</td>
 		<td>optional, enumeration, default value: <span class='incode'>AND</span></td>
-		<td>Possible values are <span class='incode'>AND</span> and <span class='incode'>OR</span> </td>
+		<td>Values are <span class='incode'>AND</span> and <span class='incode'>OR</span> </td>
 	</tr>
 	<tr>
 		<td>matcher</td>
 		<td>optional, enumeration, default value: <span class='incode'>EQUALS</span></td>
-		<td>Possible values are <span class='incode'>EQUALS</span>, <span class='incode'>NOT_EQUALS</span>, <span class='incode'>EQUALS_IGNORE_CASE</span>, <span class='incode'>LIKE_IGNORE_CASE</span></td>
+		<td>Values are <span class='incode'>EQUALS</span>, <span class='incode'>NOT_EQUALS</span>, <span class='incode'>EQUALS_IGNORE_CASE</span>, <span class='incode'>LIKE_IGNORE_CASE</span></td>
 	</tr>
 </table>
 
@@ -84,6 +84,6 @@ ${PAGINATION_TABLE}
 
 <h3>Examples</h3>
 <p>
-	Search for all <a href='articles.html'>Articles</a> belonging to <a class='incode' href='trades.html'>Trade.tradeId = ${TRADE_ID}</a>
+	Search for all <a href='articles.html'>Articles</a> belonging to <span class='incode'>Trade.tradeId = ${TRADE_ID}</span>
 </p>
 ${SEARCH_POST_PLACEHOLDER}

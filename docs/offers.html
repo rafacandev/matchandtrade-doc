@@ -1,18 +1,18 @@
 <html><head><title>REST Doc Maker</title></head>
-<link rel='stylesheet' href='css/rest-doc-maker.css'><script src='js/rest-doc-maker.js'></script><body>
+<link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Offer</h1>
 <p>
 	<i>Resource</i> for <span class='incode'>Offer</span>.
-	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='items.html'>Item</a>
-	for a wanted <a href='items.html'>Item</a>.
+	An <span class='incode'>Offer</span> is a proposal to exchange an offered <a href='articles.html'>Article</a>
+	for a wanted <a href='articles.html'>Article</a>.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST /rest/v1/trade-memberships/{tradeMembershipId}/offers/</span></li>
-	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
-	<li><span class='incode'>GET /rest/v1/trade-memberships/{tradeMembershipId}/offers?{queryParameters}</span></li>
-	<li><span class='incode'>DELETE /rest/v1/trade-memberships/{tradeMembershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>POST /rest/v1/memberships/{membershipId}/offers/</span></li>
+	<li><span class='incode'>GET /rest/v1/memberships/{membershipId}/offers/{offerId}</span></li>
+	<li><span class='incode'>GET /rest/v1/memberships/{membershipId}/offers?{queryParameters}</span></li>
+	<li><span class='incode'>DELETE /rest/v1/memberships/{membershipId}/offers/{offerId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
@@ -33,14 +33,14 @@
 		<td>Id associated with this resource</td>
 	</tr>
 	<tr>
-		<td>offeredItemId</td>
+		<td>offeredArticleId</td>
 		<td>ready-only</td>
-		<td>Id associated with the offered <a href='items.html'>Item</a></td>
+		<td>Id associated with the offered <a href='articles.html'>Article</a></td>
 	</tr>
 	<tr>
-		<td>wantedItemId</td>
+		<td>wantedArticleId</td>
 		<td>ready-only</td>
-		<td>Id associated with the wanted <a href='items.html'>Item</a> in exchange for the <span class="incode">Offer.offeredItemId</span></td>
+		<td>Id associated with the wanted <a href='articles.html'>Article</a> in exchange for the <span class="incode">Offer.offeredArticleId</span></td>
 	</tr>
 </table>
 
@@ -51,12 +51,12 @@
 		<th>Description</th>
 	</tr>
 	<tr>
-		<td>offeredItemId</td>
-		<td>Refers to a <span class='incode'>Offer.offeredItemId</span></td>
+		<td>offeredArticleId</td>
+		<td>Refers to a <span class='incode'>Offer.offeredArticleId</span></td>
 	</tr>
 	<tr>
-		<td>wantedItemId</td>
-		<td>Refers to a <span class='incode'>Offer.wantedItemId</span></td>
+		<td>wantedArticleId</td>
+		<td>Refers to a <span class='incode'>Offer.wantedArticleId</span></td>
 	</tr>
 		<tr>
 		<td>_pageNumber</td>
@@ -72,165 +72,210 @@
 <h3>Rules</h3>
 <ul>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must differ.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must differ.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must belong existing Items.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must belong existing Articles.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> must belong to the offering <span class="incode">User.userId</span>
+		<span class="incode">Offer.offeredArticleId</span> must belong to the offering <span class="incode">User.userId</span>
 		when performing a <span class="incode">POST</span> or <span class="incode">DELETE</span> operations.
 	</li>
 	<li>
-		<span class="incode">Offer.offeredItemId</span> and <span class="incode">Offer.wantedItemId</span> must be associated to the same Trade.
+		<span class="incode">Offer.offeredArticleId</span> and <span class="incode">Offer.wantedArticleId</span> must be associated to the same Trade.
 	</li>
 </ul>
 
 <h3>Examples</h3>
-<div class='tab'><button id='summaryTabLink_25' class='tablinks' onclick='openTab(event, "summaryTab_25")'>Summary</button><button id='httpTabLink_25' class='tablinks' onclick='openTab(event, "httpTab_25")'>HTTP</button><button id='curlTabLink_25' class='tablinks' onclick='openTab(event, "curlTab_25")'>curl</button></div><div id='summaryTab_25' class='tabcontent code'>Request:  POST http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/
-{&quot;offeredItemId&quot;:106,&quot;wantedItemId&quot;:107}
-Response: HTTP/1.1 201 
-{&quot;offerId&quot;:75,&quot;offeredItemId&quot;:106,&quot;wantedItemId&quot;:107}</div><div id='httpTab_25' class='tabcontent code'>-----  Request  -----
-POST http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/
-Headers:       Authorization: 2622-8825-9953
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-64" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-65" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-66" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-64" class="snippet-content active">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
+HTTP/1.1 201 </pre>
+  </div>
+  <div id="snippet-content-65" class="snippet-content">
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
+-- Headers --
+   Authorization: 201-6174-6572
+   Content-Type: application/json; charset=UTF-8
+-- Body --
 {
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
 }
-
------  Response  -----
-Status:        HTTP/1.1 201 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-}</div><div id='curlTab_25' class='tabcontent code'>-----  Request  -----
-curl -v -X POST \
--H &quot;Authorization: 2622-8825-9953&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;{\&quot;offeredItemId\&quot;:106,\&quot;wantedItemId\&quot;:107}&quot; \
-http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+}</pre>
+  </div>
+  <div id="snippet-content-66" class="snippet-content">
+    <pre>curl -v -X POST \
+-H "Authorization: 201-6174-6572" \
+-H "Content-Type: application/json; charset=UTF-8" \
+-d "{\"offeredArticleId\":705,\"wantedArticleId\":706}" \
+http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
 
------  Response  -----
-Status:        HTTP/1.1 201 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 201 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-}
-</div><script>openTabById('summaryTabLink_25', "summaryTab_25");</script>
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+}</pre>
+  </div>
+</div>
 
-<div class='tab'><button id='summaryTabLink_26' class='tablinks' onclick='openTab(event, "summaryTab_26")'>Summary</button><button id='httpTabLink_26' class='tablinks' onclick='openTab(event, "httpTab_26")'>HTTP</button><button id='curlTabLink_26' class='tablinks' onclick='openTab(event, "curlTab_26")'>curl</button></div><div id='summaryTab_26' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
-Response: HTTP/1.1 200 
-{&quot;offerId&quot;:75,&quot;offeredItemId&quot;:106,&quot;wantedItemId&quot;:107}</div><div id='httpTab_26' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
-Headers:       Authorization: 2622-8825-9953
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-67" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-68" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-69" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-67" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-68" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+-- Headers --
+   Authorization: 201-6174-6572
 
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-}</div><div id='curlTab_26' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 2622-8825-9953&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+}</pre>
+  </div>
+  <div id="snippet-content-69" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 201-6174-6572" \
+http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-}
-</div><script>openTabById('summaryTabLink_26', "summaryTab_26");</script>
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+}</pre>
+  </div>
+</div>
 
-<div class='tab'><button id='summaryTabLink_27' class='tablinks' onclick='openTab(event, "summaryTab_27")'>Summary</button><button id='httpTabLink_27' class='tablinks' onclick='openTab(event, "httpTab_27")'>HTTP</button><button id='curlTabLink_27' class='tablinks' onclick='openTab(event, "curlTab_27")'>curl</button></div><div id='summaryTab_27' class='tabcontent code'>Request:  GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers?_pageNumber=1&amp;_pageSize=3&amp;offeredItemId=106&amp;wantedItemId=107
-Response: HTTP/1.1 200 
-[{&quot;offerId&quot;:75,&quot;offeredItemId&quot;:106,&quot;wantedItemId&quot;:107}]</div><div id='httpTab_27' class='tabcontent code'>-----  Request  -----
-GET http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers?_pageNumber=1&amp;_pageSize=3&amp;offeredItemId=106&amp;wantedItemId=107
-Headers:       Authorization: 2622-8825-9953
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-70" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-71" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-72" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-70" class="snippet-content active">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705&wantedArticleId=706
+HTTP/1.1 200 </pre>
+  </div>
+  <div id="snippet-content-71" class="snippet-content">
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705&wantedArticleId=706
+-- Headers --
+   Authorization: 201-6174-6572
 
-
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 1
-               Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 1
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 [ {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-} ]</div><div id='curlTab_27' class='tabcontent code'>-----  Request  -----
-curl -v -X GET \
--H &quot;Authorization: 2622-8825-9953&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers?_pageNumber=1\&amp;_pageSize=3\&amp;offeredItemId=106\&amp;wantedItemId=107
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+} ]</pre>
+  </div>
+  <div id="snippet-content-72" class="snippet-content">
+    <pre>curl -v \
+-H "Authorization: 201-6174-6572" \
+http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705\&wantedArticleId=706
 
------  Response  -----
-Status:        HTTP/1.1 200 
-Headers:       X-Pagination-Total-Count: 1
-               Content-Type: application/json;charset=UTF-8
-               Transfer-Encoding: chunked
-               Date: Wed, 30 May 2018 23:37:45 GMT
+---- Response ----
+HTTP/1.1 200 
+-- Headers --
+   X-Pagination-Total-Count: 1
+   Content-Type: application/json;charset=UTF-8
+   Transfer-Encoding: chunked
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
 [ {
-  &quot;offerId&quot; : 75,
-  &quot;offeredItemId&quot; : 106,
-  &quot;wantedItemId&quot; : 107
-} ]
-</div><script>openTabById('summaryTabLink_27', "summaryTab_27");</script>
+  "offerId" : 352,
+  "offeredArticleId" : 705,
+  "wantedArticleId" : 706
+} ]</pre>
+  </div>
+</div>
 
-<div class='tab'><button id='summaryTabLink_28' class='tablinks' onclick='openTab(event, "summaryTab_28")'>Summary</button><button id='httpTabLink_28' class='tablinks' onclick='openTab(event, "httpTab_28")'>HTTP</button><button id='curlTabLink_28' class='tablinks' onclick='openTab(event, "curlTab_28")'>curl</button></div><div id='summaryTab_28' class='tabcontent code'>Request:  DELETE http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
-Response: HTTP/1.1 204 
-</div><div id='httpTab_28' class='tabcontent code'>-----  Request  -----
-DELETE http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
-Headers:       Authorization: 2622-8825-9953
-               Accept: */*
-               Content-Type: application/json; charset=UTF-8
+<div class="snippet">
+  <div class="snippet-labels">
+    <label for="snippet-content-73" onclick="onSnippetLabelClick(this)">Summary</label>
+    <label for="snippet-content-74" onclick="onSnippetLabelClick(this)">Plain Text</label>
+    <label for="snippet-content-75" onclick="onSnippetLabelClick(this)">curl</label>
+  </div>
+  <div id="snippet-content-73" class="snippet-content active">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+HTTP/1.1 204 </pre>
+  </div>
+  <div id="snippet-content-74" class="snippet-content">
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+-- Headers --
+   Authorization: 201-6174-6572
+   Content-Type: application/json; charset=UTF-8
 
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+  <div id="snippet-content-75" class="snippet-content">
+    <pre>curl -v -X DELETE \
+-H "Authorization: 201-6174-6572" \
+-H "Content-Type: application/json; charset=UTF-8" \
+http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
 
------  Response  -----
-Status:        HTTP/1.1 204 
-Headers:       Date: Wed, 30 May 2018 23:37:45 GMT
-</div><div id='curlTab_28' class='tabcontent code'>-----  Request  -----
-curl -v -X DELETE \
--H &quot;Authorization: 2622-8825-9953&quot; \
--H &quot;Accept: */*&quot; \
--H &quot;Content-Type: application/json; charset=UTF-8&quot; \
--d &quot;&quot; \
-http://localhost:8080/matchandtrade-api/v1/trade-memberships/111/offers/75
-
------  Response  -----
-Status:        HTTP/1.1 204 
-Headers:       Date: Wed, 30 May 2018 23:37:45 GMT
-
-</div><script>openTabById('summaryTabLink_28', "summaryTab_28");</script>
+---- Response ----
+HTTP/1.1 204 
+-- Headers --
+   Date: Sat, 26 Jan 2019 15:49:53 GMT
+-- Body --
+</pre>
+  </div>
+</div>
 </body>
 </html>
