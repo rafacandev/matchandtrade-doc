@@ -1,21 +1,21 @@
 <h1>Membership</h1>
 <p>
-	<i>Resource</i> for <span class='incode'>Memberships</span>.
-	<a href='users.html'>Users</a> who want to subscribe to a <a href='trades.html'>Trade</a> need create a <span class='incode'>Membership</span>.
+	<i>Resource</i> for <span class="incode">Memberships</span>.
+	<a href='users.html'>Users</a> who want to subscribe to a <a href='trades.html'>Trade</a> need create a <span class="incode">Membership</span>.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/memberships/</span></li>
-	<li><span class='incode'>GET rest/v1/memberships/{membershipId}</span></li>
-	<li><span class='incode'>GET rest/v1/memberships?{queryParameters}</span></li>
-	<li><span class='incode'>GET rest/v1/memberships/</span></li>
-	<li><span class='incode'>DELETE rest/v1/memberships/{membershipId}</span></li>
+	<li><span class="incode">POST rest/v1/memberships/</span></li>
+	<li><span class="incode">GET rest/v1/memberships/{membershipId}</span></li>
+	<li><span class="incode">GET rest/v1/memberships?{queryParameters}</span></li>
+	<li><span class="incode">GET rest/v1/memberships/</span></li>
+	<li><span class="incode">DELETE rest/v1/memberships/{membershipId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
 <ul>
-	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
+	<li>All operations can be performed by clients with a valid <span class="incode">Authorization</span> header</li>
 </ul>
 
 <h3>Resource</h3>
@@ -46,7 +46,7 @@
 		<td>
 			<ul style="padding: 0em 0em 0em 0em; margin: 0em 0em 0em 0em">
 				<li style="margin-left: 1em"><span class="incode">OWNER</span> the <i>onwer</i> of the <span class="incode">tradeId</span>. This resource is created when a <a href="trades.html">Trade</a> is created.</li>
-				<li style="margin-left: 1em"><span class="incode">MEMBER</span> a <i>member</i> associated to the <span class="incode">tradeId</span>. When a new resource is created via <span class='incode'>POST rest/v1/memberships/</span> it has <span class="incode">Membership.type=MEMBER</span></li>
+				<li style="margin-left: 1em"><span class="incode">MEMBER</span> a <i>member</i> associated to the <span class="incode">tradeId</span>. When a new resource is created via <span class="incode">POST rest/v1/memberships/</span> it has <span class="incode">Membership.type=MEMBER</span></li>
 			</ul>
 		</td>
 	</tr>
@@ -60,20 +60,20 @@
 	</tr>
 	<tr>
 		<td>userId</td>
-		<td>Refers to a <span class='incode'>User.userId</span></td>
+		<td>Refers to a <span class="incode">User.userId</span></td>
 	</tr>
 	<tr>
 		<td>tradeId</td>
-		<td>Refers to a <span class='incode'>Trade.tradeId</span></td>
+		<td>Refers to a <span class="incode">Trade.tradeId</span></td>
 	</tr>
 	${PAGINATION_ROWS}
 </table>
 
 <h3>Rules</h3>
 <ul>
-	<li>Cannot delete a <span class='incode'>Membership.Type=OWNER</span> of an existing <a href='tades.html'>Trade</a></li>
-	<li>Cannot create more than one <span class='incode'>Membership</span> for the same <a href='tades.html'>Trade</a></li>
-	<li><a href="users.html">Users</a> can subscribe only when <span class='incode'>Trade.State=SUBMITTING_ARTICLES</span></li>
+	<li>Cannot delete a <span class="incode">Membership.Type=OWNER</span> of an existing <a href='tades.html'>Trade</a></li>
+	<li>Cannot create more than one <span class="incode">Membership</span> for the same <a href='tades.html'>Trade</a></li>
+	<li><a href="users.html">Users</a> can subscribe only when <span class="incode">Trade.State=SUBMITTING_ARTICLES</span></li>
 </ul>
 
 <h3>Examples</h3>

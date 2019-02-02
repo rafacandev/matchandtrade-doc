@@ -66,7 +66,7 @@ Here is the list of all endpoints available through the REST API.
 	REST clients should rely on the pagination information which is included in responses with multiple results. The pagination follows the <a href='https://www.w3.org/wiki/LinkHeader'>LinkHeader</a> specification along with <a href='http://www.rfc-editor.org/rfc/rfc5988.txt'>RFC5988</a>. It works similarly to <a href='https://developer.github.com/guides/traversing-with-pagination'>GitHub's pagination</a>.
 </p>
 <p>
-	When performing a GET to resources that returns an array you can pass the query parameters <span class='incode'>_pageSize</span> to indicate the number of records returned in a page and <span class='incode'>_pageNumber</span> to indicate which page number you want to return. Note that <span class='incode'>_pageNumber</span> start at number 1.
+	When performing a GET to resources that returns an array you can pass the query parameters <span class="incode">_pageSize</span> to indicate the number of records returned in a page and <span class="incode">_pageNumber</span> to indicate which page number you want to return. Note that <span class="incode">_pageNumber</span> start at number 1.
 </p>
 
 <p>Example:<p>
@@ -255,9 +255,9 @@ HTTP/1.1 200
 </div>
 
 <h2>PUT vs PATCH</h2>
-<p><span class='incode'>PUT</span> requests are favored over <span class='incode'>PATH</span> requests. While <span class='incode'>PATH</span> may offer smaller payloads, it also introduces development complexity for little benefit.</p>
+<p><span class="incode">PUT</span> requests are favored over <span class="incode">PATH</span> requests. While <span class="incode">PATH</span> may offer smaller payloads, it also introduces development complexity for little benefit.</p>
 
-<p>Additionally, when doing a <span class='incode'>PUT</span> or <span class='incode'>PATCH</span> it is recommended to do not include the <span class='incode'>id</span> for the given resource in the payload. For example, when doing a <span class='incode'>PUT /trades/{tradeId}</span> do not include <span class='incode'>tradeId</span> in the payload, it will be simply ignored.</p>
+<p>Additionally, when doing a <span class="incode">PUT</span> or <span class="incode">PATCH</span> it is recommended to do not include the <span class="incode">id</span> for the given resource in the payload. For example, when doing a <span class="incode">PUT /trades/{tradeId}</span> do not include <span class="incode">tradeId</span> in the payload, it will be simply ignored.</p>
 
 <p>Example:</p>
 <div class='code'>-----  Request  -----

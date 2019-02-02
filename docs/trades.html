@@ -2,28 +2,28 @@
 <link rel='stylesheet' href='css/rest-api-doc.css'><script src='js/rest-api-doc.js'></script><body>
 <h1>Trades</h1>
 <p>
-	<span class='incode'>Trades</span> are the the central resources of the system.
-	The <a href='users.html'>User</a> who creates a <span class='incode'>Trade</span> becomes the <i>organizer</i>
-	while other <a href='users.html'>Users</a> can subscribe to the <span class='incode'>Trade</span> becaming <i>members</i>.
+	<span class="incode">Trades</span> are the the central resources of the system.
+	The <a href='users.html'>User</a> who creates a <span class="incode">Trade</span> becomes the <i>organizer</i>
+	while other <a href='users.html'>Users</a> can subscribe to the <span class="incode">Trade</span> becaming <i>members</i>.
 	<i>Members</i> submit their <a href='articles.html'>Articles</a> through a <a href='memberships.html'>Membership</a>.
-	Later the <i>organizer</i> closes the <span class='incode'>Trade</span> and the system generates the <a href='trade-results.html'>TradeResults</a>.
+	Later the <i>organizer</i> closes the <span class="incode">Trade</span> and the system generates the <a href='trade-results.html'>TradeResults</a>.
 </p>
 
 <h3>Operations</h3>
 <ul>
-	<li><span class='incode'>POST rest/v1/trades/</span></li>
-	<li><span class='incode'>PUT rest/v1/trades/{tradeId}</span></li>
-	<li><span class='incode'>GET rest/v1/trades/{tradeId}</span></li>
-	<li><span class='incode'>GET rest/v1/trades?{queryParameters}</span></li>
-	<li><span class='incode'>GET rest/v1/trades/</span></li>
-	<li><span class='incode'>DELETE rest/v1/trades/{tradeId}</span></li>
+	<li><span class="incode">POST rest/v1/trades/</span></li>
+	<li><span class="incode">PUT rest/v1/trades/{tradeId}</span></li>
+	<li><span class="incode">GET rest/v1/trades/{tradeId}</span></li>
+	<li><span class="incode">GET rest/v1/trades?{queryParameters}</span></li>
+	<li><span class="incode">GET rest/v1/trades/</span></li>
+	<li><span class="incode">DELETE rest/v1/trades/{tradeId}</span></li>
 </ul>
 
 <h3>Authorization</h3>
 <ul>
-	<li>All operations can be performed by clients with a valid <span class='incode'>Authorization</span> header</li>
-	<li><span class='incode'>GET rest/v1/trades?{queryParameters}</span> can be performed by any client</li>
-	<li><span class='incode'>GET rest/v1/trades/</span> can be performed by any client</li>	
+	<li>All operations can be performed by clients with a valid <span class="incode">Authorization</span> header</li>
+	<li><span class="incode">GET rest/v1/trades?{queryParameters}</span> can be performed by any client</li>
+	<li><span class="incode">GET rest/v1/trades/</span> can be performed by any client</li>
 </ul>
 
 <h3>Resource</h3>
@@ -46,7 +46,7 @@
 	<tr>
 		<td>state</td>
 		<td>read-write, enumeration (see State Values table below)</td>
-		<td>The state of this trade, states drive how to interact with the <span class='incode'>Trade</span></td>
+		<td>The state of this trade, states drive how to interact with the <span class="incode">Trade</span></td>
 	</tr>
 	<tr>
 		<td>tradeId</td>
@@ -63,7 +63,7 @@
 	</tr>
 	<tr>
 		<td>SUBMITTING_ARTICLES</td>
-		<td>Default state when a <span class='incode'>Trade</span> is created. Indicates that <a href='users.html'>Users</a> can join the <span class='incode'>Trade</span> and submit <a href='articles.html'>Articles</a></td>
+		<td>Default state when a <span class="incode">Trade</span> is created. Indicates that <a href='users.html'>Users</a> can join the <span class="incode">Trade</span> and submit <a href='articles.html'>Articles</a></td>
 	</tr>
 	<tr>
 		<td>MATCHING_ARTICLES</td>
@@ -83,7 +83,7 @@
 	</tr>
 	<tr>
 		<td>CLOSED</td>
-		<td>The <span class='incode'>Trade</span> is in ready-only mode</td>
+		<td>The <span class="incode">Trade</span> is in ready-only mode</td>
 	</tr>
 </table>
 
@@ -106,10 +106,10 @@
 
 <h3>Rules</h3>
 <ul>
-	<li>When a new <span class='incode'>Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class='incode'>Authorization</span> header becomes the <span class='incode'>Trade</span> <i>organizer</i>.
-	Hence the system creates a <span class='incode'><a href='memberships.html'>Membership.type=OWNER</a></span></li>
-	<li>Only the trade <i>organizer</i> can <span class='incode'>DELETE</span> a <span class='incode'>Trade</span></li>
-	<li>Only the trade <i>organizer</i> can <span class='incode'>PUT</span> a <span class='incode'>Trade</span></li>
+	<li>When a new <span class="incode">Trade</span> is created, the <a href='users.html'>User</a> associated to the <span class="incode">Authorization</span> header becomes the <span class="incode">Trade</span> <i>organizer</i>.
+	Hence the system creates a <span class="incode"><a href='memberships.html'>Membership.type=OWNER</a></span></li>
+	<li>Only the trade <i>organizer</i> can <span class="incode">DELETE</span> a <span class="incode">Trade</span></li>
+	<li>Only the trade <i>organizer</i> can <span class="incode">PUT</span> a <span class="incode">Trade</span></li>
 </ul>
 
 <h3>Examples</h3>

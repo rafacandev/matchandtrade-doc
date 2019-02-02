@@ -12,7 +12,7 @@
 <h2>Workflow</h2>
 <p>
 	Olavo is a <a href='users.html'>User</a> and <a href='authenticate.html'>Authenticates</a> on the system.
-	<i>Note that the returned <span class='incode'>Authorization</span> header needs to be included in all secured endpoints.</i>
+	<i>Note that the returned <span class="incode">Authorization</span> header needs to be included in all secured endpoints.</i>
 </p>
 ${OWNER_AUTHENTICATE}
 
@@ -24,7 +24,7 @@ ${OWNER_AUTHENTICATIONS}
 
 <p>
   	Olavo creates a <a href='trades'>Trade</a>, by default he becomes the <i>organizer</i> of the <a href='trades'>Trade</a>.
-	The <span class='incode'>Trade.state</span> is <span class='incode'>SUBMITTING_ARTICLES</span>
+	The <span class="incode">Trade.state</span> is <span class="incode">SUBMITTING_ARTICLES</span>
 	meaning that other <a href='uses.html'>Users</a> are allowed to become <i>members</i> and list <a href='articles.html'>Articles</a>.
 </p>
 ${OWNER_TRADES_POST}
@@ -78,8 +78,8 @@ ${MEMBER_LISTING_THREE}
 
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>MATCHING_ARTICLES</span>.
-	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class='incode'>Trade.state</span></i>
+	Olavo changes the <span class="incode">Trade.state</span> to <span class="incode">MATCHING_ARTICLES</span>.
+	<i>Note that only <a href='trades.html'>Trade</a> owners can change the <span class="incode">Trade.state</span></i>
 </p>
 ${TRADE_MATCHING_ARTICLES}
 
@@ -98,7 +98,7 @@ ${MEMBER_OFFER_ONE}
 ${MEMBER_OFFER_TWO}
 
 <p>
-	Olavo changes the <span class='incode'>Trade.state</span> to <span class='incode'>GENERATE_TRADES</span>.
+	Olavo changes the <span class="incode">Trade.state</span> to <span class="incode">GENERATE_TRADES</span>.
 </p>
 ${TRADE_GENERATE_TRADES}
 
@@ -106,11 +106,11 @@ ${TRADE_GENERATE_TRADES}
 	Olavo gets the <a href='trade-results.html'>TradeResults</a> which says:<br>
 </p>
 <p>
-	Olavo (<span class='incode'>offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class='incode'>offering_article_id=1</span>)
-	to Maria (<span class='incode'>receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class='incode'>receiving_article_id=3</span>)<br>
+	Olavo (<span class="incode">offering_user_id=1</span>) sends <i>Pandemic Legacy: Season 1</i> (<span class="incode">offering_article_id=1</span>)
+	to Maria (<span class="incode">receiving_user_id=2</span>) in exchange for <i>Stone Age</i> (<span class="incode">receiving_article_id=3</span>)<br>
 
-	Maria (<span class='incode'>offering_user_id=2</span>) sends <i>Stone Age</i> (<span class='incode'>offering_article_id=3</span>)
-	to Olavo (<span class='incode'>receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class='incode'>receiving_article_id=1</span>)<br>
+	Maria (<span class="incode">offering_user_id=2</span>) sends <i>Stone Age</i> (<span class="incode">offering_article_id=3</span>)
+	to Olavo (<span class="incode">receiving_user_id=1</span>) in exchange for <i>Pandemic Legacy: Season 1</i> (<span class="incode">receiving_article_id=1</span>)<br>
 </p>
 <p>
 	<i>Note that any member of a <a href='trades.html'>Trade</a> can get <a href='trade-results.html'>TradeResults</a>.</i>
