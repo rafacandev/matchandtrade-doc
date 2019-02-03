@@ -26,6 +26,7 @@ public class ContentBuilder {
 			ContentGenerator contentGenerator = new ContentGenerator(destinationDirectory, cssFilePath, jsFilePath);
 			List<Document> contents = new ArrayList<>();
 			contents.add(new ArticleDocument());
+			contents.add(new AttachmentDocument());
 			contents.add(new ArticleAttachmentDocument());
 			contents.add(new AuthenticateDocument());
 			contents.add(new AuthenticationDocument());

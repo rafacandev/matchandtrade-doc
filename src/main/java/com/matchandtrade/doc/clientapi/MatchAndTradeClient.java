@@ -3,8 +3,6 @@ package com.matchandtrade.doc.clientapi;
 import com.github.rafasantos.restapidoc.SpecificationFilter;
 import com.github.rafasantos.restapidoc.SpecificationParser;
 import com.matchandtrade.rest.v1.json.*;
-import com.matchandtrade.rest.v1.json.search.Matcher;
-import com.matchandtrade.rest.v1.json.search.Operator;
 import com.matchandtrade.rest.v1.json.search.Recipe;
 import com.matchandtrade.rest.v1.json.search.SearchCriteriaJson;
 import io.restassured.RestAssured;
@@ -22,8 +20,9 @@ import org.springframework.http.HttpStatus;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.http.HttpStatus.*;
 
 public class MatchAndTradeClient {
@@ -122,7 +121,7 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public SpecificationParser createArticleAttachment(Integer articleId, String filepathForAnImagePng) {
+	public SpecificationParser createAttachment(String filepathForAnImagePng) {
 		String fileLocation = MatchAndTradeClient.class.getClassLoader().getResource(filepathForAnImagePng).getFile();
 		File file = new File(fileLocation);
 		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
@@ -132,8 +131,20 @@ public class MatchAndTradeClient {
 			.filter(filter)
 			.multiPart(fileSpec)
 			.header(authorizationHeader)
-			.post(Endpoint.articleAttachments(articleId));
-		logAndAssertStatus(parser, CREATED);
+			.post(Endpoint.attachments());
+		logAndAssertStatus(parser, HttpStatus.CREATED);
+		return parser;
+	}
+
+	public SpecificationParser createArticleAttachment(Integer articleId, UUID attachmentId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.contentType(ContentType.JSON)
+			.put(Endpoint.articleAttachments(articleId, attachmentId));
+		logAndAssertStatus(parser, HttpStatus.CREATED);
 		return parser;
 	}
 
@@ -148,8 +159,7 @@ public class MatchAndTradeClient {
 		logAndAssertStatus(parser, NO_CONTENT);
 		return parser;
 	}
-
-	public SpecificationParser deleteArticleAttachment(Integer articleId, Integer attachmentId) {
+	public SpecificationParser deleteArticleAttachment(Integer articleId, UUID attachmentId) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured
@@ -221,26 +231,15 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public SpecificationParser findArticleAttachment(Integer articleId) {
+	public SpecificationParser findAttachment(UUID attachmentId) {
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured
 			.given()
 			.filter(filter)
 			.header(authorizationHeader)
-			.get(Endpoint.articleAttachments(articleId));
-		logAndAssertStatus(parser, OK);
-		return parser;
-	}
-
-	public SpecificationParser findArticleAttachment(Integer articleId, Integer attachmentId) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-			.given()
-			.filter(filter)
-			.header(authorizationHeader)
-			.get(Endpoint.articleAttachments(articleId, attachmentId));
+			.contentType(ContentType.JSON)
+			.get(Endpoint.attachments(attachmentId));
 		logAndAssertStatus(parser, OK);
 		return parser;
 	}
@@ -527,5 +526,4 @@ public class MatchAndTradeClient {
 		logAndAssertStatus(parser, RESET_CONTENT);
 		return parser;
 	}
-
 }

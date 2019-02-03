@@ -2,9 +2,18 @@ package com.matchandtrade.doc.clientapi;
 
 import com.matchandtrade.doc.config.PropertiesLoader;
 
-public class Endpoint {
+import java.util.UUID;
 
+public class Endpoint {
 	private static final String BASE_URL = PropertiesLoader.serverUrl() + "/matchandtrade-api/v1";
+
+	public static String attachments() {
+		return String.format("%s/%s", BASE_URL, "attachments");
+	}
+
+	public static String attachments(UUID attachmentId) {
+		return String.format("%s/%s", attachments(), attachmentId);
+	}
 
 	public static String authenticateInfo() {
 		return String.format("%s/%s", authenticate(), "info");
@@ -26,7 +35,7 @@ public class Endpoint {
 		return String.format("%s%s", articles(), articleId);
 	}
 
-	public static String articleAttachments(Integer articleId, Integer attachmentId) {
+	public static String articleAttachments(Integer articleId, UUID attachmentId) {
 		return String.format("%s/attachments/%s", articles(articleId), attachmentId);
 	}
 
@@ -77,5 +86,4 @@ public class Endpoint {
 	public static String users(Integer userId) {
 		return String.format("%s/%s/%s", BASE_URL, "users", userId);
 	}
-
 }

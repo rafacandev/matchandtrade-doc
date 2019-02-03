@@ -9,11 +9,8 @@ import com.matchandtrade.rest.v1.json.AttachmentJson;
 
 public class ArticleAttachmentDocument implements Document {
 	
-	private static final String POST_PLACEHOLDER = "POST_PLACEHOLDER";
-	// TODO
-	private static final String GET_ALL_PLACEHOLDER = "GET_ALL_PLACEHOLDER";
-	private static final String GET_PLACEHOLDER = "GET_PLACEHOLDER";
 	private static final String DELETE_PLACEHOLDER = "DELETE_PLACEHOLDER";
+	private static final String PUT_PLACEHOLDER = "PUT_PLACEHOLDER";
 
 	private final MatchAndTradeClient clientApi;
 	private String template;
@@ -28,21 +25,14 @@ public class ArticleAttachmentDocument implements Document {
 		ArticleJson article = new ArticleJson();
 		article.setName("Article");
 		article = clientApi.create(article).getResponse().as(ArticleJson.class);
+		AttachmentJson attachment = clientApi.createAttachment("image-landscape.png").getResponse().as(AttachmentJson.class);
 
-		SpecificationParser postParser = clientApi.createArticleAttachment(article.getArticleId(), "image-landscape.png");
-		template = TemplateUtil.replacePlaceholder(template, POST_PLACEHOLDER, postParser.asHtmlSnippet());
-		AttachmentJson attachment = postParser.getResponse().as(AttachmentJson.class);
+		SpecificationParser putParser = clientApi.createArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
+		template = TemplateUtil.replacePlaceholder(template, PUT_PLACEHOLDER, putParser.asHtmlSnippet());
+		//TODO
+//		SpecificationParser deleteParser = clientApi.deleteArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
+//		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
 
-		SpecificationParser getParser = clientApi.findArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
-		template = TemplateUtil.replacePlaceholder(template, GET_PLACEHOLDER, getParser.asHtmlSnippet());
-
-		SpecificationParser getAllParser = clientApi.findArticleAttachment(article.getArticleId());
-		template = TemplateUtil.replacePlaceholder(template, GET_ALL_PLACEHOLDER, getAllParser.asHtmlSnippet());
-
-		SpecificationParser deleteParser = clientApi.deleteArticleAttachment(article.getArticleId(), attachment.getAttachmentId());
-		template = TemplateUtil.replacePlaceholder(template, DELETE_PLACEHOLDER, deleteParser.asHtmlSnippet());
-
-		template = TemplateUtil.replacePaginationTable(template);
 		return TemplateUtil.appendHeaderAndFooter(template);
 	}
 
