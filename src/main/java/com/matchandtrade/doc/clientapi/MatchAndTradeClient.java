@@ -136,14 +136,17 @@ public class MatchAndTradeClient {
 		return parser;
 	}
 
-	public SpecificationParser createArticleAttachment(Integer articleId, UUID attachmentId) {
+	public SpecificationParser createArticleAttachment(Integer articleId, String filepathForAnImagePng) {
+		String fileLocation = MatchAndTradeClient.class.getClassLoader().getResource(filepathForAnImagePng).getFile();
+		File file = new File(fileLocation);
+		MultiPartSpecification fileSpec = new MultiPartSpecBuilder(file).mimeType("image/png").fileName("my-image.png").build();
 		SpecificationFilter filter = new SpecificationFilter();
 		SpecificationParser parser = new SpecificationParser(filter);
 		RestAssured.given()
 			.filter(filter)
+			.multiPart(fileSpec)
 			.header(authorizationHeader)
-			.contentType(ContentType.JSON)
-			.put(Endpoint.articleAttachments(articleId, attachmentId));
+			.post(Endpoint.articleAttachments(articleId));
 		logAndAssertStatus(parser, HttpStatus.CREATED);
 		return parser;
 	}
@@ -156,17 +159,6 @@ public class MatchAndTradeClient {
 			.filter(filter)
 			.header(authorizationHeader)
 			.delete(Endpoint.articles(articleId));
-		logAndAssertStatus(parser, NO_CONTENT);
-		return parser;
-	}
-	public SpecificationParser deleteArticleAttachment(Integer articleId, UUID attachmentId) {
-		SpecificationFilter filter = new SpecificationFilter();
-		SpecificationParser parser = new SpecificationParser(filter);
-		RestAssured
-			.given()
-			.filter(filter)
-			.header(authorizationHeader)
-			.delete(Endpoint.articleAttachments(articleId, attachmentId));
 		logAndAssertStatus(parser, NO_CONTENT);
 		return parser;
 	}
@@ -240,6 +232,19 @@ public class MatchAndTradeClient {
 			.header(authorizationHeader)
 			.contentType(ContentType.JSON)
 			.get(Endpoint.attachments(attachmentId));
+		logAndAssertStatus(parser, OK);
+		return parser;
+	}
+
+	public SpecificationParser findAttachmentsByArticleId(Integer articleId) {
+		SpecificationFilter filter = new SpecificationFilter();
+		SpecificationParser parser = new SpecificationParser(filter);
+		RestAssured
+			.given()
+			.filter(filter)
+			.header(authorizationHeader)
+			.contentType(ContentType.JSON)
+			.get(Endpoint.articleAttachments(articleId));
 		logAndAssertStatus(parser, OK);
 		return parser;
 	}

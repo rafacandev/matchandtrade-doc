@@ -1,6 +1,7 @@
 package com.matchandtrade.doc.clientapi;
 
 import com.matchandtrade.doc.config.PropertiesLoader;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -33,10 +34,6 @@ public class Endpoint {
 
 	public static String articles(Integer articleId) {
 		return String.format("%s%s", articles(), articleId);
-	}
-
-	public static String articleAttachments(Integer articleId, UUID attachmentId) {
-		return String.format("%s/attachments/%s", articles(articleId), attachmentId);
 	}
 
 	public static String articleAttachments(Integer articleId) {

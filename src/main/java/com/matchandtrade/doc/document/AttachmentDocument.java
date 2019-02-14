@@ -36,5 +36,4 @@ public class AttachmentDocument implements Document {
 	public String contentFilePath() {
 		return "attachments.html";
 	}
-
 }
