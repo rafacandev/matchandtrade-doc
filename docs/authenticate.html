@@ -42,10 +42,10 @@ HTTP/1.1 200 </pre>
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 5283-637-2674
-   Set-Cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
+   Authorization: 4975-3963-8614
+   Set-Cookie: MTSESSION=EB6198F8458907A0010F5F9046C990FB; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>
@@ -56,10 +56,10 @@ http://localhost:8080/matchandtrade-api/v1/authenticate
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 5283-637-2674
-   Set-Cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
+   Authorization: 4975-3963-8614
+   Set-Cookie: MTSESSION=EB6198F8458907A0010F5F9046C990FB; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>
@@ -79,33 +79,33 @@ HTTP/1.1 200 </pre>
   <div id="snippet-content-32" class="snippet-content">
     <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/info
 -- Headers --
-   cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly
+   cookie: MTSESSION=EB6198F8458907A0010F5F9046C990FB; Path=/; HttpOnly
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
-   Content-Length: 46
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Content-Length: 47
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 {
-  "authorizationHeader" : "5283-637-2674"
+  "authorizationHeader" : "4975-3963-8614"
 }</pre>
   </div>
   <div id="snippet-content-33" class="snippet-content">
     <pre>curl -v \
--H "cookie: MTSESSION=DC9D52A6C394AA7C6EF217A22EB9CF2C; Path=/; HttpOnly" \
+-H "cookie: MTSESSION=EB6198F8458907A0010F5F9046C990FB; Path=/; HttpOnly" \
 http://localhost:8080/matchandtrade-api/v1/authenticate/info
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
-   Content-Length: 46
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Content-Length: 47
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 {
-  "authorizationHeader" : "5283-637-2674"
+  "authorizationHeader" : "4975-3963-8614"
 }</pre>
   </div>
 </div>
@@ -124,28 +124,28 @@ HTTP/1.1 205 </pre>
   <div id="snippet-content-35" class="snippet-content">
     <pre>GET http://localhost:8080/matchandtrade-api/v1/authenticate/sign-off
 -- Headers --
-   Authorization: 7718-5469-3876
+   Authorization: 2709-4476-7553
 
 ---- Response ----
 HTTP/1.1 205 
 -- Headers --
-   Set-Cookie: MTSESSION=95818BCFEFAE986B2A69AC650FBEC029; Path=/; HttpOnly
+   Set-Cookie: MTSESSION=CA43186C5EDC11FB46C803E95B506F73; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-36" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 7718-5469-3876" \
+-H "Authorization: 2709-4476-7553" \
 http://localhost:8080/matchandtrade-api/v1/authenticate/sign-off
 
 ---- Response ----
 HTTP/1.1 205 
 -- Headers --
-   Set-Cookie: MTSESSION=95818BCFEFAE986B2A69AC650FBEC029; Path=/; HttpOnly
+   Set-Cookie: MTSESSION=CA43186C5EDC11FB46C803E95B506F73; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>

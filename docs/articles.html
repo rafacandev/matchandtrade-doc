@@ -86,7 +86,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-2" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 6046-5783-2587
+   Authorization: 7861-1954-1411
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -98,20 +98,22 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-3" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 6046-5783-2587" \
+-H "Authorization: 7861-1954-1411" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"description\":\"In mint condition\",\"name\":\"Pandemic Legacy: Season 1\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -121,14 +123,16 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
@@ -141,21 +145,23 @@ HTTP/1.1 201
     <label for="snippet-content-6" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-4" class="snippet-content active">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/2252
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-5" class="snippet-content">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/articles/2252
 -- Headers --
-   Authorization: 6046-5783-2587
+   Authorization: 7861-1954-1411
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1 Updated",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }
 ---- Response ----
@@ -163,37 +169,41 @@ HTTP/1.1 200
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1 Updated",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-6" class="snippet-content">
     <pre>curl -v -X PUT \
--H "Authorization: 6046-5783-2587" \
+-H "Authorization: 7861-1954-1411" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"articleId\":702,\"description\":\"In mint condition\",\"name\":\"Pandemic Legacy: Season 1 Updated\",\"_links\":[{\"self\":\"http:\/\/localhost:8080\/matchandtrade-api\/v1\/articles\/702\"}]}" \
-http://localhost:8080/matchandtrade-api/v1/articles/702
+-d "{\"articleId\":2252,\"description\":\"In mint condition\",\"name\":\"Pandemic Legacy: Season 1 Updated\",\"_links\":[{\"self\":\"http:\/\/localhost:8080\/matchandtrade-api\/v1\/articles\/2252\"},{\"attachments\":\"http:\/\/localhost:8080\/matchandtrade-api\/v1\/articles\/2252\/attachments\/\"}]}" \
+http://localhost:8080/matchandtrade-api/v1/articles/2252
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1 Updated",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
@@ -206,45 +216,49 @@ HTTP/1.1 200
     <label for="snippet-content-9" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-7" class="snippet-content active">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/2252
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-8" class="snippet-content">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/articles/2252
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1 Updated",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-9" class="snippet-content">
     <pre>curl -v \
-http://localhost:8080/matchandtrade-api/v1/articles/702
+http://localhost:8080/matchandtrade-api/v1/articles/2252
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 {
-  "articleId" : 702,
+  "articleId" : 2252,
   "description" : "In mint condition",
   "name" : "Pandemic Legacy: Season 1 Updated",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/702"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2252"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2252/attachments/"
   } ]
 }</pre>
   </div>
@@ -266,71 +280,99 @@ HTTP/1.1 200 </pre>
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   X-Pagination-Total-Count: 355
+   X-Pagination-Total-Count: 1256
    Link: <http://localhost:8080/matchandtrade-api/v1/articles/?_pageNumber=2>; rel="nextPage"
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 [ {
   "articleId" : 1,
-  "name" : "blue way - 70513",
+  "name" : "royal change - 651621544380287698",
   "_links" : [ {
     "self" : "http://localhost:8080/matchandtrade-api/v1/articles/1"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/1/attachments/"
   } ]
 }, {
   "articleId" : 2,
-  "name" : "expensive area - 33933",
+  "name" : "alice-25-94-60-46\"",
   "_links" : [ {
     "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2/attachments/"
   } ]
 }, {
-  "articleId" : 3,
-  "name" : "useless job - 99220",
+  "articleId" : 52,
+  "description" : "rigid idea - 47711 - with blue morning - 63043",
+  "name" : "noted side - 57592",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/3"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/52"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/52/attachments/"
   } ]
 }, {
-  "articleId" : 4,
-  "name" : "spirited minute - 64888",
+  "articleId" : 53,
+  "description" : "angelic person - 6319 - with nippy father - 48298",
+  "name" : "jgTghFOVt1QU9SKamgXYPuxAsajucD9siPt74RZ1tOPvbB3mUmrDv1Zqd0ch4FFUFW982ixr8UTyZBC1EbdXSAiNrNICCwmx0BP9AJBPqgnyciS9AcLxFoV2pvklgUCH2qhJJ9qHuGDIMkOJmFx2xX",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/4"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/53"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/53/attachments/"
   } ]
 }, {
-  "articleId" : 5,
-  "name" : "complete system - 26640",
+  "articleId" : 54,
+  "description" : "great president - 14719 - for unsung person - 1166",
+  "name" : "jgTghFOVt1QU9SKamgXYPuxAsajucD9siPt74RZ1tOPvbB3mUmrDv1Zqd0ch4FFUFW982ixr8UTyZBC1EbdXSAiNrNICCwmx0BP9AJBPqgnyciS9AcLxFoV2pvklgUCH2qhJJ9qHuGDIMkOJmFx2xX",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/5"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/54"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/54/attachments/"
   } ]
 }, {
-  "articleId" : 6,
-  "name" : "silly lot - 97217",
+  "articleId" : 55,
+  "description" : "perfumed head - 93770 - of natural kid - 94629",
+  "name" : "untrue home - 86297",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/6"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/55"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/55/attachments/"
   } ]
 }, {
-  "articleId" : 7,
-  "name" : "elementary day - 61410",
+  "articleId" : 56,
+  "description" : "blushing night - 62529 - plus relieved others - 50453",
+  "name" : "fast country - 60294",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/7"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/56"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/56/attachments/"
   } ]
 }, {
-  "articleId" : 8,
-  "name" : "long-term moment - 48269",
+  "articleId" : 57,
+  "description" : "sardonic city - 65403 - and crisp member - 36235",
+  "name" : "wrathful party - 65766",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/8"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/57"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/57/attachments/"
   } ]
 }, {
-  "articleId" : 9,
-  "name" : "strange life - 94116",
+  "articleId" : 58,
+  "description" : "long-term year - 66367 - with distorted side - 99075",
+  "name" : "suspicious program - 38206",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/9"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/58"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/58/attachments/"
   } ]
 }, {
-  "articleId" : 10,
-  "name" : "whimsical problem - 5374",
+  "articleId" : 59,
+  "description" : "married body - 78251 - with knowing government - 36280",
+  "name" : "our idea - 17082",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/10"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/59"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/59/attachments/"
   } ]
 } ]</pre>
   </div>
@@ -341,71 +383,99 @@ http://localhost:8080/matchandtrade-api/v1/articles/
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   X-Pagination-Total-Count: 355
+   X-Pagination-Total-Count: 1256
    Link: <http://localhost:8080/matchandtrade-api/v1/articles/?_pageNumber=2>; rel="nextPage"
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:17 GMT
 -- Body --
 [ {
   "articleId" : 1,
-  "name" : "blue way - 70513",
+  "name" : "royal change - 651621544380287698",
   "_links" : [ {
     "self" : "http://localhost:8080/matchandtrade-api/v1/articles/1"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/1/attachments/"
   } ]
 }, {
   "articleId" : 2,
-  "name" : "expensive area - 33933",
+  "name" : "alice-25-94-60-46\"",
   "_links" : [ {
     "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2/attachments/"
   } ]
 }, {
-  "articleId" : 3,
-  "name" : "useless job - 99220",
+  "articleId" : 52,
+  "description" : "rigid idea - 47711 - with blue morning - 63043",
+  "name" : "noted side - 57592",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/3"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/52"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/52/attachments/"
   } ]
 }, {
-  "articleId" : 4,
-  "name" : "spirited minute - 64888",
+  "articleId" : 53,
+  "description" : "angelic person - 6319 - with nippy father - 48298",
+  "name" : "jgTghFOVt1QU9SKamgXYPuxAsajucD9siPt74RZ1tOPvbB3mUmrDv1Zqd0ch4FFUFW982ixr8UTyZBC1EbdXSAiNrNICCwmx0BP9AJBPqgnyciS9AcLxFoV2pvklgUCH2qhJJ9qHuGDIMkOJmFx2xX",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/4"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/53"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/53/attachments/"
   } ]
 }, {
-  "articleId" : 5,
-  "name" : "complete system - 26640",
+  "articleId" : 54,
+  "description" : "great president - 14719 - for unsung person - 1166",
+  "name" : "jgTghFOVt1QU9SKamgXYPuxAsajucD9siPt74RZ1tOPvbB3mUmrDv1Zqd0ch4FFUFW982ixr8UTyZBC1EbdXSAiNrNICCwmx0BP9AJBPqgnyciS9AcLxFoV2pvklgUCH2qhJJ9qHuGDIMkOJmFx2xX",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/5"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/54"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/54/attachments/"
   } ]
 }, {
-  "articleId" : 6,
-  "name" : "silly lot - 97217",
+  "articleId" : 55,
+  "description" : "perfumed head - 93770 - of natural kid - 94629",
+  "name" : "untrue home - 86297",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/6"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/55"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/55/attachments/"
   } ]
 }, {
-  "articleId" : 7,
-  "name" : "elementary day - 61410",
+  "articleId" : 56,
+  "description" : "blushing night - 62529 - plus relieved others - 50453",
+  "name" : "fast country - 60294",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/7"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/56"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/56/attachments/"
   } ]
 }, {
-  "articleId" : 8,
-  "name" : "long-term moment - 48269",
+  "articleId" : 57,
+  "description" : "sardonic city - 65403 - and crisp member - 36235",
+  "name" : "wrathful party - 65766",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/8"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/57"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/57/attachments/"
   } ]
 }, {
-  "articleId" : 9,
-  "name" : "strange life - 94116",
+  "articleId" : 58,
+  "description" : "long-term year - 66367 - with distorted side - 99075",
+  "name" : "suspicious program - 38206",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/9"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/58"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/58/attachments/"
   } ]
 }, {
-  "articleId" : 10,
-  "name" : "whimsical problem - 5374",
+  "articleId" : 59,
+  "description" : "married body - 78251 - with knowing government - 36280",
+  "name" : "our idea - 17082",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/10"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/59"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/59/attachments/"
   } ]
 } ]</pre>
   </div>
@@ -418,30 +488,30 @@ HTTP/1.1 200
     <label for="snippet-content-15" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-13" class="snippet-content active">
-    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/2252
 HTTP/1.1 204 </pre>
   </div>
   <div id="snippet-content-14" class="snippet-content">
-    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/702
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/articles/2252
 -- Headers --
-   Authorization: 6046-5783-2587
+   Authorization: 7861-1954-1411
 
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-15" class="snippet-content">
     <pre>curl -v -X DELETE \
--H "Authorization: 6046-5783-2587" \
-http://localhost:8080/matchandtrade-api/v1/articles/702
+-H "Authorization: 7861-1954-1411" \
+http://localhost:8080/matchandtrade-api/v1/articles/2252
 
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:52 GMT
+   Date: Thu, 14 Feb 2019 02:38:18 GMT
 -- Body --
 </pre>
   </div>

@@ -94,50 +94,50 @@
     <label for="snippet-content-66" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-64" class="snippet-content active">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/
 HTTP/1.1 201 </pre>
   </div>
   <div id="snippet-content-65" class="snippet-content">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/
 -- Headers --
-   Authorization: 201-6174-6572
+   Authorization: 9985-8347-4326
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 }</pre>
   </div>
   <div id="snippet-content-66" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 201-6174-6572" \
+-H "Authorization: 9985-8347-4326" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"offeredArticleId\":705,\"wantedArticleId\":706}" \
-http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/
+-d "{\"offeredArticleId\":2255,\"wantedArticleId\":2256}" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 }</pre>
   </div>
 </div>
@@ -149,43 +149,43 @@ HTTP/1.1 201
     <label for="snippet-content-69" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-67" class="snippet-content active">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-68" class="snippet-content">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 -- Headers --
-   Authorization: 201-6174-6572
+   Authorization: 9985-8347-4326
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 }</pre>
   </div>
   <div id="snippet-content-69" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 201-6174-6572" \
-http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+-H "Authorization: 9985-8347-4326" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 }</pre>
   </div>
 </div>
@@ -197,13 +197,13 @@ HTTP/1.1 200
     <label for="snippet-content-72" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-70" class="snippet-content active">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705&wantedArticleId=706
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/?offeredArticleId=2255&wantedArticleId=2256
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-71" class="snippet-content">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705&wantedArticleId=706
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/?offeredArticleId=2255&wantedArticleId=2256
 -- Headers --
-   Authorization: 201-6174-6572
+   Authorization: 9985-8347-4326
 
 ---- Response ----
 HTTP/1.1 200 
@@ -211,18 +211,18 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 1
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 [ {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 } ]</pre>
   </div>
   <div id="snippet-content-72" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 201-6174-6572" \
-http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/?offeredArticleId=705\&wantedArticleId=706
+-H "Authorization: 9985-8347-4326" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/?offeredArticleId=2255\&wantedArticleId=2256
 
 ---- Response ----
 HTTP/1.1 200 
@@ -230,12 +230,12 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 1
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 [ {
-  "offerId" : 352,
-  "offeredArticleId" : 705,
-  "wantedArticleId" : 706
+  "offerId" : 902,
+  "offeredArticleId" : 2255,
+  "wantedArticleId" : 2256
 } ]</pre>
   </div>
 </div>
@@ -247,32 +247,32 @@ HTTP/1.1 200
     <label for="snippet-content-75" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-73" class="snippet-content active">
-    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 HTTP/1.1 204 </pre>
   </div>
   <div id="snippet-content-74" class="snippet-content">
-    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+    <pre>DELETE http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 -- Headers --
-   Authorization: 201-6174-6572
+   Authorization: 9985-8347-4326
    Content-Type: application/json; charset=UTF-8
 
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-75" class="snippet-content">
     <pre>curl -v -X DELETE \
--H "Authorization: 201-6174-6572" \
+-H "Authorization: 9985-8347-4326" \
 -H "Content-Type: application/json; charset=UTF-8" \
-http://localhost:8080/matchandtrade-api/v1/memberships/658/offers/352
+http://localhost:8080/matchandtrade-api/v1/memberships/1658/offers/902
 
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 </pre>
   </div>

@@ -13,33 +13,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-44" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 6435-4503-5256
+   Authorization: 9665-4028-4904
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 655,
-  "articleId" : 704
+  "membershipId" : 1655,
+  "articleId" : 2254
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-45" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 6435-4503-5256" \
+-H "Authorization: 9665-4028-4904" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":655,\"articleId\":704}" \
+-d "{\"membershipId\":1655,\"articleId\":2254}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 </pre>
   </div>
@@ -58,31 +58,31 @@ HTTP/1.1 204 </pre>
   <div id="snippet-content-47" class="snippet-content">
     <pre>DELETE http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 6435-4503-5256
+   Authorization: 9665-4028-4904
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 655,
-  "articleId" : 704
+  "membershipId" : 1655,
+  "articleId" : 2254
 }
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-48" class="snippet-content">
     <pre>curl -v -X DELETE \
--H "Authorization: 6435-4503-5256" \
+-H "Authorization: 9665-4028-4904" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":655,\"articleId\":704}" \
+-d "{\"membershipId\":1655,\"articleId\":2254}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 204 
 -- Headers --
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:19 GMT
 -- Body --
 </pre>
   </div>

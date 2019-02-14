@@ -32,10 +32,10 @@ HTTP/1.1 200 </pre>
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 9368-6059-313
-   Set-Cookie: MTSESSION=277E55F17017EE2BABD321AF6F315351; Path=/; HttpOnly
+   Authorization: 3967-3527-9934
+   Set-Cookie: MTSESSION=25975994D50273CF943FD2BB27FA19F2; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:21 GMT
 -- Body --
 </pre>
   </div>
@@ -46,10 +46,10 @@ http://localhost:8080/matchandtrade-api/v1/authenticate
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 9368-6059-313
-   Set-Cookie: MTSESSION=277E55F17017EE2BABD321AF6F315351; Path=/; HttpOnly
+   Authorization: 3967-3527-9934
+   Set-Cookie: MTSESSION=25975994D50273CF943FD2BB27FA19F2; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:21 GMT
 -- Body --
 </pre>
   </div>
@@ -72,22 +72,22 @@ HTTP/1.1 200 </pre>
   <div id="snippet-content-107" class="snippet-content">
     <pre>GET http://localhost:8080/matchandtrade-api/v1/authentications/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "userId" : 766
+  "userId" : 3017
 }</pre>
   </div>
   <div id="snippet-content-108" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 http://localhost:8080/matchandtrade-api/v1/authentications/
 
 ---- Response ----
@@ -95,10 +95,10 @@ HTTP/1.1 200
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "userId" : 766
+  "userId" : 3017
 }</pre>
   </div>
 </div>
@@ -121,33 +121,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-110" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/trades/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889"
+  "name" : "Board games in Toronto - 1550111902543"
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "SUBMITTING_ARTICLES",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-111" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"name\":\"Board games in Toronto - 1548517794889\"}" \
+-d "{\"name\":\"Board games in Toronto - 1550111902543\"}" \
 http://localhost:8080/matchandtrade-api/v1/trades/
 
 ---- Response ----
@@ -155,14 +155,14 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "SUBMITTING_ARTICLES",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
@@ -178,13 +178,13 @@ HTTP/1.1 201
     <label for="snippet-content-114" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-112" class="snippet-content active">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/?userId=766&tradeId=361
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/?userId=3017&tradeId=861
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-113" class="snippet-content">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/?userId=766&tradeId=361
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/memberships/?userId=3017&tradeId=861
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 
 ---- Response ----
@@ -193,20 +193,20 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 1
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 [ {
-  "membershipId" : 665,
-  "userId" : 766,
-  "tradeId" : 361,
+  "membershipId" : 1665,
+  "userId" : 3017,
+  "tradeId" : 861,
   "type" : "OWNER"
 } ]</pre>
   </div>
   <div id="snippet-content-114" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
-http://localhost:8080/matchandtrade-api/v1/memberships/?userId=766\&tradeId=361
+http://localhost:8080/matchandtrade-api/v1/memberships/?userId=3017\&tradeId=861
 
 ---- Response ----
 HTTP/1.1 200 
@@ -214,12 +214,12 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 1
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 [ {
-  "membershipId" : 665,
-  "userId" : 766,
-  "tradeId" : 361,
+  "membershipId" : 1665,
+  "userId" : 3017,
+  "tradeId" : 861,
   "type" : "OWNER"
 } ]</pre>
   </div>
@@ -241,7 +241,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-116" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -252,19 +252,21 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 717,
+  "articleId" : 2267,
   "name" : "Pandemic Legacy: Season 1",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/717"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2267"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2267/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-117" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"name\":\"Pandemic Legacy: Season 1\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -274,13 +276,15 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 717,
+  "articleId" : 2267,
   "name" : "Pandemic Legacy: Season 1",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/717"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2267"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2267/attachments/"
   } ]
 }</pre>
   </div>
@@ -298,7 +302,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-119" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -309,19 +313,21 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 718,
+  "articleId" : 2268,
   "name" : "Pandemic Legacy: Season 2",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/718"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2268"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2268/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-120" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"name\":\"Pandemic Legacy: Season 2\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -331,13 +337,15 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 718,
+  "articleId" : 2268,
   "name" : "Pandemic Legacy: Season 2",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/718"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2268"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2268/attachments/"
   } ]
 }</pre>
   </div>
@@ -359,33 +367,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-122" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 665,
-  "articleId" : 717
+  "membershipId" : 1665,
+  "articleId" : 2267
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-123" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":665,\"articleId\":717}" \
+-d "{\"membershipId\":1665,\"articleId\":2267}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -403,33 +411,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-125" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 665,
-  "articleId" : 718
+  "membershipId" : 1665,
+  "articleId" : 2268
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-126" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":665,\"articleId\":718}" \
+-d "{\"membershipId\":1665,\"articleId\":2268}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -454,10 +462,10 @@ HTTP/1.1 200 </pre>
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 5718-8469-528
-   Set-Cookie: MTSESSION=EC833B3537B7AE125F6398E4D2096C4B; Path=/; HttpOnly
+   Authorization: 2716-7401-3644
+   Set-Cookie: MTSESSION=2AEB8D78CD046D18B410756A925F8122; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -468,10 +476,10 @@ http://localhost:8080/matchandtrade-api/v1/authenticate
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
-   Authorization: 5718-8469-528
-   Set-Cookie: MTSESSION=EC833B3537B7AE125F6398E4D2096C4B; Path=/; HttpOnly
+   Authorization: 2716-7401-3644
+   Set-Cookie: MTSESSION=2AEB8D78CD046D18B410756A925F8122; Path=/; HttpOnly
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -493,22 +501,22 @@ HTTP/1.1 200 </pre>
   <div id="snippet-content-131" class="snippet-content">
     <pre>GET http://localhost:8080/matchandtrade-api/v1/authentications/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "userId" : 767
+  "userId" : 3018
 }</pre>
   </div>
   <div id="snippet-content-132" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 http://localhost:8080/matchandtrade-api/v1/authentications/
 
 ---- Response ----
@@ -516,10 +524,10 @@ HTTP/1.1 200
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "userId" : 767
+  "userId" : 3018
 }</pre>
   </div>
 </div>
@@ -541,32 +549,32 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-134" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "userId" : 767,
-  "tradeId" : 361
+  "userId" : 3018,
+  "tradeId" : 861
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "membershipId" : 666,
-  "userId" : 767,
-  "tradeId" : 361,
+  "membershipId" : 1666,
+  "userId" : 3018,
+  "tradeId" : 861,
   "type" : "MEMBER"
 }</pre>
   </div>
   <div id="snippet-content-135" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"userId\":767,\"tradeId\":361}" \
+-d "{\"userId\":3018,\"tradeId\":861}" \
 http://localhost:8080/matchandtrade-api/v1/memberships/
 
 ---- Response ----
@@ -574,12 +582,12 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "membershipId" : 666,
-  "userId" : 767,
-  "tradeId" : 361,
+  "membershipId" : 1666,
+  "userId" : 3018,
+  "tradeId" : 861,
   "type" : "MEMBER"
 }</pre>
   </div>
@@ -601,7 +609,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-137" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -612,19 +620,21 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 719,
+  "articleId" : 2269,
   "name" : "Stone Age",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/719"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2269"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2269/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-138" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"name\":\"Stone Age\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -634,13 +644,15 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 719,
+  "articleId" : 2269,
   "name" : "Stone Age",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/719"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2269"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2269/attachments/"
   } ]
 }</pre>
   </div>
@@ -658,7 +670,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-140" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -669,19 +681,21 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 719,
+  "articleId" : 2269,
   "name" : "Stone Age",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/719"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2269"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2269/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-141" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"name\":\"Stone Age\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -691,13 +705,15 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 719,
+  "articleId" : 2269,
   "name" : "Stone Age",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/719"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2269"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2269/attachments/"
   } ]
 }</pre>
   </div>
@@ -715,7 +731,7 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-143" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/articles/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
@@ -726,19 +742,21 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 721,
+  "articleId" : 2271,
   "name" : "No Thanks!",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/721"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2271"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2271/attachments/"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-144" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
 -d "{\"name\":\"No Thanks!\"}" \
 http://localhost:8080/matchandtrade-api/v1/articles/
@@ -748,13 +766,15 @@ HTTP/1.1 201
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "articleId" : 721,
+  "articleId" : 2271,
   "name" : "No Thanks!",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/721"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2271"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2271/attachments/"
   } ]
 }</pre>
   </div>
@@ -776,33 +796,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-146" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 666,
-  "articleId" : 719
+  "membershipId" : 1666,
+  "articleId" : 2269
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-147" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":666,\"articleId\":719}" \
+-d "{\"membershipId\":1666,\"articleId\":2269}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -820,33 +840,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-149" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 666,
-  "articleId" : 720
+  "membershipId" : 1666,
+  "articleId" : 2270
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-150" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":666,\"articleId\":720}" \
+-d "{\"membershipId\":1666,\"articleId\":2270}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -864,33 +884,33 @@ HTTP/1.1 201 </pre>
   <div id="snippet-content-152" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/listing/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "membershipId" : 666,
-  "articleId" : 721
+  "membershipId" : 1666,
+  "articleId" : 2271
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
   <div id="snippet-content-153" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"membershipId\":666,\"articleId\":721}" \
+-d "{\"membershipId\":1666,\"articleId\":2271}" \
 http://localhost:8080/matchandtrade-api/v1/listing/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Length: 0
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 </pre>
   </div>
@@ -908,17 +928,17 @@ HTTP/1.1 201
     <label for="snippet-content-156" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-154" class="snippet-content active">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/361
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/861
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-155" class="snippet-content">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/361
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/861
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
+  "name" : "Board games in Toronto - 1550111902543",
   "state" : "MATCHING_ARTICLES"
 }
 ---- Response ----
@@ -926,37 +946,37 @@ HTTP/1.1 200
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "MATCHING_ARTICLES",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-156" class="snippet-content">
     <pre>curl -v -X PUT \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"name\":\"Board games in Toronto - 1548517794889\",\"state\":\"MATCHING_ARTICLES\"}" \
-http://localhost:8080/matchandtrade-api/v1/trades/361
+-d "{\"name\":\"Board games in Toronto - 1550111902543\",\"state\":\"MATCHING_ARTICLES\"}" \
+http://localhost:8080/matchandtrade-api/v1/trades/861
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "MATCHING_ARTICLES",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
@@ -973,50 +993,50 @@ HTTP/1.1 200
     <label for="snippet-content-159" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-157" class="snippet-content active">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/665/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1665/offers/
 HTTP/1.1 201 </pre>
   </div>
   <div id="snippet-content-158" class="snippet-content">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/665/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1665/offers/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "offeredArticleId" : 717,
-  "wantedArticleId" : 719
+  "offeredArticleId" : 2267,
+  "wantedArticleId" : 2269
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 362,
-  "offeredArticleId" : 717,
-  "wantedArticleId" : 719
+  "offerId" : 912,
+  "offeredArticleId" : 2267,
+  "wantedArticleId" : 2269
 }</pre>
   </div>
   <div id="snippet-content-159" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"offeredArticleId\":717,\"wantedArticleId\":719}" \
-http://localhost:8080/matchandtrade-api/v1/memberships/665/offers/
+-d "{\"offeredArticleId\":2267,\"wantedArticleId\":2269}" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1665/offers/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 362,
-  "offeredArticleId" : 717,
-  "wantedArticleId" : 719
+  "offerId" : 912,
+  "offeredArticleId" : 2267,
+  "wantedArticleId" : 2269
 }</pre>
   </div>
 </div>
@@ -1033,50 +1053,50 @@ HTTP/1.1 201
     <label for="snippet-content-162" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-160" class="snippet-content active">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 HTTP/1.1 201 </pre>
   </div>
   <div id="snippet-content-161" class="snippet-content">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 717
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2267
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 363,
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 717
+  "offerId" : 913,
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2267
 }</pre>
   </div>
   <div id="snippet-content-162" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"offeredArticleId\":719,\"wantedArticleId\":717}" \
-http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+-d "{\"offeredArticleId\":2269,\"wantedArticleId\":2267}" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 363,
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 717
+  "offerId" : 913,
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2267
 }</pre>
   </div>
 </div>
@@ -1087,50 +1107,50 @@ HTTP/1.1 201
     <label for="snippet-content-165" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-163" class="snippet-content active">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 HTTP/1.1 201 </pre>
   </div>
   <div id="snippet-content-164" class="snippet-content">
-    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+    <pre>POST http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 -- Headers --
-   Authorization: 3920-7632-295
+   Authorization: 5408-1646-3395
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 718
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2268
 }
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 364,
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 718
+  "offerId" : 914,
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2268
 }</pre>
   </div>
   <div id="snippet-content-165" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 3920-7632-295" \
+-H "Authorization: 5408-1646-3395" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"offeredArticleId\":719,\"wantedArticleId\":718}" \
-http://localhost:8080/matchandtrade-api/v1/memberships/666/offers/
+-d "{\"offeredArticleId\":2269,\"wantedArticleId\":2268}" \
+http://localhost:8080/matchandtrade-api/v1/memberships/1666/offers/
 
 ---- Response ----
 HTTP/1.1 201 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "offerId" : 364,
-  "offeredArticleId" : 719,
-  "wantedArticleId" : 718
+  "offerId" : 914,
+  "offeredArticleId" : 2269,
+  "wantedArticleId" : 2268
 }</pre>
   </div>
 </div>
@@ -1145,17 +1165,17 @@ HTTP/1.1 201
     <label for="snippet-content-168" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-166" class="snippet-content active">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/361
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/861
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-167" class="snippet-content">
-    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/361
+    <pre>PUT http://localhost:8080/matchandtrade-api/v1/trades/861
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
+  "name" : "Board games in Toronto - 1550111902543",
   "state" : "GENERATE_RESULTS"
 }
 ---- Response ----
@@ -1163,37 +1183,37 @@ HTTP/1.1 200
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "GENERATE_RESULTS",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
   <div id="snippet-content-168" class="snippet-content">
     <pre>curl -v -X PUT \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"name\":\"Board games in Toronto - 1548517794889\",\"state\":\"GENERATE_RESULTS\"}" \
-http://localhost:8080/matchandtrade-api/v1/trades/361
+-d "{\"name\":\"Board games in Toronto - 1550111902543\",\"state\":\"GENERATE_RESULTS\"}" \
+http://localhost:8080/matchandtrade-api/v1/trades/861
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 {
-  "name" : "Board games in Toronto - 1548517794889",
-  "tradeId" : 361,
+  "name" : "Board games in Toronto - 1550111902543",
+  "tradeId" : 861,
   "state" : "GENERATE_RESULTS",
   "_links" : [ {
-    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/361"
+    "self" : "http://localhost:8080/matchandtrade-api/v1/trades/861"
   } ]
 }</pre>
   </div>
@@ -1219,28 +1239,28 @@ HTTP/1.1 200
     <label for="snippet-content-171" onclick="onSnippetLabelClick(this)">curl</label>
   </div>
   <div id="snippet-content-169" class="snippet-content active">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/361/results/
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/861/results/
 HTTP/1.1 200 </pre>
   </div>
   <div id="snippet-content-170" class="snippet-content">
-    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/361/results/
+    <pre>GET http://localhost:8080/matchandtrade-api/v1/trades/861/results/
 -- Headers --
-   Authorization: 2671-8924-1804
+   Authorization: 9062-329-7479
    Content-Type: text/csv; charset=ISO-8859-1
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: text/csv;charset=ISO-8859-1
-   Content-Length: 840
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Content-Length: 850
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 user_id,user_name,article_id,article_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_article_id,receiving_article_name,sends_to,sending_to_user_id,sending_to_user_name
-766,Olavo,717,Pandemic Legacy: Season 1,:RECEIVES:,767,Maria,719,Stone Age,:SENDS:,767,Maria
-767,Maria,719,Stone Age,:RECEIVES:,766,Olavo,717,Pandemic Legacy: Season 1,:SENDS:,766,Olavo
+3017,Olavo,2267,Pandemic Legacy: Season 1,:RECEIVES:,3018,Maria,2269,Stone Age,:SENDS:,3018,Maria
+3018,Maria,2269,Stone Age,:RECEIVES:,3017,Olavo,2267,Pandemic Legacy: Season 1,:SENDS:,3017,Olavo
 
 # --------------------------------
-# Summary of Trade [361 : Board games in Toronto - 1548517794889]
+# Summary of Trade [861 : Board games in Toronto - 1550111902543]
 # Total of articles: 5
 # Total of traded articles: 2
 # Total of articles not traded: 3
@@ -1253,23 +1273,23 @@ user_id,user_name,article_id,article_name,receives,receiving_from_user_id,receiv
   </div>
   <div id="snippet-content-171" class="snippet-content">
     <pre>curl -v \
--H "Authorization: 2671-8924-1804" \
+-H "Authorization: 9062-329-7479" \
 -H "Content-Type: text/csv; charset=ISO-8859-1" \
-http://localhost:8080/matchandtrade-api/v1/trades/361/results/
+http://localhost:8080/matchandtrade-api/v1/trades/861/results/
 
 ---- Response ----
 HTTP/1.1 200 
 -- Headers --
    Content-Type: text/csv;charset=ISO-8859-1
-   Content-Length: 840
-   Date: Sat, 26 Jan 2019 15:49:54 GMT
+   Content-Length: 850
+   Date: Thu, 14 Feb 2019 02:38:22 GMT
 -- Body --
 user_id,user_name,article_id,article_name,receives,receiving_from_user_id,receiving_from_user_name,receiving_article_id,receiving_article_name,sends_to,sending_to_user_id,sending_to_user_name
-766,Olavo,717,Pandemic Legacy: Season 1,:RECEIVES:,767,Maria,719,Stone Age,:SENDS:,767,Maria
-767,Maria,719,Stone Age,:RECEIVES:,766,Olavo,717,Pandemic Legacy: Season 1,:SENDS:,766,Olavo
+3017,Olavo,2267,Pandemic Legacy: Season 1,:RECEIVES:,3018,Maria,2269,Stone Age,:SENDS:,3018,Maria
+3018,Maria,2269,Stone Age,:RECEIVES:,3017,Olavo,2267,Pandemic Legacy: Season 1,:SENDS:,3017,Olavo
 
 # --------------------------------
-# Summary of Trade [361 : Board games in Toronto - 1548517794889]
+# Summary of Trade [861 : Board games in Toronto - 1550111902543]
 # Total of articles: 5
 # Total of traded articles: 2
 # Total of articles not traded: 3

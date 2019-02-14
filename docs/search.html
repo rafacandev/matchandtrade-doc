@@ -100,7 +100,7 @@
 
 <h3>Examples</h3>
 <p>
-	Search for all <a href='articles.html'>Articles</a> belonging to <span class="incode">Trade.tradeId = 358</span>
+	Search for all <a href='articles.html'>Articles</a> belonging to <span class="incode">Trade.tradeId = 858</span>
 </p>
 <div class="snippet">
   <div class="snippet-labels">
@@ -115,14 +115,15 @@ HTTP/1.1 200 </pre>
   <div id="snippet-content-77" class="snippet-content">
     <pre>POST http://localhost:8080/matchandtrade-api/v1/search
 -- Headers --
-   Authorization: 6025-2434-8441
+   Authorization: 8490-5337-7463
    Content-Type: application/json; charset=UTF-8
 -- Body --
 {
   "recipe" : "ARTICLES",
+  "sorts" : [ ],
   "criteria" : [ {
     "field" : "Trade.tradeId",
-    "value" : 358,
+    "value" : 858,
     "operator" : "AND",
     "matcher" : "EQUALS"
   } ]
@@ -133,27 +134,47 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 4
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 [ {
-  "articleId" : 707,
-  "name" : "American Gods"
+  "articleId" : 2257,
+  "name" : "American Gods",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2257"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2257/attachments/"
+  } ]
 }, {
-  "articleId" : 708,
-  "name" : "Neverwhere"
+  "articleId" : 2258,
+  "name" : "Neverwhere",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2258"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2258/attachments/"
+  } ]
 }, {
-  "articleId" : 709,
-  "name" : "Stardust"
+  "articleId" : 2259,
+  "name" : "Stardust",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2259"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2259/attachments/"
+  } ]
 }, {
-  "articleId" : 710,
-  "name" : "The Sandman"
+  "articleId" : 2260,
+  "name" : "The Sandman",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2260"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2260/attachments/"
+  } ]
 } ]</pre>
   </div>
   <div id="snippet-content-78" class="snippet-content">
     <pre>curl -v -X POST \
--H "Authorization: 6025-2434-8441" \
+-H "Authorization: 8490-5337-7463" \
 -H "Content-Type: application/json; charset=UTF-8" \
--d "{\"recipe\":\"ARTICLES\",\"criteria\":[{\"field\":\"Trade.tradeId\",\"value\":358,\"operator\":\"AND\",\"matcher\":\"EQUALS\"}]}" \
+-d "{\"recipe\":\"ARTICLES\",\"sorts\":[],\"criteria\":[{\"field\":\"Trade.tradeId\",\"value\":858,\"operator\":\"AND\",\"matcher\":\"EQUALS\"}]}" \
 http://localhost:8080/matchandtrade-api/v1/search
 
 ---- Response ----
@@ -162,20 +183,40 @@ HTTP/1.1 200
    X-Pagination-Total-Count: 4
    Content-Type: application/json;charset=UTF-8
    Transfer-Encoding: chunked
-   Date: Sat, 26 Jan 2019 15:49:53 GMT
+   Date: Thu, 14 Feb 2019 02:38:20 GMT
 -- Body --
 [ {
-  "articleId" : 707,
-  "name" : "American Gods"
+  "articleId" : 2257,
+  "name" : "American Gods",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2257"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2257/attachments/"
+  } ]
 }, {
-  "articleId" : 708,
-  "name" : "Neverwhere"
+  "articleId" : 2258,
+  "name" : "Neverwhere",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2258"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2258/attachments/"
+  } ]
 }, {
-  "articleId" : 709,
-  "name" : "Stardust"
+  "articleId" : 2259,
+  "name" : "Stardust",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2259"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2259/attachments/"
+  } ]
 }, {
-  "articleId" : 710,
-  "name" : "The Sandman"
+  "articleId" : 2260,
+  "name" : "The Sandman",
+  "_links" : [ {
+    "self" : "http://localhost:8080/matchandtrade-api/v1/articles/2260"
+  }, {
+    "attachments" : "http://localhost:8080/matchandtrade-api/v1/articles/2260/attachments/"
+  } ]
 } ]</pre>
   </div>
 </div>
